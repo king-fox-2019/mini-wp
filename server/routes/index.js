@@ -7,5 +7,6 @@ routes.post('/signin', UserController.signIn)
 
 routes.use(authenticate)
 routes.use('/user', require('./user'))
+routes.use('/articles', require('./articles'))
 
 module.exports = routes
