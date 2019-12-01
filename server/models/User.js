@@ -52,11 +52,14 @@ const userSchema = new Schema(
       required: [true, 'Password required'],
       minlength: [6, 'Password min length 6']
     },
-    firstName: {
-      type: String
-    },
-    LastName: {
-      type: String
+    fullName: {
+      type: String,
+      validate: {
+        validator(val) {
+          return /^[A-Za-z ]+$/.test(val)
+        },
+        msg: 'Invalid full name format'
+      }
     }
   },
   { versionKey: false, timestamps: true }
