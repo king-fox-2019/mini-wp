@@ -28,12 +28,12 @@ There are multiple errors that might happen, and this section is intended to cap
 
 ### 404: Not Found
 
-- `User not found`: This happens when your account has been removed from the system (banned).
 - `Article not found`: This could happen when you try to access deleted article, or the `article's id` is invalid. Recheck the `article's id` or, if not sure, try to use Get All Articles route to see the correct `id` for that article.
 
 ### 401: Unauthorized
 
 - `Valid access token required`: Could happen in endpoints where `access_token` is reequired, which means almost all route endpoints. The cause could be the `access_token` is invalid, missing, or broken. If this still persist after you try to fix it, try requesting new `access_token` from Sign In endpoint.
+- `User not found`: This happens when your account has been removed from the system (banned).
 
 ### 403: Forbidden
 

@@ -10,7 +10,7 @@ module.exports = {
           if (user) {
             req.user = user
             next()
-          } else throw { status: 404, message: 'User not found' }
+          } else throw { status: 401, message: 'User not found' }
         })
         .catch(next)
     } catch (err) {
