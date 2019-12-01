@@ -62,7 +62,7 @@ const userSchema = new Schema(
       }
     }
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false }
 )
 
 userSchema.post('validate', function(doc, next) {
