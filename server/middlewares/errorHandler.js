@@ -11,7 +11,7 @@ module.exports = (err, req, res, next) => {
       }
       break
     case 'JsonWebTokenError':
-      status = 422
+      status = 401
       message = 'Valid access token required'
       break
 
