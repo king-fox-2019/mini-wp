@@ -1,5 +1,3 @@
-function errorHandler(err,req,res,next){
+module.exports = (err,req,res,next)=>{
     console.log(err)
 }
-
-module.exports = errorHandler

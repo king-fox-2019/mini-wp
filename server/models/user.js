@@ -29,6 +29,10 @@ const userSchema = new Schema({
         required: [true, 'Password cannot be empty'],
         minlength: [6, 'Your password min have 6 digits']
     }
+},
+{
+    versionKey: false,
+    timestamps: true
 })
 
 userSchema.post('validate', function(next){
