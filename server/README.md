@@ -30,6 +30,11 @@ There are multiple errors that might happen, and this section is intended to cap
 ### 404: Not Found
 
 - `User not found`: This happens when your account has been removed from the system (banned).
+- `Article not found`: This could happen when you try to access deleted article, or the `article's id` is invalid. Recheck the `article's id` or, if not sure, try to use Get All Articles route to see the correct `id` for that article.
+
+### 403: Forbidden
+
+- `Unauthorized access to this article`: This means you are trying to modify (edit, delete) articles which is not authorised by you. If that's not the case, it's possibly because of incorrect `id`. Try to check it and make sure you were accessing the correct article.
 
 
 
@@ -296,7 +301,7 @@ PUT /articles/:id
 
 ##### Body
 
-- title **Required**
+- title
 - content
 - featuredImage 
 
@@ -305,6 +310,15 @@ PUT /articles/:id
 Status 200: OK
 
 ```json
-
+{
+    "data": {
+        "_id": "5de359433425644760f0b7ce",
+        "title": "Edited Dummy Article",
+        "content": "Edited content",
+        "featuredImage": "https://cdn.dummyimages.com/photo/edited-dummy-photo.jpg",
+        "createdAt": "2019-12-01T06:10:11.674Z",
+        "updatedAt": "2019-12-01T12:27:17.983Z"
+    }
+}
 ```
 

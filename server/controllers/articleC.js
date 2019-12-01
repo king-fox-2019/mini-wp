@@ -49,6 +49,21 @@ class ArticleController {
       .populate('author', '_id fullName username email')
       .then(article => {
         if (article) res.status(200).json({ data: article })
+        else throw { status: 404, message: 'Article not found' }
+      })
+      .catch(next)
+  }
+
+  static editArticle(req, res, next) {
+    const article = req.article
+    const { title, content, featuredImage } = req.body
+    article.title = title || article.title
+    article.content = content || article.content
+    article.featuredImage = featuredImage || article.featuredImage
+    article
+      .save()
+      .then(article => {
+        res.status(200).json({ data: { ...article._doc, author: undefined } })
       })
       .catch(next)
   }
