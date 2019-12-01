@@ -23,6 +23,7 @@ There are multiple errors that might happen, and this section is intended to cap
 ### 422: Unprocessable Entity
 
 - User validation error: Often happens on Sign Up. Require you to check whether you've sent correct data, all required fields were filled, and all validation passed. Change all fields causing error, and resend your data. Example message: `Username Required`, `Email already registered`, `Password min length 6`.
+- `Wrong username/email/password`: Happens on Sign In. Caused by missing fields, invalid data values, or probably you just havent's Sign Up yet. Fix all data, or change to the correct route if you happen to be in the last case, and try again.
 
 
 
@@ -79,6 +80,23 @@ POST /signin
 Status 200: OK
 
 ```json
+{
+  "Message": "Sign in success",
+  "data": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZTMzMzM3NjJhNWI5MzNjNTFkNDY2NCIsImVtYWlsIjoiZHVtbXlAbWFpbC5jb20iLCJpYXQiOjE1NzUxNzIwNTd9.9Wr2WAdXEp0nlkAJJUvqm4uXGYspxIFfZe-xTaLaUG4"
+  }
+}
+```
 
+
+
+### Check Session
+
+This, as opposed to Sign In, is used to verify `access_token` and return it's payload. It's internally used to verify client access and redirects it based on verification result.
+
+##### Endpoint
+
+```http
+GET /user/checksession
 ```
 

@@ -1,5 +1,6 @@
 const { User } = require('../models')
 const { compare } = require('../helpers/passwordHandler')
+const { encode } = require('../helpers/tokenHandler')
 
 class UserController {
   static signUp(req, res, next) {
@@ -31,10 +32,27 @@ class UserController {
         { username: username || emailUsername },
         { email: email || emailUsername }
       ]
-    }).then(user => {
-      if (user && compare(password, user.password)) {
-      }
     })
+      .then(user => {
+        try {
+          if (user && compare(password, user.password)) {
+            const access_token = encode(user)
+            res.status(200).json({
+              Message: 'Sign in success',
+              data: { access_token }
+            })
+          } else {
+            throw 'err'
+          }
+        } catch (error) {
+          throw { status: 422, message: 'Wrong username/email/password' }
+        }
+      })
+      .catch(next)
+  }
+
+  static checkSession(req, res, next) {
+    res.status
   }
 }
 
