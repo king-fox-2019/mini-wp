@@ -8,5 +8,6 @@ articles.get('/:id', ArticleController.getOneArticle)
 
 articles.use('/:id', authorize)
 articles.put('/:id', ArticleController.editArticle)
+articles.delete('/:id', ArticleController.deleteArticle)
 
 module.exports = articles

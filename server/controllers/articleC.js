@@ -12,10 +12,8 @@ class ArticleController {
     })
       .then(article => {
         res.status(201).json({
-          title,
-          content,
-          featuredImage,
-          createdAt: article.createdAt
+          message: 'Article created',
+          data: { title, content, featuredImage, createdAt: article.createdAt }
         })
       })
       .catch(next)
@@ -63,7 +61,24 @@ class ArticleController {
     article
       .save()
       .then(article => {
-        res.status(200).json({ data: { ...article._doc, author: undefined } })
+        res.status(200).json({
+          message: 'Article edited',
+          data: { ...article._doc, author: undefined }
+        })
+      })
+      .catch(next)
+  }
+
+  static deleteArticle(req, res, next) {
+    Article.findByIdAndDelete(req.params.id)
+      .then(article => {
+        res.status(200).json({
+          message: 'Article deleted',
+          data: {
+            _id: article.id,
+            status: 'deleted'
+          }
+        })
       })
       .catch(next)
   }

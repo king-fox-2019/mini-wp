@@ -121,9 +121,11 @@ Status 200: OK
 
 ```json
 {
-  "username": "dummy",
-  "email": "dummy@mail.com",
-  "fullName": "Dummy Guy"
+  "data": {
+    "username": "dummy",
+    "email": "dummy@mail.com",
+    "fullName": "Dummy Guy"  
+  } 
 }
 ```
 
@@ -155,10 +157,13 @@ Status 201: Created
 
 ```json
 {
-  "title": "Dummy Article",
-  "content": "Article's content",
-  "featuredImage": "https://cdn.dummyimages.com/photo/dummy-photo.jpg",
-  "createdAt": "2019-12-01T06:10:11.674Z"
+  "message": "Article created",
+  "data": {
+    "title": "Dummy Article",
+    "content": "Article's content",
+    "featuredImage": "https://cdn.dummyimages.com/photo/dummy-photo.jpg",
+    "createdAt": "2019-12-01T06:10:11.674Z"  
+  }
 }
 ```
 
@@ -311,14 +316,43 @@ Status 200: OK
 
 ```json
 {
-    "data": {
-        "_id": "5de359433425644760f0b7ce",
-        "title": "Edited Dummy Article",
-        "content": "Edited content",
-        "featuredImage": "https://cdn.dummyimages.com/photo/edited-dummy-photo.jpg",
-        "createdAt": "2019-12-01T06:10:11.674Z",
-        "updatedAt": "2019-12-01T12:27:17.983Z"
-    }
+  "message": "Article edited",
+  "data": {
+    "_id": "5de359433425644760f0b7ce",
+    "title": "Edited Dummy Article",
+    "content": "Edited content",
+    "featuredImage": "https://cdn.dummyimages.com/photo/edited-dummy-photo.jpg",
+    "createdAt": "2019-12-01T06:10:11.674Z",
+    "updatedAt": "2019-12-01T12:27:17.983Z"
+  }
+}
+```
+
+
+
+### Delete Article
+
+##### Endpoint
+
+```http
+DELETE /articles/:id
+```
+
+##### Header
+
+- access_token **Required**
+
+##### Response
+
+Status 200: OK
+
+```json
+{
+  "message": "Article deleted",
+  "data": {
+    "_id": "5de359433425644760f0b7ce",
+    "status": "deleted"
+  }
 }
 ```
 
