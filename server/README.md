@@ -24,6 +24,11 @@ There are multiple errors that might happen, and this section is intended to cap
 
 - User validation error: Often happens on Sign Up. Require you to check whether you've sent correct data, all required fields were filled, and all validation passed. Change all fields causing error, and resend your data. Example message: `Username Required`, `Email already registered`, `Password min length 6`.
 - `Wrong username/email/password`: Happens on Sign In. Caused by missing fields, invalid data values, or probably you just havent's Sign Up yet. Fix all data, or change to the correct route if you happen to be in the last case, and try again.
+- `Valid access token required`: Could happen in endpoints where `access_token` is reequired, which means almost all route endpoints. This could mean that the `access_token` is invalid, missing, or broken. If this still persist after you try to fix it, try requesting new `access_token` from Sign In endpoint.
+
+### 404: Not Found
+
+- `User not found`: This happens when your account has been removed from the system (banned).
 
 
 
@@ -98,5 +103,21 @@ This, as opposed to Sign In, is used to verify `access_token` and return it's pa
 
 ```http
 GET /user/checksession
+```
+
+##### Header
+
+- access_token **Required**
+
+##### Response
+
+Status 200: OK
+
+```json
+{
+  "username": "dummy",
+  "email": "dummy@mail.com",
+  "fullName": "Dummy Guy"
+}
 ```
 

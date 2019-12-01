@@ -10,6 +10,10 @@ module.exports = (err, req, res, next) => {
         message.push(err.errors[path].message)
       }
       break
+    case 'JsonWebTokenError':
+      status = 422
+      message = 'Valid access token required'
+      break
 
     default:
       status = err.status || 500
