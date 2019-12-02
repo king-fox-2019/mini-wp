@@ -54,7 +54,7 @@ POST /signup
 #### Body
 
 - username **Required** **Unique** Must only contains lowercase letters, numbers, dots and/or underscores.
-- email **Required** **Unique** Must be unique and valid email format.
+- email **Required** **Unique** Must be a valid email format.
 - password **Required** Must have at least 6 characters.
 - fullName **Optional** Must only contains letters and spaces
 
