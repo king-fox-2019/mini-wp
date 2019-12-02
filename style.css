@@ -1,0 +1,42 @@
+  #sidebar-wrapper {
+    min-height: 100%;
+    margin-left: -15rem;
+    transition: margin .25s ease-out;
+  }
+  
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+  }
+  
+  #sidebar-wrapper .list-group {
+    width: 15rem;
+  }
+  
+  #page-content-wrapper {
+    min-width: 100%;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+.navbar {
+    margin-bottom: 50px;
+    border-radius: 0;
+  }
+   .header {
+    margin-bottom: 0;
+    background-image: url("https://images.template.net/wp-content/uploads/2016/11/21131124/polygonal.jpg");
+  }
+  .header h1{
+    -webkit-text-stroke: 1px #ccc;
+    text-shadow: 2px 2px #ffffff;
+    color: teal;
+    font-family: Impact;
+    font-weight: bold;
+  }
+  footer {
+    background-color: #292929;
+    padding: 25px;
+    color: white;
+  }
