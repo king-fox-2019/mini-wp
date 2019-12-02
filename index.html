@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    /* * {
+      border: 1px solid blueviolet;
+    } */
+    </style>
+  </head>
+  <body>
+      <header class="fixed-top">
+          <nav class="navbar navbar-expand navbar-light bg-light justify-content-between align-items-center">
+              <a class="navbar-brand" href="#">
+                <img src="https://image.flaticon.com/icons/svg/2/2041.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Mini WP
+              </a>
+              <div class="nav navbar-nav custom-navbar align-items-center">
+                  <a class="nav-item nav-link" href="#"><button class="btn btn-sm btn-outline-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add article</button></a>
+                  <a class="nav-item nav-link active" href="#">Profile <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link" href="#"><button class="btn btn-sm btn-outline-danger"><i class="fa fa-sign-out"></i> Log out</button></a>
+              </div>
+          </nav>
+      </header>
+      <div class="container-fluid">
+        <div class="row">
+          <nav class="col-md-3 sidebar bg-light d-none d-md-block">
+            <div class="sidebar-sticky">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a id="dashboard-sidebar" href="#" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i> Dashboard </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Post</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" id="add-article-dropdown" href="#">Add Article</a>
+                    <a class="dropdown-item" id="list-article-dropdown" href="#">List Article</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <main class="col-md-9 ml-md-auto">
+            <section id="dashboard-main" >
+              <h1>Dashboard</h1>
+            </section>
+            <section id="list-post-main" >
+              <h1>List Article</h1>
+              <hr class="main-hr">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date posted</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Judul</td>
+                    <td>12-12-2012</td>
+                    <td>view | delete</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Article</td>
+                    <td>12-12-2012</td>
+                    <td>view | delete</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Saya</td>
+                    <td>12-12-2012</td>
+                    <td>view | delete</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+            <section id="add-post-main">
+              <h1>Add Article</h1>
+              <hr class="main-hr">
+              <form action="" method="POST" id="add-post-form">
+                <div class="form-group">
+                  <label for="post-title">Post Title: </label>
+                  <input type="text" id="post-title">
+                </div>
+                <div class="form-group">
+                  <label for="post-content">Post content: </label>
+                  <textarea class="form-control" id="post-content" rows="15"></textarea>
+                </div>
+                <div class="form-group justify-content-end d-flex">
+                  <input type="submit" class="btn btn-primary" value="Post Article">
+                </div>
+              </form>
+            </section>
+          </main>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="text-right mr-3">
+          <span>Amil Hasbala | 2019</span>
+        </div>
+      </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
