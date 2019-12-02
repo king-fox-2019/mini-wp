@@ -10,10 +10,11 @@ class UserController{
             email,
             password 
         })
-        .then(user => {
+        .then(({_id, username, email}) => {
             let filterUser = {
-                username: user.username,
-                email: user.email
+                id: _id,
+                username,
+                email
             }
             res.status(201).json(filterUser)
         })
@@ -78,9 +79,16 @@ class UserController{
         User.findOne({
             _id: req.params.id
         })
-        .then(({_id, username, email}) => {
-            let filterUser = { id: _id, username, email}
-            res.status(200).json(filterUser)
+        .then(user => {
+            if(user){
+                let filterUser = { id: user._id, username: user.username, email: user.email}
+                res.status(200).json(filterUser)
+            }else{
+                next({
+                    status: 404,
+                    message: 'There is no user with that id'
+                })
+            }
         })
         .catch(err=>{
             next(err)

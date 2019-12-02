@@ -13,15 +13,15 @@ const userSchema = new Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please input the valid email format'],
         validate:{
             validator: function(value){
-                User.findOne({
+                return User.findOne({
                     email: value
                 })
                 .then(user => {
-                    if(user) return true
-                    else return false
+                    if(user) return false
+                    else return true
                 })
             },
-            message: `${value} is already registered`
+            message: `Email is already registered`
         }
     },
     password:{
@@ -35,7 +35,7 @@ const userSchema = new Schema({
     timestamps: true
 })
 
-userSchema.post('validate', function(next){
+userSchema.post('validate', function(doc,next){
     this.password = bcrypt.hash(this.password)
     next()
 })
