@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+  <title>Mini WP</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md fixed-top bg-dark">
+      <a class="navbar-brand mr-auto text-light">AdminAd+</a>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light mr-3" type="submit">Search</button>
+      </form> 
+      <button class="btn btn-outline-secondary mr-3" type="submit">Logout</button>
+    </nav>
+  </header>
+
+  <div id="main-body" class="container-fluid">
+    <div class="row" style="height: 100vh">
+
+      <!-- Left part -->
+      <div id="left-part" class="col-2 border p-0">
+
+        <!-- User card -->
+        <div id="user-card" class="mx-2 my-2 border" style="height: 100px">
+          <img 
+            src="https://avatars3.githubusercontent.com/u/36827603?s=460&v=4" 
+            class="rounded float-left mx-2 my-2"
+            style="width: 50px" 
+            alt="avatar">
+          <div id="name-job" class="my-2">
+            <span id="user-name" class="" style="font-size: 1em;">Dedi Prakasa</span>
+            <br>
+            <span id="user-job" style="font-size: 0.8em;">Fullstack Developer</span>
+          </div>
+        </div>
+        <!-- End of user card -->
+
+        <!-- Main navigation -->
+        <div id="main-nav" class="mx-2 mt-4" style="height: 100vh">
+          <span class="mx-2">Main</span>
+          <hr class="my-1">
+          <ul class="list-group" >
+            <li class="menu list-group-item">Create New Post</li>
+            <li class="menu list-group-item">Posts</li>
+          </ul>
+        </div>
+        <!-- End of main navigation -->
+
+      </div>
+      <!-- End of left part -->
+
+      <!-- Main content -->
+      <div id="main-content" class="col-10 border">
+
+        <!-- Create new post -->
+        <div id="post-page" class="my-2 container" style="height: 100vh; width: 70%">
+          <h4 class="my-4 mx-1">Create New Post</h4>
+          <form >
+            <div class="form-group">
+              <input id="title-input" class="form-control" type="text" placeholder="Title">
+            </div>
+            <div class="form-group">
+              <textarea rows=10 id="content" class="form-control" type="text" placeholder="Main content of your post"></textarea>
+            </div>
+            <button class="btn btn-primary">Submit Post</button>
+          </form>
+        </div>
+        <!-- End of create new post -->
+
+        <!-- List of posts -->
+        <div id="list-posts" class="my-2 container" style="width: 70%">
+          <ul class="list-group">
+            <li class="list-group-item show-post ">
+                <span class="">What is Lorem Ipsum?</span>
+                <div class="float-right mt-1"></div>
+            </li>
+            <li class="list-group-item show-post">
+                <span class="">Lorem Ipsum</span>
+                <div class="actions-toggle float-right mt-1"></div>
+            </li>
+          </ul>
+        </div>
+        <!-- End of list of posts -->
+        
+         <!-- All posts -->
+
+      <div id="blog" class="container border text-justify" style="width: 60%">
+        <div class="blog-post mx-5 my-5">
+            <span class="date">November 31, 2019</span>
+            <article class="article-content">
+              <h3 class="article-title">What is Lorem Ipsum?</h3>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+              when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+              It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+            </article>
+          </div>
+          <div class="blog-post mx-5 my-5">
+            <span class="date">November 30, 2019</span>
+            <article class="article-content">
+              <h3 class="article-title">Lorem Ipsum</h3>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
+              been the industry's standard dummy text ever since the 1500s, when an unknown printer took a 
+              galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, 
+              but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in 
+              the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop 
+              publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </article>
+          </div>
+        </div>
+  
+        <!-- End of all posts -->
+
+      </div>
+
+      
+      <!-- End of main content -->
+    </div>
+  </div>
+
+
+
+  <footer>
+  </footer>
+
+  <!-- JS Script -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="./index.js"></script>
+</body>
+</html>
