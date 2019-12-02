@@ -8,19 +8,70 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="css/fonts.css" type="text/css"/>
+    <title>Fancy TODO</title>
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <logo>
+            -<i class="fa fa-simplybuilt" style="font-size:36px"></i>-
+            Fancy-Todo
+        </logo>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse search-form" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-2 left-nav">
+        <div class="col-sm-3 left-nav">
             <div class="container-flex profile-container">
-                <img src="img/profile.png" class="img-fluid rounded-circle img-profile" alt="John Doe">
+                <div id="img-profile">
+                    <img src="img/profile.png" class="img-fluid rounded-circle img-profile" alt="John Doe">
+                </div>
+                <h3 class="profile dropdown-toggle" data-toggle="dropdown" id="profile-name">John Doe</h3>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button">Profile</button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item" type="button">Sign Out</button>
+                </div>
+                <div class="profile" id="profile-title">
+                    <small>Software Engineer</small>
+                </div>
+                <hr/>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-Project">
+                        Project 1
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-Project">
+                        Project 2
+                        <span class="badge badge-primary badge-pill">4</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-Project">
+                        Project 3
+                        <span class="badge badge-primary badge-pill">10</span>
+                    </li>
+                    <li class="list-group-item list-group-Project" id="new-project">
+                        <i class="fa fa-plus" style="font-size:24px"></i>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -49,70 +100,151 @@
                 <div class="tab-pane fade show active" id="open" role="tabpanel" aria-labelledby="open-tab">
                     <div class="container card-container row">
                         <div class="card text-white bg-primary mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Open card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-primary mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Open card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-primary mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Open card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-primary mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Open card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="inprogress" role="tabpanel" aria-labelledby="inprogress-tab">
                     <div class="container card-container row">
-                        <div class="card text-white bg-warning mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                        <div class="card text-white bg-info mb-3" style="max-width: 15rem;">
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">In Progress card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
-                        <div class="card text-white bg-warning mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                        <div class="card text-white bg-info mb-3" style="max-width: 15rem;">
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">In Progress card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
-                        <div class="card text-white bg-warning mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                        <div class="card text-white bg-info mb-3" style="max-width: 15rem;">
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">In Progress card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
-                        <div class="card text-white bg-warning mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                        <div class="card text-white bg-info mb-3" style="max-width: 15rem;">
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">In Progress card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
                     </div>
@@ -120,35 +252,75 @@
 
                 <div class="tab-pane fade" id="testing" role="tabpanel" aria-labelledby="testing-tab">
                     <div class="container card-container row">
-                        <div class="card text-white bg-danger mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                        <div class="card text-white bg-secondary mb-3" style="max-width: 15rem;">
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Testing card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
-                        <div class="card text-white bg-danger mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                        <div class="card text-white bg-secondary mb-3" style="max-width: 15rem;">
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Testing card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
-                        <div class="card text-white bg-danger mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                        <div class="card text-white bg-secondary mb-3" style="max-width: 15rem;">
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Testing card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
-                        <div class="card text-white bg-danger mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                        <div class="card text-white bg-secondary mb-3" style="max-width: 15rem;">
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Testing card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
                     </div>
@@ -156,34 +328,74 @@
                 <div class="tab-pane fade" id="ready" role="tabpanel" aria-labelledby="ready-tab">
                     <div class="container card-container row">
                         <div class="card text-white bg-success mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Ready card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-success mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Ready card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-success mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Ready card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-success mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Ready card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
                     </div>
@@ -191,34 +403,74 @@
                 <div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">
                     <div class="container card-container row">
                         <div class="card text-white bg-dark mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Done card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-dark mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Done card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-dark mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Done card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
 
                         <div class="card text-white bg-dark mb-3" style="max-width: 15rem;">
-                            <div class="card-header">Monday 02 Nov 2019 - 09.00 PM</div>
+                            <div class="card-header">
+                                Monday 02 Nov 2019 - 09.00 PM
+                                <div class="card-delete">
+                                    <i class="fa fa-close" style="font-size:14px"></i>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Done card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-calendar"></i>
                             </div>
                         </div>
                     </div>

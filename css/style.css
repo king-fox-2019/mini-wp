@@ -1,21 +1,59 @@
-body{
+body {
     margin: 0;
     padding: 0;
 }
 
-.card-container{
+.card-container {
     padding: 20px;
 }
 
-.card{
+.card {
     margin: 5px;
 }
 
-.card-header{
+.card-header {
     font-size: 12px;
 }
 
-.left-nav{
-    background-color: #0097e6;
-    padding-top: 25px;
+.left-nav {
+
+}
+
+.profile {
+    text-align: center;
+}
+
+.card-footer {
+    text-align: right;
+}
+
+.card-text {
+    font-size: 12px;
+}
+
+.card-delete {
+    float: right;
+}
+
+logo {
+    font-family: Xanthousy;
+    font-size: 50px;
+}
+
+.search-form {
+    float: right;
+}
+
+.list-group-Project {
+    font-size: 14px;
+    padding: 10px;
+}
+
+#img-profile{
+    padding: 25px;
+}
+#new-project{
+    font-weight: bold;
+    text-align: center;
+    background-color: #7f8fa6;
 }
