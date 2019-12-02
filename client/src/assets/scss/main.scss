@@ -12,6 +12,7 @@ $theme-colors: (
 );
 
 $body-bg: $main-bg;
+$component-active-bg: $secondary;
 $enable-shadows: true;
 
 @import '~bootstrap/scss/bootstrap';

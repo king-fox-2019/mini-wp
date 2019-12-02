@@ -1,17 +1,19 @@
 <template>
-  <div
-    class="container w-50 d-flex flex-column justify-content-center align-items-center"
-  >
+  <div class="container row mx-auto justify-content-center align-items-center">
     <b-jumbotron
       header-level="5"
       bg-variant="main-bg"
-      class="d-flex text-center align-items-center mb-4 py-0"
+      class="col-12 d-flex text-center pb-0 mb-0"
       id="landing-page"
       fluid
     >
       <template v-slot:header>Sign Up</template>
     </b-jumbotron>
-    <b-form @submit="onSubmit" novalidate>
+    <b-form
+      class="col-12 col-md-8 col-lg-6 col-xl-5 align-self-start"
+      @submit.prevent="onSubmit"
+      novalidate
+    >
       <b-form-group
         label="Username"
         label-for="username"
@@ -22,6 +24,7 @@
           v-model="username"
           type="text"
           placeholder="dummy"
+          :state="validateUsername"
           required
         ></b-form-input>
       </b-form-group>
@@ -36,6 +39,7 @@
           v-model="email"
           type="email"
           placeholder="dummy@mail.com"
+          :state="validateEmail"
           required
         ></b-form-input>
       </b-form-group>
@@ -49,6 +53,8 @@
           id="password"
           v-model="password"
           type="password"
+          placeholder="******"
+          :state="validatePassword"
           required
         ></b-form-input>
       </b-form-group>
@@ -70,6 +76,22 @@ export default {
   },
   method: {
     onSubmit() {}
+  },
+  computed: {
+    validateUsername() {
+      return this.username ? /^[a-zA-Z0-9_.]+$/.test(this.username) : null
+    },
+    validateEmail() {
+      return this.email
+        ? // eslint-disable-next-line no-useless-escape
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            this.email
+          )
+        : null
+    },
+    validatePassword() {
+      return this.password ? this.password.length >= 6 : null
+    }
   }
 }
 </script>
