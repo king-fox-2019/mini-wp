@@ -38,7 +38,19 @@ body {
   color: #141414
 }
 
-.actions-toggle:after {
-  content: '\2807';
-  font-size: 1.2em;
+.dropdown-item:hover {
+  cursor: pointer;
+}
+
+.dropdown-toggle:after {
+  display: none;
+}
+
+.quill-editor {
+  background-color: white;
+}
+
+.ql-editor{
+  min-height:250px;
+  max-height: 300px
 }
