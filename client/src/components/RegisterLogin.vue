@@ -1,21 +1,31 @@
 <template>
-  
+  <div>
+ 
    
    <!-- codepen  -->
    <div class="cont">
   <div class="form sign-in">
     <h2>Welcome back,</h2>
-    <label>
-      <span>Email</span>
-      <input type="email" />
-    </label>
-    <label>
-      <span>Password</span>
-      <input type="password" />
-    </label>
-    <p class="forgot-pass">Forgot password?</p>
-    <button type="button" class="submit">Sign In</button>
-    <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
+     <form @submit.prevent="login()">
+      <label>
+        <span>Email</span>
+        <input type="email" v-model="email" />
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" />
+      </label>
+      <p class="forgot-pass">Forgot password?</p>
+      <button type="button" class="submit">Sign In</button>
+            <!-- google signin -->
+  <g-signin-button
+    :params="googleSignInParams"
+    @success="onSignInSuccess"
+    @error="onSignInError">
+    Sign in with Google
+  </g-signin-button>
+<!-- end google signin -->
+    </form>
   </div>
   <div class="sub-cont">
     <div class="img">
@@ -34,6 +44,7 @@
     </div>
     <div class="form sign-up">
       <h2>Time to feel like home,</h2>
+       <form @submit.prevent="register()">
       <label>
         <span>Name</span>
         <input type="text" />
@@ -47,13 +58,24 @@
         <input type="password" />
       </label>
       <button type="button" class="submit">Sign Up</button>
-      <button type="button" class="fb-btn">Join with <span>facebook</span></button>
+      <!-- google signin -->
+  <g-signin-button
+    :params="googleSignInParams"
+    @success="onSignInSuccess"
+    @error="onSignInError">
+    Sign in with Google
+  </g-signin-button>
+<!-- end google signin -->
+    </form>
     </div>
   </div>
 </div>
-
    <!-- end codepen  -->
 
+
+
+   
+  </div>
   
 </template>
 
@@ -68,7 +90,10 @@ export default {
     return {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      googleSignInParams: {
+        client_id: '239754148921-nlpf58ao2hn3gmba34aoj22s3jvlnjcg.apps.googleusercontent.com'
+      }
     }
   },
   methods : {
@@ -130,6 +155,38 @@ export default {
     animate() {
     console.log(`triggeredddd `);
       document.querySelector('.cont').classList.toggle('s--signup');
+    },
+    onSignInSuccess (googleUser) {
+      // `googleUser` is the GoogleUser object that represents the just-signed-in user.
+      // See https://developers.google.com/identity/sign-in/web/reference#users
+      const profile = googleUser.getBasicProfile() // etc etc
+      console.log(profile);
+      let idToken = googleUser.getAuthResponse().id_token;
+      console.log(idToken);
+
+      axios({
+        method : 'post',
+        // url : 'http://35.198.219.105/users/google-signin',
+        url : 'http://localhost:3000/users/google-signin',
+
+        data : {
+          idToken
+        }
+      })
+      .then(({data}) => {
+        console.log(data, "ini on sign in google");
+        localStorage.setItem('token', data.token)
+        this.switchToMainPage()
+      })
+      .catch(err => {
+        console.log(err.response);
+        
+      })
+      
+    },
+    onSignInError (error) {
+      // `error` contains any error occurred.
+      console.log('OH NOES', error)
     }
   }
 }
@@ -138,7 +195,7 @@ export default {
         
 </script>
 
-<style scoped>
+<style>
 *, *:before, *:after {
 	 box-sizing: border-box;
 	 margin: 0;
@@ -377,4 +434,13 @@ export default {
 	 right: 5px;
 }
  
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 10px 10px;
+  margin-left: 220px !important;
+  border-radius: 45px;
+  background-color: #D4AF7A !important;
+  color: #fff;
+}
 </style>

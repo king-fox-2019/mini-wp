@@ -10668,12 +10668,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      googleSignInParams: {
+        client_id: '239754148921-nlpf58ao2hn3gmba34aoj22s3jvlnjcg.apps.googleusercontent.com'
+      }
     };
   },
   methods: {
@@ -10734,6 +10759,37 @@ var _default = {
     animate: function animate() {
       console.log("triggeredddd ");
       document.querySelector('.cont').classList.toggle('s--signup');
+    },
+    onSignInSuccess: function onSignInSuccess(googleUser) {
+      var _this3 = this;
+
+      // `googleUser` is the GoogleUser object that represents the just-signed-in user.
+      // See https://developers.google.com/identity/sign-in/web/reference#users
+      var profile = googleUser.getBasicProfile(); // etc etc
+
+      console.log(profile);
+      var idToken = googleUser.getAuthResponse().id_token;
+      console.log(idToken);
+      (0, _axios.default)({
+        method: 'post',
+        // url : 'http://35.198.219.105/users/google-signin',
+        url: 'http://localhost:3000/users/google-signin',
+        data: {
+          idToken: idToken
+        }
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+        console.log(data, "ini on sign in google");
+        localStorage.setItem('token', data.token);
+
+        _this3.switchToMainPage();
+      }).catch(function (err) {
+        console.log(err.response);
+      });
+    },
+    onSignInError: function onSignInError(error) {
+      // `error` contains any error occurred.
+      console.log('OH NOES', error);
     }
   }
 };
@@ -10750,34 +10806,133 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cont" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "sub-cont" }, [
-      _c("div", { staticClass: "img" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
+  return _c("div", [
+    _c("div", { staticClass: "cont" }, [
+      _c("div", { staticClass: "form sign-in" }, [
+        _c("h2", [_vm._v("Welcome back,")]),
         _vm._v(" "),
         _c(
-          "div",
+          "form",
           {
-            staticClass: "img__btn",
             on: {
-              click: function($event) {
-                return _vm.animate()
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.login()
               }
             }
           },
           [
-            _c("span", { staticClass: "m--up" }, [_vm._v("Sign Up")]),
+            _c("label", [
+              _c("span", [_vm._v("Email")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.email,
+                    expression: "email"
+                  }
+                ],
+                attrs: { type: "email" },
+                domProps: { value: _vm.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.email = $event.target.value
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
-            _c("span", { staticClass: "m--in" }, [_vm._v("Sign In")])
-          ]
+            _vm._m(0),
+            _vm._v(" "),
+            _c("p", { staticClass: "forgot-pass" }, [
+              _vm._v("Forgot password?")
+            ]),
+            _vm._v(" "),
+            _c("button", { staticClass: "submit", attrs: { type: "button" } }, [
+              _vm._v("Sign In")
+            ]),
+            _vm._v(" "),
+            _c(
+              "g-signin-button",
+              {
+                attrs: { params: _vm.googleSignInParams },
+                on: { success: _vm.onSignInSuccess, error: _vm.onSignInError }
+              },
+              [_vm._v("\n    Sign in with Google\n  ")]
+            )
+          ],
+          1
         )
       ]),
       _vm._v(" "),
-      _vm._m(3)
+      _c("div", { staticClass: "sub-cont" }, [
+        _c("div", { staticClass: "img" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "img__btn",
+              on: {
+                click: function($event) {
+                  return _vm.animate()
+                }
+              }
+            },
+            [
+              _c("span", { staticClass: "m--up" }, [_vm._v("Sign Up")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "m--in" }, [_vm._v("Sign In")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form sign-up" }, [
+          _c("h2", [_vm._v("Time to feel like home,")]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.register()
+                }
+              }
+            },
+            [
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "submit", attrs: { type: "button" } },
+                [_vm._v("Sign Up")]
+              ),
+              _vm._v(" "),
+              _c(
+                "g-signin-button",
+                {
+                  attrs: { params: _vm.googleSignInParams },
+                  on: { success: _vm.onSignInSuccess, error: _vm.onSignInError }
+                },
+                [_vm._v("\n    Sign in with Google\n  ")]
+              )
+            ],
+            1
+          )
+        ])
+      ])
     ])
   ])
 }
@@ -10786,31 +10941,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form sign-in" }, [
-      _c("h2", [_vm._v("Welcome back,")]),
+    return _c("label", [
+      _c("span", [_vm._v("Password")]),
       _vm._v(" "),
-      _c("label", [
-        _c("span", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "email" } })
-      ]),
-      _vm._v(" "),
-      _c("label", [
-        _c("span", [_vm._v("Password")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "password" } })
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "forgot-pass" }, [_vm._v("Forgot password?")]),
-      _vm._v(" "),
-      _c("button", { staticClass: "submit", attrs: { type: "button" } }, [
-        _vm._v("Sign In")
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "fb-btn", attrs: { type: "button" } }, [
-        _vm._v("Connect with "),
-        _c("span", [_vm._v("facebook")])
-      ])
+      _c("input", { attrs: { type: "password" } })
     ])
   },
   function() {
@@ -10841,35 +10975,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form sign-up" }, [
-      _c("h2", [_vm._v("Time to feel like home,")]),
+    return _c("label", [
+      _c("span", [_vm._v("Name")]),
       _vm._v(" "),
-      _c("label", [
-        _c("span", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text" } })
-      ]),
+      _c("input", { attrs: { type: "text" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", [_vm._v("Email")]),
       _vm._v(" "),
-      _c("label", [
-        _c("span", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "email" } })
-      ]),
+      _c("input", { attrs: { type: "email" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", [_vm._v("Password")]),
       _vm._v(" "),
-      _c("label", [
-        _c("span", [_vm._v("Password")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "password" } })
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "submit", attrs: { type: "button" } }, [
-        _vm._v("Sign Up")
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "fb-btn", attrs: { type: "button" } }, [
-        _vm._v("Join with "),
-        _c("span", [_vm._v("facebook")])
-      ])
+      _c("input", { attrs: { type: "password" } })
     ])
   }
 ]
@@ -10879,7 +11008,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-59e2a9",
+            _scopeId: null,
             functional: undefined
           };
         })());
@@ -14291,15 +14420,15 @@ var _vueGoogleSigninButton = _interopRequireDefault(require("vue-google-signin-b
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+_vue.default.use(_vueWysiwyg.default, {});
+
+_vue.default.use(_vueGoogleSigninButton.default);
+
 new _vue.default({
   render: function render(h) {
     return h(_App.default);
   }
 }).$mount('#app');
-
-_vue.default.use(_vueWysiwyg.default, {});
-
-_vue.default.use(_vueGoogleSigninButton.default);
 },{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"src/App.vue","vue-wysiwyg":"node_modules/vue-wysiwyg/dist/vueWysiwyg.js","vue-google-signin-button":"node_modules/vue-google-signin-button/dist/vue-google-signin-button.min.js"}],"../../../../../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -14328,7 +14457,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42979" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41021" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
