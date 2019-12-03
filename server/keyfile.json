@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "femme-mini-wp",
+  "private_key_id": "958fe3a4efc8349753cb92dfdb542f0577fb6196",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDhpH3tsSMceslQ\nx2gF+VqEonLIDGcve3oaImKbk5wllCaOsiR2Up619BtxcVAFQiabBDA4pw/BK+13\nIpiL/NC4wkyuo+bPTg1WoadSFND1a/7PxmRnfO1PA90+zdY2BAthi4hA4sZaLqqH\nyInkGiy+yJiOmlgYP7lPTz/8J+ylEVpsjLtuLIkJM29bzY64Fm17P7MiJiN+Z9/g\ndGc7OYMsOxjjiYCc9Ep/yureoHikhccuBqdfsjAQEMOH4RfKMV9tWsLSaKEq889r\nM8x1D09QWKAjwXvsaw+QRnxZrSe021LyEpYXK/FJgRx+/aru/j1V6TfiSp6nIfAE\nbEYBBkdfAgMBAAECggEACaGs20yjJdG7CtCrwbZp4YCYxB+2E9mQcmAGexFc8URd\nwzFTrx1KKT9AIKKE0ASmEW+nVRAvK9zv0r9490Nq0yuwCnsCjpzFTabO0iWRi5vc\nn5i65KlOl3FnHe0QeEkfPlsD1HPgvoJHqIcBaumBx6t0kWRk+9FUhqVaW/SGGNxF\nP4nVE3/4auSf5SZeLQdze7/qF6SHyDlylWgCun/BFWYpCxdWCummSeRJSKlL6ADP\nLxwndAC3jqGd5WdyZ9XqeDKJ4gKU+bgvccduCC8RuSzxW233/0teUFY4dJZePjTT\nUg9TBMbufq9drXn97vT1haUKYS+LY0j5DwoK48fMSQKBgQDyQBUjZD5+lOSrnDBO\nXO1irJR34L8QP4jpKqKuHTkckwL6XdDad82qeaCLI45aLQzZE/nnQDh5+kaIcHZo\nccNqJx6WswQ9M06seI110cbbBa4wdSIhMDKNqwkecxUp+LAMLp+/mh95oHKrvuB8\nmABiMayNXg1WS9aJESFDAtRxUwKBgQDucxjSmLHSwZx3tmDDOQUPwtZrVwDmDQbU\naBTMn6Z+JM2932tUUhnv9MQrXDDYe70MfbyOACmoepw2hi0Nv/ixabCuJEAnLP34\nNwftjmi0nMhc4L3EwNq5GBTqyTQ3wxuHXw/TIkiOSe1UqRVLNiNxqhPuSTX6+Su1\nHvSR3AnURQKBgFWZ215UL9ke1+bkHBW0tJVnklcB7cHaEZEC5dVMsj+smyLJP+HS\n77PLorVH7SdkP+P9MRNMGCjSDVZtFwo1GO5LwH1T6K2Pkb9UIfh+FhyS10h8O4Eq\nvNJem6xM0i+wltTXLM/RsEmULrENk9mzBH+uOeECWQgjaD2q9evt9g/NAoGAeaZY\npKBoIEjMZbqy1QZTEb5qG+sQN02wDU9oRRiyHSrzmAnSvPsB5oyuRBzNgrRmN2gy\neROWLTEYXyzG8XveCc0M6VrvK81laGvS7Jw5yOMvyUqTJjzpmYKysTGjJUux0Ldr\n4GBeOdF3djio920QWh3V+zx4gKj8ZnP7fCqRDS0CgYEA2NQmYYrF++IaeRbxXaP5\nADHKcl5B+pfkzGIe7WFsRRSP3Z+ZsihBTsjNmr448XS49Ere6/NrNxk4YYa175wl\n5KR+r8o37r2fY2JLtKULmwagPPY4aVWBgy+vycOdCG7+hJR8u6xrJDxpsxyOEtt4\njz4HC09zmvWqeiYUQ/FrQkI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "femme-837@femme-mini-wp.iam.gserviceaccount.com",
+  "client_id": "115050505755714395877",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/femme-837%40femme-mini-wp.iam.gserviceaccount.com"
+}
