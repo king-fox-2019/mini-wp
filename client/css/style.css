@@ -35,7 +35,7 @@ body {
     float: right;
 }
 
-logo {
+#logo {
     font-family: Xanthousy;
     font-size: 50px;
 }
@@ -44,9 +44,13 @@ logo {
     float: right;
 }
 
-#article-new {
+#article-new, #article-list {
     font-size: 14px;
     padding: 10px;
+}
+
+#article-list{
+    color: #fff;
 }
 
 #img-profile {
