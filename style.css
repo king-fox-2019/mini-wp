@@ -1,0 +1,64 @@
+.close-btn {
+  background-color: rgb(221, 199, 199);
+}
+
+.save-btn {
+  background-color: #343a40;
+  color: rgb(185, 176, 177);
+}
+
+.search-btn {
+  width: 50px;
+  background-color: rgb(192, 209, 192);
+}
+
+.search-btn:hover {
+  background-color: rgb(122, 136, 122);
+}
+
+.nav-item {
+  margin: 0 15px;
+}
+
+textarea {
+  border-radius: 4px;
+}
+
+#article-list {
+  overflow-y: scroll;
+  height: 550px;
+}
+
+#article {
+  margin-top: 30px;
+}
+
+.home {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: #343a40;
+}
+
+h6 {
+  display: inline;
+  padding: 0 5px;
+  text-align: center;
+  background-color: aqua;
+  border-radius: 4px;
+}
+
+.nav-tabs {
+  border-style: none;
+}
+
+#home-nav {
+  margin-top: 20px;
+  text-decoration: none;
+}
