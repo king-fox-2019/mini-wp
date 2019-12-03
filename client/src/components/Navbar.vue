@@ -1,8 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="primary" fixed="top">
-    <b-navbar-brand :to="onSession ? 'explore' : '/'" active-class="active"
-      >TYPRESS</b-navbar-brand
-    >
+    <b-navbar-brand to="/" active-class="active">TYPRESS</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -34,9 +32,6 @@
 
 <script>
 export default {
-  props: {
-    onSession: Boolean
-  },
   data() {
     return {}
   },

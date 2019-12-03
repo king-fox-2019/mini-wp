@@ -1,5 +1,8 @@
 <template>
-  <div class="container row mx-auto justify-content-center align-items-center">
+  <div
+    class="container row mx-auto justify-content-center align-items-center"
+    ref="signUpContainer"
+  >
     <b-jumbotron
       header-level="5"
       bg-variant="main-bg"
@@ -15,46 +18,81 @@
       novalidate
     >
       <b-form-group
-        label="Username"
         label-for="username"
         description="Must only contains lowercase letters, numbers, dots and/or underscores."
       >
         <b-form-input
           id="username"
-          v-model="username"
+          v-model.trim="username"
           type="text"
-          placeholder="dummy"
+          placeholder="Username"
           :state="validateUsername"
+          @focus="emptyUsername = false"
           required
         ></b-form-input>
+        <b-popover
+          target="username"
+          placement="right"
+          variant="danger"
+          content="Username cannot empty!"
+          triggers=""
+          :show.sync="emptyUsername"
+        ></b-popover>
       </b-form-group>
 
       <b-form-group
-        label="Email"
         label-for="email"
         description="Must be a valid email format."
       >
         <b-form-input
           id="email"
-          v-model="email"
+          v-model.trim="email"
           type="email"
-          placeholder="dummy@mail.com"
+          placeholder="Email"
           :state="validateEmail"
+          @focus="emptyEmail = false"
           required
         ></b-form-input>
+        <b-popover
+          target="email"
+          placement="right"
+          variant="danger"
+          content="Email cannot empty!"
+          triggers=""
+          :show.sync="emptyEmail"
+        ></b-popover>
       </b-form-group>
 
       <b-form-group
-        label="Password"
         label-for="password"
         description="Must have at least 6 characters."
       >
         <b-form-input
           id="password"
-          v-model="password"
+          v-model.trim="password"
           type="password"
-          placeholder="******"
+          placeholder="Password"
           :state="validatePassword"
+          @focus="emptyPassword = false"
+          required
+        ></b-form-input>
+        <b-popover
+          target="password"
+          placement="right"
+          variant="danger"
+          content="Password cannot empty!"
+          triggers=""
+          :show.sync="emptyPassword"
+        ></b-popover>
+      </b-form-group>
+
+      <b-form-group label-for="full-name">
+        <b-form-input
+          id="full-name"
+          v-model.trim="fullName"
+          type="text"
+          placeholder="Full Name (Optional)"
+          :state="validateFullName"
           required
         ></b-form-input>
       </b-form-group>
@@ -71,11 +109,68 @@ export default {
     return {
       username: '',
       email: '',
-      password: ''
+      password: '',
+      fullName: '',
+      emptyUsername: false,
+      emptyEmail: false,
+      emptyPassword: false
     }
   },
-  method: {
-    onSubmit() {}
+  methods: {
+    onSubmit() {
+      let isValid = true
+      const { username, email, password, fullName } = this
+      if (!username) {
+        this.emptyUsername = true
+        isValid = false
+      }
+      if (!email) {
+        this.emptyEmail = true
+        isValid = false
+      }
+      if (!password) {
+        this.emptyPassword = true
+        isValid = false
+      }
+      if (
+        isValid &&
+        this.validateUsername &&
+        this.validateEmail &&
+        this.validatePassword &&
+        this.validateFullName != false
+      ) {
+        const loader = this.$loading.show({
+          container: this.$refs.signUpContainer
+        })
+        this.$store
+          .dispatch('onSignUp', {
+            username,
+            email,
+            password,
+            fullName: fullName || undefined
+          })
+          .then(({ data }) => {
+            this.$toasted.show(data.message)
+            this.$router.push('/')
+          })
+          .catch(({ response }) => {
+            if (response.data.message.length) {
+              response.data.message.forEach(msg => {
+                this.$toasted.show(msg, { className: 'bg-danger' })
+              })
+            } else {
+              this.$toasted.show(response.data.message, {
+                className: 'bg-danger'
+              })
+            }
+          })
+          .finally(() =>
+            setTimeout(() => {
+              loader.hide()
+            }, 5000)
+          )
+      }
+    }
   },
   computed: {
     validateUsername() {
@@ -91,6 +186,9 @@ export default {
     },
     validatePassword() {
       return this.password ? this.password.length >= 6 : null
+    },
+    validateFullName() {
+      return this.fullName ? /^[A-Za-z ]+$/.test(this.fullName) : null
     }
   }
 }

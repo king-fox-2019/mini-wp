@@ -2,7 +2,7 @@
   <b-jumbotron
     header-level="1"
     bg-variant="main-bg"
-    class="d-flex text-center align-items-center"
+    class="d-flex text-center align-items-center m-0"
     id="landing-page"
     fluid
   >

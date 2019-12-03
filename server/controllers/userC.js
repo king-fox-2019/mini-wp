@@ -9,7 +9,7 @@ class UserController {
       username,
       email,
       password,
-      fullName
+      fullName: fullName || undefined
     })
       .then(user => {
         res.status(200).json({
