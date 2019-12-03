@@ -7,10 +7,6 @@ const routes = [
   {
     path: '/',
     name: 'landing',
-    beforeEnter: (to, from, next) => {
-      if (localStorage.getItem('access_token')) next('/dashboard')
-      else next()
-    },
     component: () =>
       import(/* webpackChunkName: "landing" */ '@/views/Landing.vue')
   },
@@ -19,6 +15,12 @@ const routes = [
     name: 'signup',
     component: () =>
       import(/* webpackChunkName: "signup" */ '@/views/SignUp.vue')
+  },
+  {
+    path: '/signin',
+    name: 'signin',
+    component: () =>
+      import(/* webpackChunkName: "signin" */ '@/views/SignUp.vue')
   },
   {
     path: '/profile',
@@ -40,8 +42,18 @@ const router = new VueRouter({
 })
 
 // router.beforeEach((to, from, next) => {
-//   if (to.name !==
-//   next()
+//   if (to.path == from.path) return next()
+//   const toOuterPage =
+//     to.name == 'landing' || to.name == 'signup' || to.name == 'signin'
+//   checkSession()
+//     .then(() => {
+//       if (toOuterPage) next('/')
+//       else next()
+//     })
+//     .catch(() => {
+//       if (toOuterPage) next()
+//       else next('/signup')
+//     })
 // })
 
 export default router

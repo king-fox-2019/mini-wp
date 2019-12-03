@@ -1,6 +1,8 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="primary" fixed="top">
-    <b-navbar-brand to="/" active-class="active">TYPRESS</b-navbar-brand>
+    <b-navbar-brand :to="onSession ? '/explore' : '/'" active-class="active"
+      >TYPRESS</b-navbar-brand
+    >
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -16,7 +18,7 @@
             >Profile</b-dropdown-item
           >
           <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item to="signout" active-class="active"
+          <b-dropdown-item active-class="active" @click="signOut"
             >Sign Out</b-dropdown-item
           >
         </b-nav-item-dropdown>
@@ -38,6 +40,15 @@ export default {
   computed: {
     activePage() {
       return this.$route.path
+    },
+    onSession() {
+      return this.$store.state.onSession
+    }
+  },
+  methods: {
+    signOut() {
+      this.$store.dispatch('onSignOut')
+      this.$router.push('/')
     }
   }
 }

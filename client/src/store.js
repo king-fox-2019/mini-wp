@@ -1,23 +1,31 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Axios from 'axios'
 
-// Axios.defaults.baseURL = 'http://localhost:3000'
-const axios = Axios.create({ baseURL: 'http://localhost:3000' })
+import server from './api/server'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    onSession: false
+  },
+  mutations: {
+    CHANGE_SESSION(state, session) {
+      state.onSession = session
+    }
+  },
   actions: {
     onSignUp(context, { username, email, password, fullName }) {
-      return axios.post('signup', {
+      return server.post('signup', {
         username,
         email,
         password,
         fullName
       })
+    },
+    onSignOut({ commit }) {
+      commit('CHANGE_SESSION', false)
+      localStorage.clear()
     }
   },
   modules: {}

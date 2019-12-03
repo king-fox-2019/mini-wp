@@ -69,7 +69,7 @@
       >
         <b-form-input
           id="password"
-          v-model.trim="password"
+          v-model="password"
           type="password"
           placeholder="Password"
           :state="validatePassword"
@@ -103,6 +103,8 @@
 </template>
 
 <script>
+import checkSession from '@/utils/checkSession'
+
 export default {
   name: 'SignUp',
   data() {
@@ -114,6 +116,25 @@ export default {
       emptyUsername: false,
       emptyEmail: false,
       emptyPassword: false
+    }
+  },
+  computed: {
+    validateUsername() {
+      return this.username ? /^[a-zA-Z0-9_.]+$/.test(this.username) : null
+    },
+    validateEmail() {
+      return this.email
+        ? // eslint-disable-next-line no-useless-escape
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            this.email
+          )
+        : null
+    },
+    validatePassword() {
+      return this.password ? this.password.length >= 6 : null
+    },
+    validateFullName() {
+      return this.fullName ? /^[A-Za-z ]+$/.test(this.fullName) : null
     }
   },
   methods: {
@@ -151,7 +172,8 @@ export default {
           })
           .then(({ data }) => {
             this.$toasted.show(data.message)
-            this.$router.push('/')
+            localStorage.setItem('access_token', data.data.access_token)
+            this.$router.push('/dashboard')
           })
           .catch(({ response }) => {
             if (response.data.message.length) {
@@ -164,32 +186,21 @@ export default {
               })
             }
           })
-          .finally(() =>
-            setTimeout(() => {
-              loader.hide()
-            }, 5000)
-          )
+          .finally(() => loader.hide())
       }
     }
   },
-  computed: {
-    validateUsername() {
-      return this.username ? /^[a-zA-Z0-9_.]+$/.test(this.username) : null
-    },
-    validateEmail() {
-      return this.email
-        ? // eslint-disable-next-line no-useless-escape
-          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-            this.email
-          )
-        : null
-    },
-    validatePassword() {
-      return this.password ? this.password.length >= 6 : null
-    },
-    validateFullName() {
-      return this.fullName ? /^[A-Za-z ]+$/.test(this.fullName) : null
-    }
+  beforeRouteEnter(to, from, next) {
+    if (localStorage.getItem('access_token')) {
+      checkSession()
+        .then(() => {
+          next('/')
+        })
+        .catch(() => {
+          localStorage.clear()
+          next()
+        })
+    } else next()
   }
 }
 </script>

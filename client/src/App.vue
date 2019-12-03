@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar'
+import Navbar from '@/components/Navbar'
+import checkSession from '@/utils/checkSession.js'
 
 export default {
   components: {
@@ -16,6 +17,11 @@ export default {
     return {
       onSession: false
     }
+  },
+  created() {
+    checkSession()
+      .then(() => this.$store.commit('CHANGE_SESSION', true))
+      .catch(() => this.$store.commit('CHANGE_SESSION', false))
   }
 }
 </script>
