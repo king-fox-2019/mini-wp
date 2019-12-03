@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // printLorem()
-    insertCard()
+    // insertCard()
+    
     $("#sidebar").mCustomScrollbar({
          theme: "minimal"
     });

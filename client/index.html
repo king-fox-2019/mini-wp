@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="./style.css">
     
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-</head>
+
+
 
     <title>Mini Wordpress Layout</title>
 </head>
+
 <body>
+
 
 <div >
 <nav class="navbar navbar-dark bg-dark fixed-top" >
@@ -40,7 +40,7 @@
 
 
 
-
+<div id="app">
 <div class="wrapper">
     <!-- Sidebar  -->
     <nav class="sidebar" id="sidebar">
@@ -51,26 +51,20 @@
 
         <ul class="list-unstyled components">
             <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a href="#" id="homeButton" @click="changePage('home'), getArticles()">
                     <i class="fas fa-home"></i>
                     Home
                 </a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="#">Home 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
-                    </li>
-                </ul>
+
             </li>
             <li>
-                <a href="#">
+                <a href="#" @click="changePage('about')">
                     <i class="fas fa-briefcase"></i>
                     About
+                </a>
+                <a href="#" id="createNewPost" @click="changePage('createNewPost')">
+                    <!-- <i class="fas fa-briefcase"></i> -->
+                    +New Post
                 </a>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-copy"></i>
@@ -91,12 +85,16 @@
         </ul>
     </nav>
 
+
+
+
     <!-- Page Content  -->
     <div id="content" >
             <div class="container-fluid">
 
+
                 <!-- Modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+Post</button>
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+Post</button>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -111,11 +109,13 @@
                         <form>
                         <div class="form-group">
                             <label for="title-text" class="col-form-label">Title</label>
-                            <textarea class="form-control" id="title-text" rows=1 style="resize: none;""></textarea>
+                            <textarea class="form-control" id="title-text" rows=1 style="resize: none;"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Message</label>
-                            <textarea class="form-control" id="message-text" rows=6 style="resize: none;"></textarea>
+                            <form method="post">
+                                <textarea id="mytextarea" name="mytextarea" rows=10 style="resize: none;">Hello, World!</textarea>
+                            </form>
                         </div>
                         </form>
                     </div>
@@ -125,23 +125,67 @@
                     </div>
                     </div>
                 </div>
+                </div> -->
+
+                <div id="contentArticle"></div>
+                <div class="row align-items-center" id="cardContainer"></div>
+
+                <div class="row align-items-center" id="homePage" v-if="showPage === 'home'">
+
+                    <div id="repeatCard" v-for="x in articles.data.length-1">
+                        <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ articles.data[x].title }}</h5>
+                            <p class="card-text">{{ articles.data[x].content }}</p>
+                            <p class="card-text">{{ articles.data[x].createdAt.split('T')[0] }}</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
-                <div id="contentArticle">
-                </div>
-
-                <div class="row align-items-center" id="cardContainer">
+                <div class="row align-items-center" id="aboutPage" v-if="showPage === 'about' ">
+                    <h1>about page nih</h1>
                 </div>
                     
+                <div class="row align-items-center" id="createPostPage" v-if="showPage === 'createNewPost' ">
+
+                    <div class="container">
+                        <div class="row row-cols-2">
+                            <div class="col">
+                                <h4>Create new post</h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-cols-2">
+                            <div class="col">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="formGroupTitle">Title</label>
+                                        <input type="text" class="form-control" id="formGroupTitle" placeholder="required" required v-model="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formGroupArticle">Article</label>
+                                        <textarea class="form-control" name="" id=  "formGroupArticle"  rows="15" placeholder="required" required v-model='content'></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" id="createArticleButton" @click="createArticles()">Create Article</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-    </div>
+    </div><!--  content -->
+
+</div><!--  wrapper -->
+
 
 </div>
-
-
-
-
-
 
 
 
@@ -157,7 +201,24 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
  <!-- jQuery Custom Scroller CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- vue -->    
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- Font Awesome JS -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+<!-- axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- tinydocs -->
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: '#mytextarea'
+  });
+</script>
 <!-- custom jquery -->
-<script src="./main.js"></script>
+<script src="./main1-jquery.js"></script> <!-- masih perlu buat animasi sidebar-->
+<script src="./main2-axios.js"></script>
+<script src="./vue.js"></script>
+
 </body>
 </html>
