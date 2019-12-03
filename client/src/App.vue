@@ -23,6 +23,18 @@ export default {
       .then(() => this.$store.commit('CHANGE_SESSION', true))
       .catch(() => this.$store.commit('CHANGE_SESSION', false))
   }
+  // beforeRouteUpdate(to, from, next) {
+  //   if (localStorage.getItem('access_token')) {
+  //     checkSession()
+  //       .then(() => {
+  //         next('/explore')
+  //       })
+  //       .catch(() => {
+  //         localStorage.clear()
+  //         next()
+  //       })
+  //   } else next()
+  // }
 }
 </script>
 

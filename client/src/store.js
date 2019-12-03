@@ -23,6 +23,12 @@ export default new Vuex.Store({
         fullName
       })
     },
+    onSignIn(context, { emailUsername, password }) {
+      return server.post('signin', {
+        emailUsername,
+        password
+      })
+    },
     onSignOut({ commit }) {
       commit('CHANGE_SESSION', false)
       localStorage.clear()

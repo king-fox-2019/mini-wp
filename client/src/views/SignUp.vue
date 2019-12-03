@@ -173,10 +173,13 @@ export default {
           .then(({ data }) => {
             this.$toasted.show(data.message)
             localStorage.setItem('access_token', data.data.access_token)
+            this.$store.commit('CHANGE_SESSION', true)
             this.$router.push('/dashboard')
           })
           .catch(({ response }) => {
-            if (response.data.message.length) {
+            this.password = ''
+            const message = response.data.message
+            if (typeof message != 'string') {
               response.data.message.forEach(msg => {
                 this.$toasted.show(msg, { className: 'bg-danger' })
               })
