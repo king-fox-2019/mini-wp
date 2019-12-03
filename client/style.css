@@ -1,0 +1,39 @@
+body{
+  overflow: hidden;
+}
+
+.card{
+  margin: 20px;
+}
+
+button{
+  width: 15%;
+}
+
+.sidebar{
+  background-color: lightgrey;
+  height: 95vh;
+  overflow: scroll;
+  padding: 0;
+  text-align: center;
+}
+
+.sidebar-item{
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5%;
+  margin-top: 5%; 
+}
+
+.sidebar-item:hover{
+  background-color: lightblue;
+}
+
+.scroll{
+  overflow: scroll;
+  height: 90vh;
+}
+
+label{
+  display: block;
+}
