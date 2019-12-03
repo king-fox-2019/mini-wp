@@ -44,16 +44,11 @@ logo {
     float: right;
 }
 
-.list-group-Project {
+#article-new {
     font-size: 14px;
     padding: 10px;
 }
 
-#img-profile{
+#img-profile {
     padding: 25px;
-}
-#new-project{
-    font-weight: bold;
-    text-align: center;
-    background-color: #7f8fa6;
 }
