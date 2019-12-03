@@ -1,3 +1,6 @@
+'use strict';
+const BASE_URL = 'http://localhost:3000'
+
 const miniWp = new Vue({
   el: "#body",
   data: {
@@ -6,7 +9,18 @@ const miniWp = new Vue({
     showPost: false,
     article: "",
     content: "",
-    blogposts: []
+    blogposts: [
+      {
+        id: 1,
+        title: "Belajar Vue.js",
+        article: "Baca dokumentasi"
+      },
+      {
+        id: 2,
+        title: "Belajar Vue.js",
+        article: "Nonton yucup"
+      }
+    ]
   },
   methods: {
     toggleMySite: function() {
@@ -23,18 +37,34 @@ const miniWp = new Vue({
       this.page = "showPost";
     },
     fetchData: function() {
-      axios({
-        method: "GET",
-        url: "http://localhost:3000/posts"
-      })
-        .then(({ data }) => {
-          this.blogposts = data;
+        axios({
+          method: "GET",
+          url: "http://localhost:3000/article"
         })
-        .catch(_ => {
-          console.log(_);
-        });
+          .then(({ data }) => {
+            this.blogposts = data;
+          })
+          .catch(_ => {
+            console.log(_);
+          });
+    },
+    addPost: function() {
+      let newPost = {
+        title: this.article,
+        content: this.content
+      };
+      axios({
+        method: 'POST',
+        url: `${BASE_URL}/article`,
+        data: {
+          title: "hai",
+          content: "halo"
+        }
+      })
+        .then( ( { data } ) => {
+          console.log(data)
+        } )
+        .catch(err=> console.log(err))
     }
   }
 });
-
-

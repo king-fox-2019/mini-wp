@@ -60,9 +60,10 @@
                     </div>
                 </div>
                 <hr>
-                <label for="exampleFormControlInput1">Title</label>
+                <label for="articleTitle">Title</label>
                 <input type="text" v-model="article" class="form-control" id="articleTitle" placeholder="Your article title here"><br>
                 <textarea v-model="content" id="editor" cols="30" @ rows="10"></textarea>
+                <button type="button" class="btn btn-danger" @click="addPost">Submit</button>
                 <hr>
             </section>
 
@@ -70,7 +71,7 @@
                     <div class="card mt-5 mb-2" v-for="post in blogposts">
                     <div class="card-body">
                         <h1> {{ post.title }} </h1>
-                        <p> {{ post.article }} </p>
+                        <p> {{ post.content }} </p>
                     </div>
                 </div>               
             </section>
