@@ -20,8 +20,22 @@
 </template>
 
 <script>
+import checkSession from '@/utils/checkSession'
+
 export default {
-  name: 'LandingPage'
+  name: 'LandingPage',
+  beforeRouteEnter(to, from, next) {
+    if (localStorage.getItem('access_token')) {
+      checkSession()
+        .then(() => {
+          next('/explore')
+        })
+        .catch(() => {
+          localStorage.clear()
+          next()
+        })
+    } else next()
+  }
 }
 </script>
 
