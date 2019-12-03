@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const jwt = require('../helpers/jwt')
 const bcrypt = require('../helpers/bcrypt')
+const avatar = "https://api.adorable.io/avatars/285"
 
 class UserController{
     static registerUser(req,res,next){
@@ -8,13 +9,15 @@ class UserController{
         User.create({
             username,
             email,
-            password 
+            password,
+            avatar: `${avatar}/${email}.png` 
         })
-        .then(({_id, username, email}) => {
+        .then(({_id, username, email, avatar}) => {
             let filterUser = {
                 id: _id,
                 username,
-                email
+                email,
+                avatar
             }
             res.status(201).json(filterUser)
         })
