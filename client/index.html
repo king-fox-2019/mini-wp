@@ -97,17 +97,18 @@
 
           <!-- List of posts -->
           <div id="list-posts" class="my-2 container" style="width: 70%" v-if="page == 'allPosts'">
+            <h4 h4 class="my-4 mx-1">Posts</h4>
             <ul class="list-group">
-                <li class="list-group-item show-post d-flex justify-content-between" v-for="article in articles" :data-id="article.id">
-                    <span class="">{{ article.title }}</span>
+                <li class="list-group-item d-flex justify-content-between" v-for="article in articles" :data-id="article._id">
+                    <span class="title-list" v-on:click="viewPost(article._id)">{{ article.title }}</span>
                     <div class="dropdown">
                       <button class="btn dropdown-toggle float-right" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v"></i>
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" v-on:click="viewPost(article.id)">View</button>
-                        <button class="dropdown-item" v-on:click="editCanvas(article.id)">Edit</button>
-                        <button class="dropdown-item" v-on:click="deletePost(article.id)">Delete</button>
+                        <button class="dropdown-item" v-on:click="viewPost(article._id)">View</button>
+                        <button class="dropdown-item" v-on:click="editCanvas(article._id)">Edit</button>
+                        <button class="dropdown-item" v-on:click="deletePost(article._id)">Delete</button>
                       </div>
                     </div>
                 </li>
@@ -118,7 +119,7 @@
           <!-- Blog -->
           <div id="blog" class="container border text-justify" style="width: 60%" v-if="page == 'blog'" >
             <div class="blog-post mx-5 my-5">
-              <span class="date">November 31, 2019</span>
+              <span class="date">{{ articleData.created_at }}</span>
               <article class="article-content">
                 <h3 class="article-title">{{ articleData.title }}</h3>
                 <p>{{ articleData.content }}</p>
@@ -130,9 +131,9 @@
           <!-- Edit canvas -->
           <div id="edit" class="my-2 container" style="height: 100vh; width: 70%" v-if="page == 'edit'">
             <h4 class="my-4 mx-1">Edit Post</h4>
-            <form v-on:submit.prevent="editPost">
+            <form v-on:submit.prevent="editPost(articleData._id)">
               <div class="form-group">
-                <input id="title-input" class="form-control" type="text" placeholder="Title" v-model="articleData.title">
+                <input id="edit-title-input" class="form-control" type="text" placeholder="Title" v-model="articleData.title">
               </div>
               <!-- <div id="quill-editor" class="form-group bg-white mb-2" style="height: 250px;"> -->
               <!-- <div class="form-group" style="background-color: white;"> -->
@@ -158,7 +159,7 @@
 
   <!-- JS Script -->
   <script>
-    Vue.use(VueQuillEditor);
+    // Vue.use(VueQuillEditor);
 
     let app = new Vue({
       el: "#app",
@@ -202,11 +203,13 @@
         },
 
         editCanvas(articleId) {
+          console.log(typeof articleId)
           axios({
             method: "get",
             url: `http://localhost:3000/articles/${articleId}`
           })
             .then(article => {
+              console.log(article.data)
               this.articleData = article.data;
               this.changePage("edit");
             })
@@ -227,27 +230,41 @@
             method: "get",
             url: `http://localhost:3000/articles/${articleId}`
           })
-            .then(article => {
-              console.log(article.data)
-              this.articleData = article.data
-              this.changePage("blog");
-
-            })
-            .catch(err => {
-              console.log(err)
-            })
+          .then(article => {
+            console.log(article.data)
+            this.articleData = article.data
+            this.changePage("blog");
+            
+          })
+          .catch(err => {
+            console.log(err)
+          })
         },
-
+        
         editPost(articleId) {
+          console.log(typeof articleId)
+          console.log(`http://localhost:3000/articles/${articleId}`)
           axios({
             method: "patch",
             url: `http://localhost:3000/articles/${articleId}`,
             data: {
-              title: document.getElementById("title-input").value,
+              title: document.getElementById("edit-title-input").value,
               content: document.getElementById("edit-content").value
             }
           })
-          
+            .then(article => {
+              return axios({
+                method: "get",
+                url: `http://localhost:3000/articles/${articleId}`,
+              })
+            })
+            .then(article => {
+              this.articleData = article.data;
+              this.changePage("blog")
+            })
+            .catch(err => {
+            console.log(err)
+          })
         },
 
         deletePost(articleId) {

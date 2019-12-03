@@ -15,6 +15,9 @@ body {
   top: 50px
 }
 
+.title-list:hover {
+  cursor: pointer;
+}
 
 .menu:hover {
   cursor: pointer;
