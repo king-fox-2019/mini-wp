@@ -66,10 +66,13 @@ Status 201: Created
 {
   "message": "User registered",
   "data": {
-    "username": "dummy",
-    "email": "dummy@mail.com",
-    "password": "123456",
-    "fullName": "Dummy Guy"
+    "user": {
+      "username": "dummy",
+      "email": "dummy@mail.com",
+      "password": "123456",
+      "fullName": "Dummy Guy"
+    },
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZTMzMzM3NjJhNWI5MzNjNTFkNDY2NCIsImVtYWlsIjoiZHVtbXlAbWFpbC5jb20iLCJpYXQiOjE1NzUxNzIwNTd9.9Wr2WAdXEp0nlkAJJUvqm4uXGYspxIFfZe-xTaLaUG4"
   }
 }
 ```

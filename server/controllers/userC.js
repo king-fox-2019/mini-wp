@@ -12,13 +12,17 @@ class UserController {
       fullName: fullName || undefined
     })
       .then(user => {
+        const access_token = encode(user)
         res.status(200).json({
           message: 'User registered',
           data: {
-            username: user.username,
-            email: user.email,
-            password,
-            fullName: user.fullName
+            user: {
+              username: user.username,
+              email: user.email,
+              password,
+              fullName: user.fullName
+            },
+            access_token
           }
         })
       })
