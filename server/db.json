@@ -1,0 +1,16 @@
+{
+  "article": [
+    {
+      "title": "example",
+      "content": "lorem ipsum blabalbalbal sum",
+      "created_at": "14-12-2012",
+      "id": 1
+    },
+    {
+      "title": "contoh",
+      "content": " Excepturi perspiciatis aliquid magnam ipsum minus iure quidem mollitia",
+      "created_at": "17-12-2012",
+      "id": 2
+    }
+  ]
+}
