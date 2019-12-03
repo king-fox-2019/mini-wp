@@ -42,4 +42,7 @@ export default {
 #page {
   height: 100vh;
 }
+*:focus {
+  outline: none;
+}
 </style>
