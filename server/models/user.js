@@ -28,7 +28,11 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password cannot be empty'],
         minlength: [6, 'Your password min have 6 digits']
-    }
+    },
+    favorites:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Article'
+    }]
 },
 {
     versionKey: false,
