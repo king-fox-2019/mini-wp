@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
+@import 'nav.css';
+@import 'side-nav.css';
+@import 'blog-post.css';
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto Slab', serif;
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+}
+
+#article-editor, #article-updater {
+    height: 375px;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
