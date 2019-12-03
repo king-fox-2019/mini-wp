@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <title>mini wp</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <h1 class="navbar-brand" onclick="location.reload()" href="#">
+                <i class="fa fa-book"></i> MINI WP
+              </h1>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="nav-item">
+                <a
+                  v-on:click="create()"
+                  class="nav-link add-article"
+                  href="#"
+                  data-target="#add-article"
+                  data-toggle="modal"
+                  href="#add-article"
+                  >Add Article</a
+                >
+              </li>
+              <li class="nav-item">
+                <div class="input-group">
+                  <input
+                    v-model="articleName"
+                    class="form-control"
+                    placeholder="Search article"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      v-on:click="filterArticles"
+                      class="btn"
+                      type="button"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Create Modal -->
+      <div
+        class="modal fade"
+        id="add-article"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="add-article"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h5 class="modal-title" id="add-article-title">
+                Write new article
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input
+                v-model="createTitle"
+                class="form-control"
+                type="text"
+                id="add-title"
+                style="margin-bottom:10px;"
+                placeholder="Article title"
+              />
+              <input
+                v-model="createTag"
+                class="form-control"
+                type="text"
+                id="add-tag"
+                style="margin-bottom:10px;"
+                placeholder="Article tag"
+              />
+              <textarea
+                v-model="createContent"
+                class="form-control"
+                rows="10"
+                style="min-width: 100%;"
+              ></textarea>
+              <!-- <div id="editor"></div> -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn close-btn" data-dismiss="modal">
+                Close
+              </button>
+              <button v-on:click="createArticle" type="button" data-dismiss="modal" class="btn save-btn">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="edit-article"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="add-article"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h5 class="modal-title" id="add-article-title">
+                Edit article
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input
+                v-model="updateTitle"
+                class="form-control"
+                type="text"
+                id="add-title"
+                style="margin-bottom:10px;"
+              />
+              <input
+                v-model="updateTag"
+                class="form-control"
+                type="text"
+                id="add-tag"
+                style="margin-bottom:10px;"
+              />
+              <textarea
+                v-model="updateContent"
+                class="form-control summernote"
+                rows="10"
+                style="min-width: 100%;"
+              ></textarea>
+              <!-- <div id="editor"></div> -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn close-btn" data-dismiss="modal">
+                Close
+              </button>
+              <button v-on:click="updateArticle(updateId)" type="button" data-dismiss="modal" class="btn save-btn">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- home -->
+      <div class="container home">
+        <div class="row">
+          <div class="col-sm-12">
+            <!--<ul class="nav flex nav-tabs" id="home-nav">
+                <li class="nav-item active">
+                    <a data-toggle="tab" href="#article-list">All Article</a>
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="tab" href="#article-cooking">Cooking</a>
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="tab" href="#article-travel">Travelling</a>
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="tab" href="#article-technology">Technology</a>
+                </li>
+            </ul> -->
+            <!-- <div class="tab-content"> -->
+            <!-- <div class="tab-pane fade show active" id="article-list"> -->
+            <div style="margin-top: 80px"></div>
+            <div class="article" v-for="(article,i) in articles" :key="i" :id="article._id">
+              <h1>{{article.title}}</h1>
+              <h6>{{article.tag}}</h6>
+              <p><span v-html="article.content"></span></p>
+              <i>Created at: {{article.createdAt.substring(0,10)}}</i><br>
+              <div class="btn-group">
+                    <button type="button" class="btn btn-primary" data-target="#edit-article" data-toggle="modal" href="#edit-article" v-on:click="findArticle(article._id)">Edit</button>
+                    <button type="button" class="btn btn-primary" v-on:click="deleteArticle(article._id)">Delete</button>
+              </div>
+            </div>
+            <!-- </div> -->
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    $(window).scroll(function(e) {
+      // add/remove class to navbar when scrolling to hide/show
+        var scroll = $(window).scrollTop();
+        if (scroll >= 150) {
+            $('.navbar').addClass("navbar-hide");
+        } else {
+            $('.navbar').removeClass("navbar-hide");
+            }
+        });
+      let article = new Vue({
+        el: "#app",
+        data: {
+          articles: [],
+          articleName: "",
+          createTitle: "",
+          createTag: "",
+          createContent: "",
+          updateId:"",
+          updateTitle: "",
+          updateTag: "",
+          updateContent: "",
+          quill: null
+        },
+        methods: {
+           findArticle: function(id) {
+            $.ajax({
+                method:"get",
+                url:"http://localhost:3000/article?id="+id
+            })
+            .done(article=>{
+                this.updateId = article._id
+                this.updateTitle = article.title
+                this.updateTag = article.tag
+                this.updateContent = article.content
+            })
+           },
+           updateArticle: function(id) {
+            $.ajax({
+                method:"put",
+                url:"http://localhost:3000/article",
+                data:{
+                    id:id,
+                    title:this.updateTitle,
+                    tag:this.updateTag,
+                    content:this.updateContent
+                }
+            })
+            .done(()=>location.reload())
+           }
+          ,getArticles: function() {
+            $.ajax({
+              method: "get",
+              url: "http://localhost:3000/article"
+            }).done(listArticles => {
+              for (let article of listArticles) {
+                this.articles.push(article);
+              }
+            });
+          },
+          filterArticles: function(event) {
+              $.ajax({
+              method: "get",
+              url: "http://localhost:3000/article?title=" + this.articleName
+            }).done(articles => {
+              this.articles = []
+                for (let article of articles) {
+                  this.articles.push(article);
+                }
+              });
+          },
+          createArticle: function(event) {
+              console.log(this.quill)
+              $.ajax({
+                  method:"post",
+                  url: "http://localhost:3000/article",
+                  data:{
+                      title:this.createTitle,
+                      tag:this.createTag,
+                      content:this.quill.root.innerHTML
+                  }
+              })
+              .done(article=>this.articles.push(article))
+          },
+          deleteArticle: function(id) {
+              $.ajax({
+                  method:"delete",
+                  url:"http://localhost:3000/article",
+                  data:{id}
+              })
+              .done(()=>{
+                  let articles = this.articles.filter(article=>{
+                      return article._id !== id
+                  })
+                  this.articles = articles
+              })
+          }
+        },
+        created() {
+          this.getArticles();
+        },
+        mounted() {
+            this.quill = new Quill('#editor', {
+                debug: 'info',
+                modules: {
+                    toolbar: [
+                                ['bold', 'italic', 'underline', 'strike'],
+                                ['blockquote', 'code-block'],
+                                [{ 'header': 1 }, { 'header': 2 }],
+                             ]
+                }, 
+                placeholder: 'Compose an epic...',
+                theme: 'snow'
+            });
+        }
+      });
+    </script>
+  </body>
+</html>

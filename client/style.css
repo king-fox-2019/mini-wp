@@ -16,21 +16,35 @@
   background-color: rgb(122, 136, 122);
 }
 
+.navbar-brand:hover {
+  cursor: pointer;
+}
+
 .nav-item {
   margin: 0 15px;
+}
+
+.navbar {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.navbar-hide {
+  pointer-events: none;
+  opacity: 0;
 }
 
 textarea {
   border-radius: 4px;
 }
 
+.article {
+  margin-bottom: 30px
+}
+
 #article-list {
   overflow-y: scroll;
   height: 550px;
-}
-
-#article {
-  margin-top: 30px;
 }
 
 .home {
@@ -61,4 +75,14 @@ h6 {
 #home-nav {
   margin-top: 20px;
   text-decoration: none;
+}
+
+.btn-primary {
+  background-color: rgb(226, 217, 217);
+  border: none;
+  color: black
+}
+
+.btn-primary:hover {
+  background-color: #343a40
 }
