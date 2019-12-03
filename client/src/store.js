@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    onSession: false
+    onSession: false,
+    userArticles: []
   },
   mutations: {
     CHANGE_SESSION(state, session) {
       state.onSession = session
+    },
+    CHANGE_USER_ARTICLES(state, articles) {
+      state.userArticles = articles
     }
   },
   actions: {
@@ -32,6 +36,14 @@ export default new Vuex.Store({
     onSignOut({ commit }) {
       commit('CHANGE_SESSION', false)
       localStorage.clear()
+    },
+    fetchUserArticles(context) {
+      const access_token = localStorage.getItem('access_token')
+      return server
+        .get('user/articles', { headers: { access_token } })
+        .then(({ data }) => {
+          context.commit('CHANGE_USER_ARTICLES', data.data)
+        })
     }
   },
   modules: {}

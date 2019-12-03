@@ -1,9 +1,22 @@
 <template>
-  <div>Dashboard</div>
+  <div>
+    <SideNav></SideNav>
+    <router-view class="float-right" id="main"></router-view>
+  </div>
 </template>
 
 <script>
-export default {}
+import SideNav from '@/components/SideNav'
+
+export default {
+  components: {
+    SideNav
+  }
+}
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+#main {
+  width: calc(100vw - 13rem);
+}
+</style>
