@@ -36,6 +36,11 @@ const routes = [
           )
       }
     ]
+  },
+  {
+    path: '/write',
+    name: 'write',
+    component: () => import(/* webpackChunkName: "write" */ '@/views/Write.vue')
   }
 ]
 
