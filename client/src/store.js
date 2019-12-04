@@ -44,6 +44,19 @@ export default new Vuex.Store({
         .then(({ data }) => {
           context.commit('CHANGE_USER_ARTICLES', data.data)
         })
+    },
+    onEditorAddImage(context, file) {
+      const access_token = localStorage.getItem('access_token')
+
+      const formData = new FormData()
+      formData.append('image', file)
+
+      return server({
+        method: 'post',
+        url: 'articles/image',
+        data: formData,
+        headers: { access_token }
+      })
     }
   },
   modules: {}

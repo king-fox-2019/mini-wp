@@ -82,6 +82,17 @@ class ArticleController {
       })
       .catch(next)
   }
+
+  static HandleImage(req, res, next) {
+    if (req.body.image)
+      res
+        .status(200)
+        .json({
+          message: 'Upload image success',
+          data: { imageUrl: req.body.image }
+        })
+    else next({ message: 'Upload image failed' })
+  }
 }
 
 module.exports = ArticleController

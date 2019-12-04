@@ -12,6 +12,9 @@
     ></b-form-input> -->
     <vue-editor
       v-model="content"
+      useCustomImageHandler
+      @image-added="addImageHandler"
+      @image-removed="removeImageHandler"
       placeholder="Start your journey..."
     ></vue-editor>
   </div>
@@ -26,7 +29,33 @@ export default {
   },
   data() {
     return {
-      content: ''
+      content: '',
+      images: []
+    }
+  },
+  methods: {
+    addImageHandler(file, Editor, cursorLocation, resetUploader) {
+      // An example of using FormData
+      // NOTE: Your key could be different such as:
+      // formData.append('file', file)
+
+      this.$store
+        .dispatch('onEditorAddImage', file)
+        .then(({ data }) => {
+          let imageUrl = data.data.imageUrl // Get imageUrl from response
+          this.images.push(imageUrl)
+          console.log(cursorLocation)
+          Editor.insertEmbed(cursorLocation, 'image', imageUrl)
+        })
+        .catch(({ response }) => {
+          this.$toasted.show(response.data.message, {
+            className: 'bg-danger'
+          })
+        })
+        .finally(() => resetUploader())
+    },
+    removeImageHandler(file) {
+      this.images.splice(this.images.indexOf(file), 1)
     }
   }
 }
@@ -103,6 +132,12 @@ export default {
   #quill-container {
     margin-bottom: 1rem;
     overflow-y: scroll;
+
+    .ql-editor {
+      // margin-top: 1rem;
+      margin-bottom: 3rem;
+      height: auto;
+    }
   }
 
   .ql-toolbar {
