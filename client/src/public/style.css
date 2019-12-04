@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+#brand-title{
+    font-family: 'Pacifico', cursive;
+    font-size: 36px;
+    color: #673AB7;
+}
