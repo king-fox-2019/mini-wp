@@ -1,4 +1,9 @@
 module.exports = (err, req, res, next) => {
-  console.log("here")
-  res.status(err.status).json({msg: err.message})
+  let status = 500;
+  let message= "Internal Server Error";
+  if (err.name === "ValidationError") {
+    status = 400;
+    message = err.message;
+  }
+  res.status(status).json({ message })
 }

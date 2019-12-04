@@ -4,30 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="659669797904-co34abenmpbhhvjkee033um3cs529m3t.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://kit.fontawesome.com/240be75fd4.js" crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.4/dist/vue-quill-editor.js"></script>
-
+    
     
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-  <title>Mini WP</title>
-</head>
-<body>
-  <div id="app">
+    
+    
+    
+    <title>Mini WP</title>
+  </head>
+  <body>
+    <div id="app">
     <header>
       <nav class="navbar navbar-expand-md fixed-top bg-dark">
         <a class="navbar-brand mr-auto text-light">AdminAd+</a>
@@ -38,69 +36,117 @@
         <button class="btn btn-outline-secondary mr-3" type="submit">Logout</button>
       </nav>
     </header>
+
+    <!-- signin
+    <div id="signin" class="all mt-5 container text-center justify-content-center border rounded-sm bg-light" style="width:30%; height:75vh">
+        <form id="signin-form" onsubmit="signin(event)">
+      <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+      <input id="signin-email" name="email" type="email" class="form-control mb-2" placeholder="Email address" required autofocus/>
+      <input id="signin-password"name="password" type="password" class="form-control mb-2" placeholder="Password" required/>
+      <button class="btn btn-lg btn-primary btn-block btn-sm" type="submit">
+        Sign in
+      </button>
+      <hr />
+      <div class="container row">
+        <div class="col-md-4"></div>
+        <div id="google-btn" class="g-signin2 mt-2 col-md-4" data-onsuccess="onSignIn" style="width: 100%">
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <span class="mt-2 text-center text-secondary">
+        Don't have an account?
+        <a href="#" id="reg-link" onclick="showRegister(event)">Sign up</a>
+      </span>
+      <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    </form>
+  </div> -->
+  <!-- End of signin -->
+
+  <!-- Register -->
+  <!-- <div id="register" class="all mt-5 container text-center justify-content-center border rounded-sm bg-light" style="width:30%; height:75vh">
+      <form id="register-form" v-on:click="register">
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+        <input id="reg-username" name="username" type="text" class="form-control mb-2" placeholder="Username" required>
+        <input id="reg-email" name="email" type="email" class="form-control mb-2" placeholder="Email address" required autofocus>
+        <input id="reg-password" name="password" type="password" class="form-control mb-2" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block btn-sm" type="submit" >Register</button>
+        <hr />
+        <div class="container row">
+          
+        </div>
+        <div class="col-md-4"></div>
+        <span class="mt-2 text-center text-secondary">
+          Already have an account?
+          <a href="#" id="signin-link" > Sign in</a>
+        </span>
+        <br>
+        <span class="mt-5 mb-3 text-muted">&copy; 2019</span>
+      </form>
+    </div> -->
+    <!-- End of Register -->
     
     <div  id="main-body" class="container-fluid">
       <div class="row" style="height: 100vh">
-        
-        <!-- Left part -->
-        <div id="left-part" class="col-2 border p-0">
           
+          <!-- Left part -->
+          <div id="left-part" class="col-2 border p-0">
+            
           <!-- User card -->
           <div id="user-card" class="mx-2 my-2 border" style="height: 100px">
               <img 
               src="https://avatars3.githubusercontent.com/u/36827603?s=460&v=4" 
               class="rounded float-left mx-2 my-2"
               style="width: 50px" 
-            alt="avatar">
-            <div id="name-job" class="my-2">
-              <span id="user-name" class="" style="font-size: 1em;">Dedi Prakasa</span>
-              <br>
-              <span id="user-job" style="font-size: 0.8em;">Fullstack Developer</span>
+              alt="avatar">
+              <div id="name-job" class="my-2">
+                <span id="user-name" class="" style="font-size: 1em;">Dedi Prakasa</span>
+                <br>
+                <span id="user-job" style="font-size: 0.8em;">Fullstack Developer</span>
+              </div>
             </div>
-          </div>
-          <!-- End of user card -->
-              
-          <!-- Main navigation -->
-          <div id="main-nav" class="mx-2 mt-4" style="height: 100vh">
-            <span class="mx-2">Main</span>
-            <hr class="my-1">
-            <ul class="list-group" >
-              <li class="menu list-group-item" v-on:click="changePage('canvas')">Create New Post</li>
-              <li class="menu list-group-item" v-on:click="changePage('allPosts')">Posts</li>
+            <!-- End of user card -->
+            
+            <!-- Main navigation -->
+            <div id="main-nav" class="mx-2 mt-4" style="height: 100vh">
+                <span class="mx-2">Main</span>
+                <hr class="my-1">
+                <ul class="list-group" >
+                  <li class="menu list-group-item" v-on:click="changePage('canvas')">Create New Post</li>
+                  <li class="menu list-group-item" v-on:click="changePage('allPosts')">Posts</li>
             </ul>
           </div>
           <!-- End of main navigation -->
-            
+          
           </div>
           <!-- End of left part -->
           
-        <!-- Main content -->
-        <div id="main-content" class="col-10 border">
-          
-          <!-- Canvas -->
-          <div id="canvas" class="my-2 container" style="height: 100vh; width: 70%" v-if="page == 'canvas'">
-              <h4 class="my-4 mx-1">Create New Post</h4>
-              <form v-on:submit.prevent="createPost">
+          <!-- Main content -->
+          <div id="main-content" class="col-10 border">
+            
+            <!-- Canvas -->
+            <div id="canvas" class="my-2 container" style="height: 100vh; width: 70%" v-if="page == 'canvas'">
+                <h4 class="my-4 mx-1">Create New Post</h4>
+                <form v-on:submit.prevent="createPost">
                 <div class="form-group">
                   <input id="title-input" class="form-control" type="text" placeholder="Title">
                 </div>
-                <!-- <div id="qEditor" class="form-group" style="background-color: white;">
-                  <quill-editor></quill-editor>
-                </div> -->
-                <div class="form-group">
-                  <textarea rows=10 id="content" class="form-control" type="text" placeholder="Main content of your post"></textarea>
+                <div id="qEditor" class="form-group" style="background-color: white;">
+                  <quill-editor v-model="content"></quill-editor>
                 </div>
+                <!-- <div class="form-group">
+                  <textarea rows=10 id="content" class="form-control" type="text" placeholder="Main content of your post"></textarea>
+                </div> -->
                 <button class="btn btn-primary">Submit Post</button>
               </form>
-          </div>
+            </div>
           <!-- End of canvas -->
-
+          
           <!-- List of posts -->
           <div id="list-posts" class="my-2 container" style="width: 70%" v-if="page == 'allPosts'">
-            <h4 h4 class="my-4 mx-1">Posts</h4>
+              <h4 h4 class="my-4 mx-1">Posts</h4>
             <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between" v-for="article in articles" :data-id="article._id">
-                    <span class="title-list" v-on:click="viewPost(article._id)">{{ article.title }}</span>
+              <li class="list-group-item d-flex justify-content-between" v-for="article in articles" :data-id="article._id">
+                <span class="title-list" v-on:click="viewPost(article._id)">{{ article.title }}</span>
                     <div class="dropdown">
                       <button class="btn dropdown-toggle float-right" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v"></i>
@@ -111,42 +157,42 @@
                         <button class="dropdown-item" v-on:click="deletePost(article._id)">Delete</button>
                       </div>
                     </div>
-                </li>
-            </ul>
-          </div>
-          <!-- End of list of posts -->
-          
-          <!-- Blog -->
-          <div id="blog" class="container border text-justify" style="width: 60%" v-if="page == 'blog'" >
-            <div class="blog-post mx-5 my-5">
-              <span class="date">{{ articleData.created_at }}</span>
-              <article class="article-content">
-                <h3 class="article-title">{{ articleData.title }}</h3>
-                <p>{{ articleData.content }}</p>
+                  </li>
+                </ul>
+              </div>
+              <!-- End of list of posts -->
+              
+              <!-- Blog -->
+              <div id="blog" class="container border text-justify" style="width: 60%" v-if="page == 'blog'" >
+                  <div class="blog-post mx-5 my-5">
+                    <span class="date">{{ articleData.created_at }}</span>
+                <article class="article-content">
+                  <h3 class="article-title">{{ articleData.title }}</h3>
+                  <div class="ql-editor" v-html="content" ></div>
               </article>
             </div>
           </div>
           <!-- End of blog -->
-
+          
           <!-- Edit canvas -->
           <div id="edit" class="my-2 container" style="height: 100vh; width: 70%" v-if="page == 'edit'">
-            <h4 class="my-4 mx-1">Edit Post</h4>
-            <form v-on:submit.prevent="editPost(articleData._id)">
+              <h4 class="my-4 mx-1">Edit Post</h4>
+              <form v-on:submit.prevent="editPost(articleData._id)">
               <div class="form-group">
                 <input id="edit-title-input" class="form-control" type="text" placeholder="Title" v-model="articleData.title">
               </div>
-              <!-- <div id="quill-editor" class="form-group bg-white mb-2" style="height: 250px;"> -->
               <!-- <div class="form-group" style="background-color: white;"> -->
-                <!-- <quill-editor>{{ articleData.content }}</quill-editor> -->
-                <!-- </div> -->
-              <div class="form-group">
+                <div id="qEditor" class="form-group" style="background-color: white;">
+                  <quill-editor v-model="content"></quill-editor>
+                </div>
+              <!-- <div class="form-group">
                 <textarea rows=10 id="edit-content" class="form-control" type="text"> {{ articleData.content}} </textarea>
-              </div>
+              </div> -->
               <button class="btn btn-primary">Save Change</button>
             </form>
           </div>
           <!-- End of edit canvas -->
-    
+          
         </div>
         <!-- End of main content -->
       </div>
@@ -156,140 +202,12 @@
     <footer>
     </footer>
   </div>
-
+  
   <!-- JS Script -->
-  <script>
-    // Vue.use(VueQuillEditor);
-
-    let app = new Vue({
-      el: "#app",
-      data: {
-        page: 'allPosts',
-        articles: [],
-        submission: { title: "",  content: ""},
-        newArticle: {},
-        articleData: {}
-      },
-      methods: {
-        fetchData() {
-          axios({
-            method: "get",
-            url:  "http://localhost:3000/articles",
-          })
-            .then(articles => {
-              this.articles = articles.data;
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        },
-
-        createPost() {
-          axios({
-            method: "post",
-            url: "http://localhost:3000/articles",
-            data: {
-              title: document.getElementById("title-input").value,
-              content: document.getElementById("content").value
-            }
-          })
-            .then(post => {
-              this.fetchData();
-              this.page = "allPosts";
-            })
-            .catch(err => {
-              console.log(err);
-            })
-        },
-
-        editCanvas(articleId) {
-          console.log(typeof articleId)
-          axios({
-            method: "get",
-            url: `http://localhost:3000/articles/${articleId}`
-          })
-            .then(article => {
-              console.log(article.data)
-              this.articleData = article.data;
-              this.changePage("edit");
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        },
-
-        changePage(p) {
-          this.page = p
-          if (p === "allPosts") {
-            this.fetchData()
-          }
-        },
-
-        viewPost(articleId) {
-          axios({
-            method: "get",
-            url: `http://localhost:3000/articles/${articleId}`
-          })
-          .then(article => {
-            console.log(article.data)
-            this.articleData = article.data
-            this.changePage("blog");
-            
-          })
-          .catch(err => {
-            console.log(err)
-          })
-        },
-        
-        editPost(articleId) {
-          console.log(typeof articleId)
-          console.log(`http://localhost:3000/articles/${articleId}`)
-          axios({
-            method: "patch",
-            url: `http://localhost:3000/articles/${articleId}`,
-            data: {
-              title: document.getElementById("edit-title-input").value,
-              content: document.getElementById("edit-content").value
-            }
-          })
-            .then(article => {
-              return axios({
-                method: "get",
-                url: `http://localhost:3000/articles/${articleId}`,
-              })
-            })
-            .then(article => {
-              this.articleData = article.data;
-              this.changePage("blog")
-            })
-            .catch(err => {
-            console.log(err)
-          })
-        },
-
-        deletePost(articleId) {
-          axios({
-            method: "delete",
-            url: `http://localhost:3000/articles/${articleId}`
-          })
-            .then(result => {
-              this.fetchData()
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        }
-        
-      },
-      components: {
-    	  LocalQuillEditor: VueQuillEditor.quillEditor
-      },
-      created () {
-        this.fetchData();  
-      }
-    });
-
-    
-  </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="index.js"></script>
 </body>
 </html>
