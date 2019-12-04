@@ -1,9 +1,13 @@
 'use strict';
+
+
 const BASE_URL = 'http://localhost:3000'
 
 const miniWp = new Vue({
   el: "#body",
   data: {
+    id: '',
+    isLogged: true,
     page: "home",
     nav: "mySite",
     showPost: false,
@@ -23,18 +27,79 @@ const miniWp = new Vue({
     ]
   },
   methods: {
-    toggleMySite: function() {
-      this.nav = "mySite";
+    navbar: function(ref) {
+      this.nav = ref
     },
-    toggleReader: function() {
-      this.nav = "reader";
+    editForm: function(data){
+      this.page = 'edit'
+      this.article = data.title
+      this.content = data.content
+      this.id = data._id
     },
-    openWriteForm: function() {
-      this.page = "create";
+    pageControl: function(index) {
+      if(!this.isLogged) {
+        swal.fire({
+          title: "HELLO",
+          text: "PLEASE LOGIN OR REGISTER!"
+        });
+      } else {
+        this.fetchData();
+        this.page = index
+      }
     },
-    showBlogPost: function() {
-      this.fetchData();
-      this.page = "showPost";
+    submitEdit: function() {
+      let newTitle = document.getElementById('titleEdit').value
+      let newContent = document.getElementById('contentEdit').value
+      let idEdit = document.getElementById('idEdit').value
+      axios({
+        method: "PATCH",
+        url: `${BASE_URL}/article`,
+        data: {
+          id: idEdit,
+          title: newTitle,
+          content: newContent
+        }
+      })
+        .then(_ => {
+          this.page = "showPost";
+          this.fetchData();
+        })
+        .catch(_ => {
+          swal({
+            title: "ERROR",
+            message: "INTERNAL SERVER ERROR"
+          });
+        });
+    },
+    register: function() {
+      let fullname =  document.getElementById('fullname').value;
+      let email = document.getElementById('emailRegist').value
+      let password = document.getElementById('passwordRegist').value;
+      axios({
+        method: "POST",
+        url: `${BASE_URL}/user`,
+        data: {
+          fullname: 'Undefined',
+          email: 'goblok',
+          password: 'sekali'
+        }
+      })
+        .then(data=> {
+          console.log(data)
+        })
+        .catch(err=> {
+          console.log(err)
+        })
+    },
+    sentLogin: function() {
+      if(this.isLogged) {
+        localStorage.removeItem('token')
+        this.page = ''
+        this.isLogged = false
+      } else {
+        localStorage.setItem('token', 'tokenlogin')
+        
+      }
     },
     fetchData: function() {
         axios({
@@ -42,10 +107,17 @@ const miniWp = new Vue({
           url: "http://localhost:3000/article"
         })
           .then(({ data }) => {
+            data.forEach(post => {
+              let dataCreate = new Date(post.createdAt).toDateString();
+              post.createdAt = new Date(dataCreate)
+            });
             this.blogposts = data;
           })
           .catch(_ => {
-            console.log(_);
+            swal({
+              title: 'ERROR',
+              message: 'INTERNAL SERVER ERROR'
+            })
           });
     },
     addPost: function() {
@@ -54,17 +126,34 @@ const miniWp = new Vue({
         content: this.content
       };
       axios({
-        method: 'POST',
+        method: "POST",
         url: `${BASE_URL}/article`,
         data: {
-          title: "hai",
-          content: "halo"
+          title: this.article,
+          content: this.content
         }
       })
-        .then( ( { data } ) => {
-          console.log(data)
-        } )
-        .catch(err=> console.log(err))
+        .then(({ data }) => {
+          this.fetchData();
+          this.page = "showPost";
+          this.article = "";
+          this.content = "";
+        })
+        .catch(_ => {
+          swal({
+            title: "ERROR",
+            message: "INTERNAL SERVER ERROR"
+          });
+        });
     }
+  },
+  created() {
+    if(localStorage.getItem('token')){
+      this.isLogged = true
+    }
+    console.log('Ready!')
   }
 });
+
+/* SWAL */
+

@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
     title: String,
     content: String,
-    createdAt: Date
+    createdAt: Date,
+    userId: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 ArticleSchema.pre('save', function(next){

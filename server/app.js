@@ -1,12 +1,9 @@
-if(process.env.NODE_ENV === 'development') {
-    require('dotenv').config();
-
-}
+'use strict';
 
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000
-const MONGOURI = process.env.MONGO_URI;
+const PORT = process.env.PORT
+const MONGOURI = process.env.MONGO_URI || 'mongodb://localhost:27017/miniWP'
 const mongoose = require('mongoose');
 const cors = require('cors');
 
@@ -26,7 +23,8 @@ mongoose
 
 app.get('/', (req, res) => res.send('Hello word'));
 
-const article = require('./routes/article')
-app.use('/article', article)
+const { article, user } = require('./routes')
+app.use('/article', article);
+app.use('/user', user);
 
 app.listen(PORT, ()=> console.log(`Listening on port ${PORT}`))

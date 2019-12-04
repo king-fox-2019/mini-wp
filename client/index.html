@@ -15,18 +15,24 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="" @click.prevent="toggleMySite" id="reader"><i class="fab fa-wordpress mr-3 fa-lg" style="color: white;"> Reader</i></a>
+                        <a href="" @click.prevent="navbar('mySite')" id="reader"><i class="fab fa-wordpress mr-3 fa-lg" style="color: white;"> My Site</i></a>
                     </li>
                     <li class="nav-item">
-                        <a href="" @click.prevent="toggleReader" id="reader"><i class="far fa-newspaper fa-lg" style="color: white;"> Reader</i></a>
+                        <a href="" @click.prevent="navbar('reader')" id="reader"><i class="far fa-newspaper fa-lg" style="color: white;"> Reader</i></a>
                     </li>
                 </ul>
-                <button class="btn btn-light my-2 my-sm-0 mr-4" @click="openWriteForm" type="submit">
-                    <i class="far fa-plus-square"></i>
-                    Write
-                </button>
-                <i class="my-2 my-sm-0 fas fa-universal-access fa-2x mr-4"></i>
-                <i class="my-2 my-sm-0 far fa-bell fa-2x"></i>
+                <div id="right side" class="mt-0 mr-0 ml-0 mb-0" v-if="isLogged">
+                    <button class="btn btn-light my-2 my-sm-0 mr-4" @click="pageControl('create')" type="submit">
+                        <i class="far fa-plus-square"></i>
+                        Write
+                    </button>
+                    <button class="btn btn-light my-2 my-sm-0 mr-4" @click="sentLogin" type="submit">
+                        <i class="far fa-plus-square"></i>
+                        LOGOUT
+                    </button>
+                    <i class="my-2 my-sm-0 fas fa-universal-access fa-2x mr-4"></i>
+                    <i class="my-2 my-sm-0 far fa-bell fa-2x"></i>
+                </div>
             </div>
         </nav>
         <!-- sidebar and content -->
@@ -35,7 +41,7 @@
                 <a class="nav-link active" href="#">View Site</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" @click.prevent="showBlogPost" href="#">Blog Post</a>
+                <a class="nav-link" @click.prevent="pageControl('showPost')" href="#">Blog Post</a>
             </li>
         </ul>
         <ul class="nav justify-content-center navbar-dark bg-dark" v-else-if="nav === 'reader'">
@@ -47,7 +53,7 @@
             </li>
         </ul>
         <div class="d-flex justify-content-center">
-
+            
             <section v-if="page === 'create'" class="mt-5">
                 <h1>Write your new article!</h1>
                 <div id="Article Previer">
@@ -67,17 +73,103 @@
                 <hr>
             </section>
 
-            <section v-else-if="page === 'showPost'">
-                    <div class="card mt-5 mb-2" v-for="post in blogposts">
-                    <div class="card-body">
-                        <h1> {{ post.title }} </h1>
-                        <p> {{ post.content }} </p>
+            <section v-if="page === 'edit'" class="mt-5">
+                <h1>Edit your new article!</h1>
+                <div id="Article Previer">
+                    <em>Priview</em>
+                    <div class="card">
+                        <h5 class="card-header"> {{article}} </h5>
+                        <div class="card-body">
+                            <article>{{ content }}</article>
+                        </div>
                     </div>
-                </div>               
+                </div>
+                <hr>
+                <label for="articleTitle">Title</label>
+                <input type="hidden" :value="id" id="idEdit">
+                <input type="text" v-model="article" class="form-control" id="titleEdit" placeholder="Your article title here"><br>
+                <textarea v-model="content" id="contentEdit" cols="30" @ rows="10"></textarea>
+                <button type="button" class="btn btn-danger" @click="submitEdit">Submit edit</button>
+                <hr>
             </section>
 
-            <section>
-                
+            <section v-else-if="page === 'showPost'">
+                <div class="card text-center mt-5" v-for='(post, i) in blogposts'>
+                    <div class="card-header" :id="i">
+                        {{ post.title }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text">{{ post.content }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" @click.prevent="editForm(post)" class="btn btn-primary">Edit</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{post.createdAt}}
+                    </div>
+                </div>
+            </section>
+
+
+            <section id="register/login" v-show="!isLogged">
+                <div class="accordion mt-5" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Sign-in
+                                </button>
+                            </h2>
+                        </div>  
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email" name="email" class="form-control" id="emailLogin" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" name="password" class="form-control" id="passwordLogin">
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" id="signin-button" @click='sentLogin' class="btn btn-primary">Submit</button><br>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Sign-up
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="Name">Full Name</label>
+                                            <input type="text" name="name" class="form-control" id="fullname">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email address</label>
+                                            <input type="email" name="email" class="form-control" id="emailRegist" aria-describedby="emailHelp">
+                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Password</label>
+                                            <input type="password" name="password" class="form-control" id="passwordRegist">
+                                        </div>
+                                            <button type="button" @click.prevent="register" class="btn btn-primary">Register</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
@@ -87,6 +179,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="./main.js"></script>
 </body>
 </html>
