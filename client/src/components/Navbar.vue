@@ -1,46 +1,13 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="primary" fixed="top">
-    <b-navbar-brand
-      :to="onSession ? '/dashboard' : '/'"
-      active-class="active"
-      v-if="$route.path != '/write'"
+    <b-navbar-brand :to="onSession ? '/dashboard' : '/'" active-class="active"
       >TYPRESS</b-navbar-brand
     >
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav v-if="onSession && $route.path == '/write'" id="write-nav">
-        <b-nav-item>
-          <b-button
-            class="secondary-action"
-            pill
-            variant="outline-info"
-            active-class="active"
-            >Cancel</b-button
-          >
-        </b-nav-item>
-        <b-nav-item>
-          <b-button
-            class="secondary-action"
-            pill
-            variant="outline-info"
-            active-class="active"
-            >Save</b-button
-          >
-        </b-nav-item>
-        <b-nav-item>
-          <b-button
-            class="main-action"
-            pill
-            variant="light"
-            active-class="active"
-            >Post Now</b-button
-          >
-        </b-nav-item>
-      </b-navbar-nav>
-
-      <b-navbar-nav v-else-if="onSession">
+      <b-navbar-nav v-if="onSession">
         <b-nav-item to="/explore" active-class="active">Explore</b-nav-item>
       </b-navbar-nav>
 
@@ -71,9 +38,6 @@ export default {
     return {}
   },
   computed: {
-    activePage() {
-      return this.$route.path
-    },
     onSession() {
       return this.$store.state.onSession
     }
@@ -86,16 +50,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-#write-nav {
-  .main-action {
-    margin-left: 0.5rem;
-    width: 8rem;
-  }
-
-  .secondary-action {
-    width: 4.7rem;
-  }
-}
-</style>
