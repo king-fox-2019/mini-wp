@@ -6,13 +6,27 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     fullname: String,
-    email: String,
-    password: String
+    email: {
+        type: String,
+        // unique: [true, 'Email already taken'],
+        validate: {
+            validator: function (value) {
+                return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(value)
+            },
+            msg: 'Please enter correct email address'
+        }
+    },
+    password: {
+        type: String,
+        minlength: [6, 'Your password is too short (min 6 characters)'],
+        maxlength: [12, 'Hold up, your password is too long! (max 12 charactes)']
+    }
 });
 
 UserSchema.pre('save', function(next){
-    let user = this
-    user.password = hash(user.password)
+    let user = this;
+    let securePassword = hash(user.password);
+    this.password = securePassword;
     next()
 })
 

@@ -58,6 +58,9 @@ const miniWp = new Vue({
           id: idEdit,
           title: newTitle,
           content: newContent
+        },
+        headers: {
+          token: localStorage.getItem('token')
         }
       })
         .then(_ => {
@@ -84,22 +87,35 @@ const miniWp = new Vue({
           password
         }
       })
-        .then(result=> {
-          console.log(result)
+        .then(({data})=> {
+          
         })
-        .catch(err=> {
+        .catch(({data})=> {
           console.log(err)
         })
     },
     sentLogin: function() {
-      if(this.isLogged) {
-        localStorage.removeItem('token')
-        this.page = ''
-        this.isLogged = false
-      } else {
-        localStorage.setItem('token', 'tokenlogin')
-        
-      }
+     if(localStorage.getItem('token')) {
+       localStorage.removeItem('token')
+       this.isLogged = false
+       this.page = ''
+     } else {
+       axios({
+        method: 'POST',
+        url: `${BASE_URL}/user/login`,
+        data: {
+          email: document.getElementById('emailLogin').value,
+          password: document.getElementById('passwordLogin').value
+        }
+       })
+        .then(({data})=> {
+          localStorage.setItem('token', data)
+          this.isLogged = true
+        })
+        .catch(err=> {
+          console.log(err)
+        })
+     }
     },
     fetchData: function() {
         axios({
@@ -131,6 +147,9 @@ const miniWp = new Vue({
         data: {
           title: this.article,
           content: this.content
+        },
+        headers: {
+          token: localStorage.getItem('token')
         }
       })
         .then(({ data }) => {

@@ -3,10 +3,12 @@ const { Article } = require('../models');
 
 class ArticleController {
     static addArticle(req, res, next) {
+        console.log(req.token)
         let { title, content } = req.body
         let newArticle = {
             title,
-            content
+            content,
+            userId: req.token.id
         }
         Article
             .create(newArticle)
@@ -20,6 +22,10 @@ class ArticleController {
         Article
             .find()
             .sort({ createdAt: -1})
+            .populate({
+                path: 'userId',
+                select: '-email -password'
+            })
             .then(articles=> {
                 res.status(200).json(articles)
             })
@@ -28,14 +34,16 @@ class ArticleController {
             })
     }
     static edit(req, res, next) {
-        Article
-            .updateOne({_id: req.body.id}, { $set: {title: req.body.title, content: req.body.content}})
-            .then(result=> {
+        let filter = { _id: req.body.id }
+        let update = { title: req.body.title, content: req.body.content }
+        Article 
+            .findByIdAndUpdate(filter, update)
+            .then(result => {
                 res.status(200).json({ message: 'OK!' })
             })
-            .catch(err=> {
+            .catch(err => {
                 console.log(err)
-            })
+            })            
     }
 
 }
