@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <p>ini main page rencananya</p>
   </div>
 </template>
 

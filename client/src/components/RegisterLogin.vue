@@ -13,18 +13,18 @@
       </label>
       <label>
         <span>Password</span>
-        <input type="password" />
+        <input type="password" v-model="password"/>
       </label>
       <p class="forgot-pass">Forgot password?</p>
-      <button type="button" class="submit">Sign In</button>
-            <!-- google signin -->
-  <g-signin-button
-    :params="googleSignInParams"
-    @success="onSignInSuccess"
-    @error="onSignInError">
-    Sign in with Google
-  </g-signin-button>
-<!-- end google signin -->
+      <button type="submit" class="submit">Sign In</button>
+      <!-- google signin -->
+        <g-signin-button
+          :params="googleSignInParams"
+          @success="onSignInSuccess"
+          @error="onSignInError">
+          Sign in with Google
+        </g-signin-button>
+      <!-- end google signin -->
     </form>
   </div>
   <div class="sub-cont">
@@ -47,25 +47,17 @@
        <form @submit.prevent="register()">
       <label>
         <span>Name</span>
-        <input type="text" />
+        <input type="text" v-model="name" />
       </label>
       <label>
         <span>Email</span>
-        <input type="email" />
+        <input type="email" v-model="email" />
       </label>
       <label>
         <span>Password</span>
-        <input type="password" />
+        <input type="password" v-model="password" />
       </label>
-      <button type="button" class="submit">Sign Up</button>
-      <!-- google signin -->
-  <g-signin-button
-    :params="googleSignInParams"
-    @success="onSignInSuccess"
-    @error="onSignInError">
-    Sign in with Google
-  </g-signin-button>
-<!-- end google signin -->
+      <button type="submit" class="submit">Sign Up</button>
     </form>
     </div>
   </div>
@@ -111,7 +103,7 @@ export default {
       axios({
         method : 'post',
         // url: 'http://35.198.219.105/users/login',
-        url: 'http://localhost:3000/users/login',
+        url: 'http://localhost:3040/users/login',
 
         data : {
           email : this.email, 
@@ -134,7 +126,7 @@ export default {
       axios({
         method: 'post',
         // url: 'http://35.198.219.105/users/register',
-        url: 'http://localhost:3000/users/register',
+        url: 'http://localhost:3040/users/register',
 
         data : {
           name : this.name,
@@ -145,7 +137,7 @@ export default {
       .then(({data}) => {
         console.log(data);
         localStorage.setItem('token', data.token)     
-        this.switchToAuthPage() 
+        this.switchToMainPage() 
       })
       .catch(err => {
         console.log(err.response);

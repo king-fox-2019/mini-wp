@@ -1,5 +1,5 @@
 module.exports = (err, req, res, next) => {
-  // console.log(err.name, "=====================", err);
+  console.log(err.name, "=====================", err);
   // console.log(err.errors.email.message, "aaaaaa");
   
   

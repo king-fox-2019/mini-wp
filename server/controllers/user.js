@@ -66,7 +66,12 @@ class UserController {
           _id,
           email
       })
-      res.status(200).json({ token, _id, email })
+
+      console.log(token, "lewat generate");
+      
+      const result = { token, _id, email}
+      
+      res.status(201).json({result})
 
 
     })
