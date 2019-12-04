@@ -1,20 +1,17 @@
 <template>
   <div id="page">
-    <Navbar-Write v-if="$route.path == '/write'"></Navbar-Write>
-    <Navbar v-else></Navbar>
+    <Navbar v-if="$route.path != '/write'"></Navbar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
-import NavbarWrite from '@/components/NavbarWrite'
 import checkSession from '@/utils/checkSession.js'
 
 export default {
   components: {
     Navbar,
-    NavbarWrite
   },
   data() {
     return {}

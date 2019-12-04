@@ -22,7 +22,7 @@
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto" v-if="onSession">
+      <b-navbar-nav class="ml-auto">
         <b-nav-item>
           <b-button
             class="secondary-action"

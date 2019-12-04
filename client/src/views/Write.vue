@@ -1,35 +1,48 @@
 <template>
-  <div class="container-fluid" id="write-wrapper">
-    <!-- <input type="text" v-model="title" class="text-input" /> -->
-    <div class="text-input">
-      <input type="text" placeholder="Add Title" autocomplete="off" />
-      <!-- <label for="username">Username</label> -->
-    </div>
-    <!-- <b-form-input
+  <div>
+    <Navbar-Write v-if="$route.path == '/write'"></Navbar-Write>
+
+    <div class="container-fluid" id="write-wrapper">
+      <!-- <input type="text" v-model="title" class="text-input" /> -->
+      <div class="text-input">
+        <input
+          type="text"
+          v-model="title"
+          placeholder="Add Title"
+          autocomplete="off"
+        />
+        <!-- <label for="username">Username</label> -->
+      </div>
+      <!-- <b-form-input
       class="text-input"
       v-model="text"
       placeholder="Enter your name"
     ></b-form-input> -->
-    <vue-editor
-      v-model="content"
-      useCustomImageHandler
-      @image-added="addImageHandler"
-      @image-removed="removeImageHandler"
-      placeholder="Start your journey..."
-    ></vue-editor>
+      <vue-editor
+        v-model="content"
+        useCustomImageHandler
+        @image-added="addImageHandler"
+        @image-removed="removeImageHandler"
+        placeholder="Start your journey..."
+      ></vue-editor>
+    </div>
   </div>
 </template>
 
 <script>
+import NavbarWrite from '@/components/NavbarWrite'
 import { VueEditor } from 'vue2-editor'
 import checkSession from '@/utils/checkSession'
 
 export default {
+  name: 'WritePage',
   components: {
-    VueEditor
+    VueEditor,
+    NavbarWrite
   },
   data() {
     return {
+      title: '',
       content: '',
       images: []
     }
