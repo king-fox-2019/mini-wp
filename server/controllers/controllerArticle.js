@@ -3,12 +3,16 @@ const {Article} = require('../models/modelArticle');
 class controllerArticle {
     static viewArticle(req, res, next) {
         Article.find({})
-            // .populate("author", "name")
+            .populate("author", "name")
             .then(data => {
-                res.status(200).json(data);
+                if (data.length > 0) {
+                    res.status(200).json(data);
+                } else {
+                    throw "Data is empty !!!"
+                }
             })
             .catch(err => {
-                next(err);
+                next(res.json({message : err}));
             })
     }
 
@@ -16,16 +20,54 @@ class controllerArticle {
         Article.create({
             title: req.body.title,
             category: req.body.category,
-            // author: req.body.author,
+            author: req.body.author,
             content: req.body.content,
             quillContent: req.body.quillContent,
             created_at: Date.now()
         })
-            .then(result => {
-                res.status(200).json({message: "data successfully inserted"});
+            .then(data => {
+                res.status(200).json({
+                    message: "data successfully inserted",
+                    details: data
+                });
             })
             .catch(err => {
-                next(err);
+                next(res.json({message : err}));
+            })
+    }
+
+    static findArticle(req, res, next) {
+        Article.find({
+            title: {
+                $regex: req.params.title, $options: 'i'
+            }
+        })
+            .then(data => {
+                if (data.length > 0) {
+                    res.status(200).json(data);
+                } else {
+                    throw "Data is not found !!!"
+                }
+            })
+            .catch(err => {
+                next(res.json({message : err}));
+            })
+    }
+
+    static deleteArticle(req, res, next) {
+        Article.findByIdAndDelete(req.params.id)
+            .then(data => {
+                if (data) {
+                    res.status(200).json({
+                        message: "data successfully deleted",
+                        details: data
+                    })
+                } else {
+                    throw "data not found !!!"
+                }
+            })
+            .catch(err => {
+                next(res.json({message : err}));
             })
     }
 }
