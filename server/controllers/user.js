@@ -1,7 +1,7 @@
 const { User } = require('../models');
 
 class UserController {
-    static register(res, req, next) {
+    static register(req, res, next) {
         let { fullname, email, password } = req.body
         console.log(fullname, email, password)
         let data = {
@@ -12,9 +12,10 @@ class UserController {
         User
             .create(data)
             .then(result=> {
+                console.log('berhasil')
                 res.status(201).json(result)
             })
-            .err(err=> {
+            .catch(err=> {
                 console.log(err)
             })
     }

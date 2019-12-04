@@ -7,7 +7,7 @@ const miniWp = new Vue({
   el: "#body",
   data: {
     id: '',
-    isLogged: true,
+    isLogged: false,
     page: "home",
     nav: "mySite",
     showPost: false,
@@ -72,20 +72,20 @@ const miniWp = new Vue({
         });
     },
     register: function() {
-      let fullname =  document.getElementById('fullname').value;
+      let fullname =  document.getElementById('fullname').value
       let email = document.getElementById('emailRegist').value
-      let password = document.getElementById('passwordRegist').value;
+      let password = document.getElementById('passwordRegist').value
       axios({
-        method: "POST",
+        method: 'post',
         url: `${BASE_URL}/user`,
         data: {
-          fullname: 'Undefined',
-          email: 'goblok',
-          password: 'sekali'
+          fullname,
+          email, 
+          password
         }
       })
-        .then(data=> {
-          console.log(data)
+        .then(result=> {
+          console.log(result)
         })
         .catch(err=> {
           console.log(err)
