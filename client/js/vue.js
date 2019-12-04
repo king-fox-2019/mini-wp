@@ -1,4 +1,5 @@
 // const axios = require('axios');
+
 var app = new Vue({
     el: "#app",
     data: {
@@ -7,7 +8,8 @@ var app = new Vue({
         article: [],
         title: '',
         content: '',
-        id_skrg: ''
+        id_skrg: '',
+        quill: null
     },
     methods: {
         getArticle: function () {
@@ -55,6 +57,7 @@ var app = new Vue({
                 }
             })
                 .then((result) => {
+                    this.id_skrg = ''
                     this.title = ''
                     this.content = ''
                     this.getArticle()
@@ -71,6 +74,20 @@ var app = new Vue({
                 })
                 .catch((err) => console.log(err));
             // console.log(params);
+        },
+        getQuill: function () {
+            this.quill = new Quill('#modal_create', {
+                theme: 'snow'
+            });
+            this.quill = new Quill('#modal_update', {
+                theme: 'snow'
+            });
         }
+    },
+    created: function () {
+
+    },
+    mounted: function () {
+        this.getQuill()
     }
 })
