@@ -1,5 +1,15 @@
 <template>
   <div class="container-fluid" id="write-wrapper">
+    <!-- <input type="text" v-model="title" class="text-input" /> -->
+    <div class="text-input">
+      <input type="text" placeholder="Add Title" autocomplete="off" />
+      <!-- <label for="username">Username</label> -->
+    </div>
+    <!-- <b-form-input
+      class="text-input"
+      v-model="text"
+      placeholder="Enter your name"
+    ></b-form-input> -->
     <vue-editor
       v-model="content"
       placeholder="Start your journey..."
@@ -23,47 +33,104 @@ export default {
 </script>
 
 <style lang="scss">
+.text-input {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  input {
+    background-color: transparent;
+    display: block;
+    // height: 40px;
+    text-align: center;
+    width: 100%;
+    font-size: 3rem;
+    font-weight: 200;
+    // line-height: 40px;
+    border: 0;
+    // border-bottom: 1px solid #9e9e9e;
+    outline: 0;
+  }
+}
+// .text-input {
+//   position: relative;
+//   display: block;
+//   height: 56px;
+//   width: 100%;
+//   margin-bottom: 16px;
+// }
+// .text-input > input {
+//   background-color: transparent;
+//   position: absolute;
+//   bottom: 0;
+//   display: block;
+//   height: 40px;
+//   width: 100%;
+//   line-height: 40px;
+//   border: 0;
+//   border-bottom: 1px solid #9e9e9e;
+//   outline: 0;
+//   padding: 0 8px;
+//   /*   transition: all 1s ease-in-out; */
+// }
+// .text-input > input::placeholder {
+//   color: transparent;
+// }
+// .text-input > label {
+//   position: absolute;
+//   bottom: 12px;
+//   left: 9px;
+//   color: #9e9e9e;
+//   cursor: text;
+//   transition: all 0.2s ease-in-out;
+// }
+// .text-input > input:focus,
+// .text-input > input:not(:placeholder-shown) {
+//   border-bottom: 2px solid #6c17e1;
+// }
+// .text-input > input:focus + label,
+// .text-input > input:not(:placeholder-shown) + label {
+//   bottom: 40px;
+//   left: 0;
+//   font-size: 14px;
+//   color: #6c17e1;
+// }
+
 #write-wrapper {
   padding-top: 4.5rem;
 }
 
 .quillWrapper {
   height: 80vh !important;
-  // overflow-y: scroll;
-}
-
-#quill-container {
-  overflow-y: scroll;
-}
-
-.ql-toolbar {
-  display: flex;
-  width: 100%;
-  overflow-x: scroll;
-
-  .ql-formats {
-    display: block !important;
-    flex-shrink: 0;
-    width: auto;
-  }
-}
-
-.ql-formats {
-  .ql-picker-item {
-    color: #444;
+  #quill-container {
+    margin-bottom: 1rem;
+    overflow-y: scroll;
   }
 
-  span:hover,
-  button:hover,
-  svg:hover,
-  .ql-active,
-  .ql-selected {
-    color: #9e2b25 !important;
-    .ql-stroke {
-      stroke: #9e2b25 !important;
-    }
-    .ql-fill {
-      fill: #9e2b25 !important;
+  .ql-toolbar {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+
+    .ql-formats {
+      display: block !important;
+      flex-shrink: 0;
+      width: auto;
+      .ql-picker-item {
+        color: #444;
+      }
+
+      span:hover,
+      button:hover,
+      svg:hover,
+      .ql-active,
+      .ql-selected {
+        color: #9e2b25 !important;
+        .ql-stroke {
+          stroke: #9e2b25 !important;
+        }
+        .ql-fill {
+          fill: #9e2b25 !important;
+        }
+      }
     }
   }
 }
