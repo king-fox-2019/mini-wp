@@ -5,20 +5,34 @@
   >
     <b-nav vertical class="d-flex" id="side-nav">
       <b-nav-item
-        link-classes="btn btn-primary w-75 mx-auto my-0 p-2"
+        link-classes="btn btn-primary w-75 mx-auto mb-2"
         active-class="active"
-        >New Post</b-nav-item
+        to="/write"
+        >Write</b-nav-item
       >
-      <b-nav-item link-classes="text-primary" active-class="active"
+      <b-nav-item
+        link-classes="text-primary"
+        active-class="active"
+        exact
+        to="/dashboard"
         >Articles</b-nav-item
       >
-      <b-nav-item link-classes="text-primary" active-class="active"
+      <b-nav-item
+        link-classes="text-primary"
+        active-class="active"
+        to="/dashboard/posted"
         >Posted</b-nav-item
       >
-      <b-nav-item link-classes="text-primary" active-class="active"
+      <b-nav-item
+        link-classes="text-primary"
+        active-class="active"
+        to="/dashboard/draft"
         >Draft</b-nav-item
       >
-      <b-nav-item link-classes="text-primary" active-class="active"
+      <b-nav-item
+        link-classes="text-primary"
+        active-class="active"
+        to="/dashboard/trash"
         >Trash</b-nav-item
       >
     </b-nav>
@@ -37,6 +51,7 @@ export default {}
   height: 100%;
   width: 13rem;
 }
+
 #side-nav {
   margin-top: 5rem;
   width: 100%;
@@ -47,6 +62,10 @@ export default {}
 
   a:hover {
     background-color: rgba($secondary, 0.6);
+  }
+
+  a.active {
+    background-color: rgba($secondary, 0.2);
   }
 }
 </style>

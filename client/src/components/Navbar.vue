@@ -8,7 +8,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="onSession">
-        <b-nav-item to="dashboard" active-class="active">Dashboard</b-nav-item>
+        <b-nav-item to="/dashboard" active-class="active">Dashboard</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
