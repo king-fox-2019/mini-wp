@@ -6,7 +6,7 @@ const articleSchema = new Schema(
         category: String,
         author: [{type: Schema.Types.ObjectId, ref: 'Author'}],
         content: String,
-        quillContent: String,
+        quillContent: Object,
         created_at: Date
     }
 );

@@ -47,6 +47,7 @@
                     </div>
                     <h3 class="profile dropdown-toggle" data-toggle="dropdown" id="profile-name">
                         {{ author.name }}
+                        <input type="text" value=author._id id="author" name="author" v-model="author" hidden>
                     </h3>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <button class="dropdown-item" type="button">Profile</button>
@@ -59,29 +60,15 @@
                         </small>
                     </div>
                     <hr/>
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-warning"
-                            id="article-new">
-                            Add New Article
-                            <span class="badge"><i class="fa fa-plus" style="font-size:16px"></i></span>
-                        </li>
-                    </ul>
-                    <hr>
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-info"
-                            id="article-list" v-for="title in article" :key="title.id">
-                            {{title.title}}
-                            <span class="badge">
-                                <i class="fa fa-pencil" style="font-size: 16px; padding-right: 5px"></i>
-                                <i class="fa fa-remove" style="font-size: 16px" @click="deleteArticle(title.id)"></i>
-                            </span>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <div class="col-sm-9">
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="list-of-articles-tab" data-toggle="tab" href="#list-of-articles"
+                           role="tab" aria-controls="open" aria-selected="true">List of Articles</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" id="open-tab" data-toggle="tab" href="#open" role="tab"
                            aria-controls="open" aria-selected="true">New Article</a>
@@ -89,26 +76,53 @@
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="open" role="tabpanel" aria-labelledby="open-tab">
+                    <div class="tab-pane fade show" id="list-of-articles" role="tabpanel"
+                         aria-labelledby="open-tab">
                         <div class="container card-container row">
-                            <form class="w-100" @submit="submitArticle" action="">
-                                <div class="form-group">
-                                    <label for="article-title">Title</label>
-                                    <input type="text" class="form-control" id="article-title"
-                                           placeholder="Article Title" v-model="title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="article-category">Category</label>
-                                    <input type="text" class="form-control" id="article-category"
-                                           placeholder="Article Category" v-model="category">
-                                </div>
-                                <div class="form-group">
-                                    <label>Content</label>
-                                    <div id="editor"></div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            <ul class="list-inline">
+                                <li class="list-inline-item align-items-center"
+                                    id="article-list" v-for="title in article" :key="title._id">
+                                    <div class="card text-white bg-info mb-3" style="width: 15rem;">
+                                        <div class="card-header">
+                                            {{title.created_at}}
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ title.title }}</h5>
+                                            <p class="card-text" v-html="title.content">{{ title.content }}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            {{title.category}}
+                                            <span class="badge">
+                                                <i class="fa fa-pencil" style="font-size: 16px; padding-right: 5px"></i>
+                                                <i class="fa fa-remove" style="font-size: 16px"
+                                                   @click="deleteArticle(title._id)"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
                         </div>
+                    </div>
+
+                    <div class="tab-pane fade show active" id="open" role="tabpanel" aria-labelledby="open-tab">
+                        <form class="w-100" @submit="submitArticle" action="">
+                            <div class="form-group">
+                                <label for="article-title">Title</label>
+                                <input type="text" class="form-control" id="article-title"
+                                       placeholder="Article Title" v-model="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="article-category">Category</label>
+                                <input type="text" class="form-control" id="article-category"
+                                       placeholder="Article Category" v-model="category">
+                            </div>
+                            <div class="form-group">
+                                <label>Content</label>
+                                <div id="editor"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                     </div>
                 </div>
 

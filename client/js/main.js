@@ -13,6 +13,7 @@ const app = new Vue({
             axios
                 .get("http://localhost:3000/articles")
                 .then(({data}) => {
+                    console.log(data);
                     this.article = data;
                 })
                 .catch(err => {
@@ -34,6 +35,19 @@ const app = new Vue({
                 })
         },
         submitArticle: function (e) {
+            e.preventDefault()
+
+            if (this.title === ""){
+                swal({
+                    title: "Warning?",
+                    text: "Title must not be empty",
+                    type: "warning",
+                    confirmButtonClass: "btn-danger",
+                    closeOnConfirm: false
+                });
+                return
+            }
+
             swal({
                 title: "Are you sure?",
                 text: "Your article will be saved",
@@ -59,7 +73,7 @@ const app = new Vue({
                     .post("http://localhost:3000/articles", {
                         "title": this.title,
                         "category": this.category,
-                        "author": "john doe",
+                        "author": this.author,
                         "content": this.quill.root.innerHTML,
                         "quillContent": this.quill.getContents()
                     })
@@ -71,7 +85,6 @@ const app = new Vue({
                         this.message = err
                     });
             };
-            e.preventDefault()
         },
         deleteArticle: function (id) {
             swal({

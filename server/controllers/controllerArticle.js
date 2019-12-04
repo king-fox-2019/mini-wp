@@ -5,18 +5,18 @@ class controllerArticle {
         Article.find({})
             .populate("author", "name")
             .then(data => {
-                if (data.length > 0) {
-                    res.status(200).json(data);
-                } else {
-                    throw "Data is empty !!!"
-                }
+                res.status(200).json(data);
             })
             .catch(err => {
-                next(res.json({message : err}));
+                next(res.json({message: err}));
             })
     }
 
     static createArticle(req, res, next) {
+        if (!req.body.title){
+            throw "title must not be empty";
+        }
+
         Article.create({
             title: req.body.title,
             category: req.body.category,
@@ -32,7 +32,7 @@ class controllerArticle {
                 });
             })
             .catch(err => {
-                next(res.json({message : err}));
+                next(res.json({message: err}));
             })
     }
 
@@ -50,7 +50,7 @@ class controllerArticle {
                 }
             })
             .catch(err => {
-                next(res.json({message : err}));
+                next(res.json({message: err}));
             })
     }
 
@@ -67,7 +67,7 @@ class controllerArticle {
                 }
             })
             .catch(err => {
-                next(res.json({message : err}));
+                next(res.json({message: err}));
             })
     }
 }
