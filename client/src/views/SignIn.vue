@@ -100,7 +100,7 @@ export default {
             this.$toasted.show(data.message)
             localStorage.setItem('access_token', data.data.access_token)
             this.$store.commit('CHANGE_SESSION', true)
-            this.$router.push('/explore')
+            this.$router.push('/dashboard')
           })
           .catch(({ response }) => {
             this.emailUsernameValid = null
@@ -125,7 +125,7 @@ export default {
     if (localStorage.getItem('access_token')) {
       checkSession()
         .then(() => {
-          next('/explore')
+          next('/dashboard')
         })
         .catch(() => {
           localStorage.clear()

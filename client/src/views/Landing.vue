@@ -28,7 +28,7 @@ export default {
     if (localStorage.getItem('access_token')) {
       checkSession()
         .then(() => {
-          next('/explore')
+          next('/dashboard')
         })
         .catch(() => {
           localStorage.clear()

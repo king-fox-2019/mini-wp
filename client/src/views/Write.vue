@@ -22,6 +22,7 @@
 
 <script>
 import { VueEditor } from 'vue2-editor'
+import checkSession from '@/utils/checkSession'
 
 export default {
   components: {
@@ -57,6 +58,18 @@ export default {
     removeImageHandler(file) {
       this.images.splice(this.images.indexOf(file), 1)
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    if (localStorage.getItem('access_token')) {
+      checkSession()
+        .then(() => {
+          next()
+        })
+        .catch(() => {
+          localStorage.clear()
+          next('/')
+        })
+    } else next('/')
   }
 }
 </script>
