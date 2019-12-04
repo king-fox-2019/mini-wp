@@ -175,6 +175,39 @@ Status 201: Created
 
 
 
+### Upload Image
+
+This endpoint specifically used to handle image upload when you create article using editor in the client website. But you can also use this feature manually to get your image uploaded and receive it's url.
+
+##### Endpoint
+
+```http
+POST /articles/image
+```
+
+##### Header
+
+- access_token **Required**
+
+##### Body
+
+- image **Required** It should be an image file (Usually created using FormData object)
+
+##### Response
+
+Status 200: OK
+
+```json
+{
+  "message": "Upload image success",
+  "data": {
+    "imageUrl": "https://cdn.dummyimages.com/photo/dummy-photo.jpg"
+  }
+}
+```
+
+
+
 ### Get All Articles
 
 ##### Endpoint
