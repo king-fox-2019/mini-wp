@@ -57,6 +57,11 @@ export default new Vuex.Store({
         data: formData,
         headers: { access_token }
       })
+    },
+    onSaveArticle(context, payload) {
+      const access_token = localStorage.getItem('access_token')
+
+      return server.post('articles', payload, { headers: { access_token } })
     }
   },
   modules: {}

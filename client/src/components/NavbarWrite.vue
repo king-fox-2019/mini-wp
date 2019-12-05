@@ -10,12 +10,13 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav id="write-nav">
-        <b-nav-item to="/dashboard">
+        <b-nav-item>
           <b-button
             class="secondary-action"
             pill
             variant="outline-secondary"
             active-class="active"
+            @click="$emit('on-cancel')"
             >Cancel</b-button
           >
         </b-nav-item>
@@ -29,6 +30,7 @@
             pill
             variant="outline-primary"
             active-class="active"
+            @click="$emit('on-save')"
             >Save</b-button
           >
         </b-nav-item>
@@ -38,6 +40,7 @@
             pill
             variant="primary"
             active-class="active"
+            @click="$emit('on-post')"
             >Post Now
           </b-button>
         </b-nav-item>
@@ -54,12 +57,6 @@ export default {
   computed: {
     onSession() {
       return this.$store.state.onSession
-    }
-  },
-  methods: {
-    signOut() {
-      this.$store.dispatch('onSignOut')
-      this.$router.push('/')
     }
   }
 }

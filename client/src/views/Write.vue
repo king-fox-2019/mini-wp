@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar-Write v-if="$route.path == '/write'"></Navbar-Write>
+    <Navbar-Write @on-cancel="$router.push('/dashboard')"></Navbar-Write>
 
     <div class="container-fluid" id="write-wrapper">
       <!-- <input type="text" v-model="title" class="text-input" /> -->
@@ -17,7 +17,7 @@
       class="text-input"
       v-model="text"
       placeholder="Enter your name"
-    ></b-form-input> -->
+      ></b-form-input>-->
       <vue-editor
         v-model="content"
         useCustomImageHandler
@@ -26,6 +26,41 @@
         placeholder="Start your journey..."
       ></vue-editor>
     </div>
+    <b-modal
+      id="confirm-leave"
+      :static="true"
+      hide-header
+      hide-footer
+      body-bg-variant="info"
+    >
+      <h5>You have unsaved changes. Do you want to save it?</h5>
+      <div class="d-flex flex-wrap justify-content-center mt-3">
+        <b-button
+          class="secondary-action"
+          pill
+          variant="outline-secondary"
+          active-class="active"
+          @click="$bvModal.hide('confirm-leave')"
+          >Cancel</b-button
+        >
+        <b-button
+          class="secondary-action mx-0 mr-sm-3 ml-sm-5"
+          pill
+          variant="outline-primary"
+          active-class="active"
+          id="leave-nosave"
+          >Don't save</b-button
+        >
+        <b-button
+          class="main-action mt-2 mt-sm-0"
+          pill
+          variant="primary"
+          active-class="active"
+          @click="saveAndLeave"
+          >Yes, save it</b-button
+        >
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -43,8 +78,18 @@ export default {
   data() {
     return {
       title: '',
+      initialTitle: '',
       content: '',
-      images: []
+      initialContent: '',
+      images: [],
+      vwWidth: 0
+    }
+  },
+  computed: {
+    saveToLeave() {
+      return (
+        this.initialTitle == this.title && this.initialContent == this.content
+      )
     }
   },
   methods: {
@@ -70,6 +115,46 @@ export default {
     },
     removeImageHandler(file) {
       this.images.splice(this.images.indexOf(file), 1)
+    },
+    saveArticle() {
+      const loader = this.$loading.show({
+        container: this.$refs.signUpContainer
+      })
+      const featuredImage = this.images[
+        Math.floor(Math.random() * this.images.length)
+      ]
+      return this.$store
+        .dispatch('onSaveArticle', {
+          title: this.title,
+          content: this.content,
+          featuredImage
+        })
+        .then(({ data }) => {
+          this.initialTitle = this.title
+          this.initialContent = this.content
+          this.$toasted.show(data.message)
+        })
+        .catch(({ response }) => {
+          const message = response.data.message
+          if (typeof message != 'string') {
+            response.data.message.forEach(msg => {
+              this.$toasted.show(msg, { className: 'bg-danger' })
+            })
+          } else {
+            this.$toasted.show(response.data.message, {
+              className: 'bg-danger'
+            })
+          }
+        })
+        .finally(() => {
+          this.$bvModal.hide('confirm-leave')
+          loader.hide()
+        })
+    },
+    saveAndLeave() {
+      this.saveArticle().then(() => {
+        if (this.saveToLeave) this.$router.push('/dashboard')
+      })
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -83,7 +168,23 @@ export default {
           next('/')
         })
     } else next('/')
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.saveToLeave) return next()
+    this.$bvModal.show('confirm-leave')
+
+    const noSave = document.getElementById('leave-nosave')
+    noSave.addEventListener('click', () => {
+      this.$bvModal.hide('confirm-leave')
+      next()
+    })
   }
+  // mounted() {
+  //   this.vwWidth = window.innerWidth
+  //   window.addEventListener('resize', () => {
+  //     this.vwWidth = window.innerWidth
+  //   })
+  // }
 }
 </script>
 
@@ -105,49 +206,6 @@ export default {
     outline: 0;
   }
 }
-// .text-input {
-//   position: relative;
-//   display: block;
-//   height: 56px;
-//   width: 100%;
-//   margin-bottom: 16px;
-// }
-// .text-input > input {
-//   background-color: transparent;
-//   position: absolute;
-//   bottom: 0;
-//   display: block;
-//   height: 40px;
-//   width: 100%;
-//   line-height: 40px;
-//   border: 0;
-//   border-bottom: 1px solid #9e9e9e;
-//   outline: 0;
-//   padding: 0 8px;
-//   /*   transition: all 1s ease-in-out; */
-// }
-// .text-input > input::placeholder {
-//   color: transparent;
-// }
-// .text-input > label {
-//   position: absolute;
-//   bottom: 12px;
-//   left: 9px;
-//   color: #9e9e9e;
-//   cursor: text;
-//   transition: all 0.2s ease-in-out;
-// }
-// .text-input > input:focus,
-// .text-input > input:not(:placeholder-shown) {
-//   border-bottom: 2px solid #6c17e1;
-// }
-// .text-input > input:focus + label,
-// .text-input > input:not(:placeholder-shown) + label {
-//   bottom: 40px;
-//   left: 0;
-//   font-size: 14px;
-//   color: #6c17e1;
-// }
 
 #write-wrapper {
   padding-top: 4.5rem;

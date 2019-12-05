@@ -11,7 +11,7 @@ import checkSession from '@/utils/checkSession.js'
 
 export default {
   components: {
-    Navbar,
+    Navbar
   },
   data() {
     return {}
