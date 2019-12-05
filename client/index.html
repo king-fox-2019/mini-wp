@@ -15,21 +15,35 @@
       href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
       rel="stylesheet"
     />
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <title>mini wp</title>
   </head>
   <body>
     <div id="app">
+      <div v-if="isLogin==='false'">
+        <input type="text" v-model="loginEmail">
+        <input type="password" v-model="loginPassword">
+        <button type="submit" @click="login">Login</button>
+        <p>{{error}}</p>
+      </div>
+
+    <div v-else>
       <header>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
           <div class="container-fluid">
             <div class="navbar-header">
-              <h1 class="navbar-brand" onclick="location.reload()" href="#">
-                <i class="fa fa-book"></i> MINI WP
+              <h1 class="navbar-brand" @click="getArticles()" href="#">
+                <i class="fa fa-book"></i> MINI WORDPRESS
               </h1>
             </div>
             <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a
+                  v-on:click="logout"
+                  class="nav-link add-article"
+                  href="#"
+                  >Logout</a
+                >
+              </li>
               <li class="nav-item">
                 <a
                   v-on:click="create()"
@@ -108,13 +122,19 @@
                 style="margin-bottom:10px;"
                 placeholder="Article tag"
               />
-              <textarea
+              <!-- <textarea
                 v-model="createContent"
                 class="form-control"
                 rows="10"
                 style="min-width: 100%;"
-              ></textarea>
-              <!-- <div id="editor"></div> -->
+              ></textarea> -->
+              <quill-editor v-model="createContent"
+                  ref="quillEditorA"
+                  :options="editorOption"
+                  @blur="onEditorBlur($event)"
+                  @focus="onEditorFocus($event)"
+                  @ready="onEditorReady($event)">
+	            </quill-editor>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn close-btn" data-dismiss="modal">
@@ -167,13 +187,19 @@
                 id="add-tag"
                 style="margin-bottom:10px;"
               />
-              <textarea
+              <!-- <textarea
                 v-model="updateContent"
                 class="form-control summernote"
                 rows="10"
                 style="min-width: 100%;"
-              ></textarea>
-              <!-- <div id="editor"></div> -->
+              ></textarea> -->
+              <local-quill-editor v-model="updateContent"
+                        ref="quillEditorB"
+                        :options="editorOption"
+                        @blur="onEditorBlur($event)"
+                        @focus="onEditorFocus($event)"
+                        @ready="onEditorReady($event)">
+		          </local-quill-editor>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn close-btn" data-dismiss="modal">
@@ -212,7 +238,7 @@
               <p><span v-html="article.content"></span></p>
               <i>Created at: {{article.createdAt.substring(0,10)}}</i><br>
               <div class="btn-group">
-                    <button type="button" class="btn btn-primary" data-target="#edit-article" data-toggle="modal" href="#edit-article" v-on:click="findArticle(article._id)">Edit</button>
+                    <button type="button" class="btn btn-primary" data-target="#edit-article" data-toggle="modal" href="#edit-article" v-on:click="findArticle(article)">Edit</button>
                     <button type="button" class="btn btn-primary" v-on:click="deleteArticle(article._id)">Delete</button>
               </div>
             </div>
@@ -222,6 +248,8 @@
         </div>
       </div>
     </div>
+  </div>
+
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -240,6 +268,15 @@
     ></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- Quill JS Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.4/dist/vue-quill-editor.js"></script>
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.4/quill.core.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.4/quill.bubble.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
     $(window).scroll(function(e) {
       // add/remove class to navbar when scrolling to hide/show
@@ -250,6 +287,8 @@
             $('.navbar').removeClass("navbar-hide");
             }
         });
+      
+      Vue.use(VueQuillEditor)
       let article = new Vue({
         el: "#app",
         data: {
@@ -262,21 +301,49 @@
           updateTitle: "",
           updateTag: "",
           updateContent: "",
-          quill: null
+          isLogin:"false",
+          loginEmail:'',
+          loginPassword:'',
+          error:'',
+          editorOption: {
+            theme: "snow"
+          }
+        },
+        components: {
+          LocalQuillEditor: VueQuillEditor.quillEditor
         },
         methods: {
-           findArticle: function(id) {
-            $.ajax({
-                method:"get",
-                url:"http://localhost:3000/article?id="+id
+          logout: function(){
+            localStorage.removeItem('access_token')
+            this.isLogin="false"
+            this.loginEmail=''
+            this.loginPassword=''
+            this.error=''
+          },
+          login: function(){
+            axios.post("http://localhost:3000/user/login",{
+                email:this.loginEmail,
+                password:this.loginPassword
             })
-            .done(article=>{
-                this.updateId = article._id
-                this.updateTitle = article.title
-                this.updateTag = article.tag
-                this.updateContent = article.content
+            .then(user=>{
+              console.log(user.data)
+              if(user.data.access_token){
+                localStorage.setItem('access_token',user.data.access_token)
+                this.isLogin="true"
+                this.getArticles()
+              }
+              else throw user.data
             })
-           },
+            .catch((err)=>{
+              this.error=err.message
+            })
+          },
+          findArticle: function(article) {
+            this.updateId = article._id
+            this.updateTitle = article.title
+            this.updateTag = article.tag
+            this.updateContent = article.content
+          },
            updateArticle: function(id) {
             $.ajax({
                 method:"put",
@@ -286,18 +353,31 @@
                     title:this.updateTitle,
                     tag:this.updateTag,
                     content:this.updateContent
-                }
+                },
+                headers:{access_token:localStorage.getItem('access_token')}
             })
-            .done(()=>location.reload())
+            .done(()=>this.getArticles())
+            .fail(err=>console.log(err))
            }
           ,getArticles: function() {
-            $.ajax({
+            axios({
               method: "get",
-              url: "http://localhost:3000/article"
-            }).done(listArticles => {
-              for (let article of listArticles) {
-                this.articles.push(article);
+              url: "http://localhost:3000/article",
+              headers:{access_token:localStorage.getItem('access_token')}
+            }).then(listArticles => {
+              console.log(this.isLogin)
+              console.log(listArticles.data)
+              if(!listArticles.data.message){
+                this.articles = []
+                for (let article of listArticles.data) {
+                  this.articles.push(article);
+                }
               }
+              else throw listArticles.data.message
+            })
+            .catch(err=>{
+              console.log('you are not authorized')
+              this.logout()
             });
           },
           filterArticles: function(event) {
@@ -312,48 +392,57 @@
               });
           },
           createArticle: function(event) {
-              console.log(this.quill)
+              console.log(this.createContent)
               $.ajax({
                   method:"post",
                   url: "http://localhost:3000/article",
                   data:{
                       title:this.createTitle,
                       tag:this.createTag,
-                      content:this.quill.root.innerHTML
-                  }
+                      content:this.createContent
+                  },
+                  headers:{access_token:localStorage.getItem('access_token')}
               })
-              .done(article=>this.articles.push(article))
+              .done(article=>this.getArticles())
+              .fail(err=>this.logout())
           },
           deleteArticle: function(id) {
               $.ajax({
                   method:"delete",
                   url:"http://localhost:3000/article",
-                  data:{id}
+                  data:{id},
+                  headers:{access_token:localStorage.getItem('access_token')}
               })
-              .done(()=>{
-                  let articles = this.articles.filter(article=>{
-                      return article._id !== id
-                  })
-                  this.articles = articles
+              .done(()=>this.getArticles())
+              .fail(()=>{
+                this.logout()
+                this.error="you are not authorized"
               })
+          },
+          onEditorBlur(quill) {
+            console.log('editor blur!', quill)
+          },
+          onEditorFocus(quill) {
+            console.log('editor focus!', quill)
+          },
+          onEditorReady(quill) {
+            console.log('editor ready!', quill)
+          }
+        },
+        computed: {
+          editorA() {
+            return this.$refs.quillEditorA.quill
+          },
+          editorB() {
+            return this.$refs.quillEditorB.quill
           }
         },
         created() {
-          this.getArticles();
+          this.getArticles()
         },
         mounted() {
-            this.quill = new Quill('#editor', {
-                debug: 'info',
-                modules: {
-                    toolbar: [
-                                ['bold', 'italic', 'underline', 'strike'],
-                                ['blockquote', 'code-block'],
-                                [{ 'header': 1 }, { 'header': 2 }],
-                             ]
-                }, 
-                placeholder: 'Compose an epic...',
-                theme: 'snow'
-            });
+          if(localStorage.getItem('access_token')) this.isLogin = "true"
+          else this.isLogin = "false"
         }
       });
     </script>
