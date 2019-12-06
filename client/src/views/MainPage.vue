@@ -1,11 +1,12 @@
 <template>
   <div>
+    <Menu></Menu>
     <p>ini main page rencananya</p>
   </div>
 </template>
 
 <script>
-import Navbar from "../components/Navbar"
+import Menu from "../components/Menu"
 export default {
   name: 'MainPage',
   data: function() {
@@ -50,7 +51,7 @@ export default {
     }
   },
   components: {
-    Navbar
+    Menu
   },
   created() {
     this.fetchArticle

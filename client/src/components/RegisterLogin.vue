@@ -5,7 +5,7 @@
    <!-- codepen  -->
    <div class="cont">
   <div class="form sign-in">
-    <h2>Welcome back,</h2>
+    <h2 style="color: #A36053;">Welcome back,</h2>
      <form @submit.prevent="login()">
       <label>
         <span>Email</span>
@@ -21,8 +21,9 @@
         <g-signin-button
           :params="googleSignInParams"
           @success="onSignInSuccess"
-          @error="onSignInError">
-          Sign in with Google
+          @error="onSignInError"
+          style="cursor: pointer;">
+          Sign In with Google +
         </g-signin-button>
       <!-- end google signin -->
     </form>
@@ -43,7 +44,7 @@
       </div>
     </div>
     <div class="form sign-up">
-      <h2>Time to feel like home,</h2>
+      <h2 style="color: #A36053;">Time to feel like home,</h2>
        <form @submit.prevent="register()">
       <label>
         <span>Name</span>
@@ -220,7 +221,7 @@ export default {
 	 position: relative;
 	 width: 640px;
 	 height: 100%;
-	 transition: transform 1.2s ease-in-out;
+	 transition: transform 1.5s ease-in-out;
 	 padding: 50px 30px 0;
 }
  .sub-cont {
@@ -232,7 +233,7 @@ export default {
 	 height: 100%;
 	 padding-left: 260px;
 	 background: #fff;
-	 transition: transform 1.2s ease-in-out;
+	 transition: transform 1.5s ease-in-out;
 }
  .cont.s--signup .sub-cont {
 	 transform: translate3d(-640px, 0, 0);
@@ -264,18 +265,19 @@ export default {
 	 top: 0;
 	 width: 900px;
 	 height: 100%;
-	 background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg');
+	 background-image: url('https://i.pinimg.com/564x/f2/9a/21/f29a2130131341812e4271f7eff07da4.jpg');
 	 background-size: cover;
 	 transition: transform 1.2s ease-in-out;
 }
  .img:after {
 	 content: '';
 	 position: absolute;
-	 left: 0;
+	 left: 10;
 	 top: 0;
 	 width: 100%;
 	 height: 100%;
-	 background: rgba(0, 0, 0, 0.6);
+	 /* background: rgba(0, 0, 0, 0.6); */
+   background: rgba(163, 98, 84, 0.65);
 }
  .cont.s--signup .img:before {
 	 transform: translate3d(640px, 0, 0);
@@ -289,7 +291,7 @@ export default {
 	 padding: 0 20px;
 	 text-align: center;
 	 color: #fff;
-	 transition: transform 1.2s ease-in-out;
+	 transition: transform 1.5s ease-in-out;
 }
  .img__text h2 {
 	 margin-bottom: 10px;
@@ -321,6 +323,7 @@ export default {
 	 font-size: 15px;
 	 cursor: pointer;
 }
+/* utk tagss */
  .img__btn:after {
 	 content: '';
 	 z-index: 2;
@@ -365,7 +368,7 @@ export default {
 }
  label span {
 	 font-size: 12px;
-	 color: #cfcfcf;
+	 color: #8d584a;
 	 text-transform: uppercase;
 }
  input {
@@ -374,19 +377,19 @@ export default {
 	 margin-top: 5px;
 	 padding-bottom: 5px;
 	 font-size: 16px;
-	 border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+	 border-bottom: 1px solid rgba(180, 72, 72, 0.4);
 	 text-align: center;
 }
  .forgot-pass {
 	 margin-top: 15px;
 	 text-align: center;
 	 font-size: 12px;
-	 color: #cfcfcf;
+	 color: #cea397;
 }
  .submit {
 	 margin-top: 40px;
 	 margin-bottom: 20px;
-	 background: #d4af7a;
+	 background: #A36053;
 	 text-transform: uppercase;
 }
  .fb-btn {
@@ -429,10 +432,10 @@ export default {
 .g-signin-button {
   /* This is where you control how the button looks. Be creative! */
   display: inline-block;
-  padding: 10px 10px;
-  margin-left: 220px !important;
+  padding: 10px 30px;
+  margin-left: 200px !important;
   border-radius: 45px;
-  background-color: #D4AF7A !important;
+  background-color: #C29589 !important;
   color: #fff;
 }
 </style>

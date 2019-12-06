@@ -1,11 +1,13 @@
 <template>
   <div>
+    <Menu></Menu>
     <RegisterLogin @setPage="setPage"></RegisterLogin>
   </div>
 </template>
 
 <script>
 import RegisterLogin from "../components/RegisterLogin"
+import Menu from '../components/Menu'
 
 export default {
   name: 'AuthPage',
