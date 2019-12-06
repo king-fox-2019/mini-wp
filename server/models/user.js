@@ -19,16 +19,16 @@ const UserSchema = new Schema({
         minlength: [4, 'Password Minimum Contain 4 Character']  
     },
     imageUrl : {
-        type : String,
+        type : Array,
         validate : {
             validator : function(value){
-                return value.length <= 1 ? true : false
+                return value.length > 0 ? true : false
             },
             message: props => `image is required`
         }
     }
 },{
-    versionKey: false,
+    versionKey: false
 })
 
 UserSchema.pre('save',function(next){

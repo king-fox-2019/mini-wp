@@ -11,8 +11,8 @@ module.exports = {
     },
     create(req,res,next){
         const author = req.loggedUser.id
-        const { title, content, imageUrl } = req.body
-        const form = { title, content, imageUrl, author }
+        const { title, content, imageUrl, tag } = req.body
+        const form = { title, content, imageUrl, author, tag }
         ArticleModel.create(form)
             .then(article=>{
                 res.status(201).json({
@@ -22,10 +22,22 @@ module.exports = {
             })
             .catch(next)
     },
+    findbytag(req,res,next){
+        const { tag } = req.body
+        ArticleModel.find({ tag })
+            .populate('author')
+            .then(articles=>{
+                res.status(200).json({
+                    message : `find tag :${tag} success`,
+                    articles
+                })
+            })
+            .catch(next)
+    },
     updatePut(req,res,next){
         const { id } = req.params
-        const { title, content, imageUrl } = req.body
-        const form = { title, content, imageUrl }
+        const { title, content, imageUrl, tag } = req.body
+        const form = { title, content, imageUrl, tag }
         ArticleModel.findOneAndUpdate({ _id : id },form,{ new : true, runValidators : true })
             .then(article=>{
                 res.status(201).json({

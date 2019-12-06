@@ -4,8 +4,8 @@ const { generateToken } = require('../helpers/jwt')
 
 module.exports = {
     register(req, res, next) {
-        const { name, password, email, imgUrl } = req.body
-        UserModel.create({ name, password, email, imgUrl })
+        const { name, password, email, imageUrl } = req.body
+        UserModel.create({ name, password, email, imageUrl })
             .then(user => {
                 let payload = { email: user.email, id: user._id, name : user.name }
                 let token = generateToken(payload)

@@ -14,7 +14,25 @@ const ArticleSchema = new Schema({
         ref : 'User'
     },
     imageUrl : {
-        type : String,
+        type : Array,
+        validate : {
+            validator : function(v){
+                return v.length > 0 ? true : false
+            },
+            message: props => `image is required`
+        }
+    },
+    tag : {
+        type : Array,
+        validate : {
+            validator : function(v){
+                if (v.includes('')) {
+                    return false
+                }
+                return v.length > 0 ? true : false
+            },
+            message: props => `tag is required`
+        }
     }
 },{
     timestamps: true,
