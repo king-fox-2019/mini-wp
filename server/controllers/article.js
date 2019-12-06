@@ -22,9 +22,8 @@ class ArticleController {
   static create(req, res, next) {
     console.log(req.body);
     
-    let { title, content, tags} = req.body
-    let imgSrc = req.body.file
-    Article.create({ title, content, tags, imgSrc})
+    let { title, content, tags, image } = req.body
+    Article.create({ title, content, tags, image})
     .then(article => {
       console.log(article);
       
@@ -44,9 +43,9 @@ class ArticleController {
 
   static update(req, res, next) {
     let id = req.params.id
-    let { title, content, tags, imgSrc } = req.body
+    let { title, content, tags, image } = req.body
     console.log(req.body)
-    Article.findByIdAndUpdate(id, { $set : {title, content, tags, imgSrc}}, { omitUndefined: true, new: true, runValidators: true})
+    Article.findByIdAndUpdate(id, { $set : {title, content, tags, image}}, { omitUndefined: true, new: true, runValidators: true})
     .then(article => {
       console.log(article)
       res.status(200).json( {data: article, msg: 'ok'} )

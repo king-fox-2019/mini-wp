@@ -71,7 +71,7 @@ class UserController {
       
       const result = { token, _id, email}
       
-      res.status(201).json({result})
+      res.status(201).json(result)
 
 
     })

@@ -9,15 +9,24 @@ const articleSchema = new Schema({
     type : String,
     required : [true, `Content cannot be empty`]
   },
-  imgSrc : {
+  image : {
     type : String,
     default : 'https://i.pinimg.com/564x/cf/5e/d8/cf5ed8a8b304e6599de416533fc0d286.jpg'
   },
   tags : [{
-    type : String, 
-    default : ['womanhood', 'feminism']
-  }]
+    type : String,
+    required: [true, 'You must at least add one topic']
+  }],
+  user : {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
+  // comment : [{
+  //   type : String
+
+  // }]
 }, {
+  versionKey : false,
   timestamps : true
 })
 

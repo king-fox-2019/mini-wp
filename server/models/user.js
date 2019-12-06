@@ -1,6 +1,4 @@
 const { Schema, model } = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator')
-const { emailValidator, passwordValidator } = require('../helpers/validator')
 const { hashPassword } = require('../helpers/passwordHandler')
 
 const userSchema = new Schema({
@@ -8,20 +6,18 @@ const userSchema = new Schema({
     type : String, 
     required : [true, `Please enter your email`],
     unique : [true, 'Email is already used'],
-    validate : emailValidator
+    match : [/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'invalid email format']
   },
   password : {
     type : String,
     required : [true, `Password cannot be empty`],
-    validate : passwordValidator
+    minlength: [5, 'Password must be at least 5 charachters long']
   }
 })
 userSchema.pre('save', function(next) {
   this.password = hashPassword(this.password)
   next()
 })
-
-userSchema.plugin(uniqueValidator)
 
 const User = model(`User`, userSchema)
 

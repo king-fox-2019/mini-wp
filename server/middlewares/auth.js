@@ -2,14 +2,17 @@ const { decodeToken } = require('../helpers/jwt')
 const Article = require('../models/article')
 
 const authentication = (req, res, next) => {
-  try {
-      req.loggedUser = decodeToken(req.headers.token) //option expire
-      console.log(req.loggedUser);
-      next()
-  } catch (err) {
-    console.log(err)
-    next(err)
-  }
+  
+  User.findById(decodeToken(req.headers.access_token).id)
+    .then(user => {
+      if (!user) {
+        throw {status: 401, msg: `please login first`}
+      } else {
+        req.loggedUser = user
+        next()
+      }
+    })
+    .catch(next)
 }
 
 const authorization = (req, res, next) => { //article yg di delete/edit hrs milik user yg lg login
