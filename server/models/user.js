@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     fullname: String,
     email: {
         type: String,
-        // unique: [true, 'Email already taken'],
+        unique: [true],
         validate: {
             validator: function (value) {
                 return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(value)
