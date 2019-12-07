@@ -10,13 +10,13 @@ module.exports = (req, res, next) => {
             .findOne( { _id: decoded.id } )
             .then(user=> {
                 if(!user) {
-                    console.log('TOKEN INVALID / USER NOT FOUND')
+                    next({ isThrow: true, status: 404, message: "USER NOT FOUND!" })
                 } else {
                     req.token = decoded
                     next()
                 }
             })
     } else {
-        console.log('U have to login')
+        next({isThrow: true, status: 401, message: "YOU HAVE TO LOGIN FIRST!"})
     }
 }

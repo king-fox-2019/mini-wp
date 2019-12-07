@@ -2,6 +2,16 @@
 const { Article } = require('../models');
 
 class ArticleController {
+    static destroy(req, res, next) {
+        let { id } = req.body
+        Article
+            .deleteOne({_id: id})
+            .then(succ=> {
+                console.log(succ)
+                res.status(200).json(succ)
+            })
+            .catch(next)
+    };
     static addArticle(req, res, next) {
         let { title, content } = req.body
         let newArticle = {
@@ -16,6 +26,21 @@ class ArticleController {
             })
             .catch(next)
     }
+    static showMyArticle(req, res, next) {
+        Article
+            .find({author: req.token.id})
+            .sort({ createdAt: -1 })
+            .populate({
+                path: 'author',
+                select: '-email -password'
+            })
+            .then(articles => {
+                res.status(200).json(articles)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    };
     static showArticle(req, res, next) {
         Article
             .find()

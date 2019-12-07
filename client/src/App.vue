@@ -4,7 +4,7 @@
     <login v-if="!isLogged" @login="loginAttempt"></login>
     <createarticleform class="mt-5" v-model="content" v-show="isLogged" @pagecontrol="showPage" v-if="page === 'post'"></createarticleform>
     <explore v-if="page === 'explore'" :data="this.articleList"></explore>
-    <myarticle v-if="page === 'myarticle'" :data="this.articleList"></myarticle>
+    <myarticle v-if="page === 'myarticle'" :data="this.myArticle"></myarticle>
   </div>
 </template>
 
@@ -22,15 +22,30 @@
         message: 'Hello world',
         isLogged: true,
         page: '',
-        articleList: []
+        articleList: [],
+        myArticle: []
       };
     },
     methods: {
+      fetchMine: function() {
+            axios
+                .get('/article/myarticle')
+                .then(({data})=> {
+                    this.myArticle = data
+                })
+                .catch(err=> {
+                    let fields = err.response.data.join(' | ')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: fields
+                    })
+                })
+      },
       fetchData: function() {
         axios
           .get('article')
           .then(({data})=> {
-            console.log(data)
             this.articleList = data
           })
           .catch(err=>{
@@ -112,6 +127,7 @@
     },
     created() {
       if(localStorage.getItem('token')) {
+        this.fetchMine()
         this.fetchData()
         this.isLogged = true
         this.page = 'article'

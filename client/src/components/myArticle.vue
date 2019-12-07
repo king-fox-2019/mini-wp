@@ -7,9 +7,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{article.title}}</h5>
                         <p class="card-text">{{article.author.fullname}}</p>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" @click="sentToModal(article)"  data-target="#exampleModalScrollable">READ</a>
-                        <a href="#" class="btn btn-primary">EDIT</a>
-                        <a href="#" class="btn btn-primary">DELETE</a>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" @click.prevent="sentToModal(article)"  data-target="#exampleModalScrollable">READ</a>
+                        <a href="#"  class="btn btn-primary">EDIT</a>
+                        <a href="#" @click.prevent="destroy(article)" class="btn btn-primary">DELETE</a>
                     </div>
                 </div>
                 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -36,12 +36,14 @@
 </template>
 
 <script>
+import axios from '../../api/server';
 export default {
     name: 'detail',
     props: ['data'],
    
     data() {
         return {
+            id: '',
             viewMore: false,
             title: '',
             content: '',
@@ -55,6 +57,25 @@ export default {
             this.content = article.content
             this.author = article.author
             this.createdAt = article.createdAt
+        },
+        destroy: function(article) {
+            let { _id } = article
+            axios
+                .delete('/article', {
+                    data: {
+                        id: _id
+                    }
+                })
+                .then(({data})=> {
+                    Swal.fire('Article deleted')
+                })
+                .catch(err=> {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something wrong, try again!'
+                    })
+                })
         }
     }
 };
