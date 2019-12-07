@@ -34,6 +34,7 @@ class UserController{
                     let valid = bcrypt.compare(password, user.password)
                     if(valid){
                         let filterUser = {
+                            id: user._id,
                             username: user.username,
                             email: user.email
                         }
@@ -80,7 +81,7 @@ class UserController{
 
     static getOneUser(req,res,next){
         User.findOne({
-            _id: req.params.id
+            _id: req.decoded.id
         })
         .then(user => {
             if(user){

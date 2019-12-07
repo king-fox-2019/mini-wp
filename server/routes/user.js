@@ -12,6 +12,6 @@ router.post('/login', UserController.loginUser)
 router.get('/', Authenticate, UserController.getAllUser)
 
 // get one user
-router.get('/:id', Authenticate, UserController.getOneUser)
+router.get('/profile', Authenticate, UserController.getOneUser)
 
 module.exports = router

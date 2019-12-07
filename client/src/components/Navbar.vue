@@ -24,17 +24,17 @@
             <ul class="navbar-nav mr-auto">
               <li class="nav-item dropdown" v-if="isLogin">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  User
+                  {{user.username}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Profile</a>
+                  <a class="dropdown-item" href="#" @click.prevent="showDetailUser(user.id)">Profile</a>
                   <a class="dropdown-item" href="#">Logout</a>
                 </div>
               </li>
             </ul>
           </div>
-          <button class="btn btn-primary my-2 my-sm-0 mr-2" type="submit" @click.prevent="showLogin">Signin</button>
-          <button class="btn btn-success my-2 my-sm-0 mr-2" type="submit" @click.prevent="showRegister">Signup</button>
+          <button class="btn btn-primary my-2 my-sm-0 mr-2" type="submit" @click.prevent="showLogin" v-if="!isLogin">Signin</button>
+          <button class="btn btn-success my-2 my-sm-0 mr-2" type="submit" @click.prevent="showRegister" v-if="!isLogin">Signup</button>
           <button class="btn btn-dark my-2 my-sm-0" type="submit" v-if="isLogin">Signout</button>
         </div>
       </nav>
@@ -45,9 +45,9 @@
 export default {
     data(){
       return {
-        isLogin: false
       }
     },
+    props: ['user','isLogin'],
     methods:{
       showRegister(){
         this.$emit('show-register')

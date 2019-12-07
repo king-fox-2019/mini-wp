@@ -2,7 +2,7 @@
   <div>
       <div class="container mb-3">
           <div class="mt-3">
-            <h1 class="mb-2">Create Article</h1>
+            <h2 class="mb-2">Create Article</h2>
             <label for="article-title"><h3>Title</h3></label>
             <form id="create-article">
                 <input type="text" id="article-title" placeholder="Input your title" class="form-control mb-3">
@@ -19,6 +19,19 @@
                     </div>
                 </div>
               </form>
+          </div>
+          <div class="mt-3 w-100">
+              <section>
+                <b-field label="Add some tags">
+                    <b-taginput
+                        v-model="tags"
+                        ellipsis
+                        icon="label"
+                        placeholder="Add a tag">
+                    </b-taginput>
+                </b-field>
+                <p class="content"><b>Tags:</b> {{ tags }}</p>
+            </section>
           </div>
           <div class="mt-3">
             <button class="btn btn-success">Save</button>
@@ -37,7 +50,8 @@ export default {
         return{
             myHTML : '',
             image: '',
-            imageLink: ''
+            imageLink: '',
+            tags: ['Auckland','Wellington','Very long string that would overflow']
         }
     },
     methods:{

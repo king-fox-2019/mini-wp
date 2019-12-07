@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
+    "buefy": "^0.8.8",
     "moment": "^2.24.0",
     "sweetalert2": "^9.4.3",
     "vue": "^2.6.10",

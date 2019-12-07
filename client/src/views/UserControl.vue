@@ -1,7 +1,7 @@
 <template>
     <div>
-        <formsignin v-if="showLogin"></formsignin>
-        <formsignup v-if="showRegister"></formsignup>
+        <formsignin v-if="showLogin" @go-mainpage="changeToMainPage" @user-login="userLoginInfo"></formsignin>
+        <formsignup v-if="showRegister" @show-login="changeToLogin"></formsignup>
     </div>
 </template>
 
@@ -18,6 +18,17 @@ export default {
     props: ['showRegister', 'showLogin'],
     data(){
         return {
+        }
+    },
+    methods:{
+        changeToLogin(){
+            this.$emit('to-login')
+        },
+        changeToMainPage(){
+            this.$emit('to-mainpage')
+        },
+        userLoginInfo(val){
+            this.$emit('user-login', val)
         }
     },
     computed:{
