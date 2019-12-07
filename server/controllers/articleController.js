@@ -18,7 +18,7 @@ class articleController {
     }
 
     static showArticle(req, res, next) {
-      Article.findById({ _id: ObjectId(req.params.articleId) })
+      Article.findById(req.params.articleId)
         .then(article => {
           res.status(200).json(article);
         }).catch(next);
@@ -26,7 +26,6 @@ class articleController {
 
     static editArticle(req, res, next) {
       const articleId = req.params.articleId;
-      console.log(articleId, '<<')
       const { title, content, created_at } = req.body;
       Article.findByIdAndUpdate(articleId, { title, content, created_at })
         .then(response => {

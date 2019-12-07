@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema, model, models } = mongoose;
 
-const articleSchema = new mongoose.Schema({
+const articleSchema = new Schema({
   title: String,
   content: String,
   created_at: {
@@ -10,5 +10,5 @@ const articleSchema = new mongoose.Schema({
   }
 })
 
-const Article = mongoose.model("Article", articleSchema);
+const Article = model("Article", articleSchema);
 module.exports = Article;

@@ -1,15 +1,17 @@
 const mongoose = require("mongoose");
 
-mongoose.set('useCreateIndex', true);
-mongoose.connect("mongodb://localhost:27017/mini-wp", 
-{
-  useNewUrlParser: true ,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-});
+mongoose.connect(process.env.URL_DB, 
+  { 
+    useNewUrlParser: true ,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  }
+);
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log("MongoDB: Connected!")
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function() { 
+  console.log("Connected!") 
 });
+
+module.exports = mongoose;

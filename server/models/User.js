@@ -42,8 +42,18 @@ const userSchema = new Schema({
         message: "invalid email input!"
       }
     ]
+  },
+  gSignIn: {
+    type: Boolean,
+    default: false
   }
-})
-console.log('!!!!!!!1')
+});
+
+userSchema.pre("save", function(next) {
+  this.password = hashPassword(this.password);
+  next();
+});
+
+
 const User = model("User", userSchema);
 module.exports = User;
