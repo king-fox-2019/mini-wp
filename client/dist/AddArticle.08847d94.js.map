@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/components/AddArticle.vue"],"names":[],"mappings":";;;;;;;;;;;;eAOA;AACA,EAAA,IAAA,EAAA;AADA","file":"AddArticle.08847d94.js","sourceRoot":"..","sourcesContent":["<template>\n  <div class=\"add-article\">\n    <h1>add article</h1>\n  </div>\n</template>\n\n<script>\nexport default {\n  name: \"AddArticle\"\n};\n</script>\n\n<style>\n</style>"]}
