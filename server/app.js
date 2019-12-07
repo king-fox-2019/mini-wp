@@ -9,7 +9,6 @@ const express = require("express"),
   errorHandler = require('./middlewares/errorHandler'),
   port = process.env.PORT || 3000
 
-// mongoose.connect('mongodb://localhost:27017/miniWP2', { 
 mongoose.connect(process.env.ATLAS, { 
   useNewUrlParser: true,
   useUnifiedTopology: true,
