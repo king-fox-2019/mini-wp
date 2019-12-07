@@ -16,7 +16,7 @@ class UserController {
                     email: result.email
                 }
                 let token = generateToken(payload)
-                res.status(201).json({ token })
+                res.status(201).json({ token, email: result.email })
             })
             .catch(next)
     }
@@ -32,7 +32,7 @@ class UserController {
                     email: user.email
                 }
                 let token = generateToken(payload)
-                res.status(200).json({ token })
+                res.status(200).json({ token, email: user.email })
             } else {
                 next({ status: 400, message: "wrong email or password" })
             }

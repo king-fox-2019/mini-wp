@@ -7,7 +7,6 @@ class ArticleController {
         let created_at = new Date
         let author = req.loggedUser.id
         let featured_image = imgUrl
-        console.log(featured_image)
         Article.create({ title, content, created_at, author, featured_image, tags })
             .then(result => {
                 res.status(201).json(result)
@@ -17,21 +16,21 @@ class ArticleController {
 
     static readAll(req, res, next) {
         let searchQuery = {}
-        if(req.query.title || req.query.tags) {
+        if (req.query.title || req.query.tags) {
             searchQuery = {
                 $or: []
             }
-            if(req.query.title) {
-                searchQuery.$or.push({'title': new RegExp(`${req.query.title}`, 'gi')})
+            if (req.query.title) {
+                searchQuery.$or.push({ 'title': new RegExp(`${req.query.title}`, 'gi') })
             }
-            if(req.query.tags) {
-                searchQuery.$or.push({'tags': new RegExp(`${req.query.tags}`, 'gi')})
+            if (req.query.tags) {
+                searchQuery.$or.push({ 'tags': new RegExp(`${req.query.tags}`, 'gi') })
             }
         }
         Article.find(searchQuery)
             .populate('author')
-            .then(articles  => {
-                res.status(200).json(articles )
+            .then(articles => {
+                res.status(200).json(articles)
             })
             .catch(next)
     }
@@ -60,10 +59,10 @@ class ArticleController {
         let created_at = new Date
         Article.findById(id)
             .then(article => {
-                if(article) {
+                if (article) {
                     let featured_image = []
                     article.featured_image.forEach(oldImage => {
-                        if(remove.indexOf(oldImage) == -1) {
+                        if (remove.indexOf(oldImage) == -1) {
                             featured_image.push(oldImage)
                         }
                     })
@@ -71,20 +70,20 @@ class ArticleController {
                         featured_image.push(newImage)
                     })
 
-                    if(remove) {
+                    if (remove) {
                         let removedImages = []
-                        if(typeof remove == 'string') {
+                        if (typeof remove == 'string') {
                             removedImages.push(remove)
                         } else {
                             removedImages = remove
                         }
                     }
-                    return Article.findByIdAndUpdate(id, {$set: {title, content, created_at, featured_image, tags }}, { runValidators: true, omitUndefined: true, new: true })
+                    return Article.findByIdAndUpdate(id, { $set: { title, content, created_at, featured_image, tags } }, { runValidators: true, omitUndefined: true, new: true })
                 } else {
-                    throw({ status: 404, message: 'Article not found' })
+                    throw ({ status: 404, message: 'Article not found' })
                 }
             })
-       
+
             .then(result => {
                 res.status(200).json(result)
             })
@@ -95,13 +94,13 @@ class ArticleController {
         let { id } = req.params
         Article.findById(id)
             .then(result => {
-                if(result) {
+                if (result) {
                     result.featured_image.forEach(image => {
                         deletegcs(image)
                     })
                     return Article.deleteOne({ _id: id })
                 } else {
-                    throw({ status: 404, message: 'Article not found' })
+                    throw ({ status: 404, message: 'Article not found' })
                 }
             })
             .then(result => {

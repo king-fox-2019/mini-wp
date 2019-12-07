@@ -7,7 +7,10 @@
                     <input v-model="emailLogin" type="text">
                     <label>PASSWORD</label>
                     <input v-model="passwordLogin" type="password"><br />
-                    <input type="submit" value="LOG IN">
+                    <div style="display: flex; flex-direction: row;">
+                        <input type="submit" value="LOG IN">
+                        <GoogleSignInButton @set-login="setLoginGoogle"></GoogleSignInButton>
+                    </div>
                 </form>
             </div>
             <div class="form form__signup" :style="formSignup">
@@ -16,7 +19,10 @@
                     <input v-model="emailSignup" type="email">
                     <label for="password">PASSWORD</label>
                     <input v-model="passwordSignup" type="password"><br />
-                    <input type="submit" value="REGISTER">
+                    <div style="display: flex; flex-direction: row;">
+                        <input type="submit" value="REGISTER">‘
+                        <GoogleSignInButton @set-login="setLoginGoogle"></GoogleSignInButton>
+                    </div>
                 </form>
             </div>
         </div>
@@ -32,11 +38,22 @@
 </template>
 
 <script>
-import axios from '../apis/axios'
+import axios from '../../apis/axios'
 import Swal from 'sweetalert2'
+import GoogleSignInButton from "../components/GoogleSignIn";
+
+const Toast = Swal.mixin({
+	toast: true,
+	position: 'is-top',
+	showConfirmButton: false,
+	timer: 1500
+})
 
 export default {
   name: "LoginForm",
+  components: {
+    GoogleSignInButton
+  },
     data() {
         return {
             emailLogin: '',
@@ -60,14 +77,13 @@ export default {
             })
                 .then(({ data }) => {
                     localStorage.setItem('token', data.token)
+                    localStorage.setItem('email', data.email)
                     this.$emit('set-login')
                     this.emailLogin = ''
                     this.passwordLogin = ''
-                    Swal.fire({
+                    Toast.fire({
                         icon: 'success',
-                        title: `Login Successful, Welcome`,
-                        showConfirmButton: false,
-                        timer: 1500
+                        title: 'Logged in, welcome!'
                     })
                 })
                 .catch(err => {
@@ -90,15 +106,13 @@ export default {
             })
                 .then(({ data }) => {
                     localStorage.setItem('token', data.token)
+                    localStorage.setItem('email', data.email)
                     this.$emit('set-login')
-                    console.log(`register successful`);
                     this.emailSignup = ''
                     this.passwordSignup = ''
-                    Swal.fire({
+                    Toast.fire({
                         icon: 'success',
-                        title: 'Registration successful',
-                        showConfirmButton: false,
-                        timer: 1500
+                        title: 'Registration success, welcome!'
                     })
                 })
                 .catch(err => {
@@ -110,6 +124,9 @@ export default {
                         footer: '<a href>Why do I have this issue?</a>'
                     })
                 })
+        },
+        setLoginGoogle() {
+            this.$emit('set-login')
         },
         moveOverlay(e) {
             e.preventDefault();
@@ -127,5 +144,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

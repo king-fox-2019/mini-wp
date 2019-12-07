@@ -1,12 +1,14 @@
 <template>
   <div>
-    <LoginRegisterPage @set-login="setLogin" v-show="!isLogin"></LoginRegisterPage>
-    <!-- <HomePage @set-logout="setLogout" v-if="isLogin"></HomePage> -->
+    <LoginRegisterPage @set-login="setLogin" v-if="!isLogin"></LoginRegisterPage>
+    <Homepage @set-logout="setLogout" v-if="isLogin"></Homepage>
   </div>
 </template>
 
 <script>
 import LoginRegisterPage from '../src/views/LoginRegisterPage'
+import Homepage from "./views/Homepage"
+
 export default {
   data () {
     return {
@@ -14,8 +16,8 @@ export default {
     }
   },
   components: {
-    LoginRegisterPage
-    // Homepage
+    LoginRegisterPage,
+    Homepage
   },
   methods: {
     setLogin () {
