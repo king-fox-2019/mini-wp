@@ -6,7 +6,12 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import axios from "../api/axios";
 import VueAxios from "vue-axios";
+import wysiwyg from "vue-wysiwyg";
+import "vue-wysiwyg/dist/vueWysiwyg.css";
 
+Vue.use(wysiwyg, {
+  maxHeight: "500px"
+});
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
 

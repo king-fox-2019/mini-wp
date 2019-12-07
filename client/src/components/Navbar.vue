@@ -7,16 +7,35 @@
       top
     >
       {{ snackbarSuccess.text }}
-      <v-btn color="black" text @click="snackbarSuccess.snackbar = false">Close</v-btn>
+      <v-btn color="black" text @click="snackbarSuccess.snackbar = false"
+        >Close</v-btn
+      >
     </v-snackbar>
     <v-app-bar color="grey lighten-4">
-      <v-app-bar-nav-icon v-if="isLogin" class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        v-if="isLogin"
+        class="grey--text"
+        @click="drawer = !drawer"
+      ></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase blue-grey--text">
         <span class="font-weight-light">Article</span>
         <span>Sharing</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <formsign-item v-if="!isLogin" @snackbar-success="notify" @user-signin="infoUser"></formsign-item>
+      <GoogleLogin
+        v-if="!isLogin"
+        :params="params"
+        :renderParams="renderParams"
+        :onSuccess="onSuccess"
+        :onFailure="onFailure"
+        style="margin-right: 10px;"
+      ></GoogleLogin>
+      <!-- <div v-if="!isLogin" id="google-signin-button" class="g-signin2"></div> -->
+      <formsign-item
+        v-if="!isLogin"
+        @snackbar-success="notify"
+        @user-signin="infoUser"
+      ></formsign-item>
 
       <v-btn v-else @click="onSignOut" depressed color="grey lighten-4">
         <span>Sign Out</span>
@@ -42,7 +61,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{ link.text }}</v-list-item-title>
+            <v-list-item-title class="white--text">{{
+              link.text
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -52,14 +73,26 @@
 
 <script>
 import FormSign from "../components/FormSign.vue";
+import GoogleLogin from "vue-google-login";
 
 export default {
   name: "Navbar",
   components: {
-    "formsign-item": FormSign
+    "formsign-item": FormSign,
+    GoogleLogin
   },
   data() {
     return {
+      params: {
+        client_id:
+          "524874456233-anj0lnllh0m9dkh18nf6k36enc3qf1mt.apps.googleusercontent.com"
+      },
+      // only needed if you want to render the button with the google ui
+      renderParams: {
+        width: 115,
+        height: 35,
+        longtitle: false
+      },
       user: "",
       image: "",
       isLogin: false,
@@ -79,6 +112,7 @@ export default {
   },
   methods: {
     notify(val) {
+      // console.log("masuk notif");
       this.snackbarSuccess.text = val.text;
       this.snackbarSuccess.color = val.color;
       this.snackbarSuccess.snackbar = true;
@@ -93,25 +127,117 @@ export default {
         this.image = val.image;
       }
     },
+    onSuccess(googleUser) {
+      const id_token = googleUser.getAuthResponse().id_token;
+      this.axios({
+        method: "POST",
+        url: "/users/googlesignin",
+        data: {
+          id_token
+        }
+      })
+        .then(({ data }) => {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", data.response.name);
+          localStorage.setItem("image", data.response.image);
+          let notif = {
+            color: "success",
+            text: `Welcome to the Article Sharing, ${data.response.name}`,
+            isLogin: true
+          };
+          let userInfo = {
+            name: `${data.response.name}`,
+            image: data.response.image
+          };
+          this.notify(notif);
+          this.infoUser(userInfo);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    onFailure() {
+      console.log("error");
+    },
+    // onSignIn(googleUser) {
+    // console.log("parraaahhh");
+    // const id_token = googleUser.getAuthResponse().id_token;
+    // this.axios({
+    //   method: "POST",
+    //   url: "/users/googlesignin",
+    //   data: {
+    //     id_token
+    //   }
+    // })
+    //   .then(({ data }) => {
+    //     console.log("goooglleee");
+    //     localStorage.setItem("token", data.token);
+    //     localStorage.setItem("user", data.response.name);
+    //     localStorage.setItem("image", data.response.image);
+    //     this.isLogin = true;
+    //     let notif = {
+    //       color: "success",
+    //       text: `Welcome to the Article Sharing, ${data.response.name}`,
+    //       isLogin: true
+    //     };
+    //     let userInfo = {
+    //       name: `${data.response.name}`,
+    //       image: data.response.image
+    //     };
+    //     this.notify(notif);
+    //     this.infoUser(userInfo);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    // },
     onSignOut() {
-      localStorage.removeItem("token");
-      this.snackbarSuccess.text = `Thank's For Sharing, ${localStorage.getItem(
-        "user"
-      )}`;
-      this.snackbarSuccess.color = "primary";
-      this.snackbarSuccess.snackbar = true;
-      this.isLogin = false;
-      this.$router.push("/");
-      localStorage.removeItem("user");
-      localStorage.removeItem("image");
-      //notif
+      if (gapi.auth2 !== undefined) {
+        let auth2 = gapi.auth2.getAuthInstance();
+        auth2
+          .signOut()
+          .then(() => {
+            localStorage.removeItem("token");
+            this.snackbarSuccess.text = `Thank's For Sharing, ${localStorage.getItem(
+              "user"
+            )}`;
+            this.snackbarSuccess.color = "primary";
+            this.snackbarSuccess.snackbar = true;
+            this.isLogin = false;
+            localStorage.removeItem("user");
+            localStorage.removeItem("image");
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        localStorage.removeItem("token");
+        this.snackbarSuccess.text = `Thank's For Sharing, ${localStorage.getItem(
+          "user"
+        )}`;
+        this.snackbarSuccess.color = "primary";
+        this.snackbarSuccess.snackbar = true;
+        this.isLogin = false;
+        this.$router.push("/");
+        localStorage.removeItem("user");
+        localStorage.removeItem("image");
+        //notif
+      }
     }
   },
+  // mounted() {
+  //   gapi.signin2.render("google-signin-button", {
+  //     onsuccess: this.onSignIn
+  //   });
+  // },
   created() {
     if (localStorage.getItem("token")) {
       this.isLogin = true;
       this.infoUser();
     } else {
+      gapi.signin2.render("google-signin-button", {
+        onsuccess: this.onSignIn
+      });
       this.isLogin = false;
     }
   }

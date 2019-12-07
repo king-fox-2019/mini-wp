@@ -5,6 +5,7 @@ const { comparePassword } = require("../helpers/bcrypt");
 class UserController {
   static signUp(req, res, next) {
     const { name, email, password, image } = req.body;
+    console.log(req.body.image);
     User.create({
       name,
       email,
@@ -63,6 +64,40 @@ class UserController {
             }
           }
         }
+      })
+      .catch(next);
+  }
+
+  static googleSignin(req, res, next) {
+    // console.log("masuk google");
+    // console.log(req.decoded);
+    User.findOne({
+      email: req.decoded.email
+    })
+      .then(response => {
+        if (response) {
+          return response;
+        } else {
+          return User.create({
+            name: req.decoded.name,
+            email: req.decoded.email,
+            password: process.env.DEFAULT_PASSWORD,
+            image: req.decoded.picture
+          });
+        }
+      })
+      .then(response => {
+        // console.log(response);
+        let payload = {
+          id: response._id,
+          name: response.name,
+          email: response.email
+        };
+        let token = jwt.sign(payload, process.env.JWT_SECRET);
+        res.status(201).json({
+          token,
+          response
+        });
       })
       .catch(next);
   }

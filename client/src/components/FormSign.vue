@@ -81,6 +81,7 @@
                       multiple
                       type="file"
                       required
+                      :rules="imageRules"
                       v-model="signUp.image"
                       label="Your Photo Profile"
                     ></v-file-input>
@@ -119,7 +120,7 @@ export default {
         name: "",
         email: "",
         password: "",
-        image: ""
+        image: []
       },
       nameRules: [
         v => !!v || "Name is required",
@@ -132,8 +133,12 @@ export default {
       passwordRules: [
         v => !!v || "password is required",
         v => (v && v.length >= 7) || "Password must be higher than 7 characters"
+      ],
+      imageRules: [
+        // v => !!v || "Image is required",
+        v => !!v || "Image is required"
+        // v => v.file === null || "Image is required"
       ]
-      // imageRules: [v => !!v || "Image is required"]
     };
   },
   methods: {
@@ -189,10 +194,14 @@ export default {
       if (this.$refs.form2.validate()) {
         this.snackbar = true;
         let fd = new FormData();
+        if (this.signUp.image === undefined) {
+          fd.append("image", "zonk");
+        } else {
+          fd.append("image", this.signUp.image[0]);
+        }
         fd.append("name", this.signUp.name);
         fd.append("email", this.signUp.email);
         fd.append("password", this.signUp.password);
-        fd.append("image", this.signUp.image[0]);
         this.axios({
           method: "POST",
           url: "/users/signup",
@@ -243,6 +252,9 @@ export default {
       if (!val) {
         this.resetSignUp();
       }
+    },
+    signUp(val) {
+      this.signUp.image = val;
     }
   }
 };
