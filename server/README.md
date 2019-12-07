@@ -25,6 +25,7 @@ There are multiple errors that might happen, and this section is intended to cap
 - User validation error: Often happens on Sign Up. Require you to check whether you've sent correct data, all required fields were filled, and all validation passed. Change all fields causing error, and resend your data. Example message: `Username Required`, `Email already registered`, `Password min length 6`.
 - `Wrong username/email/password`: Happens on Sign In. Caused by missing fields, invalid data values, or probably you just havent's Sign Up yet. Fix all data, or change to the correct route if you happen to be in the last case, and try again.
 - `Article title required`: Happens specifically when you are manipulating Article (creating, editing). Please check if you accidentally removed the  `article's title`.
+- `Invalid article status`: This happens when you try to create/edit your article status with invalid value. Check whether you have set the status correctly, or just leave it blank so the API will take care of it using it's default value.
 
 ### 404: Not Found
 
@@ -156,6 +157,7 @@ POST /articles
 - title **Required**
 - content
 - featuredImage 
+- status **Options:** `draft (default)` | `posted` | `trash` 
 
 ##### Response
 
@@ -168,7 +170,8 @@ Status 201: Created
     "title": "Dummy Article",
     "content": "Article's content",
     "featuredImage": "https://cdn.dummyimages.com/photo/dummy-photo.jpg",
-    "createdAt": "2019-12-01T06:10:11.674Z"  
+    "createdAt": "2019-12-01T06:10:11.674Z",
+    "status": "draft"
   }
 }
 ```
@@ -228,6 +231,7 @@ Status 200: OK
 {
   "data": [
     {
+      "status": "draft",
       "_id": "5de359433425644760f0b7ce",
       "title": "Dummy Article",
       "author": {
@@ -242,6 +246,7 @@ Status 200: OK
       "updatedAt": "2019-12-01T06:10:11.674Z"
     },
     {
+      "status": "draft",
       "_id": "5de3594c3425644760f0b7cf",
       "title": "Dummy Article 2",
       "author": {
@@ -281,6 +286,7 @@ Status 200: OK
 {
   "data": [
     {
+      "status": "draft",
       "_id": "5de359433425644760f0b7ce",
       "title": "Dummy Article",
       "content": "Articles' content",
@@ -313,6 +319,7 @@ Status 200: OK
 ```json
 {
   "data": {
+    "status": "draft",
     "_id": "5de359433425644760f0b7ce",
     "title": "Dummy Article",
     "author": {
@@ -357,6 +364,7 @@ Status 200: OK
 {
   "message": "Article edited",
   "data": {
+    "status": "draft",
     "_id": "5de359433425644760f0b7ce",
     "title": "Edited Dummy Article",
     "content": "Edited content",

@@ -16,6 +16,14 @@ const articleSchema = new Schema(
     },
     featuredImage: {
       type: String
+    },
+    status: {
+      type: String,
+      enum: {
+        values: ['draft', 'posted', 'trash'],
+        message: 'Invalid article status'
+      },
+      default: 'draft'
     }
   },
   { versionKey: false, timestamps: true }

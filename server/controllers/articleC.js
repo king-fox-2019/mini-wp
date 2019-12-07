@@ -2,18 +2,25 @@ const { Article } = require('../models')
 
 class ArticleController {
   static createArticle(req, res, next) {
-    const { title, content, featuredImage } = req.body
+    const { title, content, featuredImage, status } = req.body
     const author = req.user._id
     Article.create({
       title,
       author,
       content,
-      featuredImage
+      featuredImage,
+      status
     })
       .then(article => {
         res.status(201).json({
           message: 'Article created',
-          data: { title, content, featuredImage, createdAt: article.createdAt }
+          data: {
+            title,
+            content,
+            featuredImage,
+            createdAt: article.createdAt,
+            status: article.status
+          }
         })
       })
       .catch(next)
@@ -85,12 +92,10 @@ class ArticleController {
 
   static HandleImage(req, res, next) {
     if (req.body.image)
-      res
-        .status(200)
-        .json({
-          message: 'Upload image success',
-          data: { imageUrl: req.body.image }
-        })
+      res.status(200).json({
+        message: 'Upload image success',
+        data: { imageUrl: req.body.image }
+      })
     else next({ message: 'Upload image failed' })
   }
 }
