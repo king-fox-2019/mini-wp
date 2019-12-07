@@ -65,6 +65,11 @@ const routes = [
     path: '/write',
     name: 'write',
     component: () => import(/* webpackChunkName: "write" */ '@/views/Write.vue')
+  },
+  {
+    path: '*',
+    name: '404',
+    redirect: '/'
   }
 ]
 
