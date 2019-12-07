@@ -41,16 +41,15 @@
 import { formatDistance } from 'date-fns'
 
 export default {
+  props: {
+    articles: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       vwWidth: 0
-    }
-  },
-  computed: {
-    articles() {
-      return this.$store.state.userArticles.filter(article => {
-        return article.status != 'trash'
-      })
     }
   },
   methods: {
@@ -72,12 +71,6 @@ export default {
     formatDate(date) {
       return formatDistance(new Date(date), Date.now()) + ' ago'
     }
-  },
-  created() {
-    const loader = this.$loading.show()
-    this.$store.dispatch('fetchUserArticles').then(() => {
-      loader.hide()
-    })
   },
   mounted() {
     this.vwWidth = window.innerWidth

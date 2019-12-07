@@ -34,6 +34,30 @@ const routes = [
           import(
             /* webpackChunkName: "articles" */ '@/components/dashboard/Articles.vue'
           )
+      },
+      {
+        path: 'posted',
+        name: 'posted-articles',
+        component: () =>
+          import(
+            /* webpackChunkName: "articles" */ '@/components/dashboard/Articles.vue'
+          )
+      },
+      {
+        path: 'draft',
+        name: 'draft-articles',
+        component: () =>
+          import(
+            /* webpackChunkName: "articles" */ '@/components/dashboard/Articles.vue'
+          )
+      },
+      {
+        path: 'trash',
+        name: 'trash-articles',
+        component: () =>
+          import(
+            /* webpackChunkName: "articles" */ '@/components/dashboard/Articles.vue'
+          )
       }
     ]
   },

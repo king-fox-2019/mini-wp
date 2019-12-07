@@ -1,7 +1,20 @@
 <template>
   <div>
     <SideNav></SideNav>
-    <router-view id="main-dashboard"></router-view>
+    <router-view
+      :articles="
+        $route.path == '/dashboard'
+          ? allArticles
+          : $route.path == '/dashboard/posted'
+          ? postedArticles
+          : $route.path == '/dashboard/draft'
+          ? draftArticles
+          : $route.path == '/dashboard/draft'
+          ? trashArticles
+          : []
+      "
+      id="main-dashboard"
+    ></router-view>
   </div>
 </template>
 
@@ -12,6 +25,29 @@ import checkSession from '@/utils/checkSession'
 export default {
   components: {
     SideNav
+  },
+  computed: {
+    articles() {
+      return this.$store.state.userArticles
+    },
+    allArticles() {
+      return this.articles.filter(article => article.status != 'trash')
+    },
+    postedArticles() {
+      return this.articles.filter(article => article.status == 'posted')
+    },
+    draftArticles() {
+      return this.articles.filter(article => article.status == 'draft')
+    },
+    trashArticles() {
+      return this.articles.filter(article => article.status == 'trash')
+    }
+  },
+  created() {
+    const loader = this.$loading.show()
+    this.$store.dispatch('fetchUserArticles').then(() => {
+      loader.hide()
+    })
   },
   beforeRouteEnter(to, from, next) {
     if (localStorage.getItem('access_token')) {
