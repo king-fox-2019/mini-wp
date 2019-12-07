@@ -3,6 +3,7 @@
     <Navbar-Write
       @on-cancel="$router.push('/dashboard')"
       @on-save="saveArticle"
+      @on-post="postArticle"
     ></Navbar-Write>
 
     <div class="container-fluid" id="write-wrapper">
@@ -107,7 +108,6 @@ export default {
         .then(({ data }) => {
           let imageUrl = data.data.imageUrl // Get imageUrl from response
           this.images.push(imageUrl)
-          console.log(cursorLocation)
           Editor.insertEmbed(cursorLocation, 'image', imageUrl)
         })
         .catch(({ response }) => {
@@ -161,6 +161,44 @@ export default {
       this.saveArticle().then(() => {
         if (this.saveToLeave) this.$router.push('/dashboard')
       })
+    },
+    postArticle() {
+      const loader = this.$loading.show({
+        container: this.$refs.signUpContainer
+      })
+      const featuredImage = this.images[
+        Math.floor(Math.random() * this.images.length)
+      ]
+      return this.$store
+        .dispatch('onSaveArticle', {
+          id: this.id || undefined,
+          title: this.title,
+          content: this.content,
+          status: 'posted',
+          featuredImage
+        })
+        .then(() => {
+          this.initialTitle = this.title
+          this.initialContent = this.content
+          this.$toasted.show('Article posted')
+          this.$router.push('/dashboard')
+        })
+        .catch(({ response }) => {
+          const message = response.data.message
+          if (typeof message != 'string') {
+            response.data.message.forEach(msg => {
+              this.$toasted.show(msg, { className: 'bg-danger' })
+            })
+          } else {
+            this.$toasted.show(response.data.message, {
+              className: 'bg-danger'
+            })
+          }
+        })
+        .finally(() => {
+          this.$bvModal.hide('confirm-leave')
+          loader.hide()
+        })
     }
   },
   beforeRouteEnter(to, from, next) {
