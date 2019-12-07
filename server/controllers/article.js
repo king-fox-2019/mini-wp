@@ -3,27 +3,25 @@ const { Article } = require('../models');
 
 class ArticleController {
     static addArticle(req, res, next) {
-        console.log(req.token)
         let { title, content } = req.body
         let newArticle = {
             title,
             content,
-            userId: req.token.id
+            author: req.token.id
         }
         Article
             .create(newArticle)
             .then(data=> {
-                console.log(data)
                 res.status(201).json(data)
             })
-            .catch(err=> res.status(500).json({ message: "Internal server error" }))
+            .catch(next)
     }
     static showArticle(req, res, next) {
         Article
             .find()
             .sort({ createdAt: -1})
             .populate({
-                path: 'userId',
+                path: 'author',
                 select: '-email -password'
             })
             .then(articles=> {

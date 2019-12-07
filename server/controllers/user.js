@@ -1,7 +1,10 @@
 'use strict';
 const { User } = require('../models');
+const { OAuth2Client } = require('google-auth-library');
 const { hash, compare } = require('../helpers/bcryptjs');
 const jwt = require('../helpers/jsonwebtoken');
+
+const client = new OAuth2Client(process.env.CLIENT_ID)
 
 class UserController {
     static register(req, res, next) {
@@ -48,6 +51,11 @@ class UserController {
                 }
             })
             .catch(next)
+    }
+    static google(req, res, next) {
+        console.log('masuk?')
+        let token = req.body.idToken
+        console.log(token)
     }
 }
 

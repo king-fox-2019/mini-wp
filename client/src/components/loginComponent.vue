@@ -2,7 +2,6 @@
 <div class="container">
   <div class="row">
     <div class="col-xl"></div>
-    <!-- LOGIN FORM -->
     <div class="col-sm d-flex justify-content-center align-items-center" id="login">
         <div class="" id="wrapper">
             <form id="form" v-if="!isRegister">

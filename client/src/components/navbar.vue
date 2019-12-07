@@ -4,12 +4,12 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Site</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" @click.prevent="sentPageToDisplay('articleform')" href="#">Post an article</a>
-                    <a class="dropdown-item" href="#">My articles</a>
-                    <a class="dropdown-item" v-show="isLogged" href="#">Logout</a>
+                    <a class="dropdown-item" @click.prevent="sentPageToDisplay('post')" href="#">Post an article</a>
+                    <a class="dropdown-item" @click.prevent="sentPageToDisplay('myarticle')" href="#">My articles</a>
+                    <a class="dropdown-item" @click.prevent="logout" v-show="this.islogged" href="#">Logout</a>
                 </div>
             </li>
-            <a class="nav-link" href="#">Explore</a>
+            <a class="nav-link" @click.prevent="sentPageToDisplay('explore')" href="#">Explore</a>
         </ul>
     </div>
 </template>
@@ -18,16 +18,22 @@
 
     export default {
         name: 'navbar',
-        props: ['islogged'],
+        props: ["islogged"],
         data() {
             return {
-                isLogged: this.islogged
 
             };
         },
         methods: {
             sentPageToDisplay: function(value) {
-                this.$emit('pagecontrol', value)
+                if(value === 'explore') {
+                    this.$emit('pagecontrol', 'explore')
+                } else {
+                    this.$emit('pagecontrol', value)
+                }
+            },
+            logout: function(){
+                this.$emit('logoutapp')
             }
         },
         components: {

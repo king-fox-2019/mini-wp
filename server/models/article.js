@@ -7,7 +7,8 @@ const ArticleSchema = new Schema({
     title: String,
     content: String,
     createdAt: Date,
-    userId: { type: Schema.Types.ObjectId, ref: 'User' }
+    author: { type: Schema.Types.ObjectId, ref: 'User' },
+    featured_image: String
 });
 
 ArticleSchema.pre('save', function(next){
