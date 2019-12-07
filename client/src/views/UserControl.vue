@@ -1,7 +1,7 @@
 <template>
     <div>
-        <formsignin></formsignin>
-        <formsignup></formsignup>
+        <formsignin v-if="showLogin"></formsignin>
+        <formsignup v-if="showRegister"></formsignup>
     </div>
 </template>
 
@@ -14,6 +14,13 @@ export default {
     components:{
         formsignin,
         formsignup
+    },
+    props: ['showRegister', 'showLogin'],
+    data(){
+        return {
+        }
+    },
+    computed:{
     }
 }
 </script>

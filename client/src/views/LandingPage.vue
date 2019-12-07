@@ -2,7 +2,8 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-9 d-flex flex-column">
-                <featuredArticle></featuredArticle>
+                <featuredArticle v-if="!createArticle"></featuredArticle>
+                <detailArticle v-if="createArticle"></detailArticle>
             </div>
             <div class="col-3">
                 <bookmarkCard></bookmarkCard>
@@ -19,17 +20,19 @@ import featuredArticle from '../components/FeaturedArticle'
 import bookmarkCard from '../components/Bookmark'
 import tag from '../components/Tags'
 import job from '../components/Jobs'
+import detailArticle from '../components/DetailArticle'
 
 export default {
     components:{
         featuredArticle,
         bookmarkCard,
         tag,
-        job
+        job,
+        detailArticle
     },
     data(){
         return{
-
+            createArticle: false
         }
     }
 }

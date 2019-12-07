@@ -7,8 +7,7 @@ Vue.use(wysiwyg, {
     maxHeight: "500px",
     forcePlainTextOnPaste: true,
     image: {
-        uploadURL: "",
-        dropzoneOptions: {}
+        uploadURL: "http://localhost:3000/image/upload"
       }
     }
 );
