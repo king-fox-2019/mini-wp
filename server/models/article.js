@@ -14,7 +14,9 @@ const articleShema = new Schema({
     type: Date
   },
   status: {
-    type: String
+    type: String,
+    enum: ['pending', 'created'],
+    default: 'pending'
   },
   userId: {
     type: Schema.Types.ObjectId, ref: 'User'

@@ -26,12 +26,12 @@ class userController {
     User
       .findOne(value)
       .then(userData => {
-        console.log(userData)
         if (userData) {
           let valid = comparePassword(req.body.password, userData.password)
           if (valid) {
             let token = generateToken({ id: userData.id })
             let user = {
+              id: userData.id,
               username: userData.username,
               email: userData.email,
               token

@@ -4,10 +4,16 @@ const Article = require('../models/article')
 
 class articleController {
   static create(req, res, next) {
-    const { title, content } = req.body
+    const { title, content, status } = req.body
 
     Article
-      .create({ title, content, created_at: new Date() }) //belum ditambahkan userId
+      .create({
+        title,
+        content,
+        created_at: new Date(),
+        status,
+        userId: req.decoded._id
+      })
       .then(article => {
         res.status(201).json(article)
       })
@@ -17,7 +23,7 @@ class articleController {
   static read(req, res, next) {
     let keys = ['title', 'content']
     let value = {
-      // userId: req.decoded._id
+      userId: req.decoded._id
     }
 
     keys.forEach(element => {
@@ -36,15 +42,18 @@ class articleController {
 
   static update(req, res, next) {
     let id = req.params.id
-    let { title, content } = req.body
+    let { title, content, status } = req.body
+    console.log(req.body)
     let value = {
-      title: title || undefined, content
+      title: title || undefined,
+      content: content || undefined,
+      status: status || undefined
     }
 
     Article
       .findByIdAndUpdate(id, value, { new: true, omitUndefined: true })
       .then(article => {
-        res.status(200).json(todo)
+        res.status(200).json(article)
       })
       .catch(next)
   }
