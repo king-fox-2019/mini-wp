@@ -15,6 +15,9 @@ const articleShema = new Schema({
   },
   status: {
     type: String
+  },
+  userId: {
+    type: Schema.Types.ObjectId, ref: 'User'
   }
 })
 

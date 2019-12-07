@@ -2,7 +2,7 @@
 
 const express = require('express')
 const router = express.Router()
-const { article } = require('../controllers')
+const article = require('../controllers/articleController')
 
 router.post('/', article.create)
 router.get('/', article.read)
