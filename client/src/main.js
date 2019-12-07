@@ -17,7 +17,7 @@ Vue.use(Loading, {
 })
 Vue.use(Toasted, {
   position: 'bottom-center',
-  duration: 3000,
+  duration: 2000,
   className: 'bg-info text-dark font-weight-bold',
   containerClass: 'rounded'
 })

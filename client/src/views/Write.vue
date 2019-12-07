@@ -124,9 +124,7 @@ export default {
       const loader = this.$loading.show({
         container: this.$refs.signUpContainer
       })
-      const featuredImage = this.images[
-        Math.floor(Math.random() * this.images.length)
-      ]
+      const featuredImage = this.images[0]
       return this.$store
         .dispatch('onSaveArticle', {
           id: this.id || undefined,
@@ -166,9 +164,7 @@ export default {
       const loader = this.$loading.show({
         container: this.$refs.signUpContainer
       })
-      const featuredImage = this.images[
-        Math.floor(Math.random() * this.images.length)
-      ]
+      const featuredImage = this.images[0]
       return this.$store
         .dispatch('onSaveArticle', {
           id: this.id || undefined,
@@ -202,6 +198,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
+    window.scrollTo(0, 0)
     if (localStorage.getItem('access_token')) {
       checkSession()
         .then(() => {
@@ -223,12 +220,6 @@ export default {
       next()
     })
   }
-  // mounted() {
-  //   this.vwWidth = window.innerWidth
-  //   window.addEventListener('resize', () => {
-  //     this.vwWidth = window.innerWidth
-  //   })
-  // }
 }
 </script>
 
