@@ -9,11 +9,15 @@ const articleSchema = new Schema ({
         type: String
     }, 
     created_at: {
-        type: Date
-    },
-    updated_at: {
         type: Date,
         default: Date.now()
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }, 
+    featured_image: {
+        type: String
     }
 })
 
