@@ -60,8 +60,12 @@ export default new Vuex.Store({
     },
     onSaveArticle(context, payload) {
       const access_token = localStorage.getItem('access_token')
-
-      return server.post('articles', payload, { headers: { access_token } })
+      if (payload.id)
+        return server.put(`articles/${payload.id}`, payload, {
+          headers: { access_token }
+        })
+      else
+        return server.post('articles', payload, { headers: { access_token } })
     }
   },
   modules: {}

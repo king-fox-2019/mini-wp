@@ -167,11 +167,12 @@ Status 201: Created
 {
   "message": "Article created",
   "data": {
+    "status": "draft",
     "title": "Dummy Article",
+    "_id": "5deb719a2eb4affc85871058",
     "content": "Article's content",
     "featuredImage": "https://cdn.dummyimages.com/photo/dummy-photo.jpg",
-    "createdAt": "2019-12-01T06:10:11.674Z",
-    "status": "draft"
+    "createdAt": "2019-12-01T06:10:11.674Z"
   }
 }
 ```

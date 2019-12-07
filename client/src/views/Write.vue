@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Navbar-Write @on-cancel="$router.push('/dashboard')"></Navbar-Write>
+    <Navbar-Write
+      @on-cancel="$router.push('/dashboard')"
+      @on-save="saveArticle"
+    ></Navbar-Write>
 
     <div class="container-fluid" id="write-wrapper">
       <!-- <input type="text" v-model="title" class="text-input" /> -->
@@ -77,6 +80,7 @@ export default {
   },
   data() {
     return {
+      id: '',
       title: '',
       initialTitle: '',
       content: '',
@@ -125,14 +129,16 @@ export default {
       ]
       return this.$store
         .dispatch('onSaveArticle', {
+          id: this.id || undefined,
           title: this.title,
           content: this.content,
           featuredImage
         })
         .then(({ data }) => {
+          this.id = data.data._id
           this.initialTitle = this.title
           this.initialContent = this.content
-          this.$toasted.show(data.message)
+          this.$toasted.show('Article saved')
         })
         .catch(({ response }) => {
           const message = response.data.message

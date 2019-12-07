@@ -14,13 +14,7 @@ class ArticleController {
       .then(article => {
         res.status(201).json({
           message: 'Article created',
-          data: {
-            title,
-            content,
-            featuredImage,
-            createdAt: article.createdAt,
-            status: article.status
-          }
+          data: { ...article._doc, author: undefined, updatedAt: undefined }
         })
       })
       .catch(next)
@@ -61,10 +55,11 @@ class ArticleController {
 
   static editArticle(req, res, next) {
     const article = req.article
-    const { title, content, featuredImage } = req.body
+    const { title, content, featuredImage, status } = req.body
     article.title = title || article.title
     article.content = content || article.content
     article.featuredImage = featuredImage || article.featuredImage
+    article.status = status || article.status
     article
       .save()
       .then(article => {
