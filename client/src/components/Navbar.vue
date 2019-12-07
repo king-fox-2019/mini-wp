@@ -10,18 +10,32 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
+                Articles
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Published</a>
+                <a class="dropdown-item" href="#">Draft</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#">Create Article</a>
               </div>
             </li>
           </ul>
-          <button class="btn btn-outline-danger my-2 my-sm-0 mr-2" type="submit">Signin</button>
-          <button class="btn btn-danger my-2 my-sm-0" type="submit">Signout</button>
+          <div class="mx-2">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  User
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Profile</a>
+                  <a class="dropdown-item" href="#">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <button class="btn btn-primary my-2 my-sm-0 mr-2" type="submit">Signin</button>
+          <button class="btn btn-success my-2 my-sm-0 mr-2" type="submit">Signup</button>
+          <button class="btn btn-dark my-2 my-sm-0" type="submit">Signout</button>
         </div>
       </nav>
 </div>
