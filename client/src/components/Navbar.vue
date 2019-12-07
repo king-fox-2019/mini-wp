@@ -1,29 +1,29 @@
 <template>
 <div>
-  <b-navbar toggleable="lg" type="dark" variant="light">
-    <b-navbar-brand href="#" id="brand-title">Tech Press</b-navbar-brand>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" id="brand-title" href="#">Tech Press</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-    <b-collapse id="nav-collapse" is-nav>
-
-      <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown right>
-        <!-- Using 'button-content' slot -->
-        <template v-slot:button-content>
-        <em class="text-dark">User</em>
-        </template>
-        <b-dropdown-item href="#" type="dark">Profile</b-dropdown-item>
-        <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-    </b-nav-item-dropdown>
-        <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-        </b-nav-form>
-      </b-navbar-nav>
-    </b-collapse>
-  </b-navbar>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+          <button class="btn btn-outline-danger my-2 my-sm-0 mr-2" type="submit">Signin</button>
+          <button class="btn btn-danger my-2 my-sm-0" type="submit">Signout</button>
+        </div>
+      </nav>
 </div>
 </template>
 
@@ -33,5 +33,8 @@ export default {
 </script>
 
 <style scoped>
-
+.btn-danger:hover{
+  color: red;
+  background-color: white;
+}
 </style>

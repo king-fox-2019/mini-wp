@@ -1,20 +1,95 @@
 <template>
     <div>
-      <b-card border-variant="light" no-body class="overflow-hidden article-card" style="max-height: 200px;">
-        <b-row no-gutters>
-          <b-col md="6" style="max-width: 320px">
-            <b-card-img src="https://picsum.photos/400/400/?image=20" class="rounded-0"></b-card-img>
-          </b-col>
-          <b-col md="6">
-            <b-card-body title="Horizontal Card">
-              <b-card-text>
-                This is a wider card with supporting text as a natural lead-in to additional content.
-                This content is a little bit longer.
-              </b-card-text>
-            </b-card-body>
-          </b-col>
-        </b-row>
-      </b-card>
+      <!-- Card -->
+      <div class="card mb-3 article-card">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="" class="card-img" alt="">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <div>
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+              <div class="d-flex flex-column">
+                <div class="d-flex">
+                  <span><small>Avatar</small></span>
+                  <span class="mx-2">.</span>
+                  <span><small>Author</small></span>
+                  <span class="mx-2">.</span>
+                  <p class="card-text"><small class="text-muted">3 mins ago</small></p>
+                </div>
+                <div>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Card -->
+      <!-- Card -->
+      <div class="card mb-3 article-card">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="" class="card-img" alt="">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <div>
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="d-flex flex-column">
+                  <div class="d-flex">
+                    <span><small>Avatar</small></span>
+                    <span class="mx-2">.</span>
+                    <span><small>Author</small></span>
+                    <span class="mx-2">.</span>
+                    <p class="card-text"><small class="text-muted">3 mins ago</small></p>
+                  </div>
+                  <div>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+        <!-- Card -->
+        <div class="card mb-3 article-card">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="" class="card-img" alt="">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <div>
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="d-flex flex-column">
+                  <div class="d-flex">
+                    <span><small>Avatar</small></span>
+                    <span class="mx-2">.</span>
+                    <span><small>Author</small></span>
+                    <span class="mx-2">.</span>
+                    <p class="card-text"><small class="text-muted">3 mins ago</small></p>
+                  </div>
+                  <div>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
     </div> 
 </template>
 
@@ -28,6 +103,7 @@ export default {
 .article-card{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
+  border-top: 3px #B71C1C solid;
 }
 
 .article-card:hover{

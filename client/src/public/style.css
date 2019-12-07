@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
 
 #brand-title{
-    font-family: 'Pacifico', cursive;
+    font-family: 'Dancing Script', cursive;
     font-size: 36px;
-    color: #673AB7;
+    color: #B71C1C;
 }
