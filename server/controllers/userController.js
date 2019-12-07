@@ -4,11 +4,12 @@ const { comparePassword } = require("../helpers/bcrypt");
 
 class UserController {
   static signUp(req, res, next) {
-    const { name, email, password } = req.body;
+    const { name, email, password, image } = req.body;
     User.create({
       name,
       email,
-      password
+      password,
+      image
     })
       .then(response => {
         let payload = {
@@ -19,8 +20,7 @@ class UserController {
         let token = jwt.sign(payload, process.env.JWT_SECRET);
         res.status(201).json({
           token,
-          user: payload.name,
-          message: `Success SignUp, Welcome ${payload.name}`
+          response
         });
       })
       .catch(next);
@@ -58,8 +58,7 @@ class UserController {
               let token = jwt.sign(payload, process.env.JWT_SECRET);
               res.status(200).json({
                 token,
-                user: payload.name,
-                message: "Success SignIn"
+                response
               });
             }
           }

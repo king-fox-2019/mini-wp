@@ -6,9 +6,12 @@
 
 <script>
 export default {
-  name: "myarticles",
+  name: "MyArticles",
   data() {
     return {};
+  },
+  created() {
+    this.$router.push("/myarticles");
   }
 };
 </script>

@@ -130,8 +130,147 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
-  name: "allarticle"
+  name: "AllArticle"
 };
 exports.default = _default;
         var $90da8d = exports.default || module.exports;
@@ -146,18 +285,363 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "all-article" },
+    [
+      _c("h2", { staticClass: "subheading grey--text" }, [
+        _vm._v("ALL ARTICLE")
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-container",
+        [
+          _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "", "justify-center": "" } },
+            [
+              _c(
+                "v-flex",
+                { staticClass: "mx-5 my-5", attrs: { xs12: "", md3: "" } },
+                [
+                  _c(
+                    "v-card",
+                    { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+                    [
+                      _c(
+                        "v-img",
+                        {
+                          staticClass: "white--text align-end",
+                          attrs: {
+                            height: "200px",
+                            src:
+                              "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                          }
+                        },
+                        [
+                          _c("v-card-title", [
+                            _vm._v("Top 10 Australian beaches")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-card-subtitle", { staticClass: "pb-0" }, [
+                        _vm._v("Number 10")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-card-text", { staticClass: "text--primary" }, [
+                        _c("div", [_vm._v("Whitehaven Beach")]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v("Whitsunday Island, Whitsunday Islands")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c(
+                            "v-tooltip",
+                            {
+                              attrs: { bottom: "" },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "activator",
+                                  fn: function(ref) {
+                                    var on = ref.on
+                                    return [
+                                      _c(
+                                        "v-btn",
+                                        _vm._g(
+                                          {
+                                            attrs: { color: "orange", text: "" }
+                                          },
+                                          on
+                                        ),
+                                        [_vm._v("Share")]
+                                      )
+                                    ]
+                                  }
+                                }
+                              ])
+                            },
+                            [_vm._v(" "), _c("span", [_vm._v("want share")])]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Explore")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { staticClass: "mx-5 my-5", attrs: { xs12: "", md3: "" } },
+                [
+                  _c(
+                    "v-card",
+                    { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+                    [
+                      _c(
+                        "v-img",
+                        {
+                          staticClass: "white--text align-end",
+                          attrs: {
+                            height: "200px",
+                            src:
+                              "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                          }
+                        },
+                        [
+                          _c("v-card-title", [
+                            _vm._v("Top 10 Australian beaches")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-card-subtitle", { staticClass: "pb-0" }, [
+                        _vm._v("Number 10")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-card-text", { staticClass: "text--primary" }, [
+                        _c("div", [_vm._v("Whitehaven Beach")]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v("Whitsunday Island, Whitsunday Islands")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Share")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Explore")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { staticClass: "mx-5 my-5", attrs: { xs12: "", md3: "" } },
+                [
+                  _c(
+                    "v-card",
+                    { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+                    [
+                      _c(
+                        "v-img",
+                        {
+                          staticClass: "white--text align-end",
+                          attrs: {
+                            height: "200px",
+                            src:
+                              "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                          }
+                        },
+                        [
+                          _c("v-card-title", [
+                            _vm._v("Top 10 Australian beaches")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-card-subtitle", { staticClass: "pb-0" }, [
+                        _vm._v("Number 10")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-card-text", { staticClass: "text--primary" }, [
+                        _c("div", [_vm._v("Whitehaven Beach")]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v("Whitsunday Island, Whitsunday Islands")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Share")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Explore")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { staticClass: "mx-5 my-5", attrs: { xs12: "", md3: "" } },
+                [
+                  _c(
+                    "v-card",
+                    { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+                    [
+                      _c(
+                        "v-img",
+                        {
+                          staticClass: "white--text align-end",
+                          attrs: {
+                            height: "200px",
+                            src:
+                              "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                          }
+                        },
+                        [
+                          _c("v-card-title", [
+                            _vm._v("Top 10 Australian beaches")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-card-subtitle", { staticClass: "pb-0" }, [
+                        _vm._v("Number 10")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-card-text", { staticClass: "text--primary" }, [
+                        _c("div", [_vm._v("Whitehaven Beach")]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v("Whitsunday Island, Whitsunday Islands")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Share")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Explore")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { staticClass: "mx-5 my-5", attrs: { xs12: "", md3: "" } },
+                [
+                  _c(
+                    "v-card",
+                    { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+                    [
+                      _c(
+                        "v-img",
+                        {
+                          staticClass: "white--text align-end",
+                          attrs: {
+                            height: "200px",
+                            src:
+                              "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                          }
+                        },
+                        [
+                          _c("v-card-title", [
+                            _vm._v("Top 10 Australian beaches")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-card-subtitle", { staticClass: "pb-0" }, [
+                        _vm._v("Number 10")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-card-text", { staticClass: "text--primary" }, [
+                        _c("div", [_vm._v("Whitehaven Beach")]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v("Whitsunday Island, Whitsunday Islands")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Share")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            { attrs: { color: "orange", text: "" } },
+                            [_vm._v("Explore")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "all-article" }, [
-      _c("h1", [_vm._v("all article")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -209,12 +693,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 // @ is an alias to /src
 var _default = {
-  name: "dashboard",
+  name: "DashBoard",
   components: {
-    AllArticle: _AllArticle.default
+    "allarticle-item": _AllArticle.default
   },
   data: function data() {
     return {};
@@ -237,9 +720,7 @@ exports.default = _default;
     "div",
     { staticClass: "dashboard" },
     [
-      _c("h1", [_vm._v("homepage")]),
-      _vm._v(" "),
-      this.$route.path === "/" ? _c("AllArticle") : _vm._e(),
+      this.$route.path === "/" ? _c("allarticle-item") : _vm._e(),
       _vm._v(" "),
       _c("router-view")
     ],
@@ -303,7 +784,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33719" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46635" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

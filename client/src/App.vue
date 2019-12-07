@@ -1,20 +1,23 @@
 <template>
   <v-app class="grey lighten-4">
-    <Navbar></Navbar>
-    <v-content class="grey lighten-4">
+    <navbar-item></navbar-item>
+    <v-content class="grey lighten-4 mx-4 my-4">
       <router-view></router-view>
     </v-content>
-    <Footerz></Footerz>
+    <footer-item></footer-item>
   </v-app>
 </template>
 
 <script>
 import Navbar from "./components/Navbar.vue";
-import Footerz from "./components/Footer.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: "App",
-  components: { Navbar, Footerz },
+  components: {
+    "navbar-item": Navbar,
+    "footer-item": Footer
+  },
   data: () => ({
     //
   })

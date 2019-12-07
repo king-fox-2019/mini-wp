@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard">
-    <h1>homepage</h1>
-    <AllArticle v-if="this.$route.path === '/'"></AllArticle>
+    <allarticle-item v-if="this.$route.path === '/'"></allarticle-item>
     <router-view></router-view>
   </div>
 </template>
@@ -10,9 +9,9 @@
 // @ is an alias to /src
 import AllArticle from "../components/AllArticle.vue";
 export default {
-  name: "dashboard",
+  name: "DashBoard",
   components: {
-    AllArticle
+    "allarticle-item": AllArticle
   },
   data() {
     return {};

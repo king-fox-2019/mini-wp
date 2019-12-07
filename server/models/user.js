@@ -30,7 +30,11 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, "Please Input Your Password"],
-      minlength: [6, "Password Minimum 6 Characters"]
+      minlength: [7, "Password Minimum 7 Characters"]
+    },
+    image: {
+      type: String,
+      required: [true, "Please Input Your Image"]
     }
   },
   {

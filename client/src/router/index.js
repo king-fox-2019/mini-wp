@@ -7,28 +7,30 @@ console.log(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "dashboard",
+    name: "DashBoard",
     component: () =>
-      import(/* webpackChunkName: "dashboard" */ "../views/Dashboard.vue"),
+      import(/* webpackChunkName: "DashBoard" */ "../views/Dashboard.vue"),
     children: [
       {
         path: "myarticles",
-        name: "myarticles",
+        name: "MyArticles",
         component: () =>
           import(
-            /* webpackChunkName: "myarticles" */ "../components/MyArticles.vue"
+            /* webpackChunkName: "MyArticles" */ "../components/MyArticles.vue"
           )
       }
     ]
   },
   {
     path: "/addarticle",
-    name: "addarticle",
+    name: "AddArticle",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "addarticle" */ "../views/AddArticle.vue")
+      import(
+        /* webpackChunkName: "AddArticle" */ "../components/AddArticle.vue"
+      )
   }
 ];
 

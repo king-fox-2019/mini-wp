@@ -131,9 +131,12 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: "myarticles",
+  name: "MyArticles",
   data: function data() {
     return {};
+  },
+  created: function created() {
+    this.$router.push("/myarticles");
   }
 };
 exports.default = _default;
@@ -221,7 +224,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33719" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46635" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,28 +1,37 @@
 <template>
   <nav>
+    <v-snackbar
+      v-model="snackbarSuccess.snackbar"
+      :timeout="snackbarSuccess.timeout"
+      :color="snackbarSuccess.color"
+      top
+    >
+      {{ snackbarSuccess.text }}
+      <v-btn color="black" text @click="snackbarSuccess.snackbar = false">Close</v-btn>
+    </v-snackbar>
     <v-app-bar color="grey lighten-4">
-      <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon v-if="isLogin" class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase blue-grey--text">
         <span class="font-weight-light">Article</span>
         <span>Sharing</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <formsign-item v-if="!isLogin" @snackbar-success="notify" @user-signin="infoUser"></formsign-item>
 
-      <v-btn v-else depressed color="grey lighten-4">
+      <v-btn v-else @click="onSignOut" depressed color="grey lighten-4">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app temporary id="drawer-menu">
-      <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>Edwin Satya Yudistira</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+      <v-layout column align-center>
+        <v-flex class="mt-5" d-flex flex-column justify-center>
+          <v-avatar size="100">
+            <v-img :src="image"></v-img>
+          </v-avatar>
+          <p class="white--text subheading mt-5">{{ user }}</p>
+        </v-flex>
+      </v-layout>
 
       <v-divider></v-divider>
 
@@ -33,11 +42,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">
-              {{
-              link.text
-              }}
-            </v-list-item-title>
+            <v-list-item-title class="white--text">{{ link.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -46,23 +51,69 @@
 </template>
 
 <script>
-import FormLogin from "../components/FormLogin.vue";
+import FormSign from "../components/FormSign.vue";
 
 export default {
-  name: "navbar",
+  name: "Navbar",
   components: {
-    FormLogin
+    "formsign-item": FormSign
   },
   data() {
     return {
+      user: "",
+      image: "",
       isLogin: false,
       drawer: false,
       links: [
-        { icon: "add", text: "Add Article", route: "/addarticle" },
+        { icon: "add", text: "Add Article", route: "addarticle" },
         { icon: "dashboard", text: "Dashboard", route: "/" },
-        { icon: "folder", text: "My Articles", route: "/myarticles" }
-      ]
+        { icon: "folder", text: "My Articles", route: "myarticles" }
+      ],
+      snackbarSuccess: {
+        snackbar: false,
+        text: "",
+        timeout: 5000,
+        color: ""
+      }
     };
+  },
+  methods: {
+    notify(val) {
+      this.snackbarSuccess.text = val.text;
+      this.snackbarSuccess.color = val.color;
+      this.snackbarSuccess.snackbar = true;
+      this.isLogin = val.isLogin;
+    },
+    infoUser(val) {
+      if (val === undefined) {
+        this.user = localStorage.getItem("user");
+        this.image = localStorage.getItem("image");
+      } else {
+        this.user = val.name;
+        this.image = val.image;
+      }
+    },
+    onSignOut() {
+      localStorage.removeItem("token");
+      this.snackbarSuccess.text = `Thank's For Sharing, ${localStorage.getItem(
+        "user"
+      )}`;
+      this.snackbarSuccess.color = "primary";
+      this.snackbarSuccess.snackbar = true;
+      this.isLogin = false;
+      this.$router.push("/");
+      localStorage.removeItem("user");
+      localStorage.removeItem("image");
+      //notif
+    }
+  },
+  created() {
+    if (localStorage.getItem("token")) {
+      this.isLogin = true;
+      this.infoUser();
+    } else {
+      this.isLogin = false;
+    }
   }
 };
 </script>
