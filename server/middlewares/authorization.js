@@ -1,26 +1,27 @@
-const { decodeToken } = require('../helpers/jwt')
-const Todo = require('../models/Todo')
+const Article = require('../models/article')
+// const {decodeToken} = require('../helpers/jwt')
+const mongoose = require('mongoose')
 
-function checkOwner(req, res, next) {
+
+function authorization(req, res, next) {
 
     try {
-        Todo.findOne({
+        Article.findOne({
             _id: req.params.id
         })
-            .then(todo => {
-                if (!todo) {
+            .then(article => {
+                if (!article) {
                     throw ({
-                        name: 'Empty',
-                        message: 'Todo already deleted'
+                        status: 404,
+                        message: 'Article already deleted'
                     })
                 } else {
-                    const { id } = decodeToken(req.headers.access_token)
-                    if (todo.owner == id) {
+                    if (article.author.equals(req.decodedID)) {
                         next()
                     } else {
                         throw ({
-                            name: 'unauthorizedUser',
-                            message: 'You are not an authorized owner.'
+                            status: 401,
+                            message: 'You are not an authorized author.'
                         })
                     }
                 }
@@ -33,4 +34,4 @@ function checkOwner(req, res, next) {
 
 }
 
-module.exports = { checkOwner }
+module.exports = authorization

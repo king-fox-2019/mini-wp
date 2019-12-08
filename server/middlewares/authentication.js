@@ -1,17 +1,16 @@
 const { decodeToken } = require('../helpers/jwt')
-const User = require('../models/User')
+const Author = require('../models/author')
 
 const authentication = (req, res, next) => {
     try {
-        const user = decodeToken(req.headers.access_token)
-        User.findOne({
-            email: user.email
-        })
-            .then(user => {
-                if (user) {
-                    req.decodedID = user._id
-                    next()}
-                else throw new Error({ status: 401, message: 'Authentication Failed' })
+        const author = decodeToken(req.headers.access_token)
+        Author.findById(author.id)
+            .then(dataAuthor => {
+                if (dataAuthor) {
+                    req.decodedID = dataAuthor._id
+                    next()
+                }
+                else throw ({ status: 401, message: 'Authentication Failed' })
             })
             .catch(next)
     }

@@ -5,7 +5,17 @@ class ArticleCtrl {
     static getArticle(req, res, next) {
         
         Article.find()
-        .sort({created_at:'desc'})
+            .sort({created_at:'desc'})
+            .then(article => {
+                res.status(200).json(article)
+            })
+            .catch(next)
+    }
+
+    static getArticleByAuthor(req, res, next) {
+
+        Article.find({ author:req.params.authorID })
+            .sort({created_at:'desc'})
             .then(article => {
                 res.status(200).json(article)
             })
@@ -23,11 +33,13 @@ class ArticleCtrl {
     static createArticle(req, res, next) {
         console.log('fired')
         const {title, content, created_at} = req.body
+        const author = req.decodedID
         
         Article.create({
             title,
             content,
-            created_at
+            created_at,
+            author
         })
             .then(todo => {
                 res.status(201).json(todo)

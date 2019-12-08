@@ -4,7 +4,15 @@ const {hash} = require('../helpers/bcrypt')
 const authorSchema = new Schema ({
     username: {
         type: String,
-        required: [true, 'Please input your Username']
+        required: [true, 'Please input your Username'],
+        validate: {
+            validator: function (value) {
+                return Author.findOne({ username: value })
+                    .then(author => {
+                        if (author) return false
+                    })
+            }, message: props => `Username already registered`
+        }
     },
     email: {
         type: String,
