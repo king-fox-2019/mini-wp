@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5">
-    <div class="row">
+    <div class="row" v-if="!edit">
       <div class="col-sm mb-3" v-for="article in data" :key="article.id">
         <div class="card" style="width: 18rem;">
           <img
@@ -18,6 +18,7 @@
               @click="sentToModal(article)"
               data-target="#exampleModalScrollable"
             >READ</a>
+            <a href="#" class="btn btn-primary" @click="articleEdit(article)">EDIT</a>
             <a href="#" class="btn btn-primary" @click="destroy(article)">DELETE</a>
           </div>
         </div>
@@ -48,26 +49,44 @@
         </div>
       </div>
     </div>
+    <edit :article="articleData" @isEdit='show' v-else></edit>
   </div>
 </template>
 
 <script>
 import axios from "../../api/server";
+import edit from "./editComponent";
 
 export default {
   name: "detail",
-  props: ["data"],
+  props: {
+    data: {
+      type: Array
+    }
+  },
 
   data() {
     return {
-      viewMore: false,
+      edit: false,
       title: "",
       content: "",
       author: "",
-      createdAt: ""
+      createdAt: "",
+      articleData: {}
     };
   },
   methods: {
+      show: function() {
+          if(!this.edit) {
+              this.edit = true
+          } else {
+              this.edit = false
+          }
+      },
+    articleEdit: function(article) {
+      this.articleData = article;
+      this.edit = true;
+    },
     authorArticle: function() {
       axios
         .get("/article/myarticle")
@@ -109,6 +128,9 @@ export default {
           });
         });
     }
+  },
+  components: {
+      edit
   }
 };
 </script>

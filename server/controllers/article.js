@@ -58,20 +58,17 @@ class ArticleController {
                 res.status(200).json(articles)
             })
             .catch(err=> {
-                console.log(err)
+                console.lfilter, updateog(err);
             })
     }
     static edit(req, res, next) {
-        let filter = { _id: req.body.id }
-        let update = { title: req.body.title, content: req.body.content }
         Article 
-            .findByIdAndUpdate(filter, update)
+            .updateOne({_id: req.body.id}, { $set: { title: req.body.title, content: req.body.content } })
             .then(result => {
+                console.log(result)
                 res.status(200).json({ message: 'OK!' })
             })
-            .catch(err => {
-                console.log(err)
-            })            
+            .catch(next)            
     }
 
 }

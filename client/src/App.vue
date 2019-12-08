@@ -38,6 +38,7 @@ export default {
         .get("/article/myarticle")
         .then(({ data }) => {
           this.myArticle = data;
+          console.log(data);
         })
         .catch(err => {
           let fields = err.response.data.join(" | ");

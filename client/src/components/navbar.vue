@@ -38,11 +38,7 @@ export default {
   },
   methods: {
     sentPageToDisplay: function(value) {
-      if (value === "explore") {
-        this.$emit("pagecontrol", "explore");
-      } else {
-        this.$emit("pagecontrol", value);
-      }
+      this.$emit("pagecontrol", value);
     },
     logout: function() {
       this.$emit("logoutapp");
