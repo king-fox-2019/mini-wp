@@ -1,27 +1,32 @@
 <template>
   <div class="all-article">
-    <h2 class="subheading grey--text">ALL ARTICLE</h2>
-
     <v-container>
+      <v-layout class="ml-auto">
+        <v-btn @click="searchingArticle" class="ml-auto mr-2" icon>
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+        <input
+          type="text"
+          style="border: 2px solid grey;"
+          placeholder="search"
+          v-model="inputSearch"
+        />
+      </v-layout>
       <v-layout row wrap justify-center>
-        <v-flex xs12 md3 class="mx-5 my-5">
+        <v-flex v-for="article in articles" :key="article._id" xs12 md3 class="mx-5 my-5">
           <v-card class="mx-auto" max-width="400">
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
+            <v-img class="white--text align-end" height="200px" :src="article.image">
+              <v-card-title class="text-uppercase">{{ article.title }}</v-card-title>
             </v-img>
 
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+            <v-card-subtitle class="pb-0">{{ }}</v-card-subtitle>
 
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
+            <v-card-text v-html="article.content" class="text--primary"></v-card-text>
+            <v-card-text
+              class="font-italic font-weight-light text--primary"
+            >Genre: {{ article.tag }}</v-card-text>
+            <v-card-text class="font-weight-thin display-1 red--text">{{ article.createdAt }}</v-card-text>
+            <v-card-text class="font-weight-bold grey--text">By: {{ article.author }}</v-card-text>
             <v-card-actions>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -34,110 +39,6 @@
             </v-card-actions>
           </v-card>
         </v-flex>
-
-        <v-flex xs12 md3 class="mx-5 my-5">
-          <v-card class="mx-auto" max-width="400">
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
-            </v-img>
-
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn color="orange" text>Share</v-btn>
-
-              <v-btn color="orange" text>Explore</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-
-        <v-flex xs12 md3 class="mx-5 my-5">
-          <v-card class="mx-auto" max-width="400">
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
-            </v-img>
-
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn color="orange" text>Share</v-btn>
-
-              <v-btn color="orange" text>Explore</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-
-        <v-flex xs12 md3 class="mx-5 my-5">
-          <v-card class="mx-auto" max-width="400">
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
-            </v-img>
-
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn color="orange" text>Share</v-btn>
-
-              <v-btn color="orange" text>Explore</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-
-        <v-flex xs12 md3 class="mx-5 my-5">
-          <v-card class="mx-auto" max-width="400">
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
-            </v-img>
-
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn color="orange" text>Share</v-btn>
-
-              <v-btn color="orange" text>Explore</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
       </v-layout>
     </v-container>
   </div>
@@ -145,7 +46,34 @@
 
 <script>
 export default {
-  name: "AllArticle"
+  name: "AllArticle",
+  props: {
+    articles: {
+      type: Array
+    }
+  },
+  data() {
+    return {
+      inputSearch: ""
+    };
+  },
+  methods: {
+    fetchAllArticle() {
+      this.$emit("fetch-articles");
+    },
+    searchingArticle() {
+      if (this.inputSearch === "") {
+        this.$emit("fetch-articles");
+        this.inputSearch = "";
+      } else {
+        this.$emit("searching-article", this.inputSearch);
+        this.inputSearch = "";
+      }
+    }
+  },
+  created() {
+    this.fetchAllArticle();
+  }
 };
 </script>
 

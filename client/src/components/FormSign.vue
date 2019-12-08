@@ -9,7 +9,7 @@
       </template>
 
       <v-card class="elevation-12">
-        <v-toolbar color="primary" dark flat>
+        <v-toolbar color="pink lighten-2" dark flat>
           <v-toolbar-title>SignIn Form</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
@@ -32,18 +32,23 @@
               type="password"
             ></v-text-field>
 
-            <v-btn color="primary" class="mr-4" type="submit">SignIn</v-btn>
+            <v-btn color="pink lighten-1" class="mr-4" type="submit">SignIn</v-btn>
 
             <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
 
             <!-- sign up form -->
             <v-dialog v-model="dialog2" width="400">
               <template v-slot:activator="{ on }">
-                <v-btn color="pink lighten-1" @click="goSignUpForm" v-on="on">SignUp</v-btn>
+                <v-btn
+                  color="teal darken-5"
+                  class="white--text"
+                  @click="goSignUpForm"
+                  v-on="on"
+                >SignUp</v-btn>
               </template>
               <!-- <v-btn color="warning" @click="onSignUp">SignUp</v-btn> -->
               <v-card class="elevation-12">
-                <v-toolbar color="pink lighten-1" dark flat>
+                <v-toolbar color="teal lighten-2" dark flat>
                   <v-toolbar-title>SignUp Form</v-toolbar-title>
                 </v-toolbar>
                 <v-card-text>
@@ -86,11 +91,11 @@
                       label="Your Photo Profile"
                     ></v-file-input>
 
-                    <v-btn color="primary" class="mr-4" @click="backToSignIn">Back</v-btn>
+                    <v-btn color="pink lighten-1" class="mr-4" @click="backToSignIn">Back</v-btn>
 
                     <v-btn color="error" class="mr-4" @click="resetSignUp">Reset Form</v-btn>
 
-                    <v-btn color="pink lighten-1" type="submit">SignUp</v-btn>
+                    <v-btn color="teal darken-5" class="white--text" type="submit">SignUp</v-btn>
                   </v-form>
                 </v-card-text>
               </v-card>
@@ -146,6 +151,7 @@ export default {
     onSignIn() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
+
         this.axios({
           method: "POST",
           url: "/users/signin",
@@ -194,6 +200,7 @@ export default {
     onSignUp() {
       if (this.$refs.form2.validate()) {
         this.snackbar = true;
+
         let fd = new FormData();
         if (this.signUp.image === undefined) {
           fd.append("image", "zonk");
@@ -203,6 +210,7 @@ export default {
         fd.append("name", this.signUp.name);
         fd.append("email", this.signUp.email);
         fd.append("password", this.signUp.password);
+
         this.axios({
           method: "POST",
           url: "/users/signup",

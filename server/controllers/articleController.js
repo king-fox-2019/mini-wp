@@ -8,7 +8,7 @@ class ArticleController {
       content,
       image,
       tag,
-      author: req.decoded.id
+      author: req.decoded.name
     })
       .then(response => {
         res.status(201).json({
@@ -22,22 +22,18 @@ class ArticleController {
   static readAll(req, res, next) {
     Article.find()
       .then(response => {
-        res.status(200).json({
-          response
-        });
+        res.status(200).json(response);
       })
       .catch(next);
   }
 
   static readMyArticle(req, res, next) {
-    const id = req.decoded.id;
+    const name = req.decoded.name;
     Article.find({
-      author: id
+      author: name
     })
       .then(response => {
-        res.status(200).json({
-          response
-        });
+        res.status(200).json(response);
       })
       .catch(next);
   }

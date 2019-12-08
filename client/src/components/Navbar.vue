@@ -9,13 +9,19 @@
       {{ snackbarSuccess.text }}
       <v-btn color="black" text @click="snackbarSuccess.snackbar = false">Close</v-btn>
     </v-snackbar>
-    <v-app-bar collapse-on-scroll="true" elevate-on-scroll="true" color="grey lighten-4">
+    <v-app-bar
+      :collapse-on-scroll="collapseOnScroll"
+      :elevate-on-scroll="elevateOnScroll"
+      color="grey lighten-4"
+    >
       <v-app-bar-nav-icon v-if="isLogin" class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase">
         <span class="font-weight-light">Article</span>
         <span color="pink lighten-1">Sharing</span>
       </v-toolbar-title>
+
       <v-spacer></v-spacer>
+
       <GoogleLogin
         v-if="!isLogin"
         :params="params"
@@ -27,25 +33,36 @@
       <!-- <div v-if="!isLogin" id="google-signin-button" class="g-signin2"></div> -->
       <formsign-item v-if="!isLogin" @snackbar-success="notify" @user-signin="infoUser"></formsign-item>
 
-      <v-btn v-else @click="onSignOut" depressed color="grey lighten-4">
+      <v-btn v-else @click="onSignOut" depressed color="grey lighten-4" class="ml-auto">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app temporary id="drawer-menu">
-      <v-layout column align-center>
-        <v-flex class="mt-5" d-flex flex-column justify-center>
-          <v-avatar size="100">
-            <v-img :src="image"></v-img>
-          </v-avatar>
-          <p class="white--text subheading mt-5">{{ user }}</p>
-        </v-flex>
-      </v-layout>
+      <v-img
+        :aspect-ratio="16/9"
+        src="https://i0.wp.com/wallur.com/wp-content/uploads/2016/12/yugioh-background-9.jpg?resize=1136%2C640"
+      >
+        <v-layout column align-center>
+          <v-flex class="mt-5" d-flex flex-column justify-center>
+            <v-avatar size="100">
+              <v-img :src="image"></v-img>
+            </v-avatar>
+            <p class="white--text subheading mt-5">
+              <strong class="text-uppercase font-italic font-weight-bold title">{{ user }}</strong>
+            </p>
+          </v-flex>
+        </v-layout>
+      </v-img>
 
       <v-divider></v-divider>
 
       <v-list dense id="drawer-menu">
-        <addarticle-item></addarticle-item>
+        <addarticle-item
+          @success-create="successCreate"
+          @error-create="errorCreate"
+          @close-create-article="drawer = false"
+        ></addarticle-item>
         <v-list-item v-for="link in links" :key="link.title" :to="link.route">
           <v-list-item-icon>
             <v-icon class="white--text">{{ link.icon }}</v-icon>
@@ -78,6 +95,8 @@ export default {
   },
   data() {
     return {
+      elevateOnScroll: true,
+      collapseOnScroll: true,
       params: {
         client_id:
           "524874456233-anj0lnllh0m9dkh18nf6k36enc3qf1mt.apps.googleusercontent.com"
@@ -106,6 +125,14 @@ export default {
     };
   },
   methods: {
+    successCreate(payload) {
+      this.drawer = false;
+      this.$emit("success-create", payload);
+    },
+    errorCreate(payload) {
+      this.drawer = false;
+      this.$emit("error-create", payload);
+    },
     notify(val) {
       // console.log("masuk notif");
       this.snackbarSuccess.text = val.text;
@@ -199,6 +226,7 @@ export default {
             this.snackbarSuccess.color = "primary";
             this.snackbarSuccess.snackbar = true;
             this.isLogin = false;
+            this.$router.push("/");
             localStorage.removeItem("user");
             localStorage.removeItem("image");
           })
@@ -241,16 +269,16 @@ export default {
 
 <style scoped>
 #drawer-menu {
-  background: #cb2d3e; /* fallback for old browsers */
+  background: #1488cc; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #ef473a,
-    #cb2d3e
+    #2b32b2,
+    #1488cc
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #ef473a,
-    #cb2d3e
+    #2b32b2,
+    #1488cc
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>

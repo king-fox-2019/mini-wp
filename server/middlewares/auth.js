@@ -35,9 +35,9 @@ function authorization(req, res, next) {
 }
 
 function authorizationMyArticle(req, res, next) {
-  let id = req.decoded.id;
+  let name = req.decoded.name;
   Article.find({
-    author: id
+    author: name
   })
     .then(response => {
       if (response.length === 0) {
