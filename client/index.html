@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Quil -->
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+    <!-- Font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* * {
+      border: 1px solid blueviolet;
+    } */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container d-flex justify-content-center" v-show="!loggedIn">
+        <form class="form-signin text-center" id="login-form" v-show="!register && !loggedIn" v-on:submit.prevent="submitLogin">
+          <img
+            class="mb-4"
+            src="https://image.flaticon.com/icons/svg/2/2041.svg"
+            alt=""
+            width="72"
+            height="72"
+          />
+          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+          <div class="form-group">
+            <label for="loginEmail" class="sr-only">Email address</label>
+            <input
+              v-model="emailLogin"
+              type="email"
+              id="loginEmail"
+              class="form-control"
+              placeholder="Email address"
+              required
+              autofocus
+            />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword" class="sr-only">Password</label>
+            <input
+              v-model="passwordLogin"
+              type="password"
+              id="loginPassword"
+              class="form-control"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button class="btn btn-primary" type="submit">Sign in</button>
+          <p>don't have an account? <a @click.prevent="register = !register" href="#">Sign up</a></p>
+        </form>
+        <form class="form-signin text-center" id="register-form" v-show="register && !loggedIn" v-on:submit.prevent="submitRegister">
+          <img
+            class="mb-4"
+            src="https://image.flaticon.com/icons/svg/2/2041.svg"
+            alt=""
+            width="72"
+            height="72"
+          />
+          <h1 class="h3 mb-3 font-weight-normal">Sign Up!</h1>
+          <div class="form-group">
+            <label for="registerEmail" class="sr-only">Email address</label>
+            <input
+              v-model="emailRegister"
+              type="email"
+              id="registerEmail"
+              class="form-control"
+              placeholder="Email address"
+              required
+              autofocus
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerName" class="sr-only">Full Name</label>
+            <input
+              v-model="nameRegister"
+              type="text"
+              id="registerName"
+              class="form-control"
+              placeholder="Your name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword" class="sr-only">Password</label>
+            <input
+              v-model="passwordRegister"
+              type="password"
+              id="registerPassword"
+              class="form-control"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button class="btn btn-primary" type="submit">Register</button>
+          <p>already have an account? <a href="#" @click.prevent="register = !register">Sign in</a></p>
+        </form>
+      </div>
+      <div v-show="loggedIn">
+        <header class="fixed-top">
+          <nav
+            class="navbar navbar-expand navbar-light bg-light justify-content-between align-items-center"
+          >
+            <a class="navbar-brand" href="#">
+              <img
+                src="https://image.flaticon.com/icons/svg/2/2041.svg"
+                width="30"
+                height="30"
+                class="d-inline-block align-top"
+                alt=""
+              />
+              Mini WP
+            </a>
+            <div class="nav navbar-nav custom-navbar align-items-center">
+              <a class="nav-item nav-link" href="#"
+                ><button class="btn btn-sm btn-outline-primary">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Add article
+                </button></a
+              >
+              <a class="nav-item nav-link active" href="#"
+                >Profile <span class="sr-only">(current)</span></a
+              >
+              <a class="nav-item nav-link" href="#"
+                ><button class="btn btn-sm btn-outline-danger" v-on:click="logout">
+                  <i class="fa fa-sign-out"></i> Log out
+                </button></a
+              >
+            </div>
+          </nav>
+        </header>
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="col-md-3 sidebar bg-light d-none d-md-block">
+              <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a
+                      id="dashboard-sidebar"
+                      href="#"
+                      @click.prevent="changeDashboard"
+                      class="nav-link"
+                      ><i class="fa fa-home" aria-hidden="true"></i> Dashboard
+                    </a>
+                  </li>
+                  <!-- jquery dropdown -->
+                  <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Post</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                      <a class="dropdown-item" id="add-article-dropdown" href="#">Add Article</a>
+                      <a class="dropdown-item" id="list-article-dropdown" href="#">List Article</a>
+                    </div>
+                  </li> -->
+                  <li class="nav-item">
+                    <a
+                      id="dashboard-sidebar"
+                      v-on:click.prevent="showSubMenu = !showSubMenu"
+                      href="#"
+                      class="nav-link"
+                      ><i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                      Post</a
+                    >
+                    <div class="sub-menu" v-if="showSubMenu">
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            id="add-article-dropdown"
+                            v-on:click.prevent="changeAddPost"
+                            href="#"
+                            >Add Article</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            id="list-article-dropdown"
+                            v-on:click.prevent="changeListPost"
+                            href="#"
+                            >List Article</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <main class="col-md-9 ml-md-auto">
+              <section id="dashboard-main" v-show="showDasboard">
+                <h1>Dashboard</h1>
+              </section>
+              <section id="list-post-main" v-show="showListPost">
+                <h1>List Article</h1>
+                <hr class="main-hr" />
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Date posted</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="article in articles" :key="article.id">
+                      <th scope="row">{{ article.id }}</th>
+                      <td>{{ article.title }}</td>
+                      <td>{{ article.created_at }}</td>
+                      <td>view | delete</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <section id="add-post-main" v-show="showAddPost">
+                <h1>Add Article</h1>
+                <hr class="main-hr" />
+                <form id="add-post-form" v-on:submit.prevent="onSubmit">
+                  <div class="form-group">
+                    <label for="post-title">Post Title: </label>
+                    <input v-model="title" type="text" id="post-title" />
+                  </div>
+                  <div class="form-group">
+                    <div id="editor-container" placeholder="your article content">
+                    </div>
+                  </div>
+                  <div class="form-group justify-content-end d-flex">
+                    <input
+                      type="submit"
+                      class="btn btn-primary"
+                      value="Post Article"
+                    />
+                  </div>
+                </form>
+                <!-- <div class="container">
+                  <h1>Preview: </h1>
+                  <h2 class="text-center">{{ title }}</h2>
+                  <div id="preview">
+                    
+                  </div>
+                </div> -->
+              </section>
+            </main>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="text-right mr-3">
+            <span>Amil Hasbala | 2019</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script> -->
+
+    <!-- quill -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <!-- Belajar vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/vue.js"></script>
+  </body>
+</html>

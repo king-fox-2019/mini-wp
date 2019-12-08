@@ -1,0 +1,30 @@
+.sidebar {
+  position: fixed;
+  padding-top: 65px;
+}
+.sidebar-sticky {
+  height: 100vh;
+}
+main {
+  min-height: calc(100vh - 28px);
+  padding-top: 70px;
+}
+.main-hr {
+  border: 1px solid lightskyblue;
+  width: 50%;
+  margin-left: 0;
+}
+
+.sub-menu{
+  margin-left: 20px;
+}
+
+#login-form,
+      #register-form {
+        max-width: 25rem;
+        min-width: 20rem;
+      }
+    form p {
+      padding-top: 10px;
+      font-size: smaller;
+    }
