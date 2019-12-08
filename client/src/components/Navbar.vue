@@ -13,7 +13,10 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto" v-if="onSession">
-        <b-nav-item-dropdown text="Alif Taufik" right>
+        <b-nav-item-dropdown
+          :text="user ? user.fullName || user.email : ''"
+          right
+        >
           <b-dropdown-item to="profile" active-class="active"
             >Profile</b-dropdown-item
           >
@@ -40,6 +43,9 @@ export default {
   computed: {
     onSession() {
       return this.$store.state.onSession
+    },
+    user() {
+      return this.$store.state.user
     }
   },
   methods: {

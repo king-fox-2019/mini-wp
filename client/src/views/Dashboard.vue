@@ -44,22 +44,21 @@ export default {
     }
   },
   created() {
-    const loader = this.$loading.show()
-    this.$store.dispatch('fetchUserArticles').then(() => {
-      loader.hide()
-    })
-  },
-  beforeRouteEnter(to, from, next) {
     if (localStorage.getItem('access_token')) {
+      const loader = this.$loading.show()
       checkSession()
-        .then(() => {
-          next()
+        .then(({ data }) => {
+          this.$store.commit('CHANGE_USER', data.data)
+          this.$store.commit('CHANGE_SESSION', true)
+          return this.$store.dispatch('fetchUserArticles')
         })
         .catch(() => {
           localStorage.clear()
-          next('/')
+          this.$store.commit('CHANGE_SESSION', false)
+          this.$router.replace('/')
         })
-    } else next('/')
+        .finally(() => loader.hide())
+    } else this.$router.replace('/')
   }
 }
 </script>

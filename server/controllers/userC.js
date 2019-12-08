@@ -58,6 +58,7 @@ class UserController {
   static checkSession(req, res, next) {
     res.status(200).json({
       data: {
+        _id: req.user._id,
         username: req.user.username,
         email: req.user.email,
         fullName: req.user.fullName

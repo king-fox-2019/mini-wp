@@ -7,7 +7,7 @@
 
 <script>
 import Navbar from '@/components/Navbar'
-import checkSession from '@/utils/checkSession.js'
+// import checkSession from '@/utils/checkSession.js'
 
 export default {
   components: {
@@ -15,12 +15,12 @@ export default {
   },
   data() {
     return {}
-  },
-  created() {
-    checkSession()
-      .then(() => this.$store.commit('CHANGE_SESSION', true))
-      .catch(() => this.$store.commit('CHANGE_SESSION', false))
   }
+  // created() {
+  //   checkSession()
+  //     .then(() =>
+  //     .catch(() => this.$store.commit('CHANGE_SESSION', false))
+  // }
   // beforeRouteUpdate(to, from, next) {
   //   if (localStorage.getItem('access_token')) {
   //     checkSession()

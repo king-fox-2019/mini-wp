@@ -197,18 +197,21 @@ export default {
         })
     }
   },
-  beforeRouteEnter(to, from, next) {
-    window.scrollTo(0, 0)
+  created() {
     if (localStorage.getItem('access_token')) {
+      const loader = this.$loading.show()
       checkSession()
-        .then(() => {
-          next()
+        .then(({ data }) => {
+          this.$store.commit('CHANGE_USER', data.data)
+          this.$store.commit('CHANGE_SESSION', true)
         })
         .catch(() => {
           localStorage.clear()
-          next('/')
+          this.$store.commit('CHANGE_SESSION', false)
+          this.$router.replace('/')
         })
-    } else next('/')
+        .finally(() => loader.hide())
+    } else this.$router.replace('/dashboard')
   },
   beforeRouteLeave(to, from, next) {
     if (this.saveToLeave) return next()

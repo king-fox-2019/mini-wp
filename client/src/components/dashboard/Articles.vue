@@ -52,9 +52,7 @@ export default {
     }
   },
   data() {
-    return {
-      vwWidth: 0
-    }
+    return {}
   },
   methods: {
     formatContent(content) {
@@ -78,12 +76,6 @@ export default {
     readArticle(article) {
       this.$router.push(`/read/${article._id}`)
     }
-  },
-  mounted() {
-    this.vwWidth = window.innerWidth
-    window.addEventListener('resize', () => {
-      this.vwWidth = window.innerWidth
-    })
   }
 }
 </script>

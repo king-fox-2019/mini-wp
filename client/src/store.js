@@ -8,11 +8,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     onSession: false,
+    user: null,
     userArticles: []
   },
   mutations: {
     CHANGE_SESSION(state, session) {
       state.onSession = session
+    },
+    CHANGE_USER(state, user) {
+      state.user = user
     },
     CHANGE_USER_ARTICLES(state, articles) {
       state.userArticles = articles

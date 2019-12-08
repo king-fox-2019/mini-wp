@@ -193,17 +193,21 @@ export default {
       }
     }
   },
-  beforeRouteEnter(to, from, next) {
+  created() {
     if (localStorage.getItem('access_token')) {
+      const loader = this.$loading.show()
       checkSession()
-        .then(() => {
-          next('/dashboard')
+        .then(({ data }) => {
+          this.$store.commit('CHANGE_USER', data.data)
+          this.$store.commit('CHANGE_SESSION', true)
+          this.$router.replace('/dashboard')
         })
         .catch(() => {
           localStorage.clear()
-          next()
+          this.$store.commit('CHANGE_SESSION', false)
         })
-    } else next()
+        .finally(() => loader.hide())
+    }
   }
 }
 </script>
