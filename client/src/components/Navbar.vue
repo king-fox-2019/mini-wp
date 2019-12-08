@@ -13,8 +13,8 @@
                 Articles
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Published</a>
-                <a class="dropdown-item" href="#">Draft</a>
+                <a class="dropdown-item" href="#" @click.prevent="getPublishArticle">Published</a>
+                <a class="dropdown-item" href="#" @click.prevent="getDraftArticle">Draft</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" @click.prevent="showCreateArticle">Create Article</a>
               </div>
@@ -63,6 +63,12 @@ export default {
       },
       showCreateArticle(){
         this.$emit('show-createArticle')
+      },
+      getPublishArticle(){
+        this.$emit('publish-article')
+      },
+      getDraftArticle(){
+        this.$emit('draft-article')
       }
     }
 }

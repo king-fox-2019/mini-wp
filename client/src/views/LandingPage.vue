@@ -2,8 +2,17 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-9 d-flex flex-column">
-                <featuredArticle v-if="!showDetailArticle" :publish-article="publishArticle" :isLogin="isLogin"></featuredArticle>
-                <detailArticle v-if="showDetailArticle"></detailArticle>
+                <featuredArticle v-if="!showDetailArticle && !showDraft"
+                :publishArticle="publisharticle"
+                :isLogin="isLogin">
+                </featuredArticle>
+                <draftArticle 
+                :draftArticle="draftarticle" 
+                v-if="showDraft">
+                </draftArticle>
+                <detailArticle 
+                v-if="showDetailArticle">
+                </detailArticle>
             </div>
             <div class="col-3">
                 <bookmarkCard></bookmarkCard>
@@ -23,6 +32,7 @@ import job from '../components/Jobs'
 import detailArticle from '../components/DetailArticle'
 import articleServer from '../../api/article'
 import Alert from '../public/Alert'
+import draftArticle from '../components/DraftArticle'
 
 export default {
     components:{
@@ -30,38 +40,18 @@ export default {
         bookmarkCard,
         tag,
         job,
-        detailArticle
+        detailArticle,
+        draftArticle
     },
-    props: ['isLogin'],
+    props: ['isLogin', 'publisharticle','draftarticle', 'showDraft'],
     data(){
         return{
-            showDetailArticle: false,
-            publishArticle: []
+            showDetailArticle: false
         }
     },
     methods:{
-        fethcingArticlePublished(){
-            articleServer({
-                url: '/publish',
-                method: 'GET',
-                headers:{
-                    access_token: localStorage.getItem('token')
-                }
-            })
-            .then(({data})=>{
-                this.publishArticle = data.reverse()
-            })
-            .catch(err => {
-                Alert.Swal.fire({
-                    icon: 'error',
-                    title: 'Fetching Data',
-                    text: `${err.response.data.message}`
-                })
-            })
-        }
     },
     created(){
-        this.fethcingArticlePublished()
     }
 }
 </script>

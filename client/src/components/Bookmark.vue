@@ -4,14 +4,22 @@
       <div class="card-body">
         <h5 class="card-title">Your Bookmark</h5>
         <hr>
+        <div class="mt-2">
+          <bookmarkItem></bookmarkItem>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
 
+import bookmarkItem from './BookmarkItem'
+
+export default {
+  components:{
+    bookmarkItem
+  }
 }
 </script>
 

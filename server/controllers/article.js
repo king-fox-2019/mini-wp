@@ -51,7 +51,13 @@ class ArticleController{
         })
         .populate('author')
         .then(articles => {
-            res.status(200).json(articles)
+            let arr = []
+            articles.forEach(data => {
+                if(data.author._id == req.decoded.id){
+                    arr.push(data)
+                }
+            })
+            res.status(200).json(arr)
         })
         .catch(next)
     }
