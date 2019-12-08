@@ -1,14 +1,32 @@
 const router = require('express').Router()
-const Controller = require('../controllers/articleC')
+const ArticleController = require('../controllers/articleC')
+const UserController = require('../controllers/userC')
+const auth = require('../middlewares/auth')
+const upload = require('../middlewares/gcs')
 
-router.get('/article', Controller.showAll)
 
-router.get('/article/:id', Controller.showOne)
+// router user
 
-router.post('/article', Controller.createArticle)
+router.get('/list-user', UserController.list)
 
-router.delete('/article/:id', Controller.delete)
+router.post('/register', UserController.register)
 
-router.put('/article/:id', Controller.update)
+router.post('/login', UserController.login)
+
+router.post('/google-signin', UserController.googleOAuth)
+
+// router article
+
+router.get('/article', ArticleController.showAll)
+
+router.get('/article/:id', ArticleController.showOne)
+
+router.use(auth)
+
+router.post('/article', upload.single('featured_image'), ArticleController.createArticle)
+
+router.delete('/article/:id', ArticleController.delete)
+
+router.put('/article/:id', ArticleController.update)
 
 module.exports = router
