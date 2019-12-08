@@ -1,5 +1,6 @@
 const { decodeToken } = require('../helpers/jwt')
 const Article = require('../models/article')
+const User = require('../models/user')
 
 const authentication = (req, res, next) => {
   

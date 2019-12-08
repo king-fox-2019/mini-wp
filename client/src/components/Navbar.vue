@@ -1,47 +1,100 @@
 <template>
   <div>
-    <sui-menu pointing>
-      <a
-        is="sui-menu-item"
-        v-for="item in items"
-        :active="isActive(item)"
-        :key="item"
-        :content="item"
-        @click="select(item)"
-      />
-      <sui-menu-menu position="right">
-        <sui-menu-item>
-          <sui-input transparent icon="search" placeholder="Search..." />
-        </sui-menu-item>
-      </sui-menu-menu>
-    </sui-menu>
+    <sui-menu :widths="4" class="navbar" borderless compact>
+      <sui-menu-item>
+        <sui-grid class="full-width">
+          <sui-grid-row stretched>
+            <sui-grid-column :width="8" class="logo">
+              <B>Brightly</B>
+            </sui-grid-column>
+            <sui-grid-column :width="8" class="tagline">
+              Raise Kids
+              <br />Who Love to Read
+            </sui-grid-column>
+          </sui-grid-row>
+        </sui-grid>
+      </sui-menu-item>
+      <sui-menu-item></sui-menu-item>
+      <sui-menu-item>
+        <sui-grid class="full-width">
+          <sui-grid-row stretched>
+            <sui-grid-column
+              @click="$router.push('/add-article')"
+              :width="4"
+              style="color: white; padding-right: 30% !important; cursor: pointer;"
+            >Add Article</sui-grid-column>
+            <sui-grid-column :width="3">
+              <!-- <sui-icon style="color: white; margin-left: 80% !important;" name="search" /> -->
+            </sui-grid-column>
+            <sui-grid-column
+              @click="$router.push('/signin')"
+              :width="4"
+              style="color: white; padding-right: 30% !important; cursor: pointer;"
+            >Sign In</sui-grid-column>
 
-    <sui-segment>
-      <docs-wireframe name="paragraph" />
-    </sui-segment>
+
+            <sui-grid-column
+              @click="$router.push('/signin')"
+              :width="4"
+              style="color: white; padding-right: 30% !important; cursor: pointer;"
+            >
+
+
+              <div class="ui search">
+                <div class="ui icon input">
+                  <input class="prompt" type="text" placeholder="Search..." />
+                  <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+              </div>
+            </sui-grid-column>
+
+
+            <sui-grid-column
+              @click="$router.push('/signout')"
+              :width="4"
+              style="color: white; padding-right: 30% !important; cursor: pointer;"
+            >Sign Out</sui-grid-column>
+          </sui-grid-row>
+        </sui-grid>
+      </sui-menu-item>
+    </sui-menu>
   </div>
 </template>
 
 <script>
 export default {
-   name: 'PointingMenuExample',
-  data() {
-    return {
-      active: 'Home',
-      items: ['Home', 'Messages', 'Friends'],
-    };
-  },
-  methods: {
-    isActive(name) {
-      return this.active === name;
-    },
-    select(name) {
-      this.active = name;
-    },
-  },
-}
+  name: "Navbar"
+};
 </script>
 
-<style>
+<style scoped>
+.navbar {
+  background: #eda28b !important;
+  border: none !important;
+  border-radius: 0 !important;
+  height: 70px;
 
+  /* overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%; */
+}
+.full-width {
+  width: 100%;
+}
+.logo {
+  font-family: "Unna", serif !important;
+  font-size: 30px;
+  color: white;
+  border-right: 1px solid white !important;
+  text-align: right;
+}
+.tagline {
+  text-align: left;
+  color: white;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Unna&display=swap");
 </style>
+

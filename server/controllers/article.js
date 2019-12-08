@@ -2,12 +2,29 @@ const Article = require('../models/article')
 
 class ArticleController {
   static findAll(req, res, next) {
+    console.log("masuk findall");
+    
     let title = req.query.title || ''
     Article.find({title : {$regex:title}}).sort({ created_at: "desc"  })
-    .then(article => {
-      res.status(200).json(article)
+    .then(articles => {
+      console.log(articles, "dapet apa article dari database");
+      
+      res.status(200).json(articles )
     })
     .catch(next)
+  }
+
+
+  static findMyArticle(req, res, next) {
+    console.log("masuk find my article")
+
+    Article.find({ user : req.loggedUser._id })
+      .then(articles => {
+        console.log(articles, 'ada kan yg article punya user')
+        res.status(200).json(articles)
+      })
+      .catch(next)
+    
   }
 
   static findOne(req, res, next) {

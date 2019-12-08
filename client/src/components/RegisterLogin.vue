@@ -16,7 +16,7 @@
         <input type="password" v-model="password"/>
       </label>
       <p class="forgot-pass">Forgot password?</p>
-      <button type="submit" class="submit">Sign In</button>
+      <button  type="submit" class="submit">Sign In</button>
       <!-- google signin -->
         <g-signin-button
           :params="googleSignInParams"
@@ -90,21 +90,14 @@ export default {
     }
   },
   methods : {
-    switchToAuthPage() {
-      console.log(`masuk switch auth page`);
-      this.$emit('setPage', 'auth')
-    },
-    switchToMainPage() {
-      console.log(`masuk switch main page`);
-      this.$emit('setPage', 'main')
-    },
+  
     login() {
       console.log(`loginnnnnnnnnnn`);
       
       axios({
         method : 'post',
         // url: 'http://35.198.219.105/users/login',
-        url: 'http://localhost:3040/users/login',
+        url: 'http://localhost:3000/users/login',
 
         data : {
           email : this.email, 
@@ -113,8 +106,8 @@ export default {
       })
       .then(({data}) => {
         console.log(data);
-        this.switchToMainPage()
         localStorage.setItem('token', data.token)
+        this.$router.push('/')
         
       })
       .catch(err => {
@@ -127,7 +120,7 @@ export default {
       axios({
         method: 'post',
         // url: 'http://35.198.219.105/users/register',
-        url: 'http://localhost:3040/users/register',
+        url: 'http://localhost:3000/users/register',
 
         data : {
           name : this.name,
@@ -138,7 +131,7 @@ export default {
       .then(({data}) => {
         console.log(data);
         localStorage.setItem('token', data.token)     
-        this.switchToMainPage() 
+         this.$router.push('/')
       })
       .catch(err => {
         console.log(err.response);
@@ -146,7 +139,6 @@ export default {
       })
     },
     animate() {
-    console.log(`triggeredddd `);
       document.querySelector('.cont').classList.toggle('s--signup');
     },
     onSignInSuccess (googleUser) {
@@ -188,7 +180,7 @@ export default {
         
 </script>
 
-<style>
+<style scoped>
 *, *:before, *:after {
 	 box-sizing: border-box;
 	 margin: 0;
@@ -197,6 +189,7 @@ export default {
  body {
 	 font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	 background: #ededed;
+   
 }
  input, button {
 	 border: none;

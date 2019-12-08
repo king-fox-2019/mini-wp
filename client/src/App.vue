@@ -1,38 +1,42 @@
 <template>
   <div>
-    <AuthPage v-if="page === 'auth'" @setPage="setPage"></AuthPage>
-    <MainPage v-if="page === 'main'" @setPage="setPage"></MainPage>
+    <Navbar></Navbar>
+    <router-view />
   </div>
 </template>
 
 <script>
-import AuthPage from "./views/AuthPage"
-import MainPage from "./views/MainPage"
+import Navbar from "./components/Navbar.vue";
+
 export default {
-  name : 'App',
-  data : function() {
+  name: "App",
+  components: {
+    Navbar
+  },
+  data: function() {
     return {
-      page : 'auth'
-    }
+      // isLogin : false
+      articles : []
+    };
   },
-  methods : {
-    setPage(page) {
-      console.log(`masuk di method setPage app.vue`)
-      this.page = page 
-    }
-  },
-  components : {
-    AuthPage,
-    MainPage
+  methods: {
+   
   },
   created() {
-    if (localStorage.getItem('token')) {
-      this.page = 'main'
-    }
+    // if (localStorage.getItem('access_token')) {
+    //   this.isLogin = true
+    // }
   }
-}
+};
 </script>
 
-<style scoped>
-
+<style>
+html,
+body {
+  background-color: #f4f4f4 !important;
+}
+.contained {
+  width: 70%;
+  margin: auto;
+}
 </style>

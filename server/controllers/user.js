@@ -1,6 +1,6 @@
 const User = require('../models/user')
 const { generateToken } = require('../helpers/jwt')
-const {compare } = require('../helpers/passwordHandler')
+const {compare } = require('../helpers/bcrypt')
 const jwt = require('jsonwebtoken')
 const { OAuth2Client } = require('google-auth-library')
 

@@ -1,29 +1,22 @@
 <template>
-  <div>
-    <Menu></Menu>
+  <div >
     <RegisterLogin @setPage="setPage"></RegisterLogin>
   </div>
 </template>
 
 <script>
 import RegisterLogin from "../components/RegisterLogin"
-import Menu from '../components/Menu'
 
 export default {
-  name: 'AuthPage',
+  name: 'Auth',
+   components: {
+    RegisterLogin
+  },
   data: function() {
     return {
-
     }
-  },
-  methods: {
-    setPage(page) {
-      this.$emit('setPage', page)
-    }
-  },
-  components: {
-    RegisterLogin
   }
+ 
 }
 </script>
 
