@@ -85,6 +85,7 @@
       </div>
     </div>
     <div v-html="article.content" id="article-content"></div>
+
     <b-modal
       id="confirm-delete"
       :static="true"
@@ -114,6 +115,72 @@
           active-class="active"
           @click="deleteArticle"
           >Delete it</b-button
+        >
+      </div>
+    </b-modal>
+
+    <b-modal
+      id="confirm-permanent-delete"
+      :static="true"
+      hide-header
+      hide-footer
+      body-bg-variant="info"
+    >
+      <h5>
+        This action is permanent and there is no going back. Are you sure?
+      </h5>
+      <p>
+        This is a permanent deletion of the article. The deleted article will be
+        actually gone and cannot be recovered.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center mt-3">
+        <b-button
+          class="secondary-action"
+          pill
+          variant="outline-secondary"
+          active-class="active"
+          @click="$bvModal.hide('confirm-permanent-delete')"
+          >Cancel</b-button
+        >
+        <b-button
+          class="main-action ml-3"
+          pill
+          variant="primary"
+          active-class="active"
+          @click="permanentDeleteArticle"
+          >Delete it</b-button
+        >
+      </div>
+    </b-modal>
+
+    <b-modal
+      id="confirm-recover"
+      :static="true"
+      hide-header
+      hide-footer
+      body-bg-variant="info"
+    >
+      <h5>Recovering Article</h5>
+      <p>
+        Confirm to recover this article. The article status will be updated to
+        "draft"
+      </p>
+      <div class="d-flex flex-wrap justify-content-center mt-3">
+        <b-button
+          class="secondary-action"
+          pill
+          variant="outline-secondary"
+          active-class="active"
+          @click="$bvModal.hide('confirm-recover')"
+          >Cancel</b-button
+        >
+        <b-button
+          class="main-action ml-3"
+          pill
+          variant="success"
+          active-class="active"
+          @click="recoverArticle"
+          >Recover</b-button
         >
       </div>
     </b-modal>
@@ -195,6 +262,62 @@ export default {
           }
         })
         .finally(() => {
+          loader.hide()
+        })
+    },
+    permanentDeleteArticle() {
+      const loader = this.$loading.show()
+      return this.$store
+        .dispatch('onDeleteArticle', this.id)
+        .then(() => {
+          this.$toasted.show('Article permanently deleted')
+          this.$router.push('/dashboard/trash')
+        })
+        .catch(({ response }) => {
+          const message = response.data.message
+          if (typeof message != 'string') {
+            response.data.message.forEach(msg => {
+              this.$toasted.show(msg, { className: 'bg-danger' })
+            })
+          } else {
+            this.$toasted.show(response.data.message, {
+              className: 'bg-danger'
+            })
+          }
+        })
+        .finally(() => {
+          loader.hide()
+        })
+    },
+    recoverArticle() {
+      const loader = this.$loading.show()
+      return this.$store
+        .dispatch('onSaveArticle', {
+          id: this.id,
+          status: 'draft'
+        })
+        .then(() => {
+          this.$toasted.show('Article recovered')
+          return this.$store
+            .dispatch('getOneArticle', this.id)
+            .then(({ data }) => {
+              this.article = data.data
+            })
+        })
+        .catch(({ response }) => {
+          const message = response.data.message
+          if (typeof message != 'string') {
+            response.data.message.forEach(msg => {
+              this.$toasted.show(msg, { className: 'bg-danger' })
+            })
+          } else {
+            this.$toasted.show(response.data.message, {
+              className: 'bg-danger'
+            })
+          }
+        })
+        .finally(() => {
+          this.$bvModal.hide('confirm-recover')
           loader.hide()
         })
     }
