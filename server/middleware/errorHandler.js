@@ -1,36 +1,43 @@
-module.exports = (err,req,res,next)=>{
-    
+module.exports= (err,req,res,next)=>{
+
     console.log(`
-    ERROR HAPPENED
-    ==================
-    ${err}
+        LOG FROM ERROR HANDLER
+        ========================
+        ${err.message}
     `)
-
-
+    console.log(err)  
+    
     let status
     let message
 
     switch (err.name) {
         case 'ValidationError':
-            status= 200
-            message= `Title & Content must be filled`
+            status = 404
+            message = err.message
             break;
-
-        case 'custom error':
-            status=404
-            message= err.message
+    
+        case 'MongoError':
+            status = 404
+            message = ' has already been used'
+            if(err.keyPattern.username)
+                message = 'username' + message
+            else if(err.keyPattern.email)
+                message = 'email' + message
             break
 
         default:
-            status = 500
-            message = 'Internal Server Error'
+            status = err.status || 500
+            message = err.message || 'INTERNAL SERVER ERROR'
             break;
     }
 
-    res.status(status)
+
+    res
+    .status(status)
     .json({
         code:status,
         message
     })
 
-}  
+
+}

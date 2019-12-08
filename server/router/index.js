@@ -1,9 +1,7 @@
 const router = require('express').Router()
-const articleRouter = require('./articleRouter')
 
-
-router.use('/articles', articleRouter)
-
+router.use('/users', require('./userRouter'))
+router.use('/articles', require('./articleRouter'))
 
 
 module.exports = router

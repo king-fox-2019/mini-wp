@@ -1,0 +1,1 @@
+{"id":"src/components/{{ article.featured_image }}","dependencies":[{"name":"e:\\Hacktiv8 PC\\Phase 2\\Portfolio\\Week 2\\client\\package.json","includedInParent":true,"mtime":1575739633429}],"generated":{"js":"module.exports = {};"},"sourceMaps":null,"error":null,"hash":"a45e49859ad5608746997cefc8e41e07","cacheData":{"env":{}}}
