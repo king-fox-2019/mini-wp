@@ -15,7 +15,7 @@
       color="grey lighten-4"
     >
       <v-app-bar-nav-icon v-if="isLogin" class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="text-uppercase">
+      <v-toolbar-title class="text-uppercase" id="logoNav" @click="goDashboard">
         <span class="font-weight-light">Article</span>
         <span color="pink lighten-1">Sharing</span>
       </v-toolbar-title>
@@ -246,13 +246,11 @@ export default {
         localStorage.removeItem("image");
         //notif
       }
+    },
+    goDashboard() {
+      this.$router.push("/");
     }
   },
-  // mounted() {
-  //   gapi.signin2.render("google-signin-button", {
-  //     onsuccess: this.onSignIn
-  //   });
-  // },
   created() {
     if (localStorage.getItem("token")) {
       this.isLogin = true;
@@ -280,5 +278,9 @@ export default {
     #2b32b2,
     #1488cc
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#logoNav:hover {
+  cursor: pointer;
 }
 </style>

@@ -1,17 +1,6 @@
 <template>
   <div class="all-article">
     <v-container>
-      <v-layout class="ml-auto">
-        <v-btn @click="searchingArticle" class="ml-auto mr-2" icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-        <input
-          type="text"
-          style="border: 2px solid grey;"
-          placeholder="search"
-          v-model="inputSearch"
-        />
-      </v-layout>
       <v-layout row wrap justify-center>
         <v-flex v-for="article in articles" :key="article._id" xs12 md3 class="mx-5 my-5">
           <v-card class="mx-auto" max-width="400">
@@ -53,22 +42,11 @@ export default {
     }
   },
   data() {
-    return {
-      inputSearch: ""
-    };
+    return {};
   },
   methods: {
     fetchAllArticle() {
       this.$emit("fetch-articles");
-    },
-    searchingArticle() {
-      if (this.inputSearch === "") {
-        this.$emit("fetch-articles");
-        this.inputSearch = "";
-      } else {
-        this.$emit("searching-article", this.inputSearch);
-        this.inputSearch = "";
-      }
     }
   },
   created() {

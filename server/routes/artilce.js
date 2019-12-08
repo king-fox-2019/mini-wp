@@ -18,8 +18,14 @@ const upload = gcsUpload({
 });
 
 router.get("/", Article.readAll);
+router.get("/tag/:tag", Article.searchByTag);
 router.use(authentication);
 router.post("/", upload.single("image"), Article.create);
+router.get(
+  "/myarticles/tag/:tag",
+  authorizationMyArticle,
+  Article.searchByTagMyArticle
+);
 router.get("/myarticles", authorizationMyArticle, Article.readMyArticle);
 
 module.exports = router;

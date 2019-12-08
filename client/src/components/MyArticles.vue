@@ -1,10 +1,8 @@
 <template>
   <div class="my-articles">
-    <h2 class="subheading grey--text">My Articles</h2>
-
     <v-container>
       <v-layout row wrap justify-center>
-        <v-flex v-for="article in myArticles" :key="article._id" xs12 md3 class="mx-5 my-5">
+        <v-flex v-for="article in myarticles" :key="article._id" xs12 md3 class="mx-5 my-5">
           <v-card class="mx-auto" max-width="400">
             <v-img class="white--text align-end" height="200px" :src="article.image">
               <v-card-title class="text-uppercase">{{ article.title }}</v-card-title>
@@ -38,77 +36,83 @@
 <script>
 export default {
   name: "MyArticles",
+  props: {
+    myarticles: {
+      type: Array
+    }
+  },
   data() {
     return {
-      myArticles: []
+      //   myArticles: []
     };
   },
   methods: {
     fetchMyArticles() {
-      const token = localStorage.getItem("token");
-
-      this.axios({
-        method: "GET",
-        url: "/articles/myarticles",
-        headers: {
-          token
-        }
-      })
-        .then(({ data }) => {
-          data.forEach(element => {
-            if (element.tag) {
-              let newTag = "";
-              element.tag.forEach((tag, index) => {
-                if (index == element.tag.length - 1) {
-                  newTag += tag;
-                } else {
-                  newTag += tag + ", ";
-                }
-              });
-              element.tag = newTag;
-            }
-            let newTime = this.getTime(element.createdAt);
-            element.createdAt = `${newTime} ago`;
-          });
-          this.myArticles = data;
-        })
-        .catch(err => {
-          let text = "";
-          err.response.data.errors.forEach(element => {
-            text += element + ", ";
-          });
-          let payload = {
-            text,
-            value: true
-          };
-          this.$emit("error-create", payload);
-        });
-    },
-    getTime(date) {
-      var seconds = Math.abs((new Date() - new Date(date)) / 1000);
-      var interval = Math.floor(seconds / 31536000);
-
-      if (interval > 1) {
-        return interval + " years";
-      }
-      interval = Math.floor(seconds / 2592000);
-      if (interval > 1) {
-        return interval + " months";
-      }
-      interval = Math.floor(seconds / 86400);
-      if (interval > 1) {
-        return interval + " days";
-      }
-      interval = Math.floor(seconds / 3600);
-      if (interval > 1) {
-        return interval + " hours";
-      }
-      interval = Math.floor(seconds / 60);
-      if (interval > 1) {
-        return interval + " minutes";
-      }
-      return Math.floor(seconds) + " seconds";
+      this.$emit("fetch-myarticles");
     }
+    // fetchMyArticles() {
+    //   const token = localStorage.getItem("token");
+    //   this.axios({
+    //     method: "GET",
+    //     url: "/articles/myarticles",
+    //     headers: {
+    //       token
+    //     }
+    //   })
+    //     .then(({ data }) => {
+    //       data.forEach(element => {
+    //         if (element.tag) {
+    //           let newTag = "";
+    //           element.tag.forEach((tag, index) => {
+    //             if (index == element.tag.length - 1) {
+    //               newTag += tag;
+    //             } else {
+    //               newTag += tag + ", ";
+    //             }
+    //           });
+    //           element.tag = newTag;
+    //         }
+    //         let newTime = this.getTime(element.createdAt);
+    //         element.createdAt = `${newTime} ago`;
+    //       });
+    //       this.myArticles = data;
+    //     })
+    //     .catch(err => {
+    //       let text = "";
+    //       err.response.data.errors.forEach(element => {
+    //         text += element + ", ";
+    //       });
+    //       let payload = {
+    //         text,
+    //         value: true
+    //       };
+    //       this.$emit("error-create", payload);
+    //     });
+    // },
+    // getTime(date) {
+    //   var seconds = Math.abs((new Date() - new Date(date)) / 1000);
+    //   var interval = Math.floor(seconds / 31536000);
+    //   if (interval > 1) {
+    //     return interval + " years";
+    //   }
+    //   interval = Math.floor(seconds / 2592000);
+    //   if (interval > 1) {
+    //     return interval + " months";
+    //   }
+    //   interval = Math.floor(seconds / 86400);
+    //   if (interval > 1) {
+    //     return interval + " days";
+    //   }
+    //   interval = Math.floor(seconds / 3600);
+    //   if (interval > 1) {
+    //     return interval + " hours";
+    //   }
+    //   interval = Math.floor(seconds / 60);
+    //   if (interval > 1) {
+    //     return interval + " minutes";
+    //   }
+    //   return Math.floor(seconds) + " seconds";
+    // }
   },
   created() {
     this.fetchMyArticles();
