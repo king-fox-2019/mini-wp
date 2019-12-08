@@ -25,12 +25,13 @@
               >{{ article.title }}</b-card-title
             >
             <b-card-text>
-              <small class="text-muted pointer" @click="readArticle(article)">{{
-                formatDate(article.updatedAt)
-              }}</small>
+              <small class="text-muted pointer" @click="readArticle(article)">
+                {{ formatDate(article.updatedAt) }}
+              </small>
             </b-card-text>
             <b-card-text
-              class="pointer"
+              class="pointer d-inline-block"
+              text-tag="div"
               v-html="formatContent(article.content)"
               @click="readArticle(article)"
             ></b-card-text>

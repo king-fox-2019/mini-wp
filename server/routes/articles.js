@@ -14,7 +14,7 @@ const upload = gcsUpload({
 
 articles.post('/', ArticleController.createArticle)
 articles.post('/image', upload.single('image'), ArticleController.HandleImage)
-articles.get('/', ArticleController.getAllArticles)
+articles.get('/', ArticleController.getAllPostedArticles)
 articles.get('/:id', ArticleController.getOneArticle)
 
 articles.use('/:id', authorize)

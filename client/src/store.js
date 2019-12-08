@@ -49,6 +49,10 @@ export default new Vuex.Store({
           context.commit('CHANGE_USER_ARTICLES', data.data)
         })
     },
+    fetchAllPostedArticles() {
+      const access_token = localStorage.getItem('access_token')
+      return server.get('/articles', { headers: { access_token } })
+    },
     onEditorAddImage(context, file) {
       const access_token = localStorage.getItem('access_token')
 

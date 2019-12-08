@@ -212,7 +212,7 @@ Status 200: OK
 
 
 
-### Get All Articles
+### Get All Posted Articles
 
 ##### Endpoint
 
@@ -232,7 +232,7 @@ Status 200: OK
 {
   "data": [
     {
-      "status": "draft",
+      "status": "posted",
       "_id": "5de359433425644760f0b7ce",
       "title": "Dummy Article",
       "author": {
@@ -247,7 +247,7 @@ Status 200: OK
       "updatedAt": "2019-12-01T06:10:11.674Z"
     },
     {
-      "status": "draft",
+      "status": "posted",
       "_id": "5de3594c3425644760f0b7cf",
       "title": "Dummy Article 2",
       "author": {

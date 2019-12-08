@@ -81,6 +81,12 @@ const routes = [
     props: true
   },
   {
+    path: '/explore',
+    name: 'explore',
+    component: () =>
+      import(/* webpackChunkName: "explore" */ '@/views/Explore.vue')
+  },
+  {
     path: '*',
     name: '404',
     redirect: '/'

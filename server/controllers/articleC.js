@@ -20,8 +20,8 @@ class ArticleController {
       .catch(next)
   }
 
-  static getAllArticles(req, res, next) {
-    Article.find()
+  static getAllPostedArticles(req, res, next) {
+    Article.find({ status: 'posted' })
       .populate('author', '_id fullName username email')
       .then(articles => {
         res.status(200).json({

@@ -171,7 +171,8 @@ export default {
           status: 'posted',
           featuredImage
         })
-        .then(() => {
+        .then(({ data }) => {
+          this.id = data.data._id
           this.initialTitle = this.title
           this.initialContent = this.content
           this.$toasted.show('Article posted')
