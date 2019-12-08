@@ -32,7 +32,6 @@ export default {
         }
       })
         .then(({ data }) => {
-          console.log(data);
           this.articles = data
         })
         .catch(err => {

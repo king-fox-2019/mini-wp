@@ -1,7 +1,9 @@
 <template>
   <div>
     <LoginRegisterPage @set-login="setLogin" v-if="!isLogin"></LoginRegisterPage>
-    <Homepage @set-logout="setLogout" v-if="isLogin"></Homepage>
+    <div :class="{'light' : (theme.isLight), 'dark' : (theme.isDark)}">
+      <Homepage @set-logout="setLogout" v-if="isLogin" @change-theme="setTheme"></Homepage>
+    </div>
   </div>
 </template>
 
@@ -12,7 +14,11 @@ import Homepage from "./views/Homepage"
 export default {
   data () {
     return {
-      isLogin: false
+      isLogin: false,
+      theme: {
+        isDark: false,
+        isLight: true
+      }
     }
   },
   components: {
@@ -25,6 +31,10 @@ export default {
     },
     setLogout () {
       this.isLogin = false
+    },
+    setTheme(dark, light) {
+      this.theme.isDark = dark
+      this.theme.isLight = light
     }
   },
   created () {
@@ -37,6 +47,16 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.light {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+.dark {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  overflow: scroll;
+}
 </style>

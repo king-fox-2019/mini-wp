@@ -44,7 +44,6 @@ import GoogleSignInButton from "../components/GoogleSignIn";
 
 const Toast = Swal.mixin({
 	toast: true,
-	position: 'is-top',
 	showConfirmButton: false,
 	timer: 1500
 })

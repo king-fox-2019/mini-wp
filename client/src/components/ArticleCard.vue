@@ -29,7 +29,7 @@
           <div class="card-content">
             <div class="media">
               <div class="media-left"></div>
-                <div class="media-content" style="display:flex; justify-content:center;flex-direction:column;">
+                <div class="media-content" style="display: flex; justify-content: center; flex-direction: column;">
                   <div class="content-text">
                     <h3 style="font-size:36px">{{ ArticleData.title }}</h3>
                     <hr>

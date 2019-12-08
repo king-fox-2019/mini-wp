@@ -1,7 +1,7 @@
 <template>
   <b-navbar class="is-primary">
     <template slot="brand">
-      <b-navbar-item>
+      <b-navbar-item @click="setPage('public')">
         <i class="fab fa-wordpress-simple"></i>
       </b-navbar-item>
     </template>

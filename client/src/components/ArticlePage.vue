@@ -14,8 +14,15 @@
 </template>
 
 <script>
-import axios from "../../apis/axios";
-import ArticleCard from "./ArticleCard";
+import axios from "../../apis/axios"
+import Swal from 'sweetalert2'
+import ArticleCard from "./ArticleCard"
+
+const Toast = Swal.mixin({
+	toast: true,
+	showConfirmButton: false,
+	timer: 1500
+})
 
 export default {
   name: "ArticlePage",
@@ -40,10 +47,16 @@ export default {
         }
       })
         .then(({ data }) => {
-          console.log(data);
-          this.articles = data;
-          this.title = "";
-          this.tags = "";
+          if(data.length == 0) {
+            Toast.fire({
+              icon: 'error',
+              title: 'No article found, try another keywords'
+            })
+          } else {
+            this.articles = data
+            this.title = ""
+            this.tags = ""
+          }
         })
         .catch(err => {
           this.$buefy.toast.open({
