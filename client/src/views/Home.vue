@@ -72,7 +72,11 @@ export default {
             let elem = document.createElement('div');
             elem.innerHTML = item.content;
             let image = elem.querySelector("img");
-            item.featuredImage = image.outerHTML
+            if (!image) {
+              item.featuredImage = "<img src='http://tatasolusi.co.id/wp-content/themes/tatasolusi/assets/images/no-images.png'>"
+            } else {
+              item.featuredImage = image.outerHTML
+            } 
           });
 
           this.articles = data;

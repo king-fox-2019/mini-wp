@@ -89,7 +89,7 @@ class ArticleController {
     }
 
     static trashStatus(req, res, next) {
-        if (!req.body.trash) {
+        if (typeof req.body.trash === 'undefined') {
             let err = {
                 status: 400,
                 msg: 'Trash status is required'

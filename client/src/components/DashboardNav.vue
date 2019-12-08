@@ -87,10 +87,13 @@ export default {
     },
     methods: {
         logOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
+            if (typeof gapi.auth2 !== 'undefined') {
+                var auth2 = gapi.auth2.getAuthInstance();
                 auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
+                    console.log('User signed out.');
+                });
+            }
+            
             this.$router.push('/login');
             localStorage.removeItem('jwt_token');
             this.$emit('session', false);
