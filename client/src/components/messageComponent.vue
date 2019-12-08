@@ -14,12 +14,6 @@
             header: String,
             content: String
         },
-        data() {
-            return {
-                header: this.props.header,
-                content: this.props.content
-            };
-        },
         methods: {},
     }
 </script>

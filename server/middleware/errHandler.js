@@ -4,16 +4,18 @@ const errHandler = (err, req, res, next) => {
 
     if (err.message) err = err.message.split(': ')[2];
 
+    console.log(err);
+
     switch (true) {
-        case "Data is empty":
+        case /empty/.test(err):
             msg = err;
             errCode = 200;
             break;
-        case "You don't have the authorization to do this action !!!":
+        case /don't have the authorization/.test(err):
             msg = err;
             errCode = 401;
             break;
-        case "is not a valid email!!!":
+        case /not a valid/.test(err):
             msg = err;
             errCode = 400;
             break;
@@ -30,8 +32,6 @@ const errHandler = (err, req, res, next) => {
             errCode = 404;
             break;
     }
-
-    console.log(err);
 
     res.status(errCode).json({message: msg});
     next();

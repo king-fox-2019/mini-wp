@@ -44,11 +44,6 @@ authorSchema.pre("save", function (next) {
     next();
 });
 
-authorSchema.pre("findOne", function (next) {
-    if (!this._conditions.email) throw "email is required";
-    next();
-});
-
 const Author = model('Author', authorSchema);
 
 module.exports = {

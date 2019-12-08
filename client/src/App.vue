@@ -1,7 +1,7 @@
 <template>
     <div>
         <login-page-component v-if="!isLogin"></login-page-component>
-        <home-page-component v-if="isLogin"></home-page-component>
+        <home-page-component v-if="isLogin" :token="token"></home-page-component>
     </div>
 </template>
 
@@ -13,7 +13,8 @@
         name: "app",
         data(){
             return {
-                isLogin: false
+                isLogin: false,
+                token: null
             }
         },
         components: {
@@ -23,6 +24,7 @@
         created() {
             if (localStorage.token){
                 this.isLogin = true;
+                this.token = localStorage.token;
             }
         }
     }
