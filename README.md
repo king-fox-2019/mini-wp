@@ -1,5 +1,10 @@
 # wowordpress
 
+## Deploy link
+```
+$ wowordpress.firebaseapp.com
+```
+
 ## Installation Package
 
 ```
