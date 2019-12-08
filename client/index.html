@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      >
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+      >
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <title>Mini WP</title>
+  </head>
+  <body>
+    <div id="app">
+    <!-- header -->
+    <div>
+      <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal text-light">Mini WP</h5>
+        <button type="button" class="btn btn-light btn-sm" v-on:click="showForm(null)">
+          <span class="glyphicon glyphicon-plus"></span> New post
+        </button>
+        <p class="my-0 text-light ml-5">
+          <span class="glyphicon glyphicon-user"> {{ username }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- articles -->
+    <div class="album py-5 bg-light" style="min-height: 86vh;" v-if="whatToDisplay === 'articles'">
+      <div class="container-fluid">
+        <div class="d-flex align-items-start justify-content-start flex-wrap">
+          <!-- cards -->
+          <div class="col-md-3" v-for="article in articles">
+            <div class="card mb-4 shadow" style="min-height: 50rem; max-height: 50rem;">
+              <img src="./pictures/thumbnail2.png" class="card-img-top">
+              <div class="card-body d-flex flex-column justify-content-around">
+                <h4 class="card-title">{{ article.title }}</h4>
+                <p class="card-text" style="height: 10rem;">{{ article.description.slice(0, 200) }}...</p>
+                <div class="d-flex justify-content-between align-items-end">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click="showSingelArticle(article)">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click="showForm(article)">Edit</button>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteArticle(article._id)">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end cards -->
+        </div>
+      </div>
+    </div>
+
+    <!-- show singel article -->
+    <div class="album py-5 bg-light container" style="min-height: 86vh;" v-else-if="whatToDisplay === 'singel-article'">
+      <button type="button" class="close" aria-label="Close" v-on:click="showArticles">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h1>{{ singelArticle.title }}</h1>
+      <p>{{ singelArticle.description }}</p>
+    </div>
+    <!-- end show article -->
+
+    <!-- form create new article -->
+    <form class="container" style="min-height: 86vh;" v-if="whatToDisplay === 'show-form'">
+      <div class="form-group">
+        <!-- <h1>Create new Article</h1> -->
+        <h1>{{ formTitle }}</h1>
+        <label for="titleArticle">Title</label>
+        <input type="text" class="form-control" placeholder="Title" v-model="article.title">
+      </div>
+      <div class="form-group">
+        <label for="titleDescription">Description</label>
+        <textarea class="form-control" placeholder="Description" v-model="article.description"></textarea>
+      </div>
+      <button class="btn btn-light" v-on:click.prevent="showArticles">Cancel</button>
+      <button type="submit" class="btn btn-primary" v-if="isEdit" v-on:click.prevent="updateArticle">{{ buttonContent }}</button>
+      <button type="submit" class="btn btn-primary" v-else v-on:click.prevent="createNewArticle">{{ buttonContent }}</button>
+    </form>
+
+    <footer class="container-fluid mt-5">
+      <div class="inner">
+        <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      </div>
+    </footer>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous">
+      </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous">
+      </script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous">
+      </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
