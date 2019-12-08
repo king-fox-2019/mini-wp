@@ -1,6 +1,6 @@
 <template>
 <div>
-  <featuredCard></featuredCard>
+  <featuredCard :articles="publishArticle" :isLogin="isLogin"></featuredCard>
 </div>
 </template>
 
@@ -11,7 +11,8 @@ import featuredCard from './Card'
 export default {
   components:{
     featuredCard
-  }
+  },
+  props: ['publishArticle', 'isLogin']
 }
 </script>
 

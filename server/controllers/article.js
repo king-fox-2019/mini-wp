@@ -2,12 +2,13 @@ const Article = require('../models/article')
 
 class ArticleController{
     static createArticle(req,res,next){
-        const {title, content, featured_image, tags} = req.body
+        const {title, content, featured_image, tags, status} = req.body
         Article.create({
             title,
             content,
             featured_image,
             author: req.decoded.id,
+            status,
             tags 
         })
         .then(article => {
@@ -33,12 +34,26 @@ class ArticleController{
         .catch(next)
     }
 
-    static getAllArticle(req,res,next){
-        Article.find()
-            .then(articles => {
-                res.status(200).json(articles)
-            })
-            .catch(next)
+    static getAllArticlePublish(req,res,next){
+        Article.find({
+            status: 'publish'
+        })
+        .populate('author')
+        .then(articles => {
+            res.status(200).json(articles)
+        })
+        .catch(next)
+    }
+
+    static getAllArticleDraft(req,res,next){
+        Article.find({
+            status: 'draft'
+        })
+        .populate('author')
+        .then(articles => {
+            res.status(200).json(articles)
+        })
+        .catch(next)
     }
 
     static likeArticle(req,res,next){

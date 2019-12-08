@@ -16,7 +16,7 @@
                 <a class="dropdown-item" href="#">Published</a>
                 <a class="dropdown-item" href="#">Draft</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Create Article</a>
+                <a class="dropdown-item" href="#" @click.prevent="showCreateArticle">Create Article</a>
               </div>
             </li>
           </ul>
@@ -28,14 +28,13 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#" @click.prevent="showDetailUser(user.id)">Profile</a>
-                  <a class="dropdown-item" href="#">Logout</a>
                 </div>
               </li>
             </ul>
           </div>
           <button class="btn btn-primary my-2 my-sm-0 mr-2" type="submit" @click.prevent="showLogin" v-if="!isLogin">Signin</button>
           <button class="btn btn-success my-2 my-sm-0 mr-2" type="submit" @click.prevent="showRegister" v-if="!isLogin">Signup</button>
-          <button class="btn btn-dark my-2 my-sm-0" type="submit" v-if="isLogin">Signout</button>
+          <button class="btn btn-dark my-2 my-sm-0" type="submit" v-if="isLogin" @click.prevent="userLogout">Signout</button>
         </div>
       </nav>
 </div>
@@ -57,6 +56,13 @@ export default {
       },
       backHome(){
         this.$emit('back-home')
+      },
+      userLogout(){
+        localStorage.clear()
+        this.$emit('user-logout')
+      },
+      showCreateArticle(){
+        this.$emit('show-createArticle')
       }
     }
 }

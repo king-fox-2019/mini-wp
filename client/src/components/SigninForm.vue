@@ -63,9 +63,9 @@ export default {
                 this.$emit('user-login', data.user)
             })
             .catch(err => {
-                if(err.response.data.message.length > 1){
-                    let message = ''
-                    let array = err.response.message.length
+                let array = err.response.data.message
+                let message = ''
+                if(typeof array == 'object'){
                     array.forEach((data,index) => {
                         if(index == array.length-1){
                             message += data
@@ -76,13 +76,13 @@ export default {
                     Alert.Swal.fire({
                         icon: 'error',
                         title: 'Login User',
-                        text: message
+                        text: `${message}`
                     })
                 }else{
                     Alert.Swal.fire({
                         icon: 'error',
                         title: 'Login User',
-                        text: `${err.response.data.message[0]}`
+                        text: `${array}`
                     })
                 }
             })

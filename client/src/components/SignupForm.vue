@@ -68,7 +68,6 @@ export default {
                     title: 'Register User',
                     text: 'Register Success!'
                 })
-                console.log('masuk signup form')
                 this.$emit('show-login')
             })
             .catch(err => {

@@ -1,9 +1,9 @@
 <template>
     <div>
-        <navbar @show-register="showRegister" @show-login="showLogin" @back-home="showMainPage" :user="userLogin" :isLogin="isLogin"></navbar>
-        <landingPage v-if="mainPage"></landingPage>
+        <navbar @show-register="showRegister" @show-login="showLogin" @back-home="showMainPage" :user="userLogin" :isLogin="isLogin" @user-logout="userLogout" @show-createArticle="showCreateArticle"></navbar>
+        <landingPage v-if="mainPage" :isLogin="isLogin"></landingPage>
         <usercontrol v-if="!isLogin && !mainPage" :show-register="registerPage" :show-login="loginPage" @to-login="changeToLogin" @to-mainpage="thereUserLogin" @user-login="setUserLogin"></usercontrol>
-        <createArticle v-if="isLogin && showArticle"></createArticle>
+        <createArticle v-if="isLogin && showArticle" @go-homepage="showMainPage"></createArticle>
     </div>
 </template>
 
@@ -57,6 +57,7 @@ export default {
             this.mainPage = true
             this.registerPage = false
             this.loginPage = false
+            this.showArticle = false
         },
         changeToLogin(){
             this.registerPage = false
@@ -75,14 +76,14 @@ export default {
         whoIsLogin(){
             let token = localStorage.getItem('token')
             UserServer({
-                url: `/${token}`,
+                url: '/profile',
                 method: 'GET',
                 headers:{
                     access_token: token
                 }
             })
             .then(({data})=>{
-                this.userLogin = data.user
+                this.userLogin = data
             })
             .catch(err =>{
                 Alert.Swal.fire({
@@ -91,10 +92,27 @@ export default {
                     text: `${err.response.data.message}`
                 })
             })
+        },
+        userLogout(){
+            this.mainPage = true
+            this.registerPage = false
+            this.loginPage = false
+            this.isLogin = false
+            Alert.Toast.fire({
+                icon: 'success',
+                title: 'User Logout',
+                text: 'User Logout Success!'
+            })
+        },
+        showCreateArticle(){
+            this.showArticle = true
+            this.mainPage = false
         }
     },
     created(){
         this.checkLogin()
+    },
+    computed:{
     }
 }
 </script>

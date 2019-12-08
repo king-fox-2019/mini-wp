@@ -5,7 +5,7 @@
             <h2 class="mb-2">Create Article</h2>
             <label for="article-title"><h3>Title</h3></label>
             <form id="create-article">
-                <input type="text" id="article-title" placeholder="Input your title" class="form-control mb-3">
+                <input type="text" id="article-title" placeholder="Input your title" class="form-control mb-3" v-model="title">
                 <wysiwyg v-model="myHTML"></wysiwyg>
             </form>
           </div>
@@ -34,7 +34,7 @@
             </section>
           </div>
           <div class="mt-3">
-            <button class="btn btn-success">Save</button>
+            <button class="btn btn-success" @click.prevent="saveArticle">Save</button>
             <button class="btn btn-danger" @click.prevent="createArticle">Post</button>
           </div>
       </div>
@@ -44,18 +44,87 @@
 <script>
 
 import imageServer from '../../api/image'
+import articleServer from '../../api/article'
+import Alert from '../public/Alert'
 
 export default {
     data(){
         return{
+            title: '',
             myHTML : '',
             image: '',
             imageLink: '',
-            tags: ['Auckland','Wellington','Very long string that would overflow']
+            tags: []
         }
     },
     methods:{
         createArticle(){
+            articleServer({
+                url: '/',
+                method: 'POST',
+                data:{
+                    title: this.title,
+                    content: this.myHTML,
+                    featured_image: this.imageLink,
+                    tags: this.tags,
+                    status: 'publish'
+                },
+                headers:{
+                    access_token: localStorage.getItem('token')
+                }
+            })
+            .then(({data})=>{
+                this.title = ''
+                this.myHTML = ''
+                this.featured_image = ''
+                this.image = ''
+                this.imageLink = ''
+                this.tags = []
+                Alert.Toast.fire({
+                    icon: 'success',
+                    title: 'Create Article',
+                    text: 'Article has been Publish'
+                })
+                this.$emit('go-homepage')
+            })
+            .catch(err => {
+                Alert.Swal.fire({
+                    icon: 'error',
+                    title: 'Create Artile',
+                    text: `${err.response.data.message}`
+                })
+            })
+        },
+        saveArticle(){
+            articleServer({
+                url: '/',
+                method: 'POST',
+                data:{
+                    title: this.title,
+                    content: this.myHTML,
+                    featured_image: this.imageLink,
+                    tags: this.tags,
+                    status: 'draft'
+                },
+                headers:{
+                    access_token: localStorage.getItem('token')
+                }
+            })
+            .then(({data})=>{
+                console.log(data)
+                Alert.Toast.fire({
+                    icon: 'success',
+                    title: 'Create Article',
+                    text: 'Article has been saved'
+                })
+            })
+            .catch(err => {
+                Alert.Swal.fire({
+                    icon: 'error',
+                    title: 'Create Artile',
+                    text: `${err.response.data.message}`
+                })
+            })
         },
         fileUploadHandle(){
             this.image = this.$refs.file.files[0]

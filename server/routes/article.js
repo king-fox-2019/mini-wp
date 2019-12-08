@@ -6,11 +6,14 @@ const AuthorizationArticle = require('../middlewares/authorization').article
 // create article
 router.post('/', Authenticate, ArticleController.createArticle)
 
+// get all publish article
+router.get('/publish', ArticleController.getAllArticlePublish)
+
+// get all draft article
+router.get('/draft', Authenticate, ArticleController.getAllArticleDraft)
+
 // get one article
 router.get('/:id', Authenticate, ArticleController.getOneArticle)
-
-// get all article
-router.get('/', Authenticate, ArticleController.getAllArticle)
 
 // give likes
 router.patch('/likes/:id', Authenticate, ArticleController.likeArticle)

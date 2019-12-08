@@ -14,6 +14,10 @@ const articleSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    status:{
+        type: String,
+        default: 'draft'
+    },
     featured_image:{
         type: String
     },
