@@ -1,4 +1,5 @@
 const { Article } = require('../models')
+const { Types } = require('mongoose')
 
 class ArticleController {
   static createArticle(req, res, next) {
@@ -32,7 +33,7 @@ class ArticleController {
   }
 
   static getAllUserArticles(req, res, next) {
-    Article.find({ author: req.user._id })
+    Article.find({ author: Types.ObjectId(req.user._id) })
       .then(articles => {
         res.status(200).json({
           data: articles.map(article => {
