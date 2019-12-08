@@ -1,0 +1,56 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+main {
+    min-height: calc(100vh - 20px);
+}
+
+/* footer {
+    background-color: #343a40 !important;
+} */
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    /* Margin bottom by footer height */
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25px;
+    /* Set the fixed height of the footer here */
+    line-height: 25px;
+    /* Vertically center the text there */
+    background-color: #343a40 !important;
+}
+
+.nav-sub-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-sub-menu li {
+    padding: 6px 15px 6px 43px;
+}
+
+.sidebar-sticky {
+    padding-top: 1.5rem;
+}
