@@ -7,7 +7,7 @@
   <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQV2SyvI7n6wm0wDFA5E4WRyijolIZj55EEUGPr2s22ybGzaNYa" size="big" /> -->
   <!-- <sui-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQV2SyvI7n6wm0wDFA5E4WRyijolIZj55EEUGPr2s22ybGzaNYa" size="big" /> -->
   <sui-image :src="String(article.image)" size="big" ></sui-image>
-  <sui-button @click="edit" v-if="isMine">edit</sui-button>
+  <sui-button @click="$router.push('/edit-article/' + article._id)" v-if="isMine">edit</sui-button>
   <sui-button @click="remove" v-if="isMine">delete</sui-button>
 
   {{article.content}}
@@ -44,12 +44,6 @@ export default {
           this.$router.push('/')
         })
         .catch(console.log) //toast
-    },
-    edit() {
-
-      axios
-        .patch()
-
     }
   },
   created() {
