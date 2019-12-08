@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar-Write
-      @on-cancel="$router.push('/dashboard')"
+      @on-cancel="$router.push(id ? `/read/${id}` : '/dashboard')"
       @on-save="saveArticle"
       @on-post="postArticle"
     ></Navbar-Write>
@@ -9,12 +9,7 @@
     <div class="container-fluid" id="write-wrapper">
       <!-- <input type="text" v-model="title" class="text-input" /> -->
       <div class="text-input">
-        <input
-          type="text"
-          v-model="title"
-          placeholder="Add Title"
-          autocomplete="off"
-        />
+        <input type="text" v-model="title" placeholder="Add Title" autocomplete="off" />
         <!-- <label for="username">Username</label> -->
       </div>
       <!-- <b-form-input
@@ -30,13 +25,7 @@
         placeholder="Start your journey..."
       ></vue-editor>
     </div>
-    <b-modal
-      id="confirm-leave"
-      :static="true"
-      hide-header
-      hide-footer
-      body-bg-variant="info"
-    >
+    <b-modal id="confirm-leave" :static="true" hide-header hide-footer body-bg-variant="info">
       <h5>You have unsaved changes. Do you want to save it?</h5>
       <div class="d-flex flex-wrap justify-content-center mt-3">
         <b-button
@@ -45,24 +34,21 @@
           variant="outline-secondary"
           active-class="active"
           @click="$bvModal.hide('confirm-leave')"
-          >Cancel</b-button
-        >
+        >Cancel</b-button>
         <b-button
           class="secondary-action mx-0 mr-sm-3 ml-sm-5"
           pill
           variant="outline-primary"
           active-class="active"
           id="leave-nosave"
-          >Don't save</b-button
-        >
+        >Don't save</b-button>
         <b-button
           class="main-action mt-2 mt-sm-0"
           pill
           variant="primary"
           active-class="active"
           @click="saveAndLeave"
-          >Yes, save it</b-button
-        >
+        >Yes, save it</b-button>
       </div>
     </b-modal>
   </div>
@@ -149,13 +135,13 @@ export default {
           }
         })
         .finally(() => {
-          this.$bvModal.hide('confirm-leave')
           loader.hide()
         })
     },
     saveAndLeave() {
       this.saveArticle().then(() => {
-        if (this.saveToLeave) this.$router.push('/dashboard')
+        this.$bvModal.hide('confirm-leave')
+        if (this.saveToLeave) this.$router.push(`/read/${this.id}`)
       })
     },
     postArticle() {
@@ -173,7 +159,7 @@ export default {
           this.initialTitle = this.title
           this.initialContent = this.content
           this.$toasted.show('Article posted')
-          this.$router.push('/dashboard')
+          this.$router.push(`/read/${this.id}`)
         })
         .catch(({ response }) => {
           const message = response.data.message
@@ -188,7 +174,6 @@ export default {
           }
         })
         .finally(() => {
-          this.$bvModal.hide('confirm-leave')
           loader.hide()
         })
     }
