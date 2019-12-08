@@ -6,14 +6,14 @@ const app = new Vue({
         message: "",
         quill: "",
         title: "",
-        category: ""
+        category: "",
+        featured_image: ""
     },
     methods: {
         fetchArticle: function () {
             axios
                 .get("http://localhost:3000/articles")
                 .then(({data}) => {
-                    console.log(data);
                     this.article = data;
                 })
                 .catch(err => {
@@ -37,7 +37,7 @@ const app = new Vue({
         submitArticle: function (e) {
             e.preventDefault()
 
-            if (this.title === ""){
+            if (this.title === "") {
                 swal({
                     title: "Warning?",
                     text: "Title must not be empty",
@@ -69,21 +69,25 @@ const app = new Vue({
             });
 
             const submitOk = () => {
-                axios
-                    .post("http://localhost:3000/articles", {
-                        "title": this.title,
-                        "category": this.category,
-                        "author": this.author,
-                        "content": this.quill.root.innerHTML,
-                        "quillContent": this.quill.getContents()
-                    })
-                    .then((response) => {
-                        this.message = response;
-                        this.fetchArticle()
-                    })
-                    .catch(err => {
-                        this.message = err
-                    });
+                let formData = new FormData();
+                formData.set('title', this.title);
+                formData.set('category', this.category);
+                formData.set('author',this.author._id);
+                formData.set('content', this.quill.root.innerHTML);
+                formData.set('quillContent', this.quill.getContents());
+                formData.set('featured_image', this.featured_image);
+
+                axios({
+                    method: "post",
+                    url: "http://localhost:3000/articles",
+                    data: formData,
+                    headers: {'Content-Type': 'multipart/form-data'}
+                }).then((response) => {
+                    this.message = response;
+                    this.fetchArticle()
+                }).catch(err => {
+                    this.message = err
+                });
             };
         },
         deleteArticle: function (id) {
@@ -119,6 +123,9 @@ const app = new Vue({
                     });
             }
         },
+        handleFileUpload: function () {
+            this.featured_image = this.$refs.featured_image.files[0];
+        }
     },
     created() {
         this.fetchArticle();

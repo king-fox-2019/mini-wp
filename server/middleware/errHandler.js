@@ -4,8 +4,6 @@ const errHandler = (err, req, res, next) => {
 
     if (err.message) err = err.message.split(': ')[2];
 
-    console.log(err);
-
     switch (true) {
         case "Data is empty":
             msg = err;
@@ -19,7 +17,7 @@ const errHandler = (err, req, res, next) => {
             msg = err;
             errCode = 400;
             break;
-        case "email has been registered !!!":
+        case /registered/.test(err):
             msg = err;
             errCode = 400;
             break;
@@ -32,6 +30,8 @@ const errHandler = (err, req, res, next) => {
             errCode = 404;
             break;
     }
+
+    console.log(err);
 
     res.status(errCode).json({message: msg});
     next();
