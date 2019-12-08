@@ -6,9 +6,9 @@ const authorization = require("../middlewares/authorization");
 
 route.get("/", controller.showArticle);
 route.use(authentication);
+route.delete("/", authorization, controller.destroy);
 route.get("/myarticle", controller.showAuthorArticle);
 route.post("/", controller.addArticle);
 route.patch("/", controller.edit);
-route.delete("/", authorization, controller.destroy);
 
 module.exports = route;

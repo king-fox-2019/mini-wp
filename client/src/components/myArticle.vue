@@ -90,14 +90,15 @@ export default {
       this.createdAt = article.createdAt;
     },
     destroy: function(article) {
-        let id = article._id
-        alert('mamen')
+      let id = article._id;
       axios
         .delete("/article", {
-          id
+          data: {
+            id
+          }
         })
         .then(({ data }) => {
-          Swal.fire("Success!", "Article Posted!", "success");
+          Swal.fire("Success!", "Article Deleted!", "success");
         })
         .catch(err => {
           let fields = err.response.data.join(" | ");
@@ -107,7 +108,7 @@ export default {
             text: fields
           });
         });
-    },
+    }
   }
 };
 </script>

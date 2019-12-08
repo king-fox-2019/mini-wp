@@ -23,8 +23,6 @@ class ArticleController {
         .catch(next)
     }
     static destroy(req, res, next) {
-        console.log('masuk kesini?')
-        return
         let { id } = req.body
         Article
             .deleteOne({_id: id})
