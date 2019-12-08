@@ -9,6 +9,12 @@ import '../node_modules/vue-wysiwyg/dist/vueWysiwyg.css'
 import Buefy from 'buefy'
 // import 'buefy/dist/buefy.css'
 import VueRouter from 'vue-router';
+import Toastr from 'vue-semantic-ui-toastr'
+import VoerroTagsInput from '@voerro/vue-tagsinput';
+import Paginate from 'vuejs-paginate'
+
+Vue.component('tags-input', VoerroTagsInput);
+Vue.component('paginate', Paginate)
 
 Vue.use(wysiwyg, {})
 // Vue.use(Buefy)
@@ -19,6 +25,13 @@ Vue.use(wysiwyg, {})
 
 Vue.use(GSignInButton)
 
+Vue.use(Toastr, {
+  duration: 3000,
+  container: '.toastr-container',
+  autoshow: true,
+  html: false,
+  position: 'right top'
+})
 
 new Vue({
   router,

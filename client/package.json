@@ -19,9 +19,12 @@
     "vue-google-signin-button": "^1.0.4",
     "vue-hot-reload-api": "^2.3.4",
     "vue-router": "^3.1.3",
-    "vue-wysiwyg": "^1.7.2"
+    "vue-semantic-ui-toastr": "^1.1.1",
+    "vue-wysiwyg": "^1.7.2",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
+    "@voerro/vue-tagsinput": "^2.1.0",
     "@vue/component-compiler-utils": "^3.0.2",
     "sass": "^1.23.7",
     "vue-template-compiler": "^2.6.10"

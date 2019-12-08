@@ -5,7 +5,7 @@
         <sui-grid class="full-width">
           <sui-grid-row stretched>
             <sui-grid-column :width="8" class="logo" @click="$router.push('/')" style="cursor: pointer;">
-              <B>Brightly</B>
+              Brightly
             </sui-grid-column>
             <sui-grid-column :width="8" class="tagline">
               Raise Kids
@@ -39,14 +39,14 @@
               style="color: white; padding-right: 30% !important; cursor: pointer;"
             >
 
-
+<!-- 
               <div class="ui search">
                 <div class="ui icon input">
                   <input class="prompt" type="text" placeholder="Search..." />
                   <i class="search icon"></i>
                 </div>
                 <div class="results"></div>
-              </div>
+              </div> -->
             </sui-grid-column>
 
 
@@ -63,12 +63,14 @@
 </template>
 
 <script>
+
 export default {
   name: "Navbar"
 };
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Yeseva+One&display=swap');
 .navbar {
   background: #eda28b !important;
   border: none !important;
@@ -84,7 +86,7 @@ export default {
   width: 100%;
 }
 .logo {
-  font-family: "Unna", serif !important;
+  font-family: 'Yeseva One', cursive !important;
   font-size: 30px;
   color: white;
   border-right: 1px solid white !important;
@@ -95,6 +97,6 @@ export default {
   color: white;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Unna&display=swap");
+
 </style>
 

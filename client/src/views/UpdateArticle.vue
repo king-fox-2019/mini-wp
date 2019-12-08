@@ -20,9 +20,22 @@
       </div>
       <!-- upload  -->
       <!-- <sui-input type="file" placeholder="Search..." /> -->
-      <Tags @changeTags="changeTags"></Tags>
+      <!-- <Tags @changeTags="changeTags"></Tags> -->
       <!-- <vue-tags-input v-model="tag" :tags="tags" @tags-changed="newTags => tags = newTags" /> -->
 
+      <tags-input
+        element-id="tags"
+        v-model="tags"
+        :existing-tags="[
+        { key: 'activity-books', value: 'Activity Books' },
+        { key: 'animals-and-nature', value: 'Animals And Nature' },
+        { key: 'baby-shower-gifts', value: 'Baby Shower Gifts' },
+        { key: 'bedtime-and-bathtime', value: 'Bedtime And Bathtime' },
+        { key: 'mindfulness-and-manners', value: 'Mindfulness And Manners' }
+    ]"
+        :typeahead="true"
+        only-existing-tags
+      ></tags-input>
       <sui-button type="submit">Submit</sui-button>
     </form>
   </div>

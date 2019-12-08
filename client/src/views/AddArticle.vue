@@ -18,12 +18,22 @@
           <input @change="previewFiles" ref="myFiles" name="input" id="file" type="file" />
         </div>
       </div>
-      <!-- upload  -->
-      <!-- <sui-input type="file" placeholder="Search..." /> -->
-      <Tags @changeTags="changeTags"></Tags>
-      <!-- <vue-tags-input v-model="tag" :tags="tags" @tags-changed="newTags => tags = newTags" /> -->
-
+      
+       <tags-input
+        element-id="tags"
+        v-model="tags"
+        :existing-tags="[
+        { key: 'activity-books', value: 'Activity Books' },
+        { key: 'animals-and-nature', value: 'Animals And Nature' },
+        { key: 'baby-shower-gifts', value: 'Baby Shower Gifts' },
+        { key: 'bedtime-and-bathtime', value: 'Bedtime And Bathtime' },
+        { key: 'mindfulness-and-manners', value: 'Mindfulness And Manners' }
+    ]"
+        :typeahead="true"
+        only-existing-tags
+      ></tags-input>
       <sui-button type="submit">Submit</sui-button>
+     
     </form>
   </div>
 </template>
@@ -31,7 +41,7 @@
 <script>
 import axios from "../helpers/axios";
 // import VueTagsInput from "@johmun/vue-tags-input";
-import Tags from "../components/Tags"
+// import Tags from "../components/Tags";
 
 $(function() {
   var container = $(".container"),
@@ -88,16 +98,13 @@ export default {
       // tags: []
     };
   },
-  components: {
-    Tags
-  },
   methods: {
     post() {
       let formData = new FormData();
       formData.append("title", this.title);
       formData.append("content", this.content);
       formData.append("image", this.file);
-      formData.append("tags", JSON.stringify(this.tagsText))
+      formData.append("tags", JSON.stringify(this.tags));
 
       console.log("ke post");
       axios
@@ -116,20 +123,6 @@ export default {
     previewFiles(event) {
       console.log(event.target.files["0"]);
       this.file = event.target.files["0"];
-    },
-    changeTags(tags) {
-      this.tags = tags
-    }
-  },
-  computed : {
-    tagsText() {
-      let result = []
-      this.tags.forEach(tag => {
-        result.push(tag.text)
-      })
-      console.log(result, "result tag nya apa");
-      
-      return result
     }
   }
 };

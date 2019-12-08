@@ -14,7 +14,7 @@ const articleSchema = new Schema({
     default : 'https://i.pinimg.com/564x/cf/5e/d8/cf5ed8a8b304e6599de416533fc0d286.jpg'
   },
   tags : [{
-    type : String,
+    type : Object,
     required: [true, 'You must at least add one topic']
   }],
   user : {

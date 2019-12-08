@@ -34,6 +34,7 @@ export default {
 html,
 body {
   background-color: #f4f4f4 !important;
+  font-size: 19px !important;
 }
 .contained {
   width: 70%;

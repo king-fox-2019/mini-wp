@@ -1,13 +1,23 @@
 <template>
   <div class="container">
-    <div class="contained" >
-    <a is="sui-label" basic color="purple">All Articles</a>
+    <div  class="contained" >
+      <span v-for="(topic, i) in topics" :key="i" >
+
+    <a @click="$router.push('/articles/' + topic.split(' ').join('-').toLowerCase())" is="sui-label" basic color="pink">{{topic}}</a>
+      </span>
+
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data: function() {
+    return {
+      topics : ['All', 'Activity Books', 'Animals And Nature', 'Baby Shower Gifts' , 'Bedtime And Bathtime', 'Mindfulness And Manners' ]
+    }
+  }
 };
 </script>
 

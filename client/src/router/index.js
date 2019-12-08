@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  
+
   {
     path: '/signin',
     name: 'signin',
@@ -25,11 +25,23 @@ const routes = [
     name: 'edit-article',
     component: () => import('../views/UpdateArticle.vue')
   },
+  { 
+    path: '/', redirect: '/articles/all' 
+  },
   {
-    path: '/',
+    path: '/articles',
+    redirect: '/articles/all',
     name: 'home',
-    component: () => import('../views/Home.vue')
-  }
+    component: () => import('../views/Home.vue'),
+    children: [
+      {
+        path: ':topic',
+        name: 'topic',
+        component: () => import('../components/Articles.vue')
+      }
+    ]
+  },
+
 ]
 
 const router = new VueRouter({

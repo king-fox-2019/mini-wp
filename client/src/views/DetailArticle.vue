@@ -10,6 +10,8 @@
   <sui-button @click="$router.push('/edit-article/' + article._id)" v-if="isMine">edit</sui-button>
   <sui-button @click="remove" v-if="isMine">delete</sui-button>
 
+
+
   {{article.content}}
   </div>
 </template>
@@ -34,6 +36,7 @@ export default {
         .catch(console.log);
     },
     remove() {
+
       axios
         .delete(`/articles/${this.$route.params.id}`, {
           headers: {
@@ -42,6 +45,9 @@ export default {
         })
         .then(({data}) => {
           this.$router.push('/')
+          this.$toastr
+            .h('Article')
+            .i('Deleted!')
         })
         .catch(console.log) //toast
     }
