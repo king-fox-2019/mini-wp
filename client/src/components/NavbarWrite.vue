@@ -34,15 +34,15 @@
             >Save</b-button
           >
         </b-nav-item>
-        <b-nav-item>
+        <b-nav-item v-if="status != 'posted'">
           <b-button
             class="main-action"
             pill
             variant="primary"
             active-class="active"
             @click="$emit('on-post')"
-            >Post Now
-          </b-button>
+            >Post Now</b-button
+          >
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -51,6 +51,7 @@
 
 <script>
 export default {
+  props: ['status'],
   data() {
     return {}
   },
