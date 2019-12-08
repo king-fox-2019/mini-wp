@@ -9,7 +9,7 @@
           ? postedArticles
           : $route.path == '/dashboard/draft'
           ? draftArticles
-          : $route.path == '/dashboard/draft'
+          : $route.path == '/dashboard/trash'
           ? trashArticles
           : []
       "

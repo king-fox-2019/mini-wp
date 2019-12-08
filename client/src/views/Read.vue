@@ -32,23 +32,24 @@
         <small class="text-muted" style="font-weight: 100;"
           >Last update: {{ formatDate(article.updatedAt) }}</small
         >
-        <div class="">
+        <div class>
           <b-button
-            class="secondary-action mr-2"
+            class="secondary-action"
             pill
             variant="outline-secondary"
+            active-class="active"
+            @click="$bvModal.show('confirm-delete')"
+          >
+            <i class="fas fa-trash-alt"></i>
+          </b-button>
+          <b-button
+            class="secondary-action mx-2"
+            pill
+            variant="outline-primary"
             active-class="active"
             :to="`/write/${article._id}`"
             >Edit</b-button
           >
-          <!-- <b-button
-            class="secondary-action"
-            pill
-            variant="outline-primary"
-            active-class="active"
-            @click="$emit('on-save')"
-            >Save</b-button
-          > -->
           <b-button
             class="main-action"
             pill
@@ -56,14 +57,54 @@
             active-class="active"
             @click="postArticle"
             v-if="article.status == 'draft'"
-            >Post Now
-          </b-button>
+            >Post Now</b-button
+          >
           <!-- <b-button :to="`/write/${article._id}`">Edit</b-button>
-          <b-button :to="`/write/${article._id}`">Post</b-button> -->
+          <b-button :to="`/write/${article._id}`">Post</b-button>-->
         </div>
       </div>
     </div>
-    <div v-html="article.content"></div>
+    <div v-html="article.content" id="article-content"></div>
+    <b-modal
+      id="confirm-delete"
+      :static="true"
+      hide-header
+      hide-footer
+      body-bg-variant="info"
+    >
+      <h5>Are you sure?</h5>
+      <p>
+        Your deleted article will be moved to Trash section. Posted article will
+        lost it's "posted" status and will be gone from Explore section. You
+        need to manually repost it to make it available for everyone again.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center mt-3">
+        <b-button
+          class="secondary-action"
+          pill
+          variant="outline-secondary"
+          active-class="active"
+          @click="$bvModal.hide('confirm-delete')"
+          >Cancel</b-button
+        >
+        <!-- <b-button
+          class="secondary-action mx-0 mr-sm-3 ml-sm-5"
+          pill
+          variant="outline-primary"
+          active-class="active"
+          id="leave-nosave"
+          >Don't save</b-button
+        >-->
+        <b-button
+          class="main-action ml-3"
+          pill
+          variant="primary"
+          active-class="active"
+          @click="deleteArticle"
+          >Delete it</b-button
+        >
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -88,9 +129,7 @@ export default {
       return formatRelative(new Date(date), Date.now())
     },
     postArticle() {
-      const loader = this.$loading.show({
-        container: this.$refs.signUpContainer
-      })
+      const loader = this.$loading.show()
       return this.$store
         .dispatch('onSaveArticle', {
           id: this.id,
@@ -103,6 +142,33 @@ export default {
             .then(({ data }) => {
               this.article = data.data
             })
+        })
+        .catch(({ response }) => {
+          const message = response.data.message
+          if (typeof message != 'string') {
+            response.data.message.forEach(msg => {
+              this.$toasted.show(msg, { className: 'bg-danger' })
+            })
+          } else {
+            this.$toasted.show(response.data.message, {
+              className: 'bg-danger'
+            })
+          }
+        })
+        .finally(() => {
+          loader.hide()
+        })
+    },
+    deleteArticle() {
+      const loader = this.$loading.show()
+      return this.$store
+        .dispatch('onSaveArticle', {
+          id: this.id,
+          status: 'trash'
+        })
+        .then(() => {
+          this.$toasted.show('Article deleted')
+          this.$router.push('/dashboard')
         })
         .catch(({ response }) => {
           const message = response.data.message
@@ -145,10 +211,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #title {
   font-weight: 200;
   font-size: 4rem;
+}
+
+#article-content {
+  width: 100%;
+  img {
+    max-width: 100%;
+  }
 }
 
 #read-article {

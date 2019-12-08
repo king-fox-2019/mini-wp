@@ -121,9 +121,7 @@ export default {
       this.images.splice(this.images.indexOf(file), 1)
     },
     saveArticle() {
-      const loader = this.$loading.show({
-        container: this.$refs.signUpContainer
-      })
+      const loader = this.$loading.show()
       const featuredImage = this.images[0]
       return this.$store
         .dispatch('onSaveArticle', {
@@ -161,9 +159,7 @@ export default {
       })
     },
     postArticle() {
-      const loader = this.$loading.show({
-        container: this.$refs.signUpContainer
-      })
+      const loader = this.$loading.show()
       const featuredImage = this.images[0]
       return this.$store
         .dispatch('onSaveArticle', {
@@ -198,6 +194,7 @@ export default {
     }
   },
   created() {
+    window.scrollTo(0, 0)
     if (localStorage.getItem('access_token')) {
       const loader = this.$loading.show()
       checkSession()
