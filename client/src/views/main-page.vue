@@ -33,6 +33,11 @@ export default {
   },
   created() {
     this.fetchdata();
+  },
+  mounted() {
+    this.$root.$on('add-article', article => {
+        this.articles.push(article)
+    });
   }
 };
 </script>

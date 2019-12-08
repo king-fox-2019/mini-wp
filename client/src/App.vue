@@ -1,6 +1,6 @@
 <template>
   <div>
-      <navbar></navbar>
+      <navbar @set-login="setLogin" :islogin="isLogin"></navbar>
       <main-page></main-page>
   </div>
 </template>
@@ -13,6 +13,23 @@ export default {
   components: {
       navbar,
       mainPage
+  },
+  data: function() {
+    return {
+      isLogin: false
+    }
+  },
+  methods: {
+    setLogin: function(val) {
+      this.isLogin = val
+    }
+  },
+  created() {
+    if(localStorage.getItem('token')){
+      this.isLogin = true
+    } else {
+      this.isLogin = false
+    }
   }
 };
 </script>
