@@ -1,17 +1,21 @@
 <template>
-  <h1>{{ message }}</h1>
+  <div>
+      <navbar></navbar>
+      <main-page></main-page>
+  </div>
 </template>
 
 <script>
+import navbar from './components/navbar'
+import mainPage from './views/main-page'
+
 export default {
-    data: function() {
-        return{
-            message: "Hello world!"
-        }
-    }
-}
+  components: {
+      navbar,
+      mainPage
+  }
+};
 </script>
 
 <style>
-
 </style>
