@@ -1,10 +1,12 @@
 # mini-wp
 
 DEPLOY GCS
+
 SERVER
-> []()
+> [http://minipc-miniwpking.anggabanny.online](http://minipc-miniwpking.anggabanny.online)
+
 CLIENT
-> []()
+> [http://wordpress.anggabanny.online/](http://wordpress.anggabanny.online/)
 
 # INTRODUCTION !
 Sebelum memulai semuanya alangkah lebih baik jika menguji server terlebih dahulu silahkan akses `/`

@@ -73,19 +73,7 @@ export default {
             reader.readAsDataURL(file);
         },
         login(){
-            Swal.fire({
-                title: 'Login!',
-                text: '',
-                imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
-                // imageWidth: 400,
-                // imageHeight: 200,
-                // timer: 2500,
-                imageAlt: 'Custom image',
-                showConfirmButton: false,
-                showCancelButton: false,
-                confirmButtonText: 'نعم',
-                cancelButtonText: 'لا',
-            })
+            Swal.showLoading()
             let form = {
                 email : this.email,
                 password : this.password
@@ -106,6 +94,20 @@ export default {
             })
             .catch(err=>{
                 Swal.close()
+                Swal.fire({
+                    title: 'Register Failed!',
+                    text: err,
+                    icon : 'error',
+                    // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                    // imageWidth: 400,
+                    // imageHeight: 200,
+                    timer: 3500,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'نعم',
+                    cancelButtonText: 'لا',
+                })
                 console.log(err);
             })
         },
@@ -113,7 +115,8 @@ export default {
             Swal.fire({
                 title: 'Register!',
                 text: '',
-                imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                icon : 'success',
                 // imageWidth: 400,
                 // imageHeight: 200,
                 // timer: 2500,
@@ -156,7 +159,8 @@ export default {
                     Swal.fire({
                         title: 'Register Failed!',
                         text: ereror.join(` & `),
-                        imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                        icon : 'success',
+                        // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
                         // imageWidth: 400,
                         // imageHeight: 200,
                         timer: 7500,
@@ -200,7 +204,8 @@ export default {
                     Swal.fire({
                         title: 'Register Failed!',
                         text: ereror.join(` & `),
-                        imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                        // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                        icon : 'success',
                         // imageWidth: 400,
                         // imageHeight: 200,
                         timer: 3500,
@@ -217,7 +222,8 @@ export default {
             Swal.fire({
                 title: 'Loading!',
                 text: '',
-                imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                // imageUrl: '../public/img/loading.gif',
+                icon : 'success',
                 // imageWidth: 400,
                 // imageHeight: 200,
                 // timer: 2500,
