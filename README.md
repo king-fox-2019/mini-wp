@@ -88,7 +88,54 @@ Response
  */
 ```
 ------------------------------------------------
-# Routes article
+## detail article
+
+```
+GET : http://localhost:3000/article/:id
+```
+
+| Authenticate User only | Authorized User only |
+|------------------------|----------------------|
+| YES                    | YES                  |
+
+Headers
+```
+/**
+ * @token access_token *required
+ */
+```
+Response
+```
+/**
+ * @success status(200) data( obj(article) )
+ * @error   status(error code) data(error)
+ */
+```
+------------------------------------------------
+## tag article
+
+```
+GET : http://localhost:3000/article/tag/:tag
+```
+
+| Authenticate User only | Authorized User only |
+|------------------------|----------------------|
+| YES                    | YES                  |
+
+Headers
+```
+/**
+ * @token access_token *required
+ */
+```
+Response
+```
+/**
+ * @success status(200) data( obj(article) )
+ * @error   status(error code) data(error)
+ */
+```
+------------------------------------------------
 ## User's article
 
 ```
