@@ -66,6 +66,10 @@ export default new Vuex.Store({
         })
       else
         return server.post('articles', payload, { headers: { access_token } })
+    },
+    getOneArticle(context, id) {
+      const access_token = localStorage.getItem('access_token')
+      return server.get(`articles/${id}`, { headers: { access_token } })
     }
   },
   modules: {}

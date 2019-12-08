@@ -11,6 +11,7 @@
           <b-card-img
             :src="article.featuredImage"
             class="rounded-0 pointer"
+            @click="readArticle(article)"
           ></b-card-img>
         </b-col>
         <b-col :md="article.featuredImage ? 8 : null">
@@ -18,17 +19,20 @@
             <b-card-text class="float-right">
               <small class="text-muted">{{ article.status }}</small>
             </b-card-text>
-            <b-card-title class="mb-0 d-inline-block pointer">{{
-              article.title
-            }}</b-card-title>
+            <b-card-title
+              class="mb-0 d-inline-block pointer"
+              @click="readArticle(article)"
+              >{{ article.title }}</b-card-title
+            >
             <b-card-text>
-              <small class="text-muted pointer">{{
+              <small class="text-muted pointer" @click="readArticle(article)">{{
                 formatDate(article.updatedAt)
               }}</small>
             </b-card-text>
             <b-card-text
               class="pointer"
               v-html="formatContent(article.content)"
+              @click="readArticle(article)"
             ></b-card-text>
           </b-card-body>
         </b-col>
@@ -70,6 +74,9 @@ export default {
     },
     formatDate(date) {
       return formatDistance(new Date(date), Date.now()) + ' ago'
+    },
+    readArticle(article) {
+      this.$router.push(`/read/${article._id}`)
     }
   },
   mounted() {

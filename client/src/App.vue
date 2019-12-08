@@ -37,6 +37,17 @@ export default {
 </script>
 
 <style lang="scss">
+@font-face {
+  font-family: CodeDemo;
+  font-weight: bold;
+  src: url('./assets/fonts/CodePro/CodeDemo-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: CodeDemo;
+  src: url('./assets/fonts/CodePro/CodeDemo-Light.otf') format('opentype');
+}
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
+
 #page {
   height: 100vh;
 }
