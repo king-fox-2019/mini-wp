@@ -8,7 +8,7 @@ class Controller {
         let name, email;
         client
             .verifyIdToken({
-                idToken: req.body.access_token,
+                idToken: req.body.id_token,
                 audience: process.env.Client_ID
             })
             .then(ticket => {
@@ -29,7 +29,7 @@ class Controller {
                 }
             })
             .then((user) => {
-                let token = genToken({ id: user.id, name: user.username })
+                let token = genToken({ id: user._id, name: user.name })
                 res.status(200).json({ token })
             })
             .catch(next)
