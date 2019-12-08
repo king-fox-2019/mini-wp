@@ -1,5 +1,5 @@
 <template>
-  <div class="form-register">
+  <div class="form-register" @submit.prevent="registerUser">
     <!-- Default form register -->
     <form class="text-center border border-light">
       <p class="h3 mb-4">Sign up</p>
@@ -37,7 +37,7 @@
       />
 
       <!-- Sign up button -->
-      <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+      <button class="btn btn-info my-4 btn-block" type="submit" @submit.prevent="onSignIn">Sign in</button>
       <span>or login with Google Account</span>
       <!-- // sign in button // -->
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
@@ -70,7 +70,7 @@ export default {
           password: this.password
         }
       })
-        .then(result => {
+        .then(({result}) => {
           localStorage.setItem("access_token", result.token);
           this.$emit("data-submited-from-form");
         })
@@ -87,7 +87,7 @@ export default {
           id_token: id_token
         }
       })
-        .done(data => {
+        .done(({data}) => {
           localStorage.setItem("access_token", data.token);
           this.$emit("data-submited-from-form");
         })

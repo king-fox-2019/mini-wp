@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form inline>
+    <b-form inline @submit.prevent='loginUser'>
       <!-- <label class="sr-only" for="inline-form-input-username">Username</label> -->
       <b-input-group prepend="@" class="mb-2 mr-sm-2 mb-sm-0">
         <b-input type="email" id="inline-form-input-username" placeholder="Email" v-model="email"></b-input>
@@ -21,6 +21,9 @@
 </template>
 
 <script>
+import swal from 'sweetalert2';
+import axios from 'axios'
+
 export default {
   name: "Login",
   components: {},
@@ -40,12 +43,14 @@ export default {
           password: this.password
         }
       })
-        .then(data => {
+        .then(({data}) => {
+          console.log(data);
           localStorage.setItem("access_token",  data.token );
           this.$emit('data-submited-from-form')
         })
-        .catch(err => {
-          swal(err.message);
+        .catch((err) => {
+          console.log(err);
+          swal.fire(err.message);
         });
     }
   }

@@ -1,39 +1,40 @@
 <template>
-  <div id="header">
+  <div id="Kepala">
     <div>
-      <Login></Login>
+      <Login @submit.prevent="loginUser"></Login>
     </div>
-    <div>
-
-    </div>
+    <div></div>
   </div>
 </template>
 
 <script>
-  import Login from './Login.vue';
+import Login from "./Login.vue";
+
 export default {
-  name: 'header',
-  props:["showLoginRegister"],
-  components:{
+  name: "Kepala",
+  props: ["showLoginRegister"],
+  components: {
     Login
   },
-  data(){
-
+  data() {
+    return {
+      
+    }
   },
-  methods:{
-
+  methods: {
+  
   }
-}
+};
 </script>
 
 <style scoped>
-    #header {
-        width: 100wv;
-        height: 10vh;
-        background-color: rgba(5, 5, 5, 0.801);
-        display: flex;
-        justify-content: flex-end;
-        padding: 5px;
-        padding-left: 10px
-    }
+#Kepala {
+  width: 100wv;
+  height: 10vh;
+  background-color: rgba(5, 5, 5, 0.801);
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  padding-left: 10px;
+}
 </style>

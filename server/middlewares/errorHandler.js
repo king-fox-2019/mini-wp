@@ -2,8 +2,8 @@
 
 module.exports = {
     errorHandler: function (error, req, res, next) {
-        console.log(JSON.stringify(error, null, 2))
-        console.log(error)
+        // console.log(JSON.stringify(error, null, 2))
+        // console.log(error)
         let statusCode;
         let messageError = [];
 
@@ -40,11 +40,12 @@ module.exports = {
                 // messageError = `${error.}`
                 break;
             default:
+                // console.log(error.status, 'asdasdasdasda');
                 statusCode = error.status || 500;
                 messageError = error.msg || 'Internal Server Error';
                 break;
         }
-
+        console.log(messageError)
         res.status(statusCode).json({
             message: messageError
         })

@@ -12,12 +12,12 @@ import Register from "../components/Register.vue";
 export default {
     name: "LoginAndRegister",
     components:{
-        Login,
+        // Login,
         Register
     },
     data(){
         return {
-            loginForm: false,
+            // loginForm: false,
             registerForm: true
         }
     }

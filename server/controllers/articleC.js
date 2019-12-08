@@ -46,7 +46,7 @@ class Controller {
                 if (result.author._id == req.decode.id) {
                     return Article.deleteOne({ _id: req.params.id })
                 } else {
-                    throw ({ status: 403, msg: "you don’t have permission to delete this article." })
+                    next ({ status: 403, msg: "you don’t have permission to delete this article." })
                 }
             })
             // Article.deleteOne({ _id: req.params.id })
@@ -63,7 +63,7 @@ class Controller {
                 if (result.author._id == req.decode.id) {
                     return Article.findByIdAndUpdate(req.params.id, req.body)
                 } else {
-                    throw ({ status: 403, msg: "you don’t have permission to change this article." })
+                    next ({ status: 403, msg: "you don’t have permission to change this article." })
                 }
             })
             // Article.findByIdAndUpdate(req.params.id, {

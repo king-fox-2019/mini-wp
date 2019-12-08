@@ -6,7 +6,7 @@ const upload = require('../middlewares/gcs')
 
 
 // router user
-
+// console.log("tes masuk ga");
 router.get('/list-user', UserController.list)
 
 router.post('/register', UserController.register)

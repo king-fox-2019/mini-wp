@@ -16,6 +16,7 @@
     "mdbootstrap": "^4.10.0",
     "mdbvue": "^6.1.0",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^9.4.3",
     "vue": "^2.6.10",
     "vue-hot-reload-api": "^2.3.4"
   },

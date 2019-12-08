@@ -49,18 +49,20 @@ class Controller {
     }
 
     static login(req, res, next) {
+        console.log(req.body)
         User.findOne({ email: req.body.email })
             .then((user) => {
-                console.log(user);
-                if (!user || user.length) throw ({ status: 404, message: "User not found" })
-
-                let userPassword = deHash(req.body.password, user.password)
-
-                if (userPassword) {
-                    let token = genToken({ id: user._id, name: user.name, email: user.email })
-                    res.status(201).json({ token, user })
+                // console.log(user);
+                if (!user || user.length == 0) {
+                    next({ status: 404, msg: "User not found" })
                 } else {
-                    throw ({ status: 403, message: "Password Incorrect" })
+                    let userPassword = deHash(req.body.password, user.password)
+                    if (userPassword) {
+                        let token = genToken({ id: user._id, name: user.name, email: user.email })
+                        res.status(201).json({ token, user })
+                    } else {
+                        next({ status: 403, msg: "Password Incorrect" })
+                    }
                 }
             })
             .catch(next);
