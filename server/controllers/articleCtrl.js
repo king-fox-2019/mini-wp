@@ -59,6 +59,15 @@ class ArticleCtrl {
 
     }
 
+    static editArticle(req, res, next) {
+        const {title, content} = req.body
+        Article.updateOne({_id: req.params.id}, {title, content})
+            .then(result => {
+                res.status(200).json(result)
+            })
+            .catch(next)
+    }
+
 }
 
 module.exports = ArticleCtrl
