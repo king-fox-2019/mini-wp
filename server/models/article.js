@@ -1,15 +1,29 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
 
-const articleSchema = new Schema ({
-    title: String,
-    tag: String,
-    content: String,
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
-})
+const articleSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  content: {
+    type: String,
+    required: true
+  },
+  created_at: {
+    type: Date,
+    default: Date.now
+  },
+  author: {
+    type: String,
+    required: true
+  },
+  featured_image: {
+    type: String
+  },
+  userId:{
+    type: String
+  }
+});
 
 const Article = mongoose.model('Article',articleSchema)
 

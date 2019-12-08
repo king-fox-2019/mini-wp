@@ -6,14 +6,12 @@ function authentication(req,res,next){
         req.decoded = verifyToken(req.headers.access_token)
         User.findById(req.decoded.id)
         .then(user=>{
-            if(user) next()
-            else throw {name:401,message:"you are not authenticated"}
+            if(user){
+                next()
+            }
+            else throw {name:400,message:'you are not authenticated'}
         })
-        .catch(err=>{
-            next(err)
-        })
-    }else{
-        next({name:401,message:"you are not authenticated"})
+        .catch(err=>next(err))
     }
 }
 

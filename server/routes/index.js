@@ -1,11 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const article = require('../routes/articleRoute')
-const user = require('../routes/userRoute')
-const {authentication} = require('../middlewares/auths')
+const router = require('express').Router()
+const article = require('./articleRoute')
+const user = require('./userRoute')
 
-router.use('/user',user)
-router.use(authentication)
 router.use('/article',article)
+router.use('/user',user)
 
 module.exports = router
