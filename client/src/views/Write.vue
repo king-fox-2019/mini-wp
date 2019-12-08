@@ -79,15 +79,15 @@ export default {
     VueEditor,
     NavbarWrite
   },
+  props: ['articleid'],
   data() {
     return {
-      id: '',
+      id: this.articleid,
       title: '',
       initialTitle: '',
       content: '',
       initialContent: '',
-      images: [],
-      vwWidth: 0
+      images: []
     }
   },
   computed: {
@@ -204,6 +204,21 @@ export default {
         .then(({ data }) => {
           this.$store.commit('CHANGE_USER', data.data)
           this.$store.commit('CHANGE_SESSION', true)
+          if (this.id)
+            return this.$store
+              .dispatch('getOneArticle', this.id)
+              .then(({ data }) => {
+                const article = data.data
+                this.title = article.title
+                this.initialTitle = article.title
+                this.content = article.content
+                this.initialContent = article.content
+                const patt = RegExp('<img src="([^"]+)">', 'g')
+                let m = []
+                while ((m = patt.exec(article.content)) != null) {
+                  this.images.push(m[1])
+                }
+              })
         })
         .catch(() => {
           localStorage.clear()

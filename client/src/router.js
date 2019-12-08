@@ -64,15 +64,15 @@ const routes = [
   {
     path: '/write',
     name: 'write',
+    component: () => import(/* webpackChunkName: "write" */ '@/views/Write.vue')
+    // props: true
+  },
+  {
+    path: '/write/:articleid',
+    name: 'edit',
     component: () =>
       import(/* webpackChunkName: "write" */ '@/views/Write.vue'),
-    // props: true
-    children: [
-      {
-        path: ':articleid',
-        props: true
-      }
-    ]
+    props: true
   },
   {
     path: '/read/:id',
