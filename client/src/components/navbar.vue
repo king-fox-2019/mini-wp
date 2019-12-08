@@ -5,7 +5,7 @@
                 <b-navbar-item >
                     <img
                         v-on:click.prevent="showHome()" 
-                        src="../../dist/all-kpop-logo.png"
+                        src="../../img/all-kpop-logo.png"
                         alt="Lightweight UI components for Vue.js based on Bulma"
                     >
                 </b-navbar-item>

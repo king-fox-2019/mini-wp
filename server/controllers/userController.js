@@ -103,7 +103,7 @@ class UserController {
                 let token = generateToken(payloadJWT)
                 res.status(200).json({access_token : token})
             }else{
-                
+                console.log('test')
                 return User.create({
                     fullname: Fullname,
                     profilePicture : profilePicture,

@@ -5,6 +5,8 @@
                 <br>
                 <div class="bts-opening" style="background-image:url('../../img/red-velvet-register.png');height:160px;width:500px;position:absolute;left:130px;margin-top:215px;background-size:cover">
                 </div>
+                <div class="bts-opening" style="background-image:url('../../img/all-kpop-logo.png');height:50px;width:200px;position:absolute;left:350px;margin-top:-200px;background-size:cover">
+                </div>
                 <div class="field">
                     <label for="" class="label">Username</label>
                     <div class="control has-icons-left">

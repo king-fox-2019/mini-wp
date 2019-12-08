@@ -27742,7 +27742,7 @@ exports.default = _default;
           _c("b-navbar-item", [
             _c("img", {
               attrs: {
-                src: "/all-kpop-logo.ebe5db30.png",
+                src: "/all-kpop-logo.00a2da57.png",
                 alt: "Lightweight UI components for Vue.js based on Bulma"
               },
               on: {
@@ -27840,7 +27840,7 @@ render._withStripped = true
       
       }
     })();
-},{"./../../dist/all-kpop-logo.png":[["all-kpop-logo.ebe5db30.png","dist/all-kpop-logo.png"],"dist/all-kpop-logo.png"],"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
+},{"./../../img/all-kpop-logo.png":[["all-kpop-logo.00a2da57.png","img/all-kpop-logo.png"],"img/all-kpop-logo.png"],"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /*!
@@ -31079,22 +31079,6 @@ exports.default = _default;
                     staticStyle: { margin: "20px", width: "28%" }
                   },
                   [
-                    project.likes.length >= 50
-                      ? _c("div", {
-                          staticClass: "love-tags",
-                          staticStyle: {
-                            "background-image":
-                              "url('/love-tag.478a4a1e.png')",
-                            width: "50px",
-                            height: "80px",
-                            position: "absolute",
-                            "margin-top": "-20px",
-                            "margin-left": "250px",
-                            "background-size": "cover"
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
                     _c("a", { attrs: { href: "#" } }, [
                       _c("div", {
                         staticClass: "image-header-inside",
@@ -31111,6 +31095,22 @@ exports.default = _default;
                         }
                       })
                     ]),
+                    _vm._v(" "),
+                    project.likes.length >= 2
+                      ? _c("div", {
+                          staticClass: "love-tags",
+                          staticStyle: {
+                            "background-image":
+                              "url('/love-tag.478a4a1e.png')",
+                            width: "50px",
+                            height: "60px",
+                            position: "absolute",
+                            "margin-top": "-8px",
+                            "margin-left": "240px",
+                            "background-size": "cover"
+                          }
+                        })
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-content" }, [
                       _c(
@@ -71795,6 +71795,11 @@ var _default = {
         _sweetalert.default.fire('Good job!', 'Congratulation, your post is updated!', 'success');
 
         _this.showPersonalPage('personal');
+
+        _this.title = '';
+        _this.description = '';
+        _this.tags = '';
+        _this.dropFiles = '';
       }).catch(function (err) {
         _sweetalert.default.fire({
           icon: 'error',
@@ -72271,6 +72276,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   name: 'login-form',
   data: function data() {
@@ -72394,6 +72401,19 @@ exports.default = _default;
           position: "absolute",
           left: "150px",
           "margin-top": "215px",
+          "background-size": "cover"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "bts-opening",
+        staticStyle: {
+          "background-image": "url('/all-kpop-logo.00a2da57.png')",
+          height: "50px",
+          width: "200px",
+          position: "absolute",
+          left: "100px",
+          "margin-top": "-200px",
           "background-size": "cover"
         }
       }),
@@ -72562,7 +72582,7 @@ render._withStripped = true
       
       }
     })();
-},{"../apis/server":"src/apis/server.js","sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","vue-google-login":"node_modules/vue-google-login/dist/vue-google-login.min.js","_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","./../../img/bts-opening.png":[["bts-opening.2b80c34d.png","img/bts-opening.png"],"img/bts-opening.png"],"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/registerform.vue":[function(require,module,exports) {
+},{"../apis/server":"src/apis/server.js","sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","vue-google-login":"node_modules/vue-google-login/dist/vue-google-login.min.js","_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","./../../img/bts-opening.png":[["bts-opening.2b80c34d.png","img/bts-opening.png"],"img/bts-opening.png"],"./../../img/all-kpop-logo.png":[["all-kpop-logo.00a2da57.png","img/all-kpop-logo.png"],"img/all-kpop-logo.png"],"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/registerform.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -72574,6 +72594,8 @@ var _server = _interopRequireDefault(require("../apis/server"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -72721,6 +72743,19 @@ exports.default = _default;
           position: "absolute",
           left: "130px",
           "margin-top": "215px",
+          "background-size": "cover"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "bts-opening",
+        staticStyle: {
+          "background-image": "url('/all-kpop-logo.00a2da57.png')",
+          height: "50px",
+          width: "200px",
+          position: "absolute",
+          left: "350px",
+          "margin-top": "-200px",
           "background-size": "cover"
         }
       }),
@@ -72953,7 +72988,7 @@ render._withStripped = true
       
       }
     })();
-},{"../apis/server":"src/apis/server.js","_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","./../../img/red-velvet-register.png":[["red-velvet-register.11cd4b17.png","img/red-velvet-register.png"],"img/red-velvet-register.png"],"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/views/login.vue":[function(require,module,exports) {
+},{"../apis/server":"src/apis/server.js","_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","./../../img/red-velvet-register.png":[["red-velvet-register.11cd4b17.png","img/red-velvet-register.png"],"img/red-velvet-register.png"],"./../../img/all-kpop-logo.png":[["all-kpop-logo.00a2da57.png","img/all-kpop-logo.png"],"img/all-kpop-logo.png"],"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/views/login.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -76253,7 +76288,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49423" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58996" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

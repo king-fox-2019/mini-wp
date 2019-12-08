@@ -2,6 +2,8 @@
     <form v-on:submit.prevent="login" class="box" style="box-shadow: 10px 10px 21px -8px rgba(0,0,0,0.2);">
         <div class="bts-opening" style="background-image:url('../../img/bts-opening.png');height:170px;width:450px;position:absolute;left:150px;margin-top:215px;background-size:cover">
         </div>
+        <div class="bts-opening" style="background-image:url('../../img/all-kpop-logo.png');height:50px;width:200px;position:absolute;left:100px;margin-top:-200px;background-size:cover">
+        </div>
                 <h2 style="font-size:36px">What's Kpoppin today?</h2>
                 <br>
                 <div class="field">

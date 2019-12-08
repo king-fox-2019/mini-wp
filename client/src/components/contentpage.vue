@@ -9,8 +9,6 @@
 
       <div class="card" style="margin:20px;width:28%;" v-for="(project, i) in filteredList" :key="i">
           
-          <div v-if="project.likes.length >= 50" class="love-tags" style="background-image: url('../../img/love-tag.png');width:50px;height:80px;position:absolute;margin-top:-20px;margin-left:250px;background-size:cover">
-          </div>
           <a href="#">
           
          <div class="image-header-inside" id="header-card"
@@ -19,6 +17,8 @@
           </div>
 
           </a>
+          <div v-if="project.likes.length >= 2" class="love-tags" style="background-image: url('../../img/love-tag.png');width:50px;height:60px;position:absolute;margin-top:-8px;margin-left:240px;background-size:cover">
+          </div>
         <div class="card-content">
           <div class="content" style="max-width:100%">
               <h2>{{project.title}}</h2>

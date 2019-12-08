@@ -187,6 +187,10 @@ export default {
                     'success'
                 )
                 this.showPersonalPage('personal')
+                this.title = ''
+                this.description = ''
+                this.tags = ''
+                this.dropFiles = ''
             })
             .catch(err => {
                 Swal.fire({

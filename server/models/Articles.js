@@ -26,9 +26,6 @@ const articleSchema = new Schema ({
     likes : [{
         type : Schema.Types.ObjectId, ref : "User"
     }],
-    dislike : [{
-        type : Schema.Types.ObjectId, ref : "User"
-    }]
 })
 
 const Article = mongoose.model('Article',articleSchema)
