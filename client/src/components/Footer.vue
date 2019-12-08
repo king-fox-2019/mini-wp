@@ -3,8 +3,16 @@
     <v-card class="flex" flat tile>
       <v-card-text class="py-2 white--text text-center">
         <div>
-          <v-btn v-for="icon in icons" :key="icon" class="mx-4" dark icon>
-            <v-icon right size="24px">{{ icon }}</v-icon>
+          <v-btn
+            v-for="icon in icons"
+            :key="icon.icon"
+            class="mx-4"
+            dark
+            icon
+            :href="icon.link"
+            target="_blank"
+          >
+            <v-icon right size="24px">{{ icon.icon }}</v-icon>
           </v-btn>
         </div>
         {{ new Date().getFullYear() }} —
@@ -20,11 +28,26 @@ export default {
   data() {
     return {
       icons: [
-        "fab fa-facebook",
-        "fab fa-twitter",
-        "fab fa-google-plus",
-        "fab fa-linkedin",
-        "fab fa-instagram"
+        {
+          icon: "fab fa-twitter",
+          link: "https://twitter.com/edwinsatya3"
+        },
+        {
+          icon: "fab fa-facebook",
+          link: "https://www.facebook.com/AUTO.TELKOMNIZER"
+        },
+        {
+          icon: "fab fa-google-plus",
+          link: ""
+        },
+        {
+          icon: "fab fa-instagram",
+          link: "https://www.instagram.com/edwinsatya_/"
+        },
+        {
+          icon: "fab fa-linkedin",
+          link: "https://www.linkedin.com/in/edwin-satya-yudistira-5a4734159/"
+        }
       ]
     };
   }

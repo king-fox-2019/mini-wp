@@ -39,11 +39,11 @@
             <!-- sign up form -->
             <v-dialog v-model="dialog2" width="400">
               <template v-slot:activator="{ on }">
-                <v-btn color="warning" @click="goSignUpForm" v-on="on">SignUp</v-btn>
+                <v-btn color="pink lighten-1" @click="goSignUpForm" v-on="on">SignUp</v-btn>
               </template>
               <!-- <v-btn color="warning" @click="onSignUp">SignUp</v-btn> -->
               <v-card class="elevation-12">
-                <v-toolbar color="warning" dark flat>
+                <v-toolbar color="pink lighten-1" dark flat>
                   <v-toolbar-title>SignUp Form</v-toolbar-title>
                 </v-toolbar>
                 <v-card-text>
@@ -90,7 +90,7 @@
 
                     <v-btn color="error" class="mr-4" @click="resetSignUp">Reset Form</v-btn>
 
-                    <v-btn color="warning" type="submit">SignUp</v-btn>
+                    <v-btn color="pink lighten-1" type="submit">SignUp</v-btn>
                   </v-form>
                 </v-card-text>
               </v-card>
@@ -136,7 +136,8 @@ export default {
       ],
       imageRules: [
         // v => !!v || "Image is required",
-        v => !!v || "Image is required"
+        v => !!v || "Image is required",
+        v => (v && v.length <= 1) || "Image is required"
         // v => v.file === null || "Image is required"
       ]
     };

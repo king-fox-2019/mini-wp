@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const Article = require("../models/article");
 
 function authentication(req, res, next) {
   try {
@@ -11,6 +12,48 @@ function authentication(req, res, next) {
   }
 }
 
+function authorization(req, res, next) {
+  Article.findById(req.params.id)
+    .then(response => {
+      if (!response) {
+        throw {
+          status: 404,
+          message: "Article Not Found!"
+        };
+      } else {
+        if (response.author === req.decoded.id) {
+          next();
+        } else {
+          throw {
+            status: 401,
+            message: "Unauthorized user"
+          };
+        }
+      }
+    })
+    .catch(next);
+}
+
+function authorizationMyArticle(req, res, next) {
+  let id = req.decoded.id;
+  Article.find({
+    author: id
+  })
+    .then(response => {
+      if (response.length === 0) {
+        throw {
+          status: 404,
+          message: "You No Have Article"
+        };
+      } else {
+        next();
+      }
+    })
+    .catch(next);
+}
+
 module.exports = {
-  authentication
+  authentication,
+  authorization,
+  authorizationMyArticle
 };

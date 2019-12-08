@@ -7,19 +7,13 @@
       top
     >
       {{ snackbarSuccess.text }}
-      <v-btn color="black" text @click="snackbarSuccess.snackbar = false"
-        >Close</v-btn
-      >
+      <v-btn color="black" text @click="snackbarSuccess.snackbar = false">Close</v-btn>
     </v-snackbar>
-    <v-app-bar color="grey lighten-4">
-      <v-app-bar-nav-icon
-        v-if="isLogin"
-        class="grey--text"
-        @click="drawer = !drawer"
-      ></v-app-bar-nav-icon>
-      <v-toolbar-title class="text-uppercase blue-grey--text">
+    <v-app-bar collapse-on-scroll="true" elevate-on-scroll="true" color="grey lighten-4">
+      <v-app-bar-nav-icon v-if="isLogin" class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title class="text-uppercase">
         <span class="font-weight-light">Article</span>
-        <span>Sharing</span>
+        <span color="pink lighten-1">Sharing</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <GoogleLogin
@@ -31,11 +25,7 @@
         style="margin-right: 10px;"
       ></GoogleLogin>
       <!-- <div v-if="!isLogin" id="google-signin-button" class="g-signin2"></div> -->
-      <formsign-item
-        v-if="!isLogin"
-        @snackbar-success="notify"
-        @user-signin="infoUser"
-      ></formsign-item>
+      <formsign-item v-if="!isLogin" @snackbar-success="notify" @user-signin="infoUser"></formsign-item>
 
       <v-btn v-else @click="onSignOut" depressed color="grey lighten-4">
         <span>Sign Out</span>
@@ -55,15 +45,18 @@
       <v-divider></v-divider>
 
       <v-list dense id="drawer-menu">
+        <addarticle-item></addarticle-item>
         <v-list-item v-for="link in links" :key="link.title" :to="link.route">
           <v-list-item-icon>
             <v-icon class="white--text">{{ link.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{
+            <v-list-item-title class="white--text">
+              {{
               link.text
-            }}</v-list-item-title>
+              }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -72,14 +65,16 @@
 </template>
 
 <script>
-import FormSign from "../components/FormSign.vue";
 import GoogleLogin from "vue-google-login";
+import FormSign from "../components/FormSign.vue";
+import AddArticle from "./AddArticle.vue";
 
 export default {
   name: "Navbar",
   components: {
     "formsign-item": FormSign,
-    GoogleLogin
+    GoogleLogin,
+    "addarticle-item": AddArticle
   },
   data() {
     return {
@@ -98,7 +93,7 @@ export default {
       isLogin: false,
       drawer: false,
       links: [
-        { icon: "add", text: "Add Article", route: "addarticle" },
+        // { icon: "add", text: "Add Article", route: "addarticle" },
         { icon: "dashboard", text: "Dashboard", route: "/" },
         { icon: "folder", text: "My Articles", route: "myarticles" }
       ],
