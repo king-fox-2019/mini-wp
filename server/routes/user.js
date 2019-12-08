@@ -1,6 +1,7 @@
 const routes = require('express').Router()
 const gcsUpload = require('gcs-upload')
 const userController = require('../controllers/user')
+const verifyGoogle = require('../middlewares/google')
 
 const upload = gcsUpload({
     limits: {
@@ -14,7 +15,9 @@ const upload = gcsUpload({
 
 routes.get('/', userController.findAll)
 routes.post('/login', userController.login)
-routes.post('/register', upload.array('imageUrl'), userController.register)
+routes.post('/google', verifyGoogle, userController.google)
+routes.post('/register', upload.array('image'), userController.register)
+routes.post('/register/google', userController.register)
 routes.delete('/:id', userController.deleted)
 
 module.exports = routes

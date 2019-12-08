@@ -15,10 +15,12 @@ const upload = gcsUpload({
 
 routes.use(authentication)
 routes.get('/', articleController.findAll)
-routes.get('/tag', articleController.findbytag)
-routes.post('/', upload.array('imageUrl') ,articleController.create)
+routes.get('/myarticles', articleController.myArticle)
+routes.post('/', upload.array('image') ,articleController.create)
+routes.post('/tag', articleController.findbytag)
 routes.patch('/:id', authorization , articleController.updatePatch)
-routes.put('/:id', authorization ,upload.array('imageUrl') ,articleController.updatePut)
+routes.put('/:id/oldpicture', authorization ,articleController.updatePut)
+routes.put('/:id', authorization ,upload.array('image') ,articleController.updatePut)
 routes.delete('/:id', authorization ,articleController.deleted)
 
 module.exports = routes

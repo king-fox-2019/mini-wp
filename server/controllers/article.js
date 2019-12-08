@@ -2,6 +2,14 @@ const ArticleModel = require('../models/article')
 
 module.exports = {
     findAll(req,res,next){
+        ArticleModel.find()
+            .populate('author')
+            .then(articles=>{
+                res.status(200).json(articles)
+            })
+            .catch(next)
+    },
+    myArticle(req,res,next){
         ArticleModel.find({ author : req.loggedUser.id })
             .populate('author')
             .then(articles=>{
@@ -11,8 +19,8 @@ module.exports = {
     },
     create(req,res,next){
         const author = req.loggedUser.id
-        const { title, content, imageUrl, tag } = req.body
-        const form = { title, content, imageUrl, author, tag }
+        const { title, content, image, tag } = req.body
+        const form = { title, content, image, author, tag }
         ArticleModel.create(form)
             .then(article=>{
                 res.status(201).json({
@@ -36,8 +44,8 @@ module.exports = {
     },
     updatePut(req,res,next){
         const { id } = req.params
-        const { title, content, imageUrl, tag } = req.body
-        const form = { title, content, imageUrl, tag }
+        const { title, content, image, tag } = req.body
+        const form = { title, content, image, tag }
         ArticleModel.findOneAndUpdate({ _id : id },form,{ new : true, runValidators : true })
             .then(article=>{
                 res.status(201).json({

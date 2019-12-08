@@ -7,13 +7,14 @@ const ArticleSchema = new Schema({
         required : [true, 'title is required']
     },
     content : {
-        type : String
+        type : String,
+        required : [true, 'content is required']
     },
     author : {
         type : Schema.Types.ObjectId,
         ref : 'User'
     },
-    imageUrl : {
+    image : {
         type : Array,
         validate : {
             validator : function(v){

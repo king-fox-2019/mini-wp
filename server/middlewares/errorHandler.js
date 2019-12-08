@@ -20,7 +20,7 @@ function errorHandling(err, req, res, next) {
         res.status(404).json({
             message: 'Id Not Found',
         })
-    } else if (err.message.name === 'JsonWebTokenError') {
+    } else if (err.name === 'JsonWebTokenError') {
         // error token
         errors.push(message)
         res.status(401).json({
@@ -50,9 +50,15 @@ function errorHandling(err, req, res, next) {
         })
         err.name
     } else {
+        if (status == 500) {
+            res.status(500).json({
+                message : "Internal Server Error"
+            })
+        }
+
         errors.push(message)
-        res.status(500).json({
-            message : `Internal Server Error`,
+        res.status(status).json({
+            message : message,
             errors
         })
     }

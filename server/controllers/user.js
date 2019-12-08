@@ -3,9 +3,25 @@ const { comparePassword } = require('../helpers/bcrypt')
 const { generateToken } = require('../helpers/jwt')
 
 module.exports = {
+    google(req,res,next){
+        UserModel.findOne({
+            email : req.decoded.email
+        })
+        .then(user=>{
+            let { name, email, picture } = req.decoded
+            if(user){
+                let payload = { email: user.email, id: user._id, name : user.name }
+                let token = generateToken(payload)
+                res.status(200).json({ token , user })
+            } else {
+                res.status(200).json({ name, email, picture })
+            }
+        })
+        .catch(next)
+    },
     register(req, res, next) {
-        const { name, password, email, imageUrl } = req.body
-        UserModel.create({ name, password, email, imageUrl })
+        const { name, password, email, image } = req.body
+        UserModel.create({ name, password, email, image })
             .then(user => {
                 let payload = { email: user.email, id: user._id, name : user.name }
                 let token = generateToken(payload)
@@ -21,7 +37,7 @@ module.exports = {
                     if (comparePassword(password, user.password)) {
                         let payload = { email: user.email, id: user._id, name: user.name }
                         let token = generateToken(payload)
-                        res.status(200).json({ token, name:user.name })
+                        res.status(200).json({ token, user })
                     } else {
                         next({ status: 400, message: 'Wrong Password' })
                     }

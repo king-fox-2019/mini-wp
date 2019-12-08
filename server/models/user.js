@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         required: [true, 'password is required'],
         minlength: [4, 'Password Minimum Contain 4 Character']  
     },
-    imageUrl : {
+    image : {
         type : Array,
         validate : {
             validator : function(value){
