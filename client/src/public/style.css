@@ -7,24 +7,6 @@ body {
     overflow-y: hidden;
 }
 
-.btn-navbar{
-    border: none;
-    background-color: #2A6188;
-    border: none;
-    color: white;
-    transition: 0.5s;
-}
-
-.btn-navbar:hover {
-    background-color: rgb(25, 72, 105);
-    border: none;
-}
-
-.btn-navbar:focus {
-    outline: none;
-    border: none;
-}
-
 .ButtonMySite {
     cursor: pointer;
     background-color: #FFFFFF;
@@ -43,32 +25,11 @@ body {
     background-color: black;
 }
 
-.btn-read-article{
-    color: rgb(26, 26, 26);
-    transition: 0.5s;
-}
 
-.btn-read-article:hover{
-    color: #2E73B2;
-}
 
-.btn-delete-article{
-    color: rgb(26, 26, 26);
-    transition: 0.5s;
-}
 
-.btn-delete-article:hover{
-    color: rgb(218, 8, 8);
-}
 
-.btn-edited-article{
-    color: rgb(26, 26, 26);
-    transition: 0.5s;
-}
 
-.btn-edited-article:hover{
-    color: rgb(60, 163, 19);
-}
 
 .separator {
     display: flex;
