@@ -3,6 +3,7 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 const express = require('express')
+const localDatabase = 'mongodb://localhost:27017/new-mini-wp'
 const cors = require('cors')
 const mongoose = require('mongoose')
 const routes = require('./routes')
@@ -17,8 +18,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
-
-mongoose.connect('mongodb://localhost:27017/new-mini-wp', {
+mongoose.connect(`mongodb://dwitamaalfred:${process.env.ATLASPASSWORD}cluster0-shard-00-00-dehxs.gcp.mongodb.net:27017,cluster0-shard-00-01-dehxs.gcp.mongodb.net:27017,cluster0-shard-00-02-dehxs.gcp.mongodb.net:27017/mini-wp?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

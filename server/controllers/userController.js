@@ -87,9 +87,9 @@ class UserController {
         .then(ticket =>{
             const payloads = ticket.getPayload()
             Email = payloads.email
-            Fullname = payloads.email.split('@')[0]
+            Fullname = payloads.name
             profilePicture = payloads.picture
-
+            
             return User.findOne({email:Email})
         })
         .then(user => {
@@ -99,17 +99,19 @@ class UserController {
                     fullname : user.fullname,
                     email : user.email
                 }
+                
                 let token = generateToken(payloadJWT)
                 res.status(200).json({access_token : token})
             }else{
-                let defaultName = `${req.body.name.split(' ')[0]}+${req.body.name.split(' ')[1]}`
-                User.create({
+                
+                return User.create({
                     fullname: Fullname,
-                    profilePicture : profilePicture || `https://ui-avatars.com/api/?name=${defaultName}`,
+                    profilePicture : profilePicture,
                     email: Email,
-                    password : password
+                    password : PasswordHasher(password)
                 })
                 .then(newUser => {
+                    console.log('from create ==============')
                     payloadJWT = {
                         _id : newUser.id,
                         fullname : newUser.fullname,
