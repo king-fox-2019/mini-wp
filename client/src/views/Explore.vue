@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Articles from '@/components/dashboard/Articles'
+import Articles from '@/components/Articles'
 import checkSession from '@/utils/checkSession'
 
 export default {
