@@ -36,7 +36,7 @@ class UserController {
             .findOne( { email } )
             .then(user=> {
                 if(!user) {
-                    next({ isThrow: true, status: 400, message: "Wrong email / password" })
+                    throw new Error({ isThrow: true, status: 400, message: "Wrong email / password" })
                 } else {
                     if(compare(password, user.password)) {
                         const payload = {
@@ -44,9 +44,9 @@ class UserController {
                             name: user.fullname
                         }
                         const token = jwt.sign(payload)
-                        res.status(200).json(token)
+                        res.status(200).json({token})
                     } else {
-                        next({isThrow: true, status: 400, message: "Wrong email / password"})
+                        throw new Error({ isThrow: true, status: 400, message: "Wrong email / password" })
                     }
                 }
             })

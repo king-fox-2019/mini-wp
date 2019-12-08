@@ -1,23 +1,45 @@
 'use strict';
-const { Article } = require('../models');
+const { Article, User } = require('../models');
 
 class ArticleController {
+    static showAuthorArticle(req, res, next) {
+        let { id } = req.token
+        let articlesList = []
+        Article
+         .find()
+         .populate({
+             path: 'author',
+             select: '-passowrd'
+         })
+        .then(articles=> {
+            let list = []
+            articles.forEach(article => {
+                if(article.author._id == id) {
+                    list.push(article)
+                }
+            });
+            res.status(200).json(list)
+        })
+        .catch(next)
+    }
     static destroy(req, res, next) {
+        console.log('masuk kesini?')
+        return
         let { id } = req.body
         Article
             .deleteOne({_id: id})
             .then(succ=> {
-                console.log(succ)
                 res.status(200).json(succ)
             })
             .catch(next)
     };
     static addArticle(req, res, next) {
         let { title, content } = req.body
+        let { id } = req.token
         let newArticle = {
             title,
             content,
-            author: req.token.id
+            author: id
         }
         Article
             .create(newArticle)
@@ -26,21 +48,6 @@ class ArticleController {
             })
             .catch(next)
     }
-    static showMyArticle(req, res, next) {
-        Article
-            .find({author: req.token.id})
-            .sort({ createdAt: -1 })
-            .populate({
-                path: 'author',
-                select: '-email -password'
-            })
-            .then(articles => {
-                res.status(200).json(articles)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    };
     static showArticle(req, res, next) {
         Article
             .find()
