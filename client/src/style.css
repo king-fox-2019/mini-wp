@@ -1,0 +1,52 @@
+a {
+  margin-right: 20px;
+  text-decoration: none !important;
+  color: rgb(138, 125, 125) !important;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.navbar-brand {
+  cursor: pointer;
+}
+
+a:hover {
+  color: rgb(187, 164, 164) !important;
+  transition: 0.3s;
+}
+
+.navbar-brand {
+  color: rgb(138, 125, 125) !important;
+}
+
+.vertical-center {
+  min-height: 100%; 
+  min-height: 100vh; 
+
+  display: flex;
+  align-items: center;
+}
+
+#register-btn{
+    color:rgb(80, 75, 75)!important;
+    transition:0.3s
+}
+
+#register-btn:hover{
+    color: black!important;
+    transition: 0.3s
+}
+
+#backtologin-btn{
+    color:rgb(80, 75, 75)!important;
+    transition:0.3s
+}
+
+#backtologin-btn:hover{
+    color: black!important;
+    transition: 0.3s
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
