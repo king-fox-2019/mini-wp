@@ -21,17 +21,6 @@ const routes = [
       }
     ]
   }
-  // {
-  //   path: "/addarticle",
-  //   name: "AddArticle",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(
-  //       /* webpackChunkName: "AddArticle" */ "../components/AddArticle.vue"
-  //     )
-  // }
 ];
 
 const router = new VueRouter({

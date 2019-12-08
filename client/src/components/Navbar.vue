@@ -181,38 +181,6 @@ export default {
     onFailure() {
       console.log("error");
     },
-    // onSignIn(googleUser) {
-    // console.log("parraaahhh");
-    // const id_token = googleUser.getAuthResponse().id_token;
-    // this.axios({
-    //   method: "POST",
-    //   url: "/users/googlesignin",
-    //   data: {
-    //     id_token
-    //   }
-    // })
-    //   .then(({ data }) => {
-    //     console.log("goooglleee");
-    //     localStorage.setItem("token", data.token);
-    //     localStorage.setItem("user", data.response.name);
-    //     localStorage.setItem("image", data.response.image);
-    //     this.isLogin = true;
-    //     let notif = {
-    //       color: "success",
-    //       text: `Welcome to the Article Sharing, ${data.response.name}`,
-    //       isLogin: true
-    //     };
-    //     let userInfo = {
-    //       name: `${data.response.name}`,
-    //       image: data.response.image
-    //     };
-    //     this.notify(notif);
-    //     this.infoUser(userInfo);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    // },
     onSignOut() {
       if (gapi.auth2 !== undefined) {
         let auth2 = gapi.auth2.getAuthInstance();
