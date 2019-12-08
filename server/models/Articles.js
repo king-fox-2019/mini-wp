@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const projectSchema = new Schema ({
+const articleSchema = new Schema ({
     title : {
         type : String,
         
@@ -22,9 +22,15 @@ const projectSchema = new Schema ({
     },
     userId : {
         type : Schema.Types.ObjectId, ref : "User"
-    }
+    },
+    likes : [{
+        type : Schema.Types.ObjectId, ref : "User"
+    }],
+    dislike : [{
+        type : Schema.Types.ObjectId, ref : "User"
+    }]
 })
 
-const Project = mongoose.model('Project',projectSchema)
+const Article = mongoose.model('Article',articleSchema)
 
-module.exports = Project
+module.exports = Article

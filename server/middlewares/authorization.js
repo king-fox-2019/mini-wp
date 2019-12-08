@@ -1,9 +1,9 @@
-const Project = require('../models/projects')
+const Article = require('../models/Articles')
 
 module.exports = (req,res,next)=>{
-    Project.findOne({_id:req.params.id})
-    .then(project => {
-        if(project.userId == req.loggedUser.id){
+    Article.findOne({_id:req.params.id})
+    .then(article => {
+        if(article.userId == req.loggedUser.id){
             next()
         }else{
             next({
@@ -13,6 +13,6 @@ module.exports = (req,res,next)=>{
         }
     }) 
     .catch(err => {
-        next()
+        next(err)
     })
 }
