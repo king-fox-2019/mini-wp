@@ -1,21 +1,25 @@
 <template>
 
   <div>
-    <loginpage v-if="isLogin == false" @loginStatus='loginStatus'></loginpage>
-    <mainpage @loginStatus='loginStatus'></mainpage>
+    <loginpage v-if="isLogin == false && personal === false" @loginStatus='loginStatus'></loginpage>
+    <mainPage v-if="isLogin == true" @loginStatus='loginStatus'></mainPage>
+    
+
   </div>
 </template>
 
 <script>
 
-import mainpage from './views/mainpage'
+import mainPage from './views/mainPage'
 import loginpage from './views/login'
+
 
 export default {
   name: 'App',
   data() {
       return {
         isLogin : false,
+        personal : false
       };
     },
     methods:{
@@ -25,14 +29,15 @@ export default {
     },
     components: {
 
-        mainpage,
-        loginpage
+        mainPage,
+        loginpage,
+      
     },
       created(){
           if(localStorage.getItem('token')){
               this.isLogin = true
           }
-      }
+      },
 
 };
 </script>

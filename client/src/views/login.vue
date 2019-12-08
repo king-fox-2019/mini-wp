@@ -1,5 +1,5 @@
 <template>
-   <section class="hero is-primary is-fullheight" style=" background-image: url('../../img/home.jpg');">
+   <section class="hero is-primary is-fullheight" style=" background-image: url('../../img/WALLPAPER---alt.jpg');background-size:cover">
     <div class="hero-body">
         <div class="container">
         <div class="columns is-centered">
@@ -45,5 +45,8 @@ export default {
 </script>
 
 <style>
+
+
+
 
 </style>

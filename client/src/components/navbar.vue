@@ -4,6 +4,7 @@
         <template slot="brand">
                 <b-navbar-item >
                     <img
+                        v-on:click.prevent="showHome()" 
                         src="../../dist/all-kpop-logo.png"
                         alt="Lightweight UI components for Vue.js based on Bulma"
                     >
@@ -11,7 +12,7 @@
             </template>
             <template slot="start">
 
-                <b-navbar-item href="#">
+                <b-navbar-item href="#" v-on:click.prevent="showHome()" >
                     Home
                 </b-navbar-item>
                 
@@ -31,6 +32,7 @@
 <script>
 export default {
     name:'navbar',
+    
     data(){
         return {
             
@@ -41,6 +43,10 @@ export default {
         logOut(){
             localStorage.clear()
             this.$emit('loginStatus',false)
+        },
+        showHome(){
+            console.log('homeee')
+            this.$emit('showPersonalPage','public')
         }
     }
 

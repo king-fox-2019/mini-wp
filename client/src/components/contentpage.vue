@@ -1,28 +1,28 @@
 <template>
-  <div class="container column is-10" style="overflow:scroll;">
+  <div class="container column is-10" style="overflow:scroll;width:100vw">
       
     <div class="section-content">
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
 
-        
+    <div v-if="editorPage === false" class="main-content-cards" style="display:flex;flex-direction:rows;flex-wrap:wrap;width:100%">
 
-    <div v-if="editorPage === false" class="main-content-cards" style="display:flex;flex-direction:rows">
-
-      <div class="card" style="margin:30px;width:30%;" v-for="(project, i) in projects" :key="i">
+      <div class="card" style="margin:20px;width:28%;" v-for="(project, i) in filteredList" :key="i">
           
+          <div v-if="project.likes.length >= 50" class="love-tags" style="background-image: url('../../img/love-tag.png');width:50px;height:80px;position:absolute;margin-top:-20px;margin-left:250px;background-size:cover">
+          </div>
           <a href="#">
           
-         <div class="image-header-inside" 
-         :style="`background-position : center;background-size:cover;height:300px;background-image: url('${projects[i].images[0]}')`" @click="isModalActive = true; index = i">
+         <div class="image-header-inside" id="header-card"
+         :style="`background-position : center;background-size:cover;height:300px;background-image: url('${project.images[0]}')`" @click="isModalActive = true; index = i">
           
           </div>
 
           </a>
         <div class="card-content">
           <div class="content" style="max-width:100%">
-              <h1>{{project.title}}</h1>
-                <p style="color:grey; font-weigth:100; margin-bottom:0px; " v-html="project.description.slice(0,200) + ' ...'">
+              <h2>{{project.title}}</h2>
+                <p style="color:grey; font-weigth:100; margin-bottom:0px; " v-html="project.description.slice(0,50)+'...'">
                     <!-- {{project.description.slice(0,200) + '...'}} -->
                     
                 </p>
@@ -31,16 +31,11 @@
                 <p style="color:grey; font-weigth:100; font-style:italic"></p>
                 <div class="buttons-content">
                     <h6 style="font-size:12px; margin-bottom:20px;" > <strong>published at :</strong>  {{project.publishedAt.slice(0,10)}}</h6>
-                    <!-- <b-button type="is-primary" style="height:50px ; margin-right:20px" @click.prevent="findUpdate(project._id); index = i ; "
-                        icon-left="update">
-                        Update
-                    </b-button>
-
-                    <b-button type="is-danger" style="height:50px ; margin-right:20px" @click.prevent="deleteProject(project._id)"
-                        icon-left="delete">
-                        Delete
-                    </b-button> -->
-                   
+                    <a href="#" style="color:red" @click="likes(project._id)">
+                        <i v-if="project.likes.length === 0" id="like-button" class="fas fa-heart" style="color:black"></i>
+                        <i v-if="project.likes.length > 0" id="like-button" class="far fa-heart" style="margin-right:10px"></i>
+                    </a>
+                    {{project.likes.length}}
                 </div>
             </div>
         </div>
@@ -56,34 +51,39 @@
            
               <div class="card" style="padding:50px">
                 
-                <div class="image-header-inside" :style="{ 'background-size':'cover','background-position':'center', 'background-image': `url('${projects[index].images[0]}')` }">
+                <div class="image-header-inside" :style="{ 'background-size':'cover','background-position':'center', 'background-image': `url('${filteredList[index].images[0]}')` }">
                 </div>
             
                 <div class="card-header-inside">
                     <div class="content-right">
                         
-                        <p class="card-header-title" style="font-size: 36px; padding-left:-10px">{{ projects[index].title}}</p>
+                        <p class="card-header-title" style="font-size: 36px; padding-left:-10px">{{ filteredList[index].title}}</p>
                        
 
                          <b-taglist style="margin-left:10px">
-                            <b-tag v-for="(tag,i) in projects[index].tags" :key="i"  style="" type="is-info">{{tag}}</b-tag>
+                            <b-tag v-for="(tag,i) in filteredList[index].tags" :key="i"  style="" type="is-info">{{tag}}</b-tag>
                         </b-taglist>
+                        <a href="#" style="color:red" @click="likes(filteredList[index]._id)">
+                            <i class="far fa-heart" style="margin-right:10px;margin-left:15px"></i>
+                            {{filteredList[index].likes.length}}
+                        </a>
 
                     </div>
-                <p style="margin-left:20px"> <strong>published at :</strong>   {{ projects[index].publishedAt.slice(0,10)}}</p>  
+                <p style="margin-left:20px"> <strong>published at :</strong>   {{ filteredList[index].publishedAt.slice(0,10)}}</p>  
                 </div>
                 <hr>
                 <div class="card-content">
                 <div class="content">
-                        <p style="color:grey; font-weigth:100; margin-bottom:0px;" v-html="projects[index].description">
+                        <p style="color:grey; font-weigth:100; margin-bottom:0px;" v-html="filteredList[index].description">
                         
                         </p>
 
                         <br>                                      
                  </div>
+                 
                 </div>
 
-                <div class="image" style="background-size: cover" v-for="(image,i) in projects[index].images" :key="i">
+                <div class="image" style="background-size: cover" v-for="(image,i) in filteredList[index].images" :key="i">
                     <img :src="image" alt="" v-if="i !== 0">
                     <hr>
                 </div>
@@ -103,7 +103,7 @@
                <template style="display:flex;align-items:center">
                     <section>
                         
-                        <p class="card-header-title" style="font-size: 36px; padding-left:-10px">Editor page</p> 
+                        <p class="card-header-title" style="font-size: 36px; padding-left:-10px">Editor Page</p> 
                         
                         <hr>
 
@@ -198,6 +198,7 @@ import Swal from 'sweetalert2'
 
     export default {
         name: 'content-page',
+        props: ['keyword'],
         data() {
             return {
                 file: [],
@@ -212,113 +213,50 @@ import Swal from 'sweetalert2'
                 description: '',
                     config: {
                         placeholder: 'Compose an epic...',
-                    },   
+                    },
+                page:'',
             }
         },
+        
+
         methods : {
 
-            findUpdate(id){
-                this.editorPage = true
-                axios({
-                    method: 'get',
-                    url : `/projects/${id}`,
-                    headers : {
-                        token : localStorage.getItem('token')
-                    }
-                })
-                .then(({data})=>{
-                    console.log(data.images)
-                    this.title = data.title
-                    this.description = data.description
-                    this.dropFiles = data.images
-                    this.tags = data.tags
-                    this.projectId = data._id
-                })
-            },
-
-            updateProject(){
-                console.log('halo dari update')
-                console.log(this.projectId)
-                axios({
-                    method:'put',
-                    url:`/projects/${this.projectId}`,
-                    headers :{
-                        token : localStorage.getItem('token')
-                    },
-                    data :{
-                        title : this.title,
-                        description : this.description,
-                        images : this.images,
-                        tags : this.tags
-                    }
-                })
-                .then(({data})=>{
-                    console.log(data)
-                    console.log('SUKSES')
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-                // console.log({
-                //     title:this.title,
-                //     description:this.description,
-                //     tags : this.tags,
-                //     images : this.images
-                // })
-
-            },
-            
-
-            showCreateForm(status){
-                this.editorPage = status
-            },
-            getProjects(){
+            fetchData() {
                 axios({
                     method: 'get',
                     url : '/projects/all',
                 })
                 .then(({data})=>{
-                    console.log(data)
                     this.projects = data
                 })
                 .catch(err => {
                     console.log(err)
                 })
+            
             },
-            deleteProject(id){
-                
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.value) {
-                axios({
-                    method: 'delete',
-                    url : `/projects/${id}`,
+            likes(id){
+                 axios({
+                    method: 'post',
+                    url : `/projects/${id}/likes`,
                     headers : {
                         token : localStorage.getItem('token')
                     },
                 })
                 .then(({data})=>{
-                    this.getProjects()
+                    this.fetchData()
                 })
                 .catch(err => {
-                    console.log(err)
                 })
-                    Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                    )
-                }
-            })
-
-                
+            },
+            deleteDropFile(index) {
+                this.dropFiles.splice(index, 1)
+            },
+            changePage(value){
+                console.log('page position ======',value)
+                this.page = value
+            },
+            showCreateForm(status){
+                this.editorPage = status
             },
             createProject(){
                 console.log(
@@ -328,23 +266,30 @@ import Swal from 'sweetalert2'
                     this.dropFiles
                 )
             }
-            
         },
-        components : {
-            
+        computed: {
+
+            filteredList() {
+                return this.projects.filter(post => {
+                    // console.log(post.tags.toString())
+                    return post.tags.toString().toLowerCase().includes(this.keyword.toLowerCase()) || post.title.toLowerCase().includes(this.keyword.toLowerCase())
+                    
+                })
+            },
         },
-        created(){
-            this.getProjects()
+        mounted() {
+            this.fetchData()
         },
-        watch(){
-            this.getProjects()
-        }
-        
     }
 </script>
 
 
 <style>
+
+
+#like-button:hover{
+    transform: scale(1.2) perspective(1px)
+}
 
 .section-content {
     padding: 3rem 1.5rem;
@@ -371,6 +316,13 @@ import Swal from 'sweetalert2'
     height: 500px;
     display: flex;
     justify-content: space-evenly;
+}
+
+#header-card:hover{
+    width:100%;
+    height:100%;
+    background-color:#000;
+    opacity:0.8;
 }
 
 .detail-card {

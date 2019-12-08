@@ -1,7 +1,8 @@
 <template>
     <form v-on:submit.prevent="login" class="box" style="box-shadow: 10px 10px 21px -8px rgba(0,0,0,0.2);">
-                <h1 style="font-size:36px">Let us help you to shine</h1>
-                <br>
+        <div class="bts-opening" style="background-image:url('../../img/bts-opening.png');height:170px;width:450px;position:absolute;left:150px;margin-top:215px;background-size:cover">
+        </div>
+                <h2 style="font-size:36px">What's Kpoppin today?</h2>
                 <br>
                 <div class="field">
                 <label for="" class="label">Email</label>
@@ -24,15 +25,14 @@
                 <br>
                 <div class="field" style="display:flex; justify-content:space-between">
                     <div class="options">
-                        <button class="button is-success" style="margin-right:20px">
+                        <button class="button is-primary" style="margin-right:20px">
                             Login
                         </button>
-                        <button @click="register" class="button is-success">
+                        <button @click="register" class="button is-warning">
                             Register
                         </button>
-
                     </div>
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 </div>
     </form>
     
@@ -113,6 +113,12 @@ export default {
 
 .columns.is-centered {
     justify-content: space-between;
+}
+.button{ 
+    transition: all .2s ease-in-out;
+}
+.button:hover{
+    transform: scale(1.1) perspective(1px)
 }
 
 </style>

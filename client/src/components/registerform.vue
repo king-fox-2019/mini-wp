@@ -3,7 +3,8 @@
             <form @submit.prevent="register" class="box" style="box-shadow: 10px 10px 21px -8px rgba(0,0,0,0.2);">
                 <h1 style="font-size:36px">Register now</h1>
                 <br>
-                <br>
+                <div class="bts-opening" style="background-image:url('../../img/red-velvet-register.png');height:160px;width:500px;position:absolute;left:130px;margin-top:215px;background-size:cover">
+                </div>
                 <div class="field">
                     <label for="" class="label">Username</label>
                     <div class="control has-icons-left">
@@ -48,10 +49,10 @@
                          
                 <div class="field" style="display:flex; justify-content:space-between">
                     
-                        <button class="button is-success">
+                        <button class="button is-primary">
                             Register
                         </button>
-                         <button class="button is-success" @click="login">
+                         <button class="button is-warning" @click="login">
                             back
                         </button>
                 </div>

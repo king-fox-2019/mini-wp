@@ -1,14 +1,16 @@
 <template>
 <div>
     
-        <navbar @loginStatus='isLogin'></navbar>
+        <navbar @loginStatus='isLogin' @showPersonalPage='showPersonalPage'></navbar>
         <section class="main-content columns is-fullheight" >
-        <sidebar v-if="isLogin === true" @openCreateForm='showCreateForm'></sidebar>
-        <contentpage v-if="createPage === false"></contentpage>
+        <sidebar @openCreateForm='showCreateForm' @showPersonalPage='showPersonalPage' @searchKeyword='searchKeyword' :filteredTags='filteredTags'></sidebar>
+        
+        <contentpage v-if="page === 'public'" :keyword='keyword' ></contentpage>
+        <personalpage v-if="page === 'personal'" :keyword='keyword'></personalpage>
  
-        <div class="container column is-10" style="overflow:scroll; padding:100px;">
-
-            <form v-if="createPage === true" @submit.prevent="createProject" enctype="multipart/form-data">
+        <div class="container column is-12" style="overflow:scroll; padding:100px;">
+            <form v-if="page === 'create'" @submit.prevent="createProject" enctype="multipart/form-data">
+          
                 
                 <template style="display:flex;align-items:center; width:70%">
                         <section style="padding-left:0px">
@@ -81,8 +83,7 @@
                             </div>                            
 
                             <button class="button" type="is-primary">Submit</button>
-                            <button class="button" type="is-danger" @click="createPage = false">Cancel</button>
-
+                            <button class="button" type="is-danger" @click="showPersonalPage('personal')">Cancel</button>
                         
                         </section>
                     </template>
@@ -103,6 +104,7 @@
 import sidebar from '../components/sidebar'
 import navbar from '../components/navbar'
 import contentpage from '../components/contentpage'
+import personalpage from '../components/personalpage'
 import quill from 'vue-quill'
 import axios from '../apis/server'
 import Swal from 'sweetalert2'
@@ -112,36 +114,53 @@ export default {
     name : 'main-page',
     data(){
         return {
-            isLogin : false,
+
+            isPublic: true,
             tags: [],
             projects : [],
             title:'',
             dropFiles : [],
             tags : [],
+            filteredTags : [],
             index : 0,
             description: '',
                 config: {
                     placeholder: 'Start writing here...',
                 },   
-            createPage : false,
+            page:'public',
+            keyword : '',
+            search: '',
+            filtered: []
+            
         }
     },
     components:{
 
         sidebar,
         navbar,
-        contentpage
+        contentpage,
+        personalpage,
 
     },
     methods: {
+    
+        searchKeyword(value){
+            console.log(value)
+            this.keyword = value
+        },
+        showPersonalPage(value){
+            this.page = value
+            this.keyword = ''
+        },
         deleteDropFile(index) {
             this.dropFiles.splice(index, 1)
         },
         isLogin(status){
             this.$emit('loginStatus',status)
         },
-        showCreateForm(status){
-            this.createPage = status
+        showCreateForm(value){
+            
+            this.page = value
         },
         createProject(){
             let formData = new FormData()
@@ -167,7 +186,7 @@ export default {
                     'Congratulation, your post is updated!',
                     'success'
                 )
-                this.createPage = false
+                this.showPersonalPage('personal')
             })
             .catch(err => {
                 Swal.fire({
@@ -179,7 +198,44 @@ export default {
             })
         }
     },
+    computed: {
+
+        filteredList() {
+            return this.projects.filter(post => {
+                return post.title.toLowerCase().includes(this.keyword.toLowerCase())
+                
+            })
+        },
+        
+     },
     mounted() {
+
+        // console.log(this.filteredList(),'from filtereddd')
+        axios({
+            method: 'get',
+            url : '/projects/all',
+        })
+        .then(({data})=>{
+            console.log(this.projects)
+            console.log('from mounted')
+            this.projects = data
+            let tags = []
+                for(let i = 0 ; i < data.length; i++){
+                    for( let j = 0 ; j < data[i].tags.length; j++){
+                        if(tags.indexOf(data[i].tags[j]) === -1) {
+                            tags.push(data[i].tags[j]);
+                        }
+                    }
+                }
+                this.filteredTags = tags
+            console.log(this.filteredTags)
+            
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+        
     this.editor = new quill(this.$refs.editor, {
         modules: {
             toolbar: [
@@ -192,7 +248,6 @@ export default {
     });
 
     this.editor.root.innerHTML = this.value;
-    // We will add the update event here
     this.editor.on('text-change', () => {});
 }
 
