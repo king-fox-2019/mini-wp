@@ -84,6 +84,14 @@ export default new Vuex.Store({
     getOneArticle(context, id) {
       const access_token = localStorage.getItem('access_token')
       return server.get(`articles/${id}`, { headers: { access_token } })
+    },
+    onUpdateName(context, fullName) {
+      const access_token = localStorage.getItem('access_token')
+      return server
+        .patch(`user/name`, { fullName }, { headers: { access_token } })
+        .then(({ data }) => {
+          context.commit('CHANGE_USER', data.data)
+        })
     }
   },
   modules: {}

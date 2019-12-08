@@ -1,8 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="primary" fixed="top">
-    <b-navbar-brand :to="onSession ? '/dashboard' : '/'" active-class="active"
-      >TYPRESS</b-navbar-brand
-    >
+    <b-navbar-brand :to="onSession ? '/dashboard' : '/'" active-class="active">TYPRESS</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -13,17 +11,10 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto" v-if="onSession">
-        <b-nav-item-dropdown
-          :text="user ? user.fullName || user.email : ''"
-          right
-        >
-          <b-dropdown-item to="profile" active-class="active"
-            >Profile</b-dropdown-item
-          >
+        <b-nav-item-dropdown :text="user ? user.fullName || user.email : ''" right>
+          <b-dropdown-item to="/profile" active-class="text-primary font-weight-bold">Profile</b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item active-class="active" @click="signOut"
-            >Sign Out</b-dropdown-item
-          >
+          <b-dropdown-item active-class="text-primary font-weight-bold" @click="signOut">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
 

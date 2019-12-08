@@ -65,6 +65,25 @@ class UserController {
       }
     })
   }
+
+  static updateUserFullName(req, res, next) {
+    User.findByIdAndUpdate(
+      req.user._id,
+      { fullName: req.body.fullName },
+      { new: true, omitUndefined: true, runValidators: true }
+    )
+      .then(user => {
+        res.status(200).json({
+          data: {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            fullName: user.fullName
+          }
+        })
+      })
+      .catch(next)
+  }
 }
 
 module.exports = UserController
