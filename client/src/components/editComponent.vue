@@ -15,7 +15,7 @@
             <div v-html="editorContent"></div>
         </section>
         
-        <button type="button" v-on:click="sentPost" class="btn btn-primary mt-2">POST!</button>
+        <button type="button" v-on:click="sentPost" class="btn btn-primary mt-2">Edit!</button>
         <button type="button" v-on:click="back" class="btn btn-primary mt-2">BACK!</button>
     </div>
 </template>
@@ -93,8 +93,8 @@ export default {
           content: this.editorContent
         })
         .then(({ data }) => {
-          Swal.fire("Success!", "Article Posted!", "success");
-          this.$emit("pagecontrol", "explore");
+          Swal.fire("Success!", "Article Edited!", "success");
+          this.$emit('isEdit')
         })
         .catch(err => {
           let fields = err.response.data.join(" | ");
