@@ -50,7 +50,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          swal.fire(err.message);
+          swal(err.message);
         });
     }
   }
