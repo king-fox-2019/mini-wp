@@ -9,8 +9,8 @@ fs
 		return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
 	})
 	.forEach(file => {
-		const module = require(`./${file}`)
-		Object.keys(module).forEach(key => modules[key] = module[key])
+		const moduleObj = require(`./${file}`)
+		Object.keys(moduleObj).forEach(key => modules[key] = moduleObj[key])
 	})
 
 
