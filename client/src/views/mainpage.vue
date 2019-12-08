@@ -174,7 +174,7 @@ export default {
             formData.append ('description',this.description)
             axios({
                 method : 'post',
-                url : 'projects',
+                url : 'articles',
                 data : formData,
                 headers: {
                     token: localStorage.getItem('token')
@@ -213,7 +213,7 @@ export default {
         // console.log(this.filteredList(),'from filtereddd')
         axios({
             method: 'get',
-            url : '/projects/all',
+            url : '/articles/all',
         })
         .then(({data})=>{
             console.log(this.projects)

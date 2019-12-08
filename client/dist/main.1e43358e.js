@@ -27405,7 +27405,7 @@ var _default = {
 
     (0, _server.default)({
       method: 'get',
-      url: '/projects/all'
+      url: '/articles/all'
     }).then(function (_ref2) {
       var data = _ref2.data;
       console.log('from sidebar');
@@ -30986,7 +30986,7 @@ var _default = {
 
       (0, _server.default)({
         method: 'get',
-        url: '/projects/all'
+        url: '/articles/all'
       }).then(function (_ref) {
         var data = _ref.data;
         _this.projects = data;
@@ -30999,7 +30999,7 @@ var _default = {
 
       (0, _server.default)({
         method: 'post',
-        url: "/projects/".concat(id, "/likes"),
+        url: "/articles/".concat(id, "/likes"),
         headers: {
           token: localStorage.getItem('token')
         }
@@ -31906,7 +31906,7 @@ var _default = {
 
       (0, _server.default)({
         method: 'get',
-        url: '/projects/',
+        url: '/articles/',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -31931,7 +31931,7 @@ var _default = {
       this.editorPage = true;
       (0, _server.default)({
         method: 'get',
-        url: "/projects/".concat(id),
+        url: "/articles/".concat(id),
         headers: {
           token: localStorage.getItem('token')
         }
@@ -31963,7 +31963,7 @@ var _default = {
       formData.append('description', this.description);
       (0, _server.default)({
         method: 'put',
-        url: "/projects/".concat(this.projectId),
+        url: "/articles/".concat(this.projectId),
         headers: {
           token: localStorage.getItem('token')
         },
@@ -32000,7 +32000,7 @@ var _default = {
         if (result.value) {
           (0, _server.default)({
             method: 'delete',
-            url: "/projects/".concat(id),
+            url: "/articles/".concat(id),
             headers: {
               token: localStorage.getItem('token')
             }
@@ -32033,7 +32033,7 @@ var _default = {
 
     (0, _server.default)({
       method: 'get',
-      url: '/projects/',
+      url: '/articles/',
       headers: {
         token: localStorage.getItem('token')
       }
@@ -71784,7 +71784,7 @@ var _default = {
       formData.append('description', this.description);
       (0, _server.default)({
         method: 'post',
-        url: 'projects',
+        url: 'articles',
         data: formData,
         headers: {
           token: localStorage.getItem('token')
@@ -71821,7 +71821,7 @@ var _default = {
     // console.log(this.filteredList(),'from filtereddd')
     (0, _server.default)({
       method: 'get',
-      url: '/projects/all'
+      url: '/articles/all'
     }).then(function (_ref3) {
       var data = _ref3.data;
       console.log(_this3.projects);
@@ -72209,7 +72209,12 @@ render._withStripped = true
       
       }
     })();
-},{"../components/sidebar":"src/components/sidebar.vue","../components/navbar":"src/components/navbar.vue","../components/contentpage":"src/components/contentpage.vue","../components/personalpage":"src/components/personalpage.vue","vue-quill":"node_modules/vue-quill/vue-quill.js","../apis/server":"src/apis/server.js","sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/loginform.vue":[function(require,module,exports) {
+},{"../components/sidebar":"src/components/sidebar.vue","../components/navbar":"src/components/navbar.vue","../components/contentpage":"src/components/contentpage.vue","../components/personalpage":"src/components/personalpage.vue","vue-quill":"node_modules/vue-quill/vue-quill.js","../apis/server":"src/apis/server.js","sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/vue-google-login/dist/vue-google-login.min.js":[function(require,module,exports) {
+var define;
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t=t||self)["vue-google-login"]={})}(this,function(t){"use strict";var e,n,o=function(t){return e?Promise.resolve(e):(n||(n=function(t){return new Promise(function(n,o){window.onGapiLoad=function(){window.gapi.load("auth2",function(){try{e=window.gapi.auth2.init(Object.assign({},t))}catch(t){o({err:"client_id missing or is incorrect, or if you added extra params maybe they are written incorrectly, did you add it to the component or plugin?"})}n(e)})}})}(t)),n)},i=function(t,e){if(t)return t[e]();return Promise.reject({err:"Script not loaded correctly, did you added the plugin or the client_id to the component?"})},r={load:function(t){return Promise.all([o(t),new Promise(function(t,e){if(!document.getElementById("auth2_script_id")){var n=document.createElement("script");n.setAttribute("src","https://apis.google.com/js/platform.js?onload=onGapiLoad"),n.setAttribute("async",!0),n.setAttribute("defer","defer"),n.setAttribute("id","auth2_script_id"),document.head.appendChild(n)}t()})]).then(function(t){return t[0]})},signIn:function(){return i(e,"signIn")},signOut:function(){return i(e,"signOut")}},s=0;var d=function(t,e,n,o,i,r,s,d,u,a){"boolean"!=typeof s&&(u=d,d=s,s=!1);var c,l="function"==typeof n?n.options:n;if(t&&t.render&&(l.render=t.render,l.staticRenderFns=t.staticRenderFns,l._compiled=!0,i&&(l.functional=!0)),o&&(l._scopeId=o),r?(c=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),e&&e.call(this,u(t)),t&&t._registeredComponents&&t._registeredComponents.add(r)},l._ssrRegister=c):e&&(c=s?function(){e.call(this,a(this.$root.$options.shadowRoot))}:function(t){e.call(this,d(t))}),c)if(l.functional){var f=l.render;l.render=function(t,e){return c.call(e),f(t,e)}}else{var h=l.beforeCreate;l.beforeCreate=h?[].concat(h,c):[c]}return n}({render:function(){var t=this.$createElement,e=this._self._c||t;return this.renderParams&&!this.logoutButton?e("div",{attrs:{id:this.id},on:{click:this.handleClick}}):e("button",{attrs:{id:this.id},on:{click:this.handleClick}},[this._t("default")],2)},staticRenderFns:[]},void 0,{name:"GoogleLogin",props:{params:{type:Object,required:!0},onSuccess:{type:Function,default:function(){}},onFailure:{type:Function,default:function(){}},logoutButton:{type:Boolean,default:!1},renderParams:{type:Object,required:!1}},beforeCreate:function(){this.id="google-signin-btn-".concat(s++)},methods:{handleClick:function(){var t=this,e=this.logoutButton?"signOut":"signIn";r[e]().then(function(e){return t.onSuccess(e)}).catch(function(e){return t.onFailure(e)})}},mounted:function(){var t=this;r.load(this.params).then(function(){t.renderParams&&!1===t.logoutButton&&window.gapi.signin2.render(t.id,t.renderParams)}).catch(function(t){console.log(t)})}},void 0,!1,void 0,void 0,void 0),u={install:function(t,e){t.GoogleAuth=r.load(e)}};t.GoogleLogin=d,t.LoaderPlugin=u,t.default=d,Object.defineProperty(t,"__esModule",{value:!0})});
+
+
+},{}],"src/components/loginform.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -72221,8 +72226,11 @@ var _server = _interopRequireDefault(require("../apis/server"));
 
 var _sweetalert = _interopRequireDefault(require("sweetalert2"));
 
+var _vueGoogleLogin = _interopRequireDefault(require("vue-google-login"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -72268,19 +72276,27 @@ var _default = {
   data: function data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      params: {
+        client_id: '434137932056-mhlk7skeh24mkbuusvdovau85bd8oees.apps.googleusercontent.com'
+      },
+      renderParams: {
+        width: 200,
+        height: 40,
+        longtitle: true
+      }
     };
   },
   methods: {
-    login: function login() {
+    onSuccess: function onSuccess(googleUser) {
       var _this = this;
 
+      var id_token = googleUser.getAuthResponse().id_token;
       (0, _server.default)({
         method: 'post',
-        url: 'users/login',
+        url: 'users/googleLogin',
         data: {
-          email: this.email,
-          password: this.password
+          id_token: id_token
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -72300,11 +72316,47 @@ var _default = {
         });
 
         console.log(err);
+      }); // console.log(googleUser.Zi.access_token ,'consoleee logggg');
+      // console.log(googleUser,'consoleee logggg');
+      // This only gets the user information: id, name, imageUrl and email
+      // console.log(googleUser.getBasicProfile());
+    },
+    login: function login() {
+      var _this2 = this;
+
+      (0, _server.default)({
+        method: 'post',
+        url: 'users/login',
+        data: {
+          email: this.email,
+          password: this.password
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+
+        _sweetalert.default.fire('Welcome Back!', 'Now you are signed in', 'success');
+
+        localStorage.setItem('token', data.access_token);
+        _this2.email = '';
+        _this2.password = '';
+
+        _this2.$emit('loginStatus', true);
+      }).catch(function (err) {
+        _sweetalert.default.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Wrong email/password'
+        });
+
+        console.log(err);
       });
     },
     register: function register() {
       this.$emit('pageStatus', 'register');
     }
+  },
+  components: {
+    GoogleLogin: _vueGoogleLogin.default
   }
 };
 exports.default = _default;
@@ -72446,11 +72498,16 @@ exports.default = _default;
             )
           ]),
           _vm._v(" "),
-          _c("div", {
-            staticClass: "g-signin2",
-            attrs: { "data-onsuccess": "onSignIn" }
+          _c("GoogleLogin", {
+            attrs: {
+              params: _vm.params,
+              renderParams: _vm.renderParams,
+              onSuccess: _vm.onSuccess,
+              onFailure: _vm.onFailure
+            }
           })
-        ]
+        ],
+        1
       )
     ]
   )
@@ -72505,7 +72562,7 @@ render._withStripped = true
       
       }
     })();
-},{"../apis/server":"src/apis/server.js","sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","./../../img/bts-opening.png":[["bts-opening.2b80c34d.png","img/bts-opening.png"],"img/bts-opening.png"],"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/registerform.vue":[function(require,module,exports) {
+},{"../apis/server":"src/apis/server.js","sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","vue-google-login":"node_modules/vue-google-login/dist/vue-google-login.min.js","_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","./../../img/bts-opening.png":[["bts-opening.2b80c34d.png","img/bts-opening.png"],"img/bts-opening.png"],"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/registerform.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -76115,7 +76172,11 @@ var FontAwesomeLayersText = {
   }
 };
 exports.FontAwesomeLayersText = FontAwesomeLayersText;
-},{"@fortawesome/fontawesome-svg-core":"node_modules/@fortawesome/fontawesome-svg-core/index.es.js"}],"src/main.js":[function(require,module,exports) {
+},{"@fortawesome/fontawesome-svg-core":"node_modules/@fortawesome/fontawesome-svg-core/index.es.js"}],"node_modules/vue-google-signin-button/dist/vue-google-signin-button.min.js":[function(require,module,exports) {
+var define;
+'use strict';var _typeof='function'==typeof Symbol&&'symbol'==typeof Symbol.iterator?function(obj){return typeof obj}:function(obj){return obj&&'function'==typeof Symbol&&obj.constructor===Symbol&&obj!==Symbol.prototype?'symbol':typeof obj};(function(){function a(c){'undefined'!=typeof console&&console.error('[g-signin-button] '+c)}function b(c){c.component('g-signin-button',{name:'g-signin-button',render:function render(d){return d('div',{attrs:{class:'g-signin-button'},ref:'signinBtn'},this.$slots.default)},props:{params:{type:Object,required:!0,default:function _default(){return{}}}},mounted:function mounted(){var _this=this;return window.gapi?this.params.client_id?void window.gapi.load('auth2',function(){var d=window.gapi.auth2.init(_this.params);d.attachClickHandler(_this.$refs.signinBtn,{},function(e){_this.$emit('success',e)},function(e){_this.$emit('error',e),_this.$emit('failure',e)})}):void a('params.client_id must be specified.'):void a('"https://apis.google.com/js/api:client.js" needs to be included as a <script>.')}})}'object'==('undefined'==typeof exports?'undefined':_typeof(exports))?module.exports=b:'function'==typeof define&&define.amd?define([],function(){return b}):window.Vue&&window.Vue.use(b)})();
+
+},{}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _buefy = _interopRequireDefault(require("buefy"));
@@ -76130,8 +76191,11 @@ var _vueFontawesome = require("@fortawesome/vue-fontawesome");
 
 var _vueQuill = _interopRequireDefault(require("vue-quill"));
 
+var _vueGoogleSigninButton = _interopRequireDefault(require("vue-google-signin-button"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+Vue.use(_vueGoogleSigninButton.default);
 Vue.use(_vueQuill.default);
 Vue.use(_buefy.default);
 Vue.component('font-awesome-icon', _vueFontawesome.FontAwesomeIcon);
@@ -76161,7 +76225,7 @@ function signOut() {
     localStorage.removeItem('token');
   });
 }
-},{"buefy":"node_modules/buefy/dist/esm/index.js","buefy/dist/buefy.css":"node_modules/buefy/dist/buefy.css","bulma/css/bulma.css":"node_modules/bulma/css/bulma.css","./App.vue":"src/App.vue","@fortawesome/vue-fontawesome":"node_modules/@fortawesome/vue-fontawesome/index.es.js","vue-quill":"node_modules/vue-quill/vue-quill.js"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"buefy":"node_modules/buefy/dist/esm/index.js","buefy/dist/buefy.css":"node_modules/buefy/dist/buefy.css","bulma/css/bulma.css":"node_modules/bulma/css/bulma.css","./App.vue":"src/App.vue","@fortawesome/vue-fontawesome":"node_modules/@fortawesome/vue-fontawesome/index.es.js","vue-quill":"node_modules/vue-quill/vue-quill.js","vue-google-signin-button":"node_modules/vue-google-signin-button/dist/vue-google-signin-button.min.js"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -76189,7 +76253,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60362" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60980" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

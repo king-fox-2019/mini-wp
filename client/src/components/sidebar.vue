@@ -100,7 +100,7 @@ import axios from '../apis/server'
 
             axios({
                 method: 'get',
-                url : '/projects/all',
+                url : '/articles/all',
             })
             .then(({data})=>{
                 console.log('from sidebar')

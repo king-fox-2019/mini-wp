@@ -224,7 +224,7 @@ import Swal from 'sweetalert2'
             fetchData() {
                 axios({
                     method: 'get',
-                    url : '/projects/all',
+                    url : '/articles/all',
                 })
                 .then(({data})=>{
                     this.projects = data
@@ -237,7 +237,7 @@ import Swal from 'sweetalert2'
             likes(id){
                  axios({
                     method: 'post',
-                    url : `/projects/${id}/likes`,
+                    url : `/articles/${id}/likes`,
                     headers : {
                         token : localStorage.getItem('token')
                     },

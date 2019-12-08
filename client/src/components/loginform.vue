@@ -32,7 +32,8 @@
                             Register
                         </button>
                     </div>
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
+                        <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
                 </div>
     </form>
     
@@ -42,16 +43,61 @@
 
 import axios from '../apis/server'
 import Swal from 'sweetalert2'
+import GoogleLogin from 'vue-google-login'
 
 export default {
     name:'login-form',
     data(){
         return {
             email:'',
-            password: ''
+            password: '',
+            params: {
+                client_id:'434137932056-mhlk7skeh24mkbuusvdovau85bd8oees.apps.googleusercontent.com'
+            },
+            renderParams: {
+                width: 200,
+                height: 40,
+                longtitle: true
+            }
         }
     },
     methods: {
+        onSuccess(googleUser) {
+            var id_token = googleUser.getAuthResponse().id_token;
+            axios({
+                method : 'post',
+                url : 'users/googleLogin',
+                data : {
+                    id_token
+                }
+            })
+            .then(({data})=>{
+                Swal.fire(
+                    'Welcome Back!',
+                    'Now you are signed in',
+                    'success'
+                )
+                localStorage.setItem('token',data.access_token)
+                this.email = ''
+                this.password = ''
+                this.$emit('loginStatus',true)
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Wrong email/password', 
+                })
+                console.log(err)
+            })
+
+            // console.log(googleUser.Zi.access_token ,'consoleee logggg');
+
+            // console.log(googleUser,'consoleee logggg');
+            // This only gets the user information: id, name, imageUrl and email
+            // console.log(googleUser.getBasicProfile());
+        },
+    
         login(){
             axios({
                 method : 'post',
@@ -85,7 +131,10 @@ export default {
         register(){
             this.$emit('pageStatus','register')
         }
-    }
+    },
+    components: {
+            GoogleLogin
+        }
 
 }
 </script>

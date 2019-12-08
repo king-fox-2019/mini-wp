@@ -226,7 +226,7 @@ import Swal from 'sweetalert2'
              getPersonal() {
                 axios({
                         method: 'get',
-                        url : '/projects/',
+                        url : '/articles/',
                         headers : {
                             token : localStorage.getItem('token')
                         },
@@ -250,7 +250,7 @@ import Swal from 'sweetalert2'
                 this.editorPage = true
                 axios({
                     method: 'get',
-                    url : `/projects/${id}`,
+                    url : `/articles/${id}`,
                     headers : {
                         token : localStorage.getItem('token')
                     }
@@ -282,7 +282,7 @@ import Swal from 'sweetalert2'
                     formData.append ('description',this.description)
                 axios({
                     method:'put',
-                    url:`/projects/${this.projectId}`,
+                    url:`/articles/${this.projectId}`,
                     headers :{
                         token : localStorage.getItem('token')
                     },
@@ -324,7 +324,7 @@ import Swal from 'sweetalert2'
                 if (result.value) {
                 axios({
                     method: 'delete',
-                    url : `/projects/${id}`,
+                    url : `/articles/${id}`,
                     headers : {
                         token : localStorage.getItem('token')
                     },
@@ -368,7 +368,7 @@ import Swal from 'sweetalert2'
             
             axios({
                     method: 'get',
-                    url : '/projects/',
+                    url : '/articles/',
                     headers : {
                         token : localStorage.getItem('token')
                     },
