@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { User, Todo } = require("../models");
+const { User, Article } = require("../models");
 
 function authentication(req, res, next) {
   if (req.headers.access_token) {
@@ -20,9 +20,9 @@ function authentication(req, res, next) {
 }
 
 function authorization(req, res, next) {
-  Todo.findById(req.params.todoId)
-    .then(todo => {
-      if (todo.user_id == req.decoded._id) {
+  Article.findById(req.params.articleId)
+    .then(article => {
+      if (article.author == req.decoded._id) {
         next();
       } else {
         throw { status: 403, message: "Forbidden access" };

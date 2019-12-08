@@ -3,25 +3,31 @@ const { ObjectId } = require("mongodb");
 
 class articleController {
     static addArticle(req, res, next) {
+      console.log(req.decoded)
       const { title, content, created_at } = req.body;
-      Article.create({ title, content, created_at })
+      const featured_image = req.file.gcsUrl;
+      const author = req.decoded._id
+      Article.create({ title, content, created_at, featured_image, author })
         .then(article => {
           res.status(200).json(article);
-        }).catch(next)
+        })
+        .catch(next)
     }
     
     static showArticles(req, res, next) {
-      Article.find({})
+      Article.find({}).sort({created_at: 'descending'})
         .then(articles => {
           res.status(200).json(articles);
-        }).catch(next)
+        })
+        .catch(next)
     }
 
     static showArticle(req, res, next) {
-      Article.findById(req.params.articleId)
+      Article.findById(req.params.articleId).sort({created_at: 'descending'})
         .then(article => {
           res.status(200).json(article);
-        }).catch(next);
+        })
+        .catch(next);
     }
 
     static editArticle(req, res, next) {
@@ -30,7 +36,8 @@ class articleController {
       Article.findByIdAndUpdate(articleId, { title, content, created_at })
         .then(response => {
           res.status(200).json({ message: 'Updated' })
-        }).catch(next);
+        })
+        .catch(next);
     }
 
     static editArticleSpecified(req, res, next) {

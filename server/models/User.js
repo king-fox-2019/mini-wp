@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema, model, models } = mongoose;
+const { hashPassword } = require("../helpers/bcrypt")
 
 const userSchema = new Schema({
   username: {
@@ -43,13 +44,21 @@ const userSchema = new Schema({
       }
     ]
   },
+  password: {
+    type: String, 
+    required: [true, "password must be filled out"]
+  },
   gSignIn: {
     type: Boolean,
     default: false
-  }
+  },
+  articles: [{
+    type: Schema.Types.ObjectId,
+    ref: "Article"
+  }]
 });
 
-userSchema.pre("save", function(next) {
+userSchema.pre("save", function() {
   this.password = hashPassword(this.password);
   next();
 });
