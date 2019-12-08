@@ -2,7 +2,6 @@
   <div class="contained">
     <p>DISCOVER</p>
     <p>Find book picks, reading tips, and activities for your little ones</p>
-    <Tags></Tags>
     <TopArticle></TopArticle>
     <Articles :articles="articles"></Articles>
 
@@ -15,7 +14,6 @@
 
 <script>
 import axios from '../helpers/axios'
-import Tags from '../components/Tags'
 import TopArticle from '../components/TopArticle'
 import Articles from '../components/Articles'
 
@@ -27,7 +25,6 @@ export default {
     }
   },
   components : {
-    Tags,
     TopArticle,
     Articles
   },

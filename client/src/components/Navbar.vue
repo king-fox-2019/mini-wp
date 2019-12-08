@@ -4,7 +4,7 @@
       <sui-menu-item>
         <sui-grid class="full-width">
           <sui-grid-row stretched>
-            <sui-grid-column :width="8" class="logo">
+            <sui-grid-column :width="8" class="logo" @click="$router.push('/')" style="cursor: pointer;">
               <B>Brightly</B>
             </sui-grid-column>
             <sui-grid-column :width="8" class="tagline">

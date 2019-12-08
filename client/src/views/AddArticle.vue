@@ -15,11 +15,13 @@
         <label class="label" for="input">Please upload a picture !</label>
 
         <div class="input">
-          <input @change="previewFiles" ref="myFiles" name="input" id="file" type="file">
+          <input @change="previewFiles" ref="myFiles" name="input" id="file" type="file" />
         </div>
       </div>
       <!-- upload  -->
       <!-- <sui-input type="file" placeholder="Search..." /> -->
+      <Tags @changeTags="changeTags"></Tags>
+      <!-- <vue-tags-input v-model="tag" :tags="tags" @tags-changed="newTags => tags = newTags" /> -->
 
       <sui-button type="submit">Submit</sui-button>
     </form>
@@ -28,6 +30,8 @@
 
 <script>
 import axios from "../helpers/axios";
+// import VueTagsInput from "@johmun/vue-tags-input";
+import Tags from "../components/Tags"
 
 $(function() {
   var container = $(".container"),
@@ -79,32 +83,53 @@ export default {
       name: "",
       file: null,
       title: "",
-      
+      tags: []
+      // tag: "",
+      // tags: []
     };
   },
   components: {
+    Tags
   },
   methods: {
     post() {
       let formData = new FormData();
       formData.append("title", this.title);
-      formData.append("content", this.content)
+      formData.append("content", this.content);
       formData.append("image", this.file);
+      formData.append("tags", JSON.stringify(this.tagsText))
 
       console.log("ke post");
-      axios.post("/articles", formData, {headers: {
-        access_token : localStorage.getItem('token')
-      }})
-      .then(({data}) => {
-        console.log(data, "mau di submit add article");
-        this.file = null
-        this.$router.push('/')
-      }, formData)
-      .catch()
+      axios
+        .post("/articles", formData, {
+          headers: {
+            access_token: localStorage.getItem("token")
+          }
+        })
+        .then(({ data }) => {
+          console.log(data, "mau di submit add article");
+          this.file = null;
+          this.$router.push("/");
+        }, formData)
+        .catch();
     },
     previewFiles(event) {
-      console.log(event.target.files['0'])
-      this.file = event.target.files['0'];
+      console.log(event.target.files["0"]);
+      this.file = event.target.files["0"];
+    },
+    changeTags(tags) {
+      this.tags = tags
+    }
+  },
+  computed : {
+    tagsText() {
+      let result = []
+      this.tags.forEach(tag => {
+        result.push(tag.text)
+      })
+      console.log(result, "result tag nya apa");
+      
+      return result
     }
   }
 };

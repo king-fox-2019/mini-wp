@@ -40,6 +40,7 @@ class ArticleController {
     console.log(req.body);
     
     let { title, content, tags, image } = req.body
+    tags = JSON.parse(tags)
     Article.create({ title, content, tags, image})
     .then(article => {
       console.log(article);
