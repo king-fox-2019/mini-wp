@@ -1,22 +1,31 @@
 <template>
   <div>
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container text-center" style="min-height: 69vh;">
-        <h1 class="display-4">You didn't have any articles yet.</h1>
-        <p class="lead">
-          Lets make a new one
-          <button type="button" class="btn btn-light btn-sm">
-            <span class="fas fa-plus"></span> New post
-          </button>
-        </p>
-      </div>
-    </div>
+    <articles_container
+      v-bind:articles="articles"
+      v-if="whatToShow === 'articles'"
+      >
+    </articles_container>
+
+    <article_form v-if="whatToShow === 'form'"></article_form>
   </div>
 </template>
 
 <script>
+import articles_container from './articles-container.vue'
+import article_form from './article-form.vue'
+
 export default {
   name: 'home-page',
+  data: function () {
+    return {
+      articles: [],
+      whatToShow: 'articles', // articles, form
+    }
+  },
+  components: {
+    articles_container,
+    article_form,
+  }
 }
 </script>
 
