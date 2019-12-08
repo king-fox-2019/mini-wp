@@ -108,6 +108,40 @@ Status 200: OK
 
 
 
+### Edit User Full Name
+
+##### Endpoint
+
+```http
+PATCH /user/name
+```
+
+##### Header
+
+- access_token **Required**
+
+#### Body
+
+- fullName **Optional** Must only contains letters and spaces
+
+##### Response
+
+Status 200: OK
+
+```json
+{
+  "message": 'Full name updated',
+  "data": {
+    "_id": "5de633efe07a431b594a2fe3",
+    "username": "alif",
+    "email": "alif@mail.com",
+    "fullName": "Atrah Cuy"
+  }
+}
+```
+
+
+
 ### Check Session
 
 This, as opposed to Sign In, is used to verify `access_token` and return it's payload. It's internally used to verify client access and redirects it based on verification result.

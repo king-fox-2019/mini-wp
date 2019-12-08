@@ -74,6 +74,7 @@ class UserController {
     )
       .then(user => {
         res.status(200).json({
+          message: 'Full name updated',
           data: {
             _id: user._id,
             username: user.username,
