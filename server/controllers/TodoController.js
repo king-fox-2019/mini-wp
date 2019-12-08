@@ -2,8 +2,9 @@ const Todo = require('../models/Todo')
 
 class TodoController{
   static showAll(req, res, next){
-    Todo.find({})
+    Todo.find({author: req.userId})
       .then((data) => {
+        console.log(data)
         res.status(200).json(data)
       })
       .catch(next)
@@ -19,9 +20,11 @@ class TodoController{
 
   static create(req, res, next){
     let { title, content} = req.body
-    Todo.create({ title, content })
-      .then((data) => {
-        res.status(201).json(data)
+    let featured_image = req.body.file || ''
+    let author = req.userId
+    Todo.create({ title, content, author, featured_image })
+      .then(() => {
+        res.status(201).json()
       })
       .catch(next)
   }
@@ -31,8 +34,8 @@ class TodoController{
     const updateObj = { title, content }
     const condition = { _id: req.params.id}
     Todo.findOneAndUpdate(condition, updateObj, {new: true})
-      .then((data) => {
-        res.status(200).json(data)
+      .then(() => {
+        res.status(200).json()
       })
       .catch(next)
   }
@@ -46,7 +49,7 @@ class TodoController{
           throw new Error(`Todo not found`)
         }
         else{
-          res.status(200).json(data)
+          res.status(200).json()
         }
       })
       .catch(next)

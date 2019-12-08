@@ -9,6 +9,13 @@ const todoSchema = new Schema({
   content: {
     type: String,
     required: true
+  },
+  author: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'User' 
+  },
+  featured_image: {
+    type: String
   }
 }, {
   timestamps: true
