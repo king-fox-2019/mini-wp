@@ -9,14 +9,14 @@
         <img class="img" :src="article.image" />
 
         <sui-item-content>
-          <sui-item-header>{{article.title}}</sui-item-header>
+          <sui-item-header class="title clickable"><span  @click="$router.push('/detail-article/' + article._id )">{{article.title}}</span></sui-item-header>
           <sui-item-meta>
             <span v-for="(tag, i) in article.tags" :key="i" class="tag">
               <a is="sui-label" tag>{{tag}}</a>
             </span>
           </sui-item-meta>
           <sui-item-description>
-            <p>{{article.content}}</p>
+            <p>{{article.content.substring(0, 200)}} ...</p>
           </sui-item-description>
         </sui-item-content>
       </sui-item>
@@ -28,9 +28,18 @@
 export default {
   name: "Articles",
   data: function() {
-    return {};
+    return {
+
+    };
   },
   props: ["articles"]
+  // computed: {
+  //   truncated(str) {
+  //     console.log(str, "mau gaa?");
+      
+  //     return `${str.substring(0, 25)}` + '...'
+  //   }
+  // }
 };
 </script>
 
@@ -39,5 +48,8 @@ img {
   width: 130px;
   height: 127px;
   margin-right: 30px;
+}
+.title:hover {
+  color:darkred !important;
 }
 </style>

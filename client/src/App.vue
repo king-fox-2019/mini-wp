@@ -39,4 +39,7 @@ body {
   width: 70%;
   margin: auto;
 }
+.clickable {
+  cursor: pointer;
+}
 </style>

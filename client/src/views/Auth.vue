@@ -1,25 +1,22 @@
 <template>
-  <div >
-    <RegisterLogin @setPage="setPage"></RegisterLogin>
+  <div>
+    <RegisterLogin></RegisterLogin>
   </div>
 </template>
 
 <script>
-import RegisterLogin from "../components/RegisterLogin"
+import RegisterLogin from "../components/RegisterLogin";
 
 export default {
-  name: 'Auth',
-   components: {
+  name: "Auth",
+  components: {
     RegisterLogin
   },
   data: function() {
-    return {
-    }
+    return {};
   }
- 
-}
+};
 </script>
 
 <style scoped>
-
 </style>

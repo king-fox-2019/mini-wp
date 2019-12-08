@@ -37,12 +37,14 @@ class UserController {
       }
     })
     .then(user => {
+      const id = user.id
+      const email = user.email
       const token = generateToken({
         id : user._id,
         email : user.email
       })
       console.log(token, "TOKEEEEEEEEEEEEN");
-      res.status(200).json({token})
+      res.status(200).json({token, id, email})
     })
     .catch(next)
   }
@@ -91,8 +93,8 @@ class UserController {
       console.log(req.body.password, "req.body");
       console.log(req.body.email, "req.email");
       
-      
-    
+   
+
       
       if(!user) {
         throw {status : 404, message : `you have to register first`}
@@ -101,11 +103,14 @@ class UserController {
         let passwordDB = user.password
         let match = compare(password, passwordDB)
         if (match) {
+
+          const id = user._id
+          const email = user.email
           let token = generateToken({
             id : user._id,
             email : user.email
           })
-          res.status(200).json({ token })
+          res.status(200).json({ token, id, email })
         } else {
           throw {status : 400, message : `username/password wrong`}
         }

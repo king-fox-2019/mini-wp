@@ -73,8 +73,8 @@
 </template>
 
 <script>
-import axios from 'axios'
-
+// import axios from 'axios'
+import axios from '../helpers/axios'
  
 
 
@@ -93,20 +93,25 @@ export default {
   
     login() {
       console.log(`loginnnnnnnnnnn`);
-      
-      axios({
-        method : 'post',
-        // url: 'http://35.198.219.105/users/login',
-        url: 'http://localhost:3000/users/login',
+      axios.post('/users/login', {
+				email : this.email,
+				password : this.password
+			})
+      // axios({
+      //   method : 'post',
+      //   // url: 'http://35.198.219.105/users/login',
+      //   url: 'http://localhost:3000/users/login',
 
-        data : {
-          email : this.email, 
-          password : this.password
-        }
-      })
+      //   data : {
+      //     email : this.email, 
+      //     password : this.password
+      //   }
+      // })
       .then(({data}) => {
-        console.log(data);
-        localStorage.setItem('token', data.token)
+        // console.log(data, "login bawa apa");
+				localStorage.setItem('token', data.token)
+				localStorage.setItem('userId', data.id)
+				localStorage.setItem('userEmail', data.email)
         this.$router.push('/')
         
       })
@@ -116,26 +121,32 @@ export default {
       })
     },
     register() {
-      console.log('registerrrrrrrr');
-      axios({
-        method: 'post',
-        // url: 'http://35.198.219.105/users/register',
-        url: 'http://localhost:3000/users/register',
+			console.log('registerrrrrrrr');
+			axios.post('/users/register', {
+				name: this.name, 
+				email : this.email,
+				password : this.password
+			})
+      // axios({
+      //   method: 'post',
+      //   // url: 'http://35.198.219.105/users/register',
+      //   url: 'http://localhost:3000/users/register',
 
-        data : {
-          name : this.name,
-          email : this.email, 
-          password : this.password
-        }
-      })
+      //   data : {
+      //     name : this.name,
+      //     email : this.email, 
+      //     password : this.password
+      //   }
+      // })
       .then(({data}) => {
         console.log(data);
-        localStorage.setItem('token', data.token)     
+				localStorage.setItem('token', data.token)
+				localStorage.setItem('userId', data.id)
+				localStorage.setItem('userEmail', data.email)
          this.$router.push('/')
       })
       .catch(err => {
-        console.log(err.response);
-        
+        console.log(err.response)
       })
     },
     animate() {

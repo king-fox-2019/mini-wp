@@ -5,7 +5,7 @@ class ArticleController {
     console.log("masuk findall");
     
     let title = req.query.title || ''
-    Article.find({title : {$regex:title}}).sort({ created_at: "desc"  })
+    Article.find({title : {$regex:title}}).sort({ createdAt: "desc"  })
     .then(articles => {
       console.log(articles, "dapet apa article dari database");
       
@@ -31,17 +31,17 @@ class ArticleController {
     let id = req.params.id
     Article.findById(id)
     .then(article => {
-      res.status(200).json({ article })
+      res.status(200).json( article )
     })
     .catch(next)
   }
 
   static create(req, res, next) {
     console.log(req.body);
-    
+    const user = req.loggedUser.id
     let { title, content, tags, image } = req.body
     tags = JSON.parse(tags)
-    Article.create({ title, content, tags, image})
+    Article.create({ title, content, tags, image, user})
     .then(article => {
       console.log(article);
       

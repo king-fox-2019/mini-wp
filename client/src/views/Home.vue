@@ -2,6 +2,7 @@
   <div class="contained">
     <p>DISCOVER</p>
     <p>Find book picks, reading tips, and activities for your little ones</p>
+    <Topics></Topics>
     <TopArticle></TopArticle>
     <Articles :articles="articles"></Articles>
 
@@ -16,6 +17,7 @@
 import axios from '../helpers/axios'
 import TopArticle from '../components/TopArticle'
 import Articles from '../components/Articles'
+import Topics from '../components/Topics'
 
 export default {
   name: 'Home',
@@ -26,7 +28,8 @@ export default {
   },
   components : {
     TopArticle,
-    Articles
+    Articles,
+    Topics
   },
   methods : {
      fetchArticle() {

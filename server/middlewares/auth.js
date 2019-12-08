@@ -23,12 +23,12 @@ const authorization = (req, res, next) => { //article yg di delete/edit hrs mili
   Article.findById(id)
   .then(article => {
     if (!article) {
-      next({status : 404, message : `to-do not found`})
-    } else if (article.userId == req.loggedUser.id) {
+      next({status : 404, message : `article not found`})
+    } else if (String(article.user) === String(req.loggedUser.id)) {
       
       next()
     } else {
-      console.log(typeof article.userId, article.userId);
+      console.log(typeof article.user, article.user);
       console.log(typeof req.loggedUser.id, req.loggedUser.id);
       
       next({ status : 403, message : `not authorized`})
