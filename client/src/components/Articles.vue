@@ -19,7 +19,8 @@
               </span>
             </sui-item-meta>
             <sui-item-description>
-              <p>{{article.content.substring(0, 200)}} ...</p>
+              <div v-html="truncate(article.content)"></div>
+              <!-- {{article.content.substring(0, 200)}} ... -->
             </sui-item-description>
           </sui-item-content>
         </sui-item>
@@ -66,6 +67,11 @@ export default {
             this.$toastr.h("Error!").i(`Couldn't connect to server`);
           }
         });
+    },
+    truncate(content) {
+      console.log(content, "nulis apaaa");
+      
+      return content.substring(243, 450)
     },
     paginate() {
       this.fetchArticle(this.page);

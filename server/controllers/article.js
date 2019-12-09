@@ -18,7 +18,7 @@ class ArticleController {
     Article.countDocuments(filter)
       .then(n => {
         count = n
-        return Article.find(filter).skip(limit * (page - 1)).limit(limit).sort({ createdAt: "desc" })
+        return Article.find(filter).skip(limit * (page - 1)).limit(limit).sort({ createdAt: "desc" }) //skip dinamis kelipatan limit
       })
       .then(articles => {
         res.status(200).json({ count, articles })

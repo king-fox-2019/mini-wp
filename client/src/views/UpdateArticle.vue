@@ -129,8 +129,6 @@ export default {
       title: "",
       tags: [],
       img: ""
-      // tag: "",
-      // tags: []
     };
   },
   components: {
