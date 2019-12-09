@@ -1,5 +1,9 @@
 # mini-wp
 
+  ```json
+  http://localhost:3000
+  ```
+
 ## USER REGISTER
 
 - **URL's**
