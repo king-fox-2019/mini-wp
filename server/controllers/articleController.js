@@ -37,13 +37,25 @@ class articleController {
             author: req.userId
         })
             .then(articles => {
-                res.send(articles)
+                res.status(200).json(articles)
             })
             .catch(next)
     }
 
     static edit = (req, res, next) => {
-
+        const articleData = {
+            title: req.body.title,
+            content: req.body.content,
+            author: req.userId,
+            featured_image: req.body.featured_image || 'Not Provided'
+        }
+        Article.updateOne({
+            _id: req.params.articleId
+        }, articleData)
+            .then(article => {
+                res.status(200).json(article)
+            })
+            .catch(next)
     }
 
     static patch = (req, res, next) => {
@@ -51,7 +63,13 @@ class articleController {
     }
 
     static remove = (req, res, next) => {
-
+        Article.destroy({
+            _id: req.params.articleId
+        })
+            .then(article => {
+                res.status(200).json(article)
+            })
+            .catch(next)
     }
 }
 
