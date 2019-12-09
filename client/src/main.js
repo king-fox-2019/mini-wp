@@ -35,7 +35,11 @@ const router = new VueRouter({
 })
 
 // router.beforeEach((to, from, next) => {
-//   if (!localStorage.getItem('jwt_token')) next('/login')
+//   if (!localStorage.getItem('jwt_token')) {
+//     next({
+//       path: '/login'
+//     })
+//   } 
 //   else next()
 // })
 
