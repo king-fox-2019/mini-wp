@@ -6,8 +6,8 @@ class Controller {
         Article
             .find()
             .populate("author", "name")
-            .then((result) => {
-                // console.log(result);
+            .then(result => {
+                console.log(result);
                 res.status(200).json(result)
             })
             .catch((next));

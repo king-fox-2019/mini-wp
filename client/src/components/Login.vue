@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import swal from 'sweetalert2';
+import swal from 'sweetalert';
 import axios from 'axios'
 
 export default {
@@ -48,9 +48,9 @@ export default {
           localStorage.setItem("access_token",  data.token );
           this.$emit('data-submited-from-form')
         })
-        .catch((err) => {
-          console.log(err);
-          swal(err.message);
+        .catch(err => {
+          console.log(err.response.data.message);
+          swal(err.response.data.message);
         });
     }
   }

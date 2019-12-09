@@ -37,10 +37,10 @@
       />
 
       <!-- Sign up button -->
-      <button class="btn btn-info my-4 btn-block" type="submit" @submit.prevent="onSignIn">Sign in</button>
+      <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
       <span>or login with Google Account</span>
       <!-- // sign in button // -->
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      <div class="g-signin2" data-onsuccess="onSignIn" @submit.prevent="onSignIn"></div>
     </form>
     <!-- Default form register -->
   </div>
@@ -70,15 +70,16 @@ export default {
           password: this.password
         }
       })
-        .then(({result}) => {
+        .then(({ result }) => {
           localStorage.setItem("access_token", result.token);
           this.$emit("data-submited-from-form");
         })
         .catch(err => {
-          swal(err.message);
+          swal(err.response.data.message);
         });
     },
     onSignIn(googleUser) {
+      console.log(googleUser, "asdasdasd");
       var id_token = googleUser.getAuthResponse().id_token;
       axios({
         method: "post",
@@ -87,12 +88,12 @@ export default {
           id_token: id_token
         }
       })
-        .done(({data}) => {
+        .done(({ data }) => {
           localStorage.setItem("access_token", data.token);
           this.$emit("data-submited-from-form");
         })
-        .catch((err) => {
-          swat(err.message);
+        .catch(err => {
+          swat(err.response.data.message);
         });
     }
   }

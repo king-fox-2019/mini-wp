@@ -119,7 +119,40 @@
 
 - ##### Success Response:
 
-  Showing all article
+  Showing all article in array of object
+
+  ```
+  [
+      {
+          "featured_image": "asdasdasdasd",
+          "_id": "5decf50e35b90a125105f85d",
+          "title": "123",
+          "content": "mari belajar berhitung",
+          "author": {
+              "_id": "5dec988fea40921ce2fea07e",
+              "name": "putri"
+          },
+          "createdAt": "2019-12-08T13:05:18.487Z",
+          "updatedAt": "2019-12-08T13:05:18.487Z",
+          "__v": 0
+      },
+      {
+          "featured_image": "https://storage.googleapis.com/andreas-												projects/1575818124537-images.png",
+          "_id": "5ded138dfc91a62189d25d49",
+          "title": "123",
+          "content": "mari belajar berhitung",
+          "author": {
+              "_id": "5dec988fea40921ce2fea07e",
+              "name": "putri"
+          },
+          "createdAt": "2019-12-08T15:15:25.935Z",
+          "updatedAt": "2019-12-08T15:15:25.935Z",
+          "__v": 0
+      }
+  ]
+  ```
+
+  ​
 
   ###### Code: 200
 
@@ -140,6 +173,24 @@
 - ##### Success Response:
 
   Showing spesific article
+
+  ```
+  {
+      "featured_image": "",
+      "_id": "5decf4f535b90a125105f85c",
+      "title": "123",
+      "content": "mari belajar berhitung",
+      "author": {
+          "_id": "5dec988fea40921ce2fea07e",
+          "name": "putri"
+      },
+      "createdAt": "2019-12-08T13:04:53.126Z",
+      "updatedAt": "2019-12-08T13:04:53.126Z",
+      "__v": 0
+  }
+  ```
+
+  ​
 
   ###### Code: 200
 
@@ -164,6 +215,21 @@
 - ##### Success Response:
 
   Article created, you can see on article list
+
+  ```
+  {
+      "featured_image": "https://storage.googleapis.com/andreas-projects/1575865522513-images.png",
+      "_id": "5dedccb987666e09ffd61dba",
+      "title": "Node.JS",
+      "content": "mari belajar ngoding",
+      "author": "5dec988fea40921ce2fea07e",
+      "createdAt": "2019-12-09T04:25:30.529Z",
+      "updatedAt": "2019-12-09T04:25:30.529Z",
+      "__v": 0
+  }
+  ```
+
+  ​
 
   ###### Code: 200
 
