@@ -4,6 +4,6 @@ const googleSignIn = require("../middlewares/googleSignIn");
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);
-router.post("/gsignin", googleSignIn, userController.googleLogin);
+router.post("/gsignin", userController.googleLogin);
 
 module.exports = router;

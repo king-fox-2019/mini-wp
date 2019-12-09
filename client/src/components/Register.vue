@@ -1,17 +1,9 @@
 <template>
-  <div
-    class="container d-flex justify-content-center align-items-center"
-    style="height:90vh;"
-  >
+  <div class="container d-flex justify-content-center align-items-center" style="height:90vh;">
     <div>
-      <h1 style="text-align:center;margin-bottom:30px;color:grey">
-        Register for free now!
-      </h1>
+      <h1 style="text-align:center;margin-bottom:30px;color:grey">Register for free now!</h1>
       <form>
-        <div
-          class="form-group row"
-          style="align-items: center;justify-content: center;"
-        >
+        <div class="form-group row" style="align-items: center;justify-content: center;">
           <label for="name" class="col-sm-4 col-form-label">Name</label>
           <input
             v-model="name"
@@ -22,13 +14,8 @@
             id="name"
           />
         </div>
-        <div
-          class="form-group row"
-          style="align-items: center;justify-content: center;"
-        >
-          <label for="email" class="col-sm-4 col-form-label"
-            >Email address</label
-          >
+        <div class="form-group row" style="align-items: center;justify-content: center;">
+          <label for="email" class="col-sm-4 col-form-label">Email address</label>
           <input
             v-model="email"
             type="email"
@@ -38,10 +25,7 @@
             style="background-color:transparent;border: 1px solid grey;"
           />
         </div>
-        <div
-          class="form-group row"
-          style="align-items: center;justify-content: center;"
-        >
+        <div class="form-group row" style="align-items: center;justify-content: center;">
           <label for="password" class="col-sm-4 col-form-label">Password</label>
           <input
             v-model="password"
@@ -52,19 +36,21 @@
             style="background-color:transparent;border: 1px solid grey"
           />
         </div>
-        <div
-          class="form-group row"
-          style="align-items: center;justify-content: center;"
-        >
+        <div class="form-group row" style="align-items: center;justify-content: center;">
           <button
             style=" text-align:center"
             @click.prevent="registerUser"
             type="submit"
             class="btn btn-outline-secondary rounded-0"
-          >
-            Register Now
-          </button>
+          >Register Now</button>
         </div>
+        <p style="text-align:center; margin:20px">OR</p>
+        <GoogleLogin
+          :params="params"
+          :renderParams="renderParams"
+          :onSuccess="onSuccess"
+          :onFailure="onFailure"
+        >Login</GoogleLogin>
         <p style="text-align:center">
           Already registered ?
           <a @click.prevent="movePage('login-page')" href="#">login</a> with
@@ -78,12 +64,26 @@
 <script>
 import axios from "../config/axios";
 import Swal from "sweetalert2";
+import GoogleLogin from "vue-google-login";
+
 export default {
+  components: {
+    GoogleLogin
+  },
   data() {
     return {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true
+      },
+      params: {
+        client_id:
+          "965890208116-v1u6q7d2u690tl22dvmlekaf87qs2e54.apps.googleusercontent.com"
+      }
     };
   },
   methods: {
@@ -96,6 +96,30 @@ export default {
         this.$emit("currentPage", { page: "dashboard-page" });
       }
     },
+    onSuccess(googleUser) {
+      let gProfile = googleUser.getBasicProfile();
+      axios({
+        method: "POST",
+        url: `users/gsignin`,
+        data: {
+          gProfile
+        }
+      })
+        .then(({ data }) => {
+          localStorage.setItem("access_token", data);
+          Swal.fire({
+            title: "Success!",
+            text: "Login success",
+            icon: "success",
+            confirmButtonText: "Okay"
+          });
+          this.$emit("currentPage", { page: "dashboard-page" });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    onFailure() {},
     registerUser() {
       const data = {
         name: this.name,

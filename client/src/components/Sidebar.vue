@@ -6,11 +6,15 @@
           <div id="navbar-user">
             <div class="d-flex flex-column">
               <li @click.prevent="slidingMenu">
-                <a href="#"> <i class="material-icons mr-2">close</i>Close </a>
+                <a href="#">
+                  <i class="material-icons mr-2">close</i>Close
+                </a>
               </li>
               <div v-if="userLogin">
                 <li @click="movePage('dashboard-page')">
-                  <a href="#"> <i class="material-icons mr-2">home</i>Home </a>
+                  <a href="#">
+                    <i class="material-icons mr-2">home</i>Home
+                  </a>
                 </li>
                 <div v-if="activePage === 'dashboard-page'">
                   <li @click="movePage('add-article-page')">
@@ -31,13 +35,9 @@
                     </a>
                   </li>
                 </div>
-                <li
-                  @click.prevent="signOut"
-                  style="max-height: 20%;max-width:170px;"
-                >
+                <li @click.prevent="signOut" style="max-height: 20%;max-width:170px;">
                   <a href="#">
-                    <i class="material-icons mr-2" id="icon-menu">exit_to_app</i
-                    >Sign Out
+                    <i class="material-icons mr-2" id="icon-menu">exit_to_app</i>Sign Out
                   </a>
                 </li>
               </div>
@@ -56,80 +56,39 @@
         >
           <a @click.prevent="slidingMenu" href="#" class="btn" id="menu-toggle">
             <span class="glyphicon glyphicon-menu-hamburger">
-              <i style="color:grey" class="material-icons" id="icon-menu"
-                >menu</i
-              >
+              <i style="color:grey" class="material-icons" id="icon-menu">menu</i>
             </span>
           </a>
           <div v-if="userLogin">
-            <a
-              href="#"
-              @click="movePage('dashboard-page')"
-              class="btn"
-              id="menu-toggle"
-            >
+            <a href="#" @click="movePage('dashboard-page')" class="btn" id="menu-toggle">
               <span class="glyphicon glyphicon-menu-hamburger">
-                <i style="color:grey" class="material-icons" id="icon-menu"
-                  >home</i
-                >
+                <i style="color:grey" class="material-icons" id="icon-menu">home</i>
               </span>
             </a>
             <div v-if="activePage === 'dashboard-page'">
-              <a
-                href="#"
-                @click="movePage('add-article-page')"
-                class="btn"
-                id="menu-toggle"
-              >
+              <a href="#" @click="movePage('add-article-page')" class="btn" id="menu-toggle">
                 <span class="glyphicon glyphicon-menu-hamburger">
-                  <i style="color:grey" class="material-icons" id="icon-menu"
-                    >note</i
-                  >
+                  <i style="color:grey" class="material-icons" id="icon-menu">note</i>
                 </span>
               </a>
             </div>
             <div v-if="activePage === 'detail-page'">
-              <a
-                href="#"
-                @click="movePage('edit-article-page')"
-                class="btn"
-                id="menu-toggle"
-              >
+              <a href="#" @click="movePage('edit-article-page')" class="btn" id="menu-toggle">
                 <span class="glyphicon glyphicon-menu-hamburger">
-                  <i style="color:grey" class="material-icons" id="icon-menu"
-                    >edit</i
-                  >
+                  <i style="color:grey" class="material-icons" id="icon-menu">edit</i>
                 </span>
               </a>
-              <a
-                href="#"
-                @click.prevent="deleteArticle"
-                class="btn"
-                id="menu-toggle"
-              >
+              <a href="#" @click.prevent="deleteArticle" class="btn" id="menu-toggle">
                 <span class="glyphicon glyphicon-menu-hamburger">
-                  <i style="color:grey" class="material-icons" id="icon-menu"
-                    >delete</i
-                  >
+                  <i style="color:grey" class="material-icons" id="icon-menu">delete</i>
                 </span>
               </a>
             </div>
           </div>
-          <div
-            class="fixed-bottom"
-            style="height: 10%;max-width:50px;background-color:#c3c3c3"
-          >
-            <a
-              v-if="userLogin"
-              href="#"
-              @click="signOut"
-              class="btn"
-              id="menu-toggle"
-            >
+          <div class="fixed-bottom" style="height: 10%;max-width:50px;background-color:#c3c3c3">
+            <a v-if="userLogin" href="#" @click="signOut" class="btn" id="menu-toggle">
               <span class="glyphicon glyphicon-menu-hamburger">
-                <i style="color:grey" class="material-icons" id="icon-menu"
-                  >exit_to_app</i
-                >
+                <i style="color:grey" class="material-icons" id="icon-menu">exit_to_app</i>
               </span>
             </a>
           </div>
@@ -170,12 +129,15 @@ export default {
   props: ["userLogin", "activePage", "article"],
   methods: {
     signOut() {
-      // const auth2 = gapi.auth2.getAuthInstance();
-      // auth2.signOut().then(function() {
+      if (typeof gapi.auth2 !== "undefined") {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function() {
+          console.log("User signed out.");
+        });
+      }
+
       localStorage.removeItem("access_token");
-      console.log("User signed out.");
       this.$emit("currentPage", { page: "login-page" });
-      // });
     },
     movePage(page) {
       this.$emit("currentPage", { page, data: this.article });

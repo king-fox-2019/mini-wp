@@ -50,35 +50,28 @@ class UserController {
       });
   }
   static googleLogin(req, res, next) {
+    const { gProfile } = req.body;
     const condition = {
-      email: req.decoded.email
+      email: gProfile.U3
     };
-    User.findOne(condition)
+    User.find(condition)
       .then(user => {
         if (user) {
-          const payload = {
-            _id: user._id
-          };
+          const payload = { id: user[0].id };
           const token = jsonwebtoken.generateToken(payload);
-          res.status(200).json({ token });
+          res.status(200).json(token);
         } else {
-          const values = {
-            name: req.decoded.name,
-            email: req.decoded.email,
-            password: passwordGenerator()
-          };
-          return User.create(values);
+          return UserController.register({
+            name: gProfile.ig,
+            email: gProfile.wea
+          });
         }
       })
-      .then(user => {
-        const payload = {
-          _id: user._id
-        };
-        const token = jsonwebtoken.generateToken(payload);
-        res.status(201).json({ token });
+      .then(data => {
+        res.status(201).json(data);
       })
       .catch(err => {
-        res.status(500).json({ message: "Internal server error" });
+        console.log(err);
       });
   }
 }
