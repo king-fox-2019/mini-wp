@@ -5,8 +5,7 @@
         <input
           v-model="email"
           type="email"
-          class="form-control rounded-0"
-          id="create-title"
+          class="form-control rounded-0 title"
           placeholder="Enter email"
         />
       </div>
@@ -14,8 +13,7 @@
         <input
           v-model="password"
           type="password"
-          class="form-control rounded-0"
-          id="create-title"
+          class="form-control rounded-0 title"
           placeholder="Enter Password"
         />
       </div>
@@ -141,7 +139,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .login {
   width: 100% !important;
   background-color: #00ccaa !important;
@@ -163,7 +161,7 @@ export default {
   box-shadow: none !important;
 }
 
-#create-title {
+.title {
   background-color: #f9f9f9;
   border-radius: 0 !important;
   height: 35px;
@@ -174,13 +172,13 @@ export default {
   border-width: 0 0 0 4px;
 }
 
-#create-title:hover {
+.title:hover {
   border-color: #00b699;
   border-radius: 0 !important;
   border-width: 0 0 0 4px;
 }
 
-#create-title:focus {
+.title:focus {
   border-color: #00b699;
   border-radius: 0 !important;
   border-width: 1px 1px 1px 4px;

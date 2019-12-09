@@ -3,11 +3,6 @@
     <div class="header">
       <img :src="article.featured_image" class="img-thumbnail" />
     </div>
-    <!-- <div class="image border">
-      <b-img
-        src="http://www.nabilafarm.com/wp-content/uploads/2015/04/6.studi-banding-pemijahan-lele.jpg"
-      ></b-img>
-    </div> -->
     <div class="container-fluid" id="dashboard-content">
       <div id="article">
         <div class="title">
@@ -150,6 +145,9 @@ export default {
 }
 
 .title {
+  padding: 2px;
+  text-align: left;
+  height: auto;
   font-size: 52px;
   font-weight: bold;
   font-family: "Sulphur Point", sans-serif;
@@ -200,5 +198,9 @@ export default {
 .header {
   height: 200px;
   overflow: hidden;
+}
+
+.img-thumbnail {
+  border: 0px !important;
 }
 </style>

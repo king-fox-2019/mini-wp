@@ -77,7 +77,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .register {
   width: 100% !important;
   background-color: #007965 !important;
