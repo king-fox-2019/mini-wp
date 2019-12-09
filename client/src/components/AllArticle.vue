@@ -32,7 +32,11 @@
                 </template>
                 <span>want edit</span>
               </v-tooltip>-->
-              <formedit-item :articleId="article._id"></formedit-item>
+              <formedit-item
+                :articleId="article._id"
+                @error-create="errorCreate"
+                @success-create="successCreate"
+              ></formedit-item>
 
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -72,6 +76,12 @@ export default {
     },
     deleteArticle(articleId) {
       this.$emit("delete-article", articleId);
+    },
+    errorCreate(payload) {
+      this.$emit("error-create", payload);
+    },
+    successCreate(payload) {
+      this.$emit("success-create", payload);
     }
   },
   created() {

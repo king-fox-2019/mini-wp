@@ -217,6 +217,7 @@ export default {
     },
     goDashboard() {
       this.$router.push("/");
+      this.$emit("fetch-articles");
     }
   },
   created() {

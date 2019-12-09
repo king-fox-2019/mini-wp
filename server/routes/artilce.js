@@ -27,6 +27,13 @@ router.get(
   Article.searchByTagMyArticle
 );
 router.get("/myarticles", authorizationMyArticle, Article.readMyArticle);
+router.get("/readone/:articleId", authorization, Article.readOne);
+router.put(
+  "/:articleId",
+  authentication,
+  upload.single("image"),
+  Article.updateArticle
+);
 router.delete("/:articleId", authorization, Article.deleteArticle);
 
 module.exports = router;

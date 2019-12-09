@@ -123,6 +123,33 @@ class ArticleController {
       })
       .catch(next);
   }
+
+  static readOne(req, res, next) {
+    const articleId = req.params.articleId;
+    Article.findById(articleId)
+      .then(response => {
+        res.status(200).json(response);
+      })
+      .catch(next);
+  }
+
+  static updateArticle(req, res, next) {
+    const articleId = req.params.articleId;
+    const { title, content, image, tag } = req.body;
+    let splitTag = tag.split(",");
+    Article.findByIdAndUpdate(articleId, {
+      title,
+      content,
+      image,
+      tag: splitTag
+    })
+      .then(response => {
+        res.status(200).json({
+          message: "Success Update Article"
+        });
+      })
+      .catch(next);
+  }
 }
 
 module.exports = ArticleController;

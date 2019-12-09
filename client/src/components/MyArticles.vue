@@ -24,14 +24,20 @@
                 <span>want share</span>
               </v-tooltip>
 
-              <v-tooltip bottom>
+              <!-- <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn color="blue" text v-on="on">
                     <v-icon>edit</v-icon>
                   </v-btn>
                 </template>
                 <span>want edit</span>
-              </v-tooltip>
+              </v-tooltip>-->
+
+              <formedit-item
+                :articleId="article._id"
+                @error-create="errorCreate"
+                @success-create="successCreate"
+              ></formedit-item>
 
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -50,8 +56,13 @@
 </template>
 
 <script>
+import FormEdit from "./FormEdit.vue";
+
 export default {
   name: "MyArticles",
+  components: {
+    "formedit-item": FormEdit
+  },
   props: {
     myarticles: {
       type: Array
@@ -68,6 +79,12 @@ export default {
     },
     deleteArticle(articleId) {
       this.$emit("delete-article", articleId);
+    },
+    errorCreate(payload) {
+      this.$emit("error-create", payload);
+    },
+    successCreate(payload) {
+      this.$emit("success-create", payload);
     }
   },
   created() {

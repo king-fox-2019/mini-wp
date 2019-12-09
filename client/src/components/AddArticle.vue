@@ -152,12 +152,14 @@ export default {
     },
     resetArticle() {
       this.$refs.formArticle.reset();
+      this.form.content = "<span><B><U>Content :</U></B></span>";
     }
   },
   watch: {
     dialogArticle(val) {
       if (!val) {
         this.resetArticle();
+        this.form.content = "<span><B><U>Content :</U></B></span>";
         this.$emit("close-create-article");
       }
     }

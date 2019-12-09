@@ -36,9 +36,12 @@
       @fetch-articles="fetchArticles"
       @searching-article="searchingArticle"
       @delete-article="deleteArticle"
+      @error-create="errorCreate($event)"
+      @success-create="successCreate"
     ></allarticle-item>
     <router-view
       @error-create="errorCreate"
+      @success-create="successCreate($event)"
       :myarticles="myarticles"
       @fetch-myarticles="fetchMyArticles"
       @delete-article="deleteArticle"
@@ -131,6 +134,9 @@ export default {
     errorCreate(payload) {
       this.$emit("error-create", payload);
     },
+    successCreate(payload) {
+      this.$emit("success-create", payload);
+    },
     searchingArticle() {
       if (this.$route.path === "/") {
         if (this.inputSearch === "") {
@@ -179,6 +185,9 @@ export default {
         });
     }
   },
-  computed: {}
+  computed: {},
+  created() {
+    this.fetchMyArticles();
+  }
 };
 </script>

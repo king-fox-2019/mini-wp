@@ -1,24 +1,23 @@
 <template>
   <div class="formedit">
-    <v-dialog v-model="dialogArticle" max-width="600px">
+    <v-dialog v-model="dialogArticleEdit" max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-list-item v-on="on">
-          <v-list-item-icon>
-            <v-icon class="white--text">add</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title class="white--text">Add Article</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <v-btn color="blue" text v-on="on">
+          <v-icon>edit</v-icon>
+        </v-btn>
       </template>
       <!-- card  add article-->
       <v-card>
-        <v-toolbar color="light-blue darken-3" dark>
+        <v-toolbar color="orange darken-4" dark>
           <v-toolbar-title>Add New Article</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
-          <v-form ref="formArticle" @submit.prevent="createArticle" class="px-3" lazy-validation>
+          <v-form
+            ref="formArticleEdit"
+            @submit.prevent="editArticle(articleId)"
+            class="px-3"
+            lazy-validation
+          >
             <v-text-field
               v-model="form.title"
               :rules="titleRules"
@@ -34,6 +33,7 @@
             <!-- </v-text-field> -->
 
             <v-file-input
+              accept="image/*"
               small-chips
               multiple
               type="file"
@@ -60,7 +60,7 @@
               class="white--text"
               depressed
               type="submit"
-            >Add Article</v-btn>
+            >Edit Article</v-btn>
             <v-btn color="error" class="ml-5" depressed @click="resetArticle">Reset Form</v-btn>
           </v-form>
         </v-card-text>
@@ -86,6 +86,7 @@ export default {
         tag: [],
         image: []
       },
+      tempImage: [],
       titleRules: [
         // v => !!v || "Title is required",
         v => (v && v.length >= 4) || "Title Minimum 4 Characters",
@@ -95,15 +96,104 @@ export default {
         v => !!v || "Image is required",
         v => (v && v.length <= 1) || "Image is required"
       ],
-      dialogArticle: false
+      dialogArticleEdit: false
     };
   },
   methods: {
+    editArticle(articleId) {
+      // console.log(this.tempImage);
+      const token = localStorage.getItem("token");
+      let newImage = null;
+      if (this.form.image.length === 0) {
+        newImage = this.tempImage;
+      } else {
+        newImage = this.form.image[0];
+      }
+      const fd = new FormData();
+      fd.append("title", this.form.title);
+      fd.append("content", this.form.content);
+      fd.append("tag", this.form.tag);
+      fd.append("image", newImage);
+
+      this.axios({
+        method: "PUT",
+        url: `/articles/${articleId}`,
+        headers: {
+          token
+        },
+        data: fd
+      })
+        .then(({ data }) => {
+          this.dialogArticleEdit = false;
+          this.resetArticle();
+          let payloadAlert = {
+            text: data.message,
+            value: true
+          };
+          this.$emit("success-create", payloadAlert);
+        })
+        .catch(err => {
+          let text = "";
+          err.response.data.errors.forEach(element => {
+            text += element + ", ";
+          });
+          let payloadAlert = {
+            text,
+            value: true
+          };
+          this.dialogArticleEdit = false;
+          this.resetArticle();
+          this.$emit("error-create", payloadAlert);
+        });
+    },
     resetArticle() {
-      this.$refs.formArticle.reset();
+      this.$refs.formArticleEdit.reset();
+      this.form.content = "<span><B><U>Content :</U></B></span>";
     }
   },
-  watch: {}
+  watch: {
+    dialogArticleEdit(val) {
+      if (!val) {
+        this.resetArticle();
+        this.form.content = "<span><B><U>Content :</U></B></span>";
+      } else {
+        const token = localStorage.getItem("token");
+        // console.log(this.getArticleId);
+        this.axios({
+          method: "GET",
+          url: `/articles/readone/${this.getArticleId}`,
+          headers: {
+            token
+          }
+        })
+          .then(({ data }) => {
+            this.form.title = data.title;
+            this.form.content = data.content;
+            this.form.tag = data.tag;
+            this.tempImage = data.image;
+          })
+          .catch(err => {
+            let text = "";
+            err.response.data.errors.forEach(element => {
+              text += element + ", ";
+            });
+            let payloadAlert = {
+              text,
+              value: true
+            };
+            setTimeout(() => {
+              this.dialogArticleEdit = false;
+              this.$emit("error-create", payloadAlert);
+            }, 2000);
+          });
+      }
+    }
+  },
+  computed: {
+    getArticleId() {
+      return this.articleId;
+    }
+  }
 };
 </script>
 

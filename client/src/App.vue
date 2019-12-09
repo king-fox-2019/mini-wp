@@ -1,6 +1,10 @@
 <template>
   <v-app class="grey lighten-4">
-    <navbar-item @success-create="successCreate" @error-create="errorCreate"></navbar-item>
+    <navbar-item
+      @success-create="successCreate"
+      @error-create="errorCreate"
+      @fetch-articles="fetchAllArticle()"
+    ></navbar-item>
     <v-content class="mx-4 my-4">
       <!-- alert success -->
       <v-alert
@@ -184,7 +188,7 @@ export default {
               text: "No Match, Try Again",
               value: true
             };
-            this.fetchAllArticle();
+            // this.fetchAllArticle();
             this.errorCreate(payload);
           }
         })
@@ -233,7 +237,7 @@ export default {
               text: "No Match, Try Again",
               value: true
             };
-            this.fetchMyArticles();
+            // this.fetchMyArticles();
             this.errorCreate(payload);
           }
         })
@@ -316,6 +320,10 @@ export default {
       }
       return Math.floor(seconds) + " seconds";
     }
+  },
+  created() {
+    this.fetchAllArticle();
+    this.fetchMyArticles();
   }
 };
 </script>
