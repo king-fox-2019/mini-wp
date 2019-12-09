@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000
 
 
 
-mongoose.connect('mongodb://localhost:27017/mini-wp', { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify : false })
+mongoose.connect(process.env.MONGO_ATLAS, { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify : false })
 .then(() => {
   console.log(`Server connected`);  
 })
