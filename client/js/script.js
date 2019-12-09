@@ -5,10 +5,12 @@ const miniWp = new Vue({
     data: {
       articles: [],
       singleArticle: {},
+      title: "",
       listArt: true,
       newArt: false,
       editArt: false,
-      quill: null
+      quillAdd: null,
+      quilEdit: null
     },
     methods: {
         showNewArticle: function() {
@@ -50,6 +52,7 @@ const miniWp = new Vue({
             const title = document.getElementById('article-title').value
             const content = this.quill.root.innerHTML
             const created_at = Date.now()
+            console.log(title, content, created_at)
 
             axios({
                 method: 'post',
@@ -87,12 +90,12 @@ const miniWp = new Vue({
                 url: `${baseUrl}/articles/${id}`
             })
             .then(({ data }) => {
+                console.log(data)
                 const {title, content, created_at} = data
-
-                this.singleArticle['title'] = title
-                this.singleArticle['content'] = content
-                this.singleArticle['created_at'] = created_at
-                
+                this.singleArticle.title = title
+                this.singleArticle.content = content
+                this.singleArticle.created_at = created_at
+                this.title = title
                 console.log(this.singleArticle)
             })
         },
@@ -168,9 +171,9 @@ const miniWp = new Vue({
         this.quill = new Quill('#article-editor', {
             theme: 'snow'
         });
-        this.quill = new Quill('#article-updater', {
-            theme: 'snow'
-        });
+        // this.quill = new Quill('#article-updater', {
+        //     theme: 'snow'
+        // });
         
     }
 })

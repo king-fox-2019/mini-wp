@@ -3,7 +3,7 @@ const {Schema, model} = require('mongoose')
 const articleSchema = new Schema ({
     title: {
         type: String,
-        required: [true, 'Please enter todo\'s name.']
+        required: [true, 'Please enter article\'s name.']
     }, 
     content: {
         type: String

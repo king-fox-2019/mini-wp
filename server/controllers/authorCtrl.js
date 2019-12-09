@@ -25,11 +25,12 @@ class AuthorController {
                 } else {
                     let authPass = compare(password, author.password)
                     if (authPass) {
+                        console.log(author.username)
+                        const authorName = author.username
                         const token = generateToken({
-                            username : author.username,
                             id: author._id
                         })
-                        res.status(200).json({ token })
+                        res.status(200).json({ token, authorName })
                     } else {
                         next({ status: 403, message: 'Invalid email or password.' })
                     }

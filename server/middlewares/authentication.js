@@ -5,9 +5,9 @@ const authentication = (req, res, next) => {
     try {
         const author = decodeToken(req.headers.access_token)
         Author.findById(author.id)
-            .then(dataAuthor => {
-                if (dataAuthor) {
-                    req.decodedID = dataAuthor._id
+            .then(author => {
+                if (author) {
+                    req.decodedID = author._id
                     next()
                 }
                 else throw ({ status: 401, message: 'Authentication Failed' })

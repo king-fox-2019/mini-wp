@@ -31,18 +31,17 @@ class ArticleCtrl {
     }
 
     static createArticle(req, res, next) {
-        console.log('fired')
-        const {title, content, created_at} = req.body
+        const {title, content, tags, created_at} = req.body
         const author = req.decodedID
-        
         Article.create({
             title,
             content,
+            tags,
             created_at,
             author
         })
-            .then(todo => {
-                res.status(201).json(todo)
+            .then(article => {
+                res.status(201).json(article)
             })
             .catch(next)
     }
