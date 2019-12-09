@@ -1,4 +1,4 @@
-# myMiniWordpress
+# PERSECTIVE
 
 ------
 
