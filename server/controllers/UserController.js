@@ -1,13 +1,13 @@
 const User = require('../models/User');
 const { OAuth2Client } = require('google-auth-library');
-const Secret = process.env.SECRET;
+const Secret = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 const jwt = require('jsonwebtoken');
 const { checkPassword } = require('../helpers/encryptPass');
 
 class UserController{
-    static create(req, res, next){
+    static create(req, res, next) {
         //console.log(req.body);
         const {username ,email, password} = req.body
         
@@ -28,7 +28,7 @@ class UserController{
         .catch(next)
     }
 
-    static signIn(req, res, next){
+    static signIn(req, res, next) {
         console.log('signIn dipanggil');
         console.log('req.body.idToken => ',req.body.idToken);
         client.verifyIdToken({
@@ -90,6 +90,7 @@ class UserController{
                 }
                 
                 let token = jwt.sign(userdata,Secret)
+                console.log('token => ',token);
                 currentUser = JSON.stringify(currentUser)
                 
                 res.status(200).json({ token, currentUser })       

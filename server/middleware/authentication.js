@@ -1,4 +1,5 @@
 const jwt = require('../helpers/jwt.js');
+const User = require('../models/User.js');
 
 module.exports = {
     authentication: function(req, res, next) {
@@ -10,7 +11,7 @@ module.exports = {
                 let decoded = jwt.verify(req.headers.token, process.env.JWT_SECRET);
                 console.log('process.env.JWT_SECRET => ',process.env.JWT_SECRET);
                 console.log('decoded => ',decoded);
-                req.decoded = decoded;
+                req.decode = decoded;
 
                 User.findById(req.decode.id)
                     .then(( user ) => {
@@ -20,7 +21,7 @@ module.exports = {
                             next({status:401, message : "Not authorized"})
                         }
                     })
-                    .catch(next) 
+                    .catch(next)
             } catch(error) {
                 console.log('error => ',error);
                 res.status(400).json({ message: 'Invalid JWT Token' })

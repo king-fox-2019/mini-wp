@@ -131,8 +131,7 @@ export default {
           console.log('129');
           this.isLogin = false;
           this.allArticles = []
-          this.isUserArticle = false;
-        }
+          this.isUserArticle = false        }
       }
     },
     showPageToggle(page) {
@@ -152,9 +151,10 @@ export default {
         this.isShowArticle = true;
         this.isUserArticle = false; //false
         this.isCreate = false;
-        this.isEditArticle = false;
-        this.isDetailedArticle = false;
+        this.isEditArticle = false; // false
+        this.isDetailedArticle = false; //false
         this.getAllArticles();
+        console.log('this.isCreate => ',this.isCreate);
       } 
 
       else if (page == "createTodoForm") {
@@ -183,7 +183,7 @@ export default {
       }
     },
     getUserArticles() {
-      console.log('184')
+        console.log('184')
         let token = localStorage.getItem("token")
         axios({
             url : "http://localhost:3000/articles/user",

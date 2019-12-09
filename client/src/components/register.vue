@@ -46,7 +46,7 @@ export default {
             let password = this.password
 
             axios({
-                url : "http://34.87.73.232/users/register",
+                url : "http://localhost:3000/users/register",
                 method : 'POST',
                 data : {
                     username, email, password

@@ -39,7 +39,6 @@ export default {
       this.$emit("fromChildren", 1);
     },
     logOut() {
-
       localStorage.clear()
       this.$emit("fromLogOutButton");
     },
@@ -56,7 +55,8 @@ export default {
   },
   watch : {
     search(newValue){
-      this.$emit('search', newValue)
+      console.log('search invoked()');
+      this.$emit('search', newValue);
    }
   }
 }

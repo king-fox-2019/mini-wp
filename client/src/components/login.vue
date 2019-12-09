@@ -56,10 +56,10 @@ export default {
     return {
       image : image,
       clientId:
-          "209474360923-ji703tcddmfcqmo2cti452cip3ek7jqo.apps.googleusercontent.com",
+          "1030967595018-ai7u8c1fp3fk6n4enusigooeen36k0hh.apps.googleusercontent.com",
       googleSignInParams: {
         clientId:
-          "209474360923-ji703tcddmfcqmo2cti452cip3ek7jqo.apps.googleusercontent.com"
+          "1030967595018-ai7u8c1fp3fk6n4enusigooeen36k0hh.apps.googleusercontent.com"
       },
       inputEmail: "",
       inputPassword: "",
@@ -73,7 +73,7 @@ export default {
       console.log(idToken)
       axios({
           method: "POST",
-          url: "http://34.87.73.232/users/signIn",
+          url: "http://localhost:3000/users/signIn",
           data: {
               idToken
           }
@@ -98,7 +98,7 @@ export default {
       let password = this.inputPassword;
       axios({
         method: "POST",
-        url: `http://34.87.73.232/users/login`,
+        url: `http://localhost:3000/users/login`,
         data: {
           email,
           password

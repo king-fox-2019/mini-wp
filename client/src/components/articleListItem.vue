@@ -88,6 +88,23 @@ export default {
         }
       });
     },
+    detailedArticle(obj) {
+      console.log("detailedArticle invoked()");
+      let id = obj._id;
+      let token = localStorage.getItem("token");
+      this.$emit("detailedArticle", obj);
+      axios({
+        url: `http://localhost:3000/articles/${id}/addView`,
+        method: "PATCH",
+        headers: { token }
+      })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(err => {
+          console.log(err.response.data);
+        })
+    },
     editArticle(obj) {
       this.$emit("editArticle", obj);
     },

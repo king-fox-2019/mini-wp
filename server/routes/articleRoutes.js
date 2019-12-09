@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ArticleController = require('../controllers/ArticleController.js');
-const authentication = require('../middleware/authentication.js');
+const { authentication } = require('../middleware/authentication.js');
 const authorization = require('../middleware/authorization.js');
 const { sendUploadToGCS, multer } = require('../helpers/images.js');
 const translateToIna = require('../middleware/translate');
