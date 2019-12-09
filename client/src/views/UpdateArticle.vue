@@ -37,7 +37,7 @@
 
 <template>
   <div class="contained" style="margin-top: 30px;">
-    <form @submit.prevent="post">
+    <form @submit.prevent="edit">
       <sui-input class="full-width" v-model="title" placeholder="Title..."></sui-input>
       <br />
       <wysiwyg v-model="content"></wysiwyg>
