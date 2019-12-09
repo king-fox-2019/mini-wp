@@ -88,7 +88,14 @@ class UserController {
       .catch(next)
    }
 
-   static uploadImage(req, res, next) {}
+   static getUser(req, res, next) {
+      User
+      .findOne({_id: req.decoded.userId})
+      .then(user => {
+         res.status(200).json({user})
+      })
+      .catch(next)
+   }
 }
 
 module.exports = UserController

@@ -22,7 +22,6 @@ class ArticleController {
    }
 
    static readAll(req, res, next) {
-      console.log('in read all')
       Article
       .find({user: req.decoded.userId})
       .then(articles => {
@@ -32,9 +31,8 @@ class ArticleController {
    }
 
    static readOne(req, res, next) {
-      console.log('in read one')
       Article
-      .find({_id: req.decoded.userId})
+      .findOne({_id: req.params.id})
       .then(article => {
          res.status(200).json({article})
       })
@@ -44,8 +42,18 @@ class ArticleController {
 
    static update(req, res, next) {
       
+      let inputs = {}
+
+      if(req.body.image != '') inputs = req.body
+      else {
+         inputs.title = req.body.title,
+         inputs.content = req.body.content
+      }
+
+      console.log(inputs, 'at article controller update')
+
       Article
-      .find(req.body)
+      .updateOne({_id: req.params.id}, {$set: inputs})
       .then(() => {
          res.status(200).json({message: 'Article update success'})
       })

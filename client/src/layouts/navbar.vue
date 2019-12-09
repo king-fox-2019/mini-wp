@@ -56,6 +56,11 @@
       color: #39B2AC;
    }
 
+   a:hover {
+      color: #39b2ac;
+      text-decoration: none;
+   }
+
    #navbar {
       border-bottom: 3px solid;
       border-color: #edf2f7;

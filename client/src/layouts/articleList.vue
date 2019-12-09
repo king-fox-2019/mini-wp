@@ -1,7 +1,7 @@
 <template>
-  <div id="article-list" class="d-flex flex-column align-items-center">
+  <div id="article-list" class="d-flex flex-column align-items-center mt-4">
      <div class="article-list-wrapper">
-        <ArticleCard v-for="article in articles" v-bind:key="article._id"></ArticleCard>
+        <ArticleCard v-on:readDetail="articleListToDetail($event)" v-for="article in articles" v-bind:key="article._id" v-bind:article="article"></ArticleCard>
      </div>
   </div>
 </template>
@@ -28,10 +28,12 @@ export default {
             }
          })
          .then(({data}) => {
-            console.log(data.articles)
             this.articles = data.articles
          })
          .catch(error => console.log(error))
+      },
+      articleListToDetail(articleId) {
+         this.$emit('readDetail', articleId)
       }
    },
    created() {

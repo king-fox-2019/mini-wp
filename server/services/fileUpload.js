@@ -10,19 +10,6 @@ aws.config.update({
 
 var s3 = new aws.S3({ /* ... */ })
 
-// module.exports = (req, res, next) => {
-//   if (!req.file) {
-//     return next({
-//         status: 400,
-//         message: `Please Upload new Image`
-//     })
-//   } else if (!req.file.mimetype.includes('image')) {
-//       return next({
-//           status: 400,
-//           message: `File Not Supported`
-//       })
-//   }
-// }
 var upload = multer({
   storage: multerS3({
     s3: s3,
@@ -32,7 +19,6 @@ var upload = multer({
       cb(null, {fieldName: file.fieldname});
     },
     key: function (req, file, cb) {
-       console.log(file)
       cb(null, file.originalname)
     }
   })

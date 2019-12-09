@@ -7,21 +7,27 @@
       </SignInRegisterPage>
 
       <div class="d-flex" v-if="showing == 'article'" v-cloak>
-         <LeftSideBar v-on:updatePage="changePage($event)">
+         <LeftSideBar v-on:updatePage="changePage($event)" v-on:updateArticle="toUpdateArticlePage($event)" v-bind:articleId="articleId" v-bind:page="page">
          </LeftSideBar>
          <ArticleWrite v-if="page == 'articleWrite'" v-on:updatePage="changePage($event)">
          </ArticleWrite>
-         <ArticleList v-if="page == 'articleList'"></ArticleList>
+         <ArticleList v-if="page == 'articleList'" v-on:readDetail="openArticleDetail($event)"></ArticleList>
+         <ArticleDetail v-if="page == 'articleDetail'" v-bind:article="article"></ArticleDetail>
+         <ArticleEdit v-if="page == 'articleEdit'" v-on:readDetail="openArticleDetail($event)" v-bind:articleId="articleId"></ArticleEdit>
       </div>
    </div>
 </template>
 
 <script>
+   import axios from '../apis/server'
+
    import Navbar from './layouts/navbar'
    import SignInRegisterPage from './layouts/signInRegisterPage'
    import LeftSideBar from './layouts/leftNavbar'
    import ArticleWrite from './layouts/articleWrite'
    import ArticleList from './layouts/articleList'
+   import ArticleDetail from './layouts/articleDetail'
+   import ArticleEdit from './layouts/articleEdit'
 
    export default {
       name: 'app',
@@ -30,14 +36,18 @@
          SignInRegisterPage,
          LeftSideBar,
          ArticleWrite,
-         ArticleList
+         ArticleList,
+         ArticleDetail,
+         ArticleEdit
       },
       data() {
          return {
             isLoggedIn: false,
             signPage: 'signin',
             page: 'articleWrite',
-            showing: 'sign'
+            showing: 'sign',
+            articleId: '',
+            article: {}
          }
       },
 
@@ -62,6 +72,27 @@
 
          changePage(pageName) {
             this.page = pageName
+         },
+
+         openArticleDetail(articleId) {
+            axios({
+               url: `/article/${articleId}`,
+               method: 'get',
+               headers: {
+                  access_token: localStorage.getItem('access_token')
+               }
+            })
+            .then(({data}) => {
+               this.article = data.article
+               this.articleId = articleId
+               this.page = 'articleDetail'
+            })
+            .catch(error => console.log(error))
+         },
+
+         toUpdateArticlePage(articleId) {
+            this.articleId = articleId
+            this.page = 'articleEdit'
          },
 
          loginCheck() {

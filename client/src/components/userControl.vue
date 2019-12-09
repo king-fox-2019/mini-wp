@@ -3,7 +3,7 @@
      <button
       class="btn px-4"
      >
-      Username
+      {{user.username}}
      </button>
      <button
       class="btn px-4"
@@ -15,8 +15,15 @@
 </template>
 
 <script>
+import axios from '../../apis/server'
+
 export default {
    name: 'userControl',
+   data() {
+      return {
+         user: {}
+      }
+   },
    methods: {
       signOut() {
          // if(GoogleAuth.isSignedIn.get()) {
@@ -24,7 +31,23 @@ export default {
          // }
          localStorage.removeItem('access_token')
          this.$emit('signOut')
+      },
+      fetchUser() {
+         axios({
+            url: '/user',
+            method: 'get',
+            headers: {
+               access_token: localStorage.getItem('access_token')
+            }
+         })
+         .then(({data}) => {
+            this.user = data.user
+         })
+         .catch(error => console.log(error))
       }
+   },
+   created() {
+      this.fetchUser()
    }
 }
 </script>
@@ -32,9 +55,10 @@ export default {
 <style scoped>
    button {
       color: #718096;
+      font-weight: 500;
    }
 
    button:hover {
-      color: #2D3748;
+      color: #39B2AC;
    }
 </style>
