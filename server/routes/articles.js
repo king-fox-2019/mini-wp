@@ -12,7 +12,6 @@ const upload = gcsUpload({
 });
 
 router.post("/image", upload.single("file"), (req, res) => {
-  console.log(req.body);
   res.status(200).json(req.body.file);
 });
 

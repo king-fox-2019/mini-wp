@@ -3,6 +3,7 @@ const Article = require("../models/Article");
 class ArticleController {
   static createArticle(req, res, next) {
     const { title, content } = req.body;
+    console.log(req.payload);
     const docs = {
       title,
       content,

@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("../helpers/jsonwebtoken");
+const passwordGenerator = require("../helpers/passwordGenerator");
 
 class UserController {
   static register(req, res, next) {
@@ -54,21 +55,26 @@ class UserController {
     const condition = {
       email: gProfile.U3
     };
-    User.find(condition)
+    User.findOne(condition)
       .then(user => {
         if (user) {
-          const payload = { id: user[0].id };
+          const payload = { _id: user._id };
           const token = jsonwebtoken.generateToken(payload);
           res.status(200).json(token);
         } else {
-          return UserController.register({
+          const password = passwordGenerator();
+          const docs = {
             name: gProfile.ig,
-            email: gProfile.wea
-          });
+            email: gProfile.U3,
+            password
+          };
+          return User.create(docs);
         }
       })
-      .then(data => {
-        res.status(201).json(data);
+      .then(user => {
+        const payload = { _id: user._id };
+        const token = jsonwebtoken.generateToken(payload);
+        res.status(201).json(token);
       })
       .catch(err => {
         console.log(err);
