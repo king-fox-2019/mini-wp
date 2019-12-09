@@ -27069,7 +27069,7 @@ var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var instance = _axios.default.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://34.87.73.163/',
   Headers: {
     token: localStorage.getItem('token')
   }
@@ -76269,27 +76269,6 @@ new Vue({
     return h(_App.default);
   }
 }).$mount('#app');
-
-function onSignIn(googleUser) {
-  var id_token = googleUser.getAuthResponse().id_token;
-  axios({
-    method: 'post',
-    url: 'http://localhost:3000/users/googleLogin',
-    data: {
-      id_token: id_token
-    }
-  }).then(function (token) {
-    localStorage.setItem('token', token.data);
-  });
-}
-
-function signOut() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    console.log('User signed out.');
-    localStorage.removeItem('token');
-  });
-}
 },{"buefy":"node_modules/buefy/dist/esm/index.js","buefy/dist/buefy.css":"node_modules/buefy/dist/buefy.css","bulma/css/bulma.css":"node_modules/bulma/css/bulma.css","./App.vue":"src/App.vue","@fortawesome/vue-fontawesome":"node_modules/@fortawesome/vue-fontawesome/index.es.js","vue-quill":"node_modules/vue-quill/vue-quill.js","vue-google-signin-button":"node_modules/vue-google-signin-button/dist/vue-google-signin-button.min.js"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -76318,7 +76297,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49245" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52572" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

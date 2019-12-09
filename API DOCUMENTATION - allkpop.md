@@ -5,7 +5,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 
 
-> Base url : <http://localhost:3000>
+> Base url : <http://mini-wp.dwitama-alfred.xyz/>
 
 
 
@@ -14,7 +14,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 ## Register [post]
 
-> <http://localhost:3000/users/register>
+> <http://mini-wp.dwitama-alfred.xyz//users/register>
 
 - Request (application/json)
 
@@ -47,7 +47,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 ## Login [post]
 
-> <http://localhost:3000/users/login>
+> <http://mini-wp.dwitama-alfred.xyz//users/login>
 
 - Request (application/json)
 
@@ -82,7 +82,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 ## Show All Article (public) [get]
 
-> <http://localhost:3000/articles/all>
+> <http://mini-wp.dwitama-alfred.xyz//articles/all>
 
 - Request (application/json)
 
@@ -187,7 +187,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 ## Show Personal Article  [get]
 
-> <http://localhost:3000/articles/>
+> <http://mini-wp.dwitama-alfred.xyz//articles/>
 
 - Request (application/json)
 
@@ -290,7 +290,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 ## Create Personal Article  [post]
 
-> <http://localhost:3000/articles>
+> <http://mini-wp.dwitama-alfred.xyz//articles>
 
 - Request (application/json)
 
@@ -374,7 +374,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 ## Delete Personal Article [delete]
 
-> <http://localhost:3000/todos/:id>
+> <http://mini-wp.dwitama-alfred.xyz//todos/:id>
 
 - Request (application/json)
 
@@ -414,7 +414,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 ## Update Article  [put]
 
-> <http://localhost:3000/articles/:id>
+> <http://mini-wp.dwitama-alfred.xyz//articles/:id>
 
 - Request (application/json)
 
@@ -495,7 +495,7 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
 
 ## Like Articles [patch]
 
-> <http://localhost:3000/articles/:id/likes>
+> <http://mini-wp.dwitama-alfred.xyz//articles/:id/likes>
 
 - Params:  id ( article id )
 

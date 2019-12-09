@@ -17,25 +17,3 @@ new Vue({
 }).$mount('#app');
 
 
-function onSignIn(googleUser) {
-    var id_token = googleUser.getAuthResponse().id_token;
-    axios({
-        method: 'post',
-        url: 'http://localhost:3000/users/googleLogin',
-        data: {
-          id_token : id_token
-        }
-      })
-      .then(token => {
-
-        localStorage.setItem('token',token.data)
-    })
-}
-
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-      localStorage.removeItem('token')
-    });
-  }
