@@ -22,10 +22,11 @@ import LoginForm from './LoginForm.vue'
 export default {
   data: function () {
     return {
-      whatToDisplay: 'register' // 'register', 'login'
+      // whatToDisplay: 'register' // 'register', 'login'
     }
   },
   name: 'login-register-form',
+  props: ['whatToDisplay'],
   components: {
     RegisterForm,
     LoginForm,

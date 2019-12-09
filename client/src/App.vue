@@ -9,9 +9,15 @@
       v-if="!isLogin"
       v-on:updateLoginStatus="checkAccessToken"
       v-on:passingToken="updateToken"
+      v-bind:whatToDisplay="whatToDisplay"
       >
     </login_register_form>
-    <home_page v-else></home_page>
+    <home_page
+      v-else
+      v-bind:userDetails="userDetails"
+      v-bind:articles="articles"
+      >
+    </home_page>
 
     <footer class="container-fluid mt-5">
       <div class="inner">
@@ -31,6 +37,9 @@ export default {
     return {
       isLogin: true,
       access_token: '',
+      userDetails: {},
+      articles: [],
+      whatToDisplay: 'register',
     }
   },
   components: {
@@ -52,8 +61,9 @@ export default {
     },
     updateToken(token) {
       localStorage.setItem('token', token)
+      this.whatToDisplay = 'login'
       this.checkAccessToken()
-    }
+    },
   },
   mounted: function () {
     this.checkAccessToken()

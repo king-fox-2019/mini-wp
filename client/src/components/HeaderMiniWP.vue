@@ -8,10 +8,10 @@
         </button>
         <div class="dropdown">
           <a class="text-light dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="fas fa-user"> {{ username }} </span>
+            <span class="fas fa-user"></span>
           </a>
 
-          <div class="dropdown-menu">
+          <div class="dropdown-menu dropdown-menu-right">
             <a
               class="dropdown-item"
               href="#"
