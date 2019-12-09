@@ -6,7 +6,7 @@
 
 server: http://localhost:3000/<br>
 client: http://localhost:1234/<br>
-Access in deploy :
+Access in deploy : http://article-sharing.edwinsatya.online/
 
 Bellows are routes that used in the sever fancy-todo.js
 
@@ -253,7 +253,7 @@ Make sure you have node js has been installed in your computer, then run the fol
 or visited my mini-wp
 
 ```
-    in :
+    in : http://article-sharing.edwinsatya.online/
 ```
 
 ## By : Edwin Satya Yudistira

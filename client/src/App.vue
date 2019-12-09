@@ -323,7 +323,7 @@ export default {
   },
   created() {
     this.fetchAllArticle();
-    this.fetchMyArticles();
+    // this.fetchMyArticles();
   }
 };
 </script>

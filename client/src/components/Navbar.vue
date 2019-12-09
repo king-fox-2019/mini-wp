@@ -99,7 +99,7 @@ export default {
       collapseOnScroll: true,
       params: {
         client_id:
-          "524874456233-anj0lnllh0m9dkh18nf6k36enc3qf1mt.apps.googleusercontent.com"
+          "435404984094-qetqu0scldk247huf5g809j1mpsssnmh.apps.googleusercontent.com"
       },
       // only needed if you want to render the button with the google ui
       renderParams: {
