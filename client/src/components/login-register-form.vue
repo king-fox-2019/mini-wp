@@ -3,6 +3,7 @@
     <RegisterForm
       v-if="whatToDisplay === 'register'"
       v-on:change-display="changeDisplay"
+      v-on:passingToken="sentToken"
       >
     </RegisterForm>
     <LoginForm
@@ -31,6 +32,9 @@ export default {
   methods: {
     changeDisplay(display) {
       this.whatToDisplay = display
+    },
+    sentToken(token) {
+      this.$emit('passingToken', token)
     }
   }
 }

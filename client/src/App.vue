@@ -1,7 +1,12 @@
 <template>
   <div>
     <HeaderMiniWP v-bind:isLogin="isLogin"></HeaderMiniWP>
-    <login_register_form v-if="!isLogin"></login_register_form>
+    <login_register_form
+      v-if="!isLogin"
+      v-on:updateLoginStatus="checkAccessToken"
+      v-on:passingToken="updateToken"
+      >
+    </login_register_form>
     <home_page v-else></home_page>
 
     <footer class="container-fluid mt-5">
@@ -21,12 +26,33 @@ export default {
   data: function () {
     return {
       isLogin: true,
+      access_token: '',
     }
   },
   components: {
     HeaderMiniWP,
     login_register_form,
     home_page
+  },
+  methods: {
+    checkAccessToken() {
+      const access_token = localStorage.getItem('token')
+
+      if (access_token) {
+        this.access_token = access_token
+        this.isLogin = true
+      } else {
+        this.access_token = ''
+        this.isLogin = false
+      }
+    },
+    passingToken(token) {
+      localStorage.setItem('token', token)
+      this.checkAccessToken()
+    }
+  },
+  mounted: function () {
+    this.checkAccessToken()
   }
 }
 </script>
