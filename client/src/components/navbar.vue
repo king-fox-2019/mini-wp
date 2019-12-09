@@ -71,8 +71,11 @@ export default {
             icon: "success",
             confirmButtonText: "Cool"
           });
-          localStorage.removeItem("token");
-          this.$emit("isLogin", false);
+          let auth2 = gapi.auth2.getAuthInstance();
+          auth2
+            .signOut()
+            localStorage.removeItem("token");
+            this.$emit("isLogin", false);
         }
       });
     }

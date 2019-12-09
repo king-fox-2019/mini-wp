@@ -34,12 +34,14 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../server";
+import GoogleLogin from 'vue-google-login'
 import Swal from "sweetalert2";
 
 export default {
   data() {
     return {
+      googleSignInParams: {client_id: "730096907393-n880p020p4bnra3a3595rvjp9k27s9gt.apps.googleusercontent.com" },
       email: "",
       password: "",
       googleSignInParams: {
@@ -52,7 +54,7 @@ export default {
     login() {
       axios({
         method: "POST",
-        url: "http://localhost:3000/users/login",
+        url: "users/login",
         data: {
           email: this.email,
           password: this.password
@@ -80,12 +82,11 @@ export default {
     onSignInSuccess(googleUser) {
       // `googleUser` is the GoogleUser object that represents the just-signed-in user.
       // See https://developers.google.com/identity/sign-in/web/reference#users
-      const profile = googleUser.getBasicProfile(); // etc etc
-      let id_token = googleUser.Zi.id_token;
+      const {id_token} = googleUser.getAuthResponse(); // etc etc
 
       axios({
         method: "POST",
-        url: "http://localhost:3000/users/login/google",
+        url: "users/login/google",
         data: {
           token: id_token
         }
@@ -118,23 +119,11 @@ export default {
         text: "Something went wrong.."
       });
     }
-
-    // onSignIn(googleUser) {
-    //   const token = googleUser.getAuthResponse().id_token;
-    //   console.log(token);
-    //   axios
-    //     .post("users/login/google", {
-    //       token
-    //     })
-    //     .then(({ data }) => {
-    //       console.log(data);
-    //       localStorage.setItem("token", data.token);
-    //       this.$emit("islogin", true);
-    //     })
-    //     .catch(err => {
-    //       console.log(err.response.data);
-    //     });
-    // }
+  },
+  mounted(){
+    gapi.signin2.render('google-signin-button', {
+      onsuccess: this.onSignIn
+    })
   }
 };
 </script>
@@ -183,5 +172,9 @@ export default {
   border-radius: 0 !important;
   border-width: 1px 1px 1px 4px;
   box-shadow: none;
+}
+
+g-signin-button {
+  margin-top: 5px
 }
 </style>
