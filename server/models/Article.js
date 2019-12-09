@@ -5,12 +5,7 @@ const timestampsPlugin = require('mongoose-timestamp')
 const articleSchema = new Schema({
    title: {
       type: String,
-      required: true,
-      validate: {
-         validator: function(v) {
-            return /^[-\w\.\$@\*\!]{1,30}$/.test(v)
-         }
-      }
+      required: true
    },
    slug: {
       type: String,
@@ -21,15 +16,14 @@ const articleSchema = new Schema({
       required: true
    },
    image: String,
-
+   audience: {
+      type: String,
+      required: true,
+      default: 'private'
+   }
 })
 
 articleSchema.plugin(timestampsPlugin)
-
-articleSchema.pre('save', function(next) {
-   this.slug = this.title.split(' ').join('-')
-   next()
-})
 
 const Article = mongoose.model('article', articleSchema)
 

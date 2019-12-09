@@ -6,7 +6,9 @@ const errorHandler = require('../middlewares/errorHandler')
 const {singleUpload} = require('../services/fileUpload')
 // const singleUpload = fileUpload.single('image')
 
-router.post('/imgUploadTest', function(req, res) {
+router.use('/user', userRouter)
+
+router.post('/imgUpload', function(req, res) {
    singleUpload(req, res, function(err) {
       if(err) {
          console.error(err)
@@ -16,7 +18,6 @@ router.post('/imgUploadTest', function(req, res) {
    })
 })
 
-router.use('/user', userRouter)
 router.use(authentication)
 router.use('/article', articleRouter)
 router.use(errorHandler)

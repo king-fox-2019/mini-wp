@@ -18,6 +18,7 @@ class UserController {
          const access_token = generateAccessToken(payload)
          res.status(201).json({message: 'User creation success', access_token})
       })
+      .catch(next)
    }
 
    static login(req, res, next) {
@@ -31,13 +32,14 @@ class UserController {
             errorCode: 400,
             message: 'Invalid email and or password'
          }
-
+         
          if(!user) throw error
          else if(!comparePassword(password, user.password)) throw error
          else res.status(200).json({
             access_token: generateAccessToken({userId: user._id})
          })
       })
+      .catch(next)
    }
 
    static googleSignIn(req, res, next) {

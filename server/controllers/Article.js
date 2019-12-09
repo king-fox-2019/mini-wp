@@ -7,7 +7,8 @@ class ArticleController {
       const inputs = {
          title: req.body.title,
          content: req.body.content,
-         image: (req.body.image) ? req.body.image : ''
+         image: (req.body.image) ? req.body.image : '',
+         slug: req.body.title.split(' ').join('-')
       }
 
       Article
