@@ -1,5 +1,5 @@
 <template>
-  <div class="add-article">
+  <div class="formedit">
     <v-dialog v-model="dialogArticle" max-width="600px">
       <template v-slot:activator="{ on }">
         <v-list-item v-on="on">
@@ -71,7 +71,12 @@
 
 <script>
 export default {
-  name: "AddArticle",
+  name: "FormEdit",
+  props: {
+    articleId: {
+      type: String
+    }
+  },
   data() {
     return {
       loading: false,
@@ -94,75 +99,13 @@ export default {
     };
   },
   methods: {
-    createArticle() {
-      if (this.$refs.formArticle.validate()) {
-        this.snackbar = true;
-        this.loading = true;
-
-        const token = localStorage.getItem("token");
-        let fd = new FormData();
-        if (this.form.image === undefined) {
-          fd.append("image", "zonk");
-        } else {
-          fd.append("image", this.form.image[0]);
-        }
-        fd.append("title", this.form.title);
-        fd.append("content", this.form.content);
-        fd.append("tag", this.form.tag);
-
-        this.axios({
-          method: "POST",
-          url: "/articles",
-          headers: {
-            token
-          },
-          data: fd
-        })
-          .then(({ data }) => {
-            let payloadAlert = {
-              text: data.message,
-              value: true
-            };
-            setTimeout(() => {
-              this.loading = false;
-              this.resetArticle();
-              this.form.content = "<span><B><U>Content :</U></B></span>";
-              this.dialogArticle = false;
-              this.$emit("success-create", payloadAlert);
-            }, 2000);
-          })
-          .catch(err => {
-            let text = "";
-            err.response.data.errors.forEach(element => {
-              text += element + ", ";
-            });
-            let payloadAlert = {
-              text,
-              value: true
-            };
-            setTimeout(() => {
-              this.loading = false;
-              this.resetArticle();
-              this.form.content = "<span><B><U>Content :</U></B></span>";
-              this.dialogArticle = false;
-              this.$emit("error-create", payloadAlert);
-            }, 2000);
-          });
-      }
-    },
     resetArticle() {
       this.$refs.formArticle.reset();
     }
   },
-  watch: {
-    dialogArticle(val) {
-      if (!val) {
-        this.resetArticle();
-        this.$emit("close-create-article");
-      }
-    }
-  }
+  watch: {}
 };
 </script>
 
-<style></style>
+<style>
+</style>

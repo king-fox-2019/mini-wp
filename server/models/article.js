@@ -6,7 +6,7 @@ const articleSchema = new Schema(
       type: String,
       required: [true, "Please input the title for your article"],
       minlength: [4, "Title Minimum 4 Characters"],
-      maxlength: [15, "Title Maximum 15 Characters"]
+      maxlength: [20, "Title Maximum 20 Characters"]
     },
     content: {
       type: String,
