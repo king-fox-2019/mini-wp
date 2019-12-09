@@ -4,6 +4,11 @@
       <div class="card-body">
         <h5 class="card-title">List Tags</h5>
         <hr>
+        <ul>
+          <li class="mb-2 tag-article" v-for="(tag,index) in tags" :key="index" @click.prevent="searchArticle(tag)">
+             {{ index+1 }}. {{ tag }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -11,7 +16,12 @@
 
 <script>
 export default {
-
+  props: ['tags'],
+  methods:{
+    searchArticle(tag){
+      this.$emit('search-article', tag)
+    }
+  }
 }
 </script>
 
@@ -19,5 +29,10 @@ export default {
 .tags-wrapper{
   height: 300px;
   max-height: 300px;
+}
+
+.tag-article:hover{
+  cursor: pointer;
+  color: brown;
 }
 </style>

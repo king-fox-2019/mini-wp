@@ -4,8 +4,8 @@
       <div class="card-body">
         <h5 class="card-title">Your Bookmark</h5>
         <hr>
-        <div class="mt-2">
-          <bookmarkItem></bookmarkItem>
+        <div class="mt-2 container">
+          <bookmarkItem :bookmark="bookmarkdetail"></bookmarkItem>
         </div>
       </div>
     </div>
@@ -19,7 +19,8 @@ import bookmarkItem from './BookmarkItem'
 export default {
   components:{
     bookmarkItem
-  }
+  },
+  props: ['bookmarkdetail']
 }
 </script>
 

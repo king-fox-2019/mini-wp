@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
       <div>
       <!-- Card -->
         <div class="card mb-3 article-card d-flex flex-column" v-for="(article,index) in articles" :key="index">
@@ -44,65 +44,11 @@
 </template>
 
 <script>
-
-import moment from 'moment'
-import articleServer from '../../api/article'
-
 export default {
-    data (){
-      return {
-      }
-    },
-    props: ['articles', 'isLogin'],
-    methods:{
-      setDate(val){
-        return moment(val).startOf('minutes').fromNow()
-      },
-      detailArticle(id){
-        articleServer({
-          url: `/${id}`,
-          method: 'GET',
-          headers:{
-            access_token: localStorage.getItem('token')
-          }
-        })
-        .then(({data})=>{
-          this.$emit('current-article', data)
-        })
-        .catch(err => {
-          console.log(err.response.data.message)
-        })
-      },
-      setContent(val){
-        let firstIndex = val.indexOf('>')
-        let lastIndex = val.indexOf('&nbsp;')
-        let content = val.slice(firstIndex+1, lastIndex+1)
-        if(firstIndex == -1){
-          return val
-        }else{
-          return `${content}...`
-        }
-      },
-      showDate(date){
-        return moment(date).format('LL')
-      }
-    }
+
 }
 </script>
 
-<style scoped>
-.article-card{
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  border-top: 3px #B71C1C solid;
-}
+<style>
 
-.article-card:hover{
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.article-title:hover{
-  color: blue;
-  cursor: pointer;
-}
 </style>

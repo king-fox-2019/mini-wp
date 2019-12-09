@@ -1,6 +1,6 @@
 <template>
 <div>
-  <featuredCard :articles="publishArticle" :isLogin="isLogin"></featuredCard>
+  <featuredCard :articles="publishArticle" :isLogin="isLogin" @current-article="currentArticle"></featuredCard>
 </div>
 </template>
 
@@ -12,7 +12,12 @@ export default {
   components:{
     featuredCard
   },
-  props: ['publishArticle', 'isLogin']
+  props: ['publishArticle', 'isLogin'],
+  methods:{
+    currentArticle(val){
+      this.$emit('current-article', val)
+    }
+  }
 }
 </script>
 

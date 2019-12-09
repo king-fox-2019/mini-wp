@@ -83,10 +83,10 @@ class UserController{
         User.findOne({
             _id: req.decoded.id
         })
+        .populate('favorites')
         .then(user => {
             if(user){
-                let filterUser = { id: user._id, username: user.username, email: user.email}
-                res.status(200).json(filterUser)
+                res.status(200).json(user)
             }else{
                 next({
                     status: 404,

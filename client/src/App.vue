@@ -14,7 +14,15 @@
         :isLogin="isLogin"
         :publisharticle="publishArticle"
         :draftarticle="draftArticle"
-        :showDraft="showDraftArticle">
+        :showDraft="showDraftArticle"
+        :showDetail="showDetailArticle"
+        @detail-article="detailArticle"
+        @edit-article="editArticle"
+        @go-homepage="showMainPage"
+        @go-draft="getDraft"
+        :bookmark="bookmarkUser"
+        :tags="tags"
+        @search="searchArticle">
         </landingPage>
         <usercontrol v-if="!isLogin && !mainPage" 
         :show-register="registerPage" 
@@ -24,8 +32,9 @@
         @user-login="setUserLogin">
         </usercontrol>
         <createArticle 
-        v-if="isLogin && showArticle" 
-        @go-homepage="showMainPage">
+        v-if="isLogin && displayCreateArticle" 
+        @go-homepage="showMainPage"
+        :article="currentArticle">
         </createArticle>
     </div>
 </template>
@@ -53,11 +62,15 @@ export default {
             mainPage: true,
             registerPage: false,
             loginPage: false,
-            showArticle: false,
+            displayCreateArticle: false,
             userLogin: {},
             publishArticle: [],
             draftArticle: [],
-            showDraftArticle: false
+            showDraftArticle: false,
+            showDetailArticle: false,
+            currentArticle: {},
+            bookmarkUser: [],
+            tags: []
         }
     },
     methods:{
@@ -66,6 +79,7 @@ export default {
             if(token){
                 this.isLogin = true
                 this.whoIsLogin()
+                this.getFavorites()
             }else{
                 this.isLogin = false
             }   
@@ -81,11 +95,13 @@ export default {
             this.mainPage = false
         },
         showMainPage(){
+            this.fethcingArticlePublished()
             this.mainPage = true
             this.registerPage = false
             this.loginPage = false
-            this.showArticle = false
+            this.displayCreateArticle = false
             this.showDraftArticle = false
+            this.showDetailArticle = false
         },
         changeToLogin(){
             this.registerPage = false
@@ -133,20 +149,28 @@ export default {
             })
         },
         showCreateArticle(){
-            this.showArticle = true
+            this.currentArticle = {}
+            this.displayCreateArticle = true
             this.mainPage = false
+            this.showDetailArticle = false
         },
         getPublish(){
             this.fethcingArticlePublished()
+            this.currentArticle = {}
             this.mainPage = true
             this.registerPage = false
             this.loginPage = false
-            this.showArticle = false
+            this.displayCreateArticle = false
             this.showDraftArticle = false
+            this.showDetailArticle = false
         },
         getDraft(){
             this.fethcingDraftArticle()
+            this.mainPage = true
             this.showDraftArticle = true
+            this.showDetailArticle = false
+            this.displayCreateArticle = false
+            this.currentArticle = {}
         },
         fethcingArticlePublished(){
             articleServer({
@@ -158,6 +182,7 @@ export default {
             })
             .then(({data})=>{
                 this.publishArticle = data.reverse()
+                this.getTags()
             })
             .catch(err => {
                 Alert.Swal.fire({
@@ -184,6 +209,86 @@ export default {
                     title: 'Fetching Data',
                     text: `${err.response.data.message}`
                 })
+            })
+        },
+        detailArticle(){
+            this.showDetailArticle = true
+        },
+        editArticle(id){
+            articleServer({
+                url: `/${id}`,
+                method: 'GET',
+                headers:{
+                    access_token: localStorage.getItem('token')
+                }
+            })
+            .then(({data})=>{
+                this.currentArticle = data
+                this.displayCreateArticle = true
+                this.mainPage = false
+                this.showDetailArticle = false
+            })
+            .catch(err =>{
+                Alert.Swal.fire({
+                    icon: 'error',
+                    title: 'Edit article',
+                    text: `${err.response.data.message}`
+                })
+            })
+        },
+        getFavorites(){
+            UserServer({
+                url: `/profile`,
+                method: 'GET',
+                headers:{
+                    access_token: localStorage.getItem('token')
+                }
+            })
+            .then(({data})=>{
+                this.bookmarkUser = data.favorites
+                console.log(this.bookmarkUser)
+            })
+            .catch(err => {
+                Alert.Swal.fire({
+                    icon: 'error',
+                    title: 'Favorite User',
+                    text: `${err.response.data.message}`
+                })
+            })
+        },
+        getTags(){
+            let filteredTags = []
+            let articles = this.publishArticle
+            articles.forEach(element => {
+                let tag = element.tags
+                tag.forEach(data => {
+                    if(!filteredTags.includes(data)){
+                        filteredTags.push(data)
+                    }
+                })
+            });
+            this.tags = filteredTags
+        },
+        searchArticle(tag){
+            articleServer({
+                url: '/publish',
+                method: 'GET',
+                headers:{
+                    access_token: localStorage.getItem('token')
+                }
+            })
+            .then(({data})=>{
+            let tagFiltered = []
+            let arr = data
+            arr.forEach(element => {
+                if(element.tags.includes(tag)){
+                    tagFiltered.push(element)
+                }
+            })  
+            this.publishArticle = tagFiltered
+            })
+            .catch(err => {
+
             })
         }
     },

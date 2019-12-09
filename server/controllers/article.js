@@ -21,6 +21,7 @@ class ArticleController{
         Article.findOne({
             _id: req.params.id
         })
+        .populate('author')
         .then(article => {
             if(!article){
                 throw({

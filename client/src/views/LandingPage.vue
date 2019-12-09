@@ -2,21 +2,30 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-9 d-flex flex-column">
-                <featuredArticle v-if="!showDetailArticle && !showDraft"
+                <featuredArticle v-if="!showDetail && !showDraft"
                 :publishArticle="publisharticle"
-                :isLogin="isLogin">
+                :isLogin="isLogin"
+                @current-article="setCurrentArticle">
                 </featuredArticle>
                 <draftArticle 
                 :draftArticle="draftarticle" 
-                v-if="showDraft">
+                v-if="showDraft"
+                @edit-article="editDraftArticle"
+                @go-draft="goDraft">
                 </draftArticle>
                 <detailArticle 
-                v-if="showDetailArticle">
+                v-if="showDetail"
+                :detailArticle="currentArticle"
+                @edit-article="editArticle"
+                @go-homepage="goHomepage">
                 </detailArticle>
             </div>
             <div class="col-3">
-                <bookmarkCard></bookmarkCard>
-                <tag class="mt-4"></tag>
+                <bookmarkCard :bookmarkdetail="bookmark"></bookmarkCard>
+                <tag class="mt-4" 
+                :tags="tags"
+                @search-article="searchArticle">
+                </tag>
                 <job class="mt-4"></job>
             </div>
         </div>
@@ -43,13 +52,32 @@ export default {
         detailArticle,
         draftArticle
     },
-    props: ['isLogin', 'publisharticle','draftarticle', 'showDraft'],
+    props: ['isLogin', 'publisharticle','draftarticle', 'showDraft', 'showDetail', 'bookmark', 'tags'],
     data(){
         return{
-            showDetailArticle: false
+            currentArticle: {}
         }
     },
     methods:{
+        setCurrentArticle(val){
+            this.currentArticle = val
+            this.$emit('detail-article')
+        },
+        editArticle(id){
+            this.$emit('edit-article', id)
+        },
+        goHomepage(){
+            this.$emit('go-homepage')
+        },
+        editDraftArticle(id){
+            this.$emit('edit-article', id)
+        },
+        goDraft(id){
+            this.$emit('go-draft', id)
+        },
+        searchArticle(tag){
+            this.$emit('search', tag)
+        }
     },
     created(){
     }
