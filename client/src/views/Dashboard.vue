@@ -187,6 +187,11 @@ export default {
                 text: data.message,
                 value: true
               };
+              Swal.fire(
+                "Deleted!",
+                "Your imaginary file has been deleted.",
+                "success"
+              );
               this.$emit("success-create", payloadAlert);
             })
             .catch(err => {
@@ -200,13 +205,6 @@ export default {
               };
               this.$emit("error-create", payloadAlert);
             });
-          Swal.fire(
-            "Deleted!",
-            "Your imaginary file has been deleted.",
-            "success"
-          );
-          // For more information about handling dismissals please visit
-          // https://sweetalert2.github.io/#handling-dismissals
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
         }
