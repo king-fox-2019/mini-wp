@@ -59,7 +59,6 @@ export default {
           data: fd 
         })
         .then(({ data }) => {
-          console.log(data)
           Swal.fire({
             icon: 'success',
             text: "Submitted!"
@@ -67,7 +66,6 @@ export default {
           this.$emit("changeMainView", "posts")
         })
         .catch(err => {
-          console.log(err)
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -75,7 +73,6 @@ export default {
           })
         })
       } else {
-          alert('!')
           axios.patch(`/articles/${this.articleId}`, {
             title: this.title,
             content: this.content 

@@ -28740,7 +28740,6 @@ var _default = {
           data: fd
         }).then(function (_ref) {
           var data = _ref.data;
-          console.log(data);
 
           _sweetalert.default.fire({
             icon: 'success',
@@ -28749,8 +28748,6 @@ var _default = {
 
           _this.$emit("changeMainView", "posts");
         }).catch(function (err) {
-          console.log(err);
-
           _sweetalert.default.fire({
             icon: 'error',
             title: 'Oops...',
@@ -28758,8 +28755,6 @@ var _default = {
           });
         });
       } else {
-        alert('!');
-
         _server.default.patch("/articles/".concat(this.articleId), {
           title: this.title,
           content: this.content
@@ -65688,7 +65683,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33359" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44493" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

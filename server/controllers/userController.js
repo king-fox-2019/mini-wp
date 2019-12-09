@@ -13,16 +13,13 @@ class userController {
     .then(user => {
       res.status(200).json(user);
     })
-    .catch(err => {
-      console.log(err)
-    })
+    .catch(next)
   }
   
   static signin(req, res, next) {
     const payload = {};
     let access_token = '';
     const { email, password } = req.body;
-    console.log(req.body, '<<<<<<<,')
     User.findOne({ email })
       .then(user => {
         if (user) {
@@ -83,18 +80,13 @@ class userController {
       
   }
 
-
   static showArticles(req, res, next) {
-
-    console.log(ObjectId(req.decoded._id))
     Article.find({ author: { _id: ObjectId(req.decoded._id) } }).sort({created_at: 'descending'})
     .populate("articles")
     .then(articles => {
-      
-      console.log(articles)
-        res.status(200).json(articles);
-      })
-      .catch(next)
+      res.status(200).json(articles);
+    })
+    .catch(next)
   }
 
   // static editUser(req, res, next) {

@@ -1,9 +1,18 @@
 module.exports = (err, req, res, next) => {
-  let status = 500;
-  let message= "Internal Server Error";
-  if (err.name === "ValidationError") {
-    status = 400;
-    message = err.message;
+  let status, message;
+  if (err.name) {
+      switch (err.name) {
+          case "CastError":
+              status = err.status || 500;
+              message = err.message || "Internal server error"
+          break;
+          default:
+              status = 500;
+              message = `${err.name} - Internal server error`
+      }
+  } else {
+      status = err.status;
+      message = err.message;
   }
-  res.status(status).json({ message })
+  res.status(status).json({ message: message });
 }
