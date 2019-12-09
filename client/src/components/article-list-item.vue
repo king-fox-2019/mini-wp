@@ -15,14 +15,15 @@
     </header>
     <div class="entry-content">
       <a href>
-        <img src="https://picsum.photos/320" alt class="img-fluid" />
+        <img src="https://image.freepik.com/free-photo/colorful-fruit_1417-1529.jpg" alt class="img-fluid" />
       </a>
       <p
         class="lead"
-      >{{ article.content }}</p>
+        v-html="article.content"
+      ></p>
 
-      <a href="#" class="btn btn-primary">
-        Read More
+      <a href="#" class="btn btn-outline-danger">
+        Delete
         <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       </a>
     </div>
@@ -37,5 +38,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+img {
+  height: 200px;
+  width: auto
+}
 </style>

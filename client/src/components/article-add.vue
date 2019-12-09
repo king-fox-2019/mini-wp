@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="submitForm" enctype="multipart/form-data">
     <div class="form-label-group">
       <input
         type="text"
@@ -12,6 +12,14 @@
       />
     </div>
     <div class="form-label-group">
+      <b-form-file
+        v-model="image"
+        :state="Boolean(image)"
+        placeholder="Choose a file or drop it here..."
+        drop-placeholder="Drop file here..."
+      ></b-form-file>
+    </div>
+    <div class="form-label-group">
       <label for="content">Content:</label>
       <wysiwyg id="content" v-model="content" />
     </div>
@@ -22,33 +30,37 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "addArticle",
   data: function() {
     return {
       title: "",
-      content: ""
+      content: "",
+      image: null
     };
   },
   methods: {
     submitForm: function() {
+      const formData = new FormData();
+      formData.append("image", this.image);
+      formData.set("title", this.title);
+      formData.set("content", this.content);
+      console.log(formData);
       axios({
         method: "POST",
         url: "http://104.198.20.142:3000/article/create",
-        data: {
-          title: this.title,
-          content: this.content
-        },
+        data: formData,
         headers: {
-            token: localStorage.getItem('token')
+          token: localStorage.getItem("token")
         }
       })
         .then(({ data }) => {
           this.$emit("add-article", data);
           this.title = "";
           this.content = "";
+          this.image = null
         })
         .catch(err => console.log(err));
     }
