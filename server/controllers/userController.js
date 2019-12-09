@@ -41,8 +41,8 @@ class userController {
                 }
                 else {
                     const payload = {
-                        id: user._id,
-                        username: user.name,
+                        userId: user._id,
+                        username: user.username,
                         email: user.email,
                     }
                     res.status(200).json({
