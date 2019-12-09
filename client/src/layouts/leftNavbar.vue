@@ -13,7 +13,7 @@ export default {
    name: 'leftNavbar',
    methods: {
       changePage(pageName) {
-         this.$emit('changePage', pageName)
+         this.$emit('updatePage', pageName)
       }
    }
 }

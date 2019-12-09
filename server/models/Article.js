@@ -20,6 +20,11 @@ const articleSchema = new Schema({
       type: String,
       required: true,
       default: 'private'
+   },
+   user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
    }
 })
 

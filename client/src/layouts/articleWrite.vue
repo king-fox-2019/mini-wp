@@ -60,7 +60,6 @@
          },
 
          submit() {
-            console.log('submitting')
             axios({
                url: '/article',
                method: 'post',
@@ -74,7 +73,7 @@
                }
             })
             .then(() => {
-               this.$emit('changePage', 'articleList')
+               this.$emit('updatePage', 'articleList')
             })
             .catch(error => console.log(error))
          }

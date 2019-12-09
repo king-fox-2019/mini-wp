@@ -7,10 +7,11 @@
       </SignInRegisterPage>
 
       <div class="d-flex" v-if="showing == 'article'" v-cloak>
-         <LeftSideBar v-on:changePage="changePage($event)">
+         <LeftSideBar v-on:updatePage="changePage($event)">
          </LeftSideBar>
-         <ArticleWrite v-on:changePage="changePage($event)">
+         <ArticleWrite v-if="page == 'articleWrite'" v-on:updatePage="changePage($event)">
          </ArticleWrite>
+         <ArticleList v-if="page == 'articleList'"></ArticleList>
       </div>
    </div>
 </template>
@@ -20,6 +21,7 @@
    import SignInRegisterPage from './layouts/signInRegisterPage'
    import LeftSideBar from './layouts/leftNavbar'
    import ArticleWrite from './layouts/articleWrite'
+   import ArticleList from './layouts/articleList'
 
    export default {
       name: 'app',
@@ -27,7 +29,8 @@
          Navbar,
          SignInRegisterPage,
          LeftSideBar,
-         ArticleWrite
+         ArticleWrite,
+         ArticleList
       },
       data() {
          return {

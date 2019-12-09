@@ -8,12 +8,14 @@ class ArticleController {
          title: req.body.title,
          content: req.body.content,
          image: (req.body.image) ? req.body.image : '',
-         slug: req.body.title.split(' ').join('-')
+         slug: req.body.title.split(' ').join('-'),
+         user: req.decoded.userId
       }
 
       Article
       .create(inputs)
       .then(article => {
+         console.log('article created', article)
          res.status(201).json({message: 'Article creation success'})
       })
       .catch(next)
