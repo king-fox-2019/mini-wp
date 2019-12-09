@@ -4,9 +4,12 @@
       <sui-menu-item>
         <sui-grid class="full-width">
           <sui-grid-row stretched>
-            <sui-grid-column :width="8" class="logo" @click="$router.push('/')" style="cursor: pointer;">
-              Brightly
-            </sui-grid-column>
+            <sui-grid-column
+              :width="8"
+              class="logo"
+              @click="$router.push('/')"
+              style="cursor: pointer;"
+            >Brightly</sui-grid-column>
             <sui-grid-column :width="8" class="tagline">
               Raise Kids
               <br />Who Love to Read
@@ -19,40 +22,32 @@
         <sui-grid class="full-width">
           <sui-grid-row stretched>
             <sui-grid-column
+             v-if="isLogin"
               @click="$router.push('/add-article')"
-              :width="4"
-              style="color: white; padding-right: 30% !important; cursor: pointer;"
+              :width="5"
+              style="color: white; padding-right: 10% !important; cursor: pointer;"
             >Add Article</sui-grid-column>
-            <sui-grid-column :width="3">
+
+            <sui-grid-column 
+             v-if="isLogin"
+            :width="5" 
+            @click="$router.push('/my-articles')"
+            style="color: white; padding-right: 10% !important; cursor: pointer;">
+              My Articles
               <!-- <sui-icon style="color: white; margin-left: 80% !important;" name="search" /> -->
             </sui-grid-column>
+
             <sui-grid-column
+              v-if="!isLogin"
               @click="$router.push('/signin')"
-              :width="4"
-              style="color: white; padding-right: 30% !important; cursor: pointer;"
+              :width="5"
+              style="color: white; padding-right: 10% !important; cursor: pointer;"
             >Sign In</sui-grid-column>
 
-
             <sui-grid-column
-              @click="$router.push('/signin')"
-              :width="4"
-              style="color: white; padding-right: 30% !important; cursor: pointer;"
-            >
-
-<!-- 
-              <div class="ui search">
-                <div class="ui icon input">
-                  <input class="prompt" type="text" placeholder="Search..." />
-                  <i class="search icon"></i>
-                </div>
-                <div class="results"></div>
-              </div> -->
-            </sui-grid-column>
-
-
-            <sui-grid-column
-              @click="$router.push('/signout')"
-              :width="4"
+              v-if="isLogin"
+              @click="logout"
+              :width="5"
               style="color: white; padding-right: 30% !important; cursor: pointer;"
             >Sign Out</sui-grid-column>
           </sui-grid-row>
@@ -63,14 +58,31 @@
 </template>
 
 <script>
-
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  data: function() {
+    return {
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("userEmail");
+      this.$router.push("/");
+      this.$toastr.h("Logout").i("Success!");
+    }
+  },
+  computed: {
+    isLogin() {
+      return localStorage.getItem("token");
+    }
+  }
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Yeseva+One&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Yeseva+One&display=swap");
 .navbar {
   background: #eda28b !important;
   border: none !important;
@@ -86,7 +98,7 @@ export default {
   width: 100%;
 }
 .logo {
-  font-family: 'Yeseva One', cursive !important;
+  font-family: "Yeseva One", cursive !important;
   font-size: 30px;
   color: white;
   border-right: 1px solid white !important;
@@ -96,7 +108,5 @@ export default {
   text-align: left;
   color: white;
 }
-
-
 </style>
 

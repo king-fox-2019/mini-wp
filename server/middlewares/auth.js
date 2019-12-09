@@ -10,6 +10,7 @@ const authentication = (req, res, next) => {
         throw {status: 401, msg: `please login first`}
       } else {
         req.loggedUser = user
+        console.log('kirim loggeduser', req.loggedUser)
         next()
       }
     })

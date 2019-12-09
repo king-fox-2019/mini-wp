@@ -1,16 +1,10 @@
 <template>
-  <div>
+  <div class="contained" style="margin-top: 30px;">
     <form @submit.prevent="post">
-      <!-- <b-field label="Name">
-            <b-input v-model="name"></b-input>
-      </b-field>-->
-      <sui-input v-model="title" placeholder="Title..."></sui-input>
-      <!-- <b-input placeholder="Title..."></b-input> -->
+      <sui-input class="full-width" v-model="title" placeholder="Title..."></sui-input>
       <br />
       <wysiwyg v-model="content"></wysiwyg>
-      <!-- <Upload></Upload> -->
 
-      <!-- upload  -->
       <div class="container">
         <label class="label" for="input">Please upload a picture !</label>
 
@@ -18,8 +12,8 @@
           <input @change="previewFiles" ref="myFiles" name="input" id="file" type="file" />
         </div>
       </div>
-      
-       <tags-input
+
+      <tags-input
         element-id="tags"
         v-model="tags"
         :existing-tags="[
@@ -32,8 +26,7 @@
         :typeahead="true"
         only-existing-tags
       ></tags-input>
-      <sui-button type="submit">Submit</sui-button>
-     
+      <sui-button class="is-primary-bg mt" type="submit">Submit</sui-button>
     </form>
   </div>
 </template>
@@ -94,8 +87,6 @@ export default {
       file: null,
       title: "",
       tags: []
-      // tag: "",
-      // tags: []
     };
   },
   methods: {
@@ -106,7 +97,6 @@ export default {
       formData.append("image", this.file);
       formData.append("tags", JSON.stringify(this.tags));
 
-      console.log("ke post");
       axios
         .post("/articles", formData, {
           headers: {
@@ -114,14 +104,18 @@ export default {
           }
         })
         .then(({ data }) => {
-          console.log(data, "mau di submit add article");
           this.file = null;
           this.$router.push("/");
         }, formData)
-        .catch();
+        .catch(err => {
+          if (err.response) {
+            this.$toastr.h("Error!").i(err.response.data.message);
+          } else {
+            this.$toastr.h("Error!").i(`Couldn't connect to server`);
+          }
+        });
     },
     previewFiles(event) {
-      console.log(event.target.files["0"]);
       this.file = event.target.files["0"];
     }
   }

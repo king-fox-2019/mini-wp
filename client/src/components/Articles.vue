@@ -1,37 +1,42 @@
 <template>
   <div class="contained">
-    <p>READ</p>
+    <div style="  text-align: center; margin: 50px;">
+      <h2>READ</h2>
+      <h5>Classroom favorites and new stories are both included in our hand-picked books for tweens to enjoy.</h5>
+    </div>
 
     <!-- {{JSON.stringify(articles)}} -->
-    <sui-item-group divided>
-      <sui-item v-for="article in articles" :key="article._id">
-        <!-- <sui-item-image size="small" src="static/images/wireframes/image.png" /> -->
-        <img class="img" :src="article.image" />
+    <div class="contained">
+      <sui-item-group divided>
+        <sui-item v-for="article in articles" :key="article._id">
+          <!-- <sui-item-image size="small" src="static/images/wireframes/image.png" /> -->
+          <img class="img" :src="article.image" />
 
-        <sui-item-content>
-          <sui-item-header class="title clickable">
-            <span @click="$router.push('/detail-article/' + article._id )">{{article.title}}</span>
-          </sui-item-header>
-          <sui-item-meta>
-            <span v-for="(tag, i) in article.tags" :key="i" class="tag">
-              <a is="sui-label" tag>{{tag}}</a>
-            </span>
-          </sui-item-meta>
-          <sui-item-description>
-            <p>{{article.content.substring(0, 200)}} ...</p>
-          </sui-item-description>
-        </sui-item-content>
-      </sui-item>
-    </sui-item-group>
-    <paginate
-      v-model="page"
-      :page-count="pageCount"
-      :click-handler="paginate"
-      :prev-text="'Prev'"
-      :next-text="'Next'"
-      :container-class="'pagination'"
-      :page-range="5"
-    ></paginate>
+          <sui-item-content>
+            <sui-item-header class="title clickable">
+              <span @click="$router.push('/detail-article/' + article._id )">{{article.title}}</span>
+            </sui-item-header>
+            <sui-item-meta>
+              <span v-for="(tag, i) in article.tags" :key="i" class="tag">
+                <a is="sui-label" tag>{{tag.value}}</a>
+              </span>
+            </sui-item-meta>
+            <sui-item-description>
+              <p>{{article.content.substring(0, 200)}} ...</p>
+            </sui-item-description>
+          </sui-item-content>
+        </sui-item>
+      </sui-item-group>
+      <paginate
+        v-model="page"
+        :page-count="pageCount"
+        :click-handler="paginate"
+        :prev-text="'Prev'"
+        :next-text="'Next'"
+        :container-class="'pagination'"
+        :page-range="5"
+      ></paginate>
+    </div>
   </div>
 </template>
 
@@ -43,27 +48,30 @@ export default {
     return {
       articles: [],
       count: 0,
-      limit: 2,
+      limit: 5,
       page: 1
     };
   },
   methods: {
     fetchArticle(page) {
-      console.log("dapet get article");
-      // ?topic=${this.$route.params.topic}
-      console.log(this.$route.params.topic);
-
       axios
-        .get(`/articles?topic=${this.$route.params.topic}&page=${page}&limit=${this.limit}`)
+        .get(
+          `/articles?topic=${this.$route.params.topic}&page=${page}&limit=${this.limit}`
+        )
         .then(({ data }) => {
-          console.log(data, "findall article dr app.vue");
           this.articles = data.articles;
           this.count = data.count;
         })
-        .catch(console.log);
+        .catch(err => {
+          if (err.response) {
+            this.$toastr.h("Error!").i(err.response.data.message);
+          } else {
+            this.$toastr.h("Error!").i(`Couldn't connect to server`);
+          }
+        });
     },
     paginate() {
-      this.fetchArticle(this.page)
+      this.fetchArticle(this.page);
     }
   },
   created() {
@@ -71,13 +79,12 @@ export default {
   },
   watch: {
     "$route.params.topic"() {
-      // console.log('berubah')
       this.fetchArticle(1);
     }
   },
   computed: {
     pageCount() {
-      return Math.ceil(this.count / this.limit)
+      return Math.ceil(this.count / this.limit);
     }
   }
 };
@@ -96,6 +103,6 @@ img {
   display: flex;
   list-style-type: none;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 </style>

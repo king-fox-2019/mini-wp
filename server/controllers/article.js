@@ -10,19 +10,19 @@ class ArticleController {
     if(topic && topic !== 'all') {
       filter['tags.key'] = `${topic}`
     }
+    if (req.loggedUser) {
+      console.log(req.loggedUser, "user nya manaaaa???");
+      
+      filter.user = req.loggedUser._id
+    }
     let count
-    // Article.find().skip(4).limit(2)
-    //   .then(articles => {
-    //     res.status(200).json(articles)
-    //   })
-    //   .catch(next)
+  
+    console.log(filter)
     Article.countDocuments(filter)
      .then(n => {
         count = n
-        // console.log(articles, "dapet apa article dari database");
-        return Article.find(filter).skip(limit * (page - 1)).limit(limit)
+        return Article.find(filter).skip(limit * (page - 1)).limit(limit).sort({ createdAt: "desc" })
       })
-      // .sort({ createdAt: "desc" })
       .then(articles => {
         res.status(200).json({ count, articles })
       })
@@ -104,17 +104,17 @@ haislnya :
   }
 
 
-  static findMyArticle(req, res, next) {
-    console.log("masuk find my article")
+  // static findMyArticle(req, res, next) {
+  //   console.log("masuk find my article")
 
-    Article.find({ user: req.loggedUser._id })
-      .then(articles => {
-        // console.log(articles, 'ada kan yg article punya user')
-        res.status(200).json(articles)
-      })
-      .catch(next)
+  //   Article.find({ user: req.loggedUser._id })
+  //     .then(articles => {
+  //       // console.log(articles, 'ada kan yg article punya user')
+  //       res.status(200).json(articles)
+  //     })
+  //     .catch(next)
 
-  }
+  // }
 
   static findOne(req, res, next) {
     let id = req.params.id

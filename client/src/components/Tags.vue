@@ -33,11 +33,7 @@ export default {
       }],
     };
   },
-  // watch : {
-  //   tags() {
-  //     this.$emit('changeTags', this.tags)
-  //   }
-  // },
+
   computed: {
     filteredItems() {
       return this.autocompleteItems.filter(i => {

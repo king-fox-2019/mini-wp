@@ -15,18 +15,10 @@ export default {
   },
   data: function() {
     return {
-      // isLogin : false
       articles : []
     };
   },
-  methods: {
-   
-  },
-  created() {
-    // if (localStorage.getItem('access_token')) {
-    //   this.isLogin = true
-    // }
-  }
+
 };
 </script>
 
@@ -42,5 +34,15 @@ body {
 }
 .clickable {
   cursor: pointer;
+}
+.full-width {
+  width: 100% !important;
+}
+.is-primary-bg {
+  background: #EDA28B !important;
+  color: #FFFFFF !important;
+}
+.mt {
+  margin-top: 20px !important;
 }
 </style>

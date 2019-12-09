@@ -25,6 +25,11 @@ const routes = [
     name: 'edit-article',
     component: () => import('../views/UpdateArticle.vue')
   },
+  {
+    path: '/my-articles',
+    name: 'my-articles',
+    component: () => import('../views/MyArticles.vue')
+  },
   { 
     path: '/', redirect: '/articles/all' 
   },

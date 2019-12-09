@@ -1,27 +1,17 @@
+<!--
 <template>
   <div>
     <form @submit.prevent="edit">
-      <!-- <b-field label="Name">
-            <b-input v-model="name"></b-input>
-      </b-field>-->
       <sui-input v-model="title" placeholder="Title..."></sui-input>
-      <!-- <b-input placeholder="Title..."></b-input> -->
       <br />
       <wysiwyg v-model="content"></wysiwyg>
-      <!-- <Upload></Upload> -->
 
-      <!-- upload  -->
       <div class="container">
-        <!-- <label class="label" for="input">Please upload a picture !</label> -->
         <img v-if="!file" :src="img" alt="old_pict" />
         <div class="input">
           <input @change="previewFiles" ref="myFiles" name="input" id="file" type="file" />
         </div>
       </div>
-      <!-- upload  -->
-      <!-- <sui-input type="file" placeholder="Search..." /> -->
-      <!-- <Tags @changeTags="changeTags"></Tags> -->
-      <!-- <vue-tags-input v-model="tag" :tags="tags" @tags-changed="newTags => tags = newTags" /> -->
 
       <tags-input
         element-id="tags"
@@ -40,6 +30,47 @@
     </form>
   </div>
 </template>
+-->
+
+
+
+
+<template>
+  <div class="contained" style="margin-top: 30px;">
+    <form @submit.prevent="post">
+      <sui-input class="full-width" v-model="title" placeholder="Title..."></sui-input>
+      <br />
+      <wysiwyg v-model="content"></wysiwyg>
+
+      <div class="container">
+        <img style="width: 150px;" v-if="!file" :src="img" alt="old_pict" />
+        <div class="input">
+          <input @change="previewFiles" ref="myFiles" name="input" id="file" type="file" />
+        </div>
+      </div>
+
+      <tags-input
+        element-id="tags"
+        v-model="tags"
+        :existing-tags="[
+        { key: 'activity-books', value: 'Activity Books' },
+        { key: 'animals-and-nature', value: 'Animals And Nature' },
+        { key: 'baby-shower-gifts', value: 'Baby Shower Gifts' },
+        { key: 'bedtime-and-bathtime', value: 'Bedtime And Bathtime' },
+        { key: 'mindfulness-and-manners', value: 'Mindfulness And Manners' }
+    ]"
+        :typeahead="true"
+        only-existing-tags
+      ></tags-input>
+      <sui-button class="is-primary-bg mt" type="submit">Submit</sui-button>
+    </form>
+  </div>
+</template>
+
+
+
+
+
 
 <script>
 import axios from "../helpers/axios";
@@ -107,14 +138,11 @@ export default {
   },
   methods: {
     edit() {
-      console.log(this.title, this.content, "ke post");
-
       if (this.file) {
         let formData = new FormData();
         formData.append("title", this.title);
         formData.append("content", this.content);
         formData.append("image", this.file);
-        // formData.append("tags", JSON.stringify(this.tagsText));
 
         axios
           .patch(`/articles/${this.$route.params.id}/gcs`, formData, {
@@ -123,11 +151,16 @@ export default {
             }
           })
           .then(({ data }) => {
-            // console.log(data, "mau di submit edit article");
             this.file = null;
             this.$router.push("/");
           })
-          .catch();
+          .catch(err => {
+            if (err.response) {
+              this.$toastr.h("Error!").i(err.response.data.message);
+            } else {
+              this.$toastr.h("Error!").i(`Couldn't connect to server`);
+            }
+          });
       } else {
         axios
           .patch(
@@ -144,23 +177,25 @@ export default {
             }
           )
           .then(({ data }) => {
-            // console.log(data, "mau di submit edit article");
             this.file = null;
             this.$router.push("/");
           })
-          .catch();
+          .catch(err => {
+            if (err.response) {
+              this.$toastr.h("Error!").i(err.response.data.message);
+            } else {
+              this.$toastr.h("Error!").i(`Couldn't connect to server`);
+            }
+          });
       }
     },
     previewFiles(event) {
-      console.log(event.target.files["0"]);
       this.file = event.target.files["0"];
     },
     changeTags(tags) {
       this.tags = tags;
     },
     fetchDetailArticle() {
-      console.log("jalan fetch update");
-
       axios
         .get(`/articles/${this.$route.params.id}`)
         .then(({ data }) => {
@@ -172,11 +207,13 @@ export default {
           this.title = data.title;
           this.tags = data.tags;
         })
-        .catch(console.log);
-    },
-    revertTags() {
-      // ["k", "l", "m"]
-      //
+        .catch(err => {
+          if (err.response) {
+            this.$toastr.h("Error!").i(err.response.data.message);
+          } else {
+            this.$toastr.h("Error!").i(`Couldn't connect to server`);
+          }
+        });
     }
   },
   computed: {
@@ -185,7 +222,6 @@ export default {
       this.tags.forEach(tag => {
         result.push(tag.text);
       });
-      console.log(result, "result tag nya apa");
 
       return result;
     }
