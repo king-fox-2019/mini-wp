@@ -20,7 +20,7 @@ class articleController {
                         title: req.body.title,
                         content: req.body.content,
                         author: req.userId,
-                        featured_image: req.body.featured_image || 'Not Provided'
+                        featured_image: req.body.featuredImage || 'Not Provided'
                     }
                     Article.create(articleData)
                         .then(article => {
