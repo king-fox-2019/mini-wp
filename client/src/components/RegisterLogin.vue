@@ -414,7 +414,7 @@ input {
   /* This is where you control how the button looks. Be creative! */
   display: inline-block;
   padding: 10px 30px;
-  margin-left: 200px !important;
+  margin-left: 180px !important;
   border-radius: 45px;
   background-color: #c29589 !important;
   color: #fff;

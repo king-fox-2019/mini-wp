@@ -423,7 +423,134 @@
 
 ```
 
+
+
+> Read All User's Article 
+
   
+
+  
+
+- **URL**
+
+  
+
+`http://localhost:3000/articles/mine`
+
+  
+
+- **Method**
+
+  
+
+`GET`
+
+  
+
+- **Data Params :** none
+  
+
+  
+
+- **Success Response :**
+
+  
+
+**code** : 200
+
+  
+
+**content example :**
+
+
+```
+{
+
+"count":  2,
+
+"articles":  [
+
+{
+
+"image":  "https://storage.googleapis.com/femme-featured-images/1575820392385-drops-of-water-water-nature-liquid-40784.jpg",
+
+"tags":  [
+
+{
+
+"key":  "activity-books",
+
+"value":  "Activity Books"
+
+},
+
+{
+
+"key":  "mindfulness-and-manners",
+
+"value":  "Mindfulness And Manners"
+
+}
+
+],
+
+"_id":  "5ded1c6836386c015a91f8af",
+
+"title":  "updated",
+
+"content":  "2",
+
+"user":  "5de679c323975138ab3f8f53",
+
+"createdAt":  "2019-12-08T15:53:12.986Z",
+
+"updatedAt":  "2019-12-08T16:24:16.187Z"
+
+},
+
+{
+
+"image":  "https://storage.googleapis.com/femme-featured-images/1575820369546-190614HydrogenPR.jpg",
+
+"tags":  [
+
+{
+
+"key":  "activity-books",
+
+"value":  "Activity Books"
+
+},
+
+{
+
+"key":  "animals-and-nature",
+
+"value":  "Animals And Nature"
+
+}
+
+],
+
+"_id":  "5ded1c5236386c015a91f8ae",
+
+"title":  "1",
+
+"content":  "1",
+
+"user":  "5de679c323975138ab3f8f53",
+
+"createdAt":  "2019-12-08T15:52:50.280Z",
+
+"updatedAt":  "2019-12-08T15:52:50.280Z"
+
+}
+
+]
+
+}
+
+```
 
   
 

@@ -4,12 +4,9 @@
       <h2>READ</h2>
       <h5>Classroom favorites and new stories are both included in our hand-picked books for tweens to enjoy.</h5>
     </div>
-
-    <!-- {{JSON.stringify(articles)}} -->
     <div class="contained">
       <sui-item-group divided>
         <sui-item v-for="article in articles" :key="article._id">
-          <!-- <sui-item-image size="small" src="static/images/wireframes/image.png" /> -->
           <img class="img" :src="article.image" />
 
           <sui-item-content>

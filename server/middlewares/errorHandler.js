@@ -1,7 +1,5 @@
 module.exports = (err, req, res, next) => {
-  console.log(err.name, "=====================", err);
-  // console.log(err.errors.email.message, "aaaaaa");
-  
+  // console.log(err.name, "=====================", err);
   
   if (err.status) {
     res.status(err.status).json({ message : err.message})
@@ -13,7 +11,6 @@ module.exports = (err, req, res, next) => {
       }
       res.status(400).json({ message })
     } 
-
     else {
       res.status(500).json({ message : `internal server error`})
     }

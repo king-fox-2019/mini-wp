@@ -21,10 +21,6 @@ const articleSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }
-  // comment : [{
-  //   type : String
-
-  // }]
 }, {
   versionKey : false,
   timestamps : true
