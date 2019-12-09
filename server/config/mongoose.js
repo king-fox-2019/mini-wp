@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
-const db = process.env.URL_DB
-// const db = process.env.MONGO_ATLAS
+// const db = process.env.URL_DB
+const db = process.env.MONGO_ATLAS
 
 mongoose.connect(db, {
     useNewUrlParser: true,

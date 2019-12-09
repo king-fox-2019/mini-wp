@@ -2,7 +2,7 @@
   <div>
     <Navbar :userLogin="userLogin"></Navbar>
     <div id="headss">
-      <h1 id="title">{{details.title}}</h1>
+      <h1 class="title" id="title">{{details.title}}</h1>
       <h4>{{details.author.name}}</h4>
       <h5>{{convertMoment}} - {{reading}}</h5>
     </div>
@@ -85,6 +85,10 @@ export default {
 </script>
 
 <style>
+.title {
+  /* margin-bottom: 0px !important; */
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
 #title {
   font-size: 30px;
   color: black;

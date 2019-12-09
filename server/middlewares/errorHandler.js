@@ -22,6 +22,8 @@ module.exports = {
                         message.push(`You're session is expired. Please login.`)
                     } else if (err.message === 'jwt must be provided') {
                         message.push('you have to login first')
+                    } else if (err.message === 'jwt malformed') {
+                        message.push('you have to login first')
                     } else {
                         message.push(err.message)
                     }

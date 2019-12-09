@@ -16,6 +16,12 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Poppins|Raleway&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+}
 .mediaz {
   padding: 10px 100px 0px 100px;
 }

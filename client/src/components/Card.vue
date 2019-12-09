@@ -173,6 +173,8 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Poppins|Raleway&display=swap");
+
 .title {
   margin-bottom: 0px !important;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
@@ -181,7 +183,8 @@ export default {
   object-fit: cover !important;
 }
 .contenz {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
 }
 .card {

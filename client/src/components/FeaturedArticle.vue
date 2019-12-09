@@ -83,7 +83,7 @@ export default {
     publishedDate(i) {
       const date = new Date(this.articles[i].createdAt); // 2009-11-10
       const month = date.toLocaleString("default", { month: "long" });
-      return `${month.substring(0, 3)}, ${date.getDate()}`;
+      return `${month}, ${date.getDate()}`;
     },
     fullName(i) {
       return `${this.articles[i].author.name}`;
@@ -116,14 +116,18 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Poppins|Raleway&display=swap");
+
 .title {
+  margin-bottom: 8px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 #test {
   object-fit: cover !important;
 }
 .contenz {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
+
   font-size: 13px;
 }
 </style>

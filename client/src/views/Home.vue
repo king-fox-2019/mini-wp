@@ -8,7 +8,7 @@
       :duration="err.duration"
       :active.sync="isActive"
     >{{ err.message }}</b-message>
-    <Navbar :userLogin="userLogin" @loggedIn="isLogin" @search="searchQuery">
+    <Navbar :userLogin="userLogin" @logout="userLogout" @loggedIn="isLogin" @search="searchQuery">
       <h3>{{ userlogged }}</h3>
     </Navbar>
 

@@ -102,6 +102,7 @@ export default {
       tab: "",
       tokenFind: false,
       search: ""
+      // userLogin: false
     };
   },
   methods: {
@@ -178,15 +179,34 @@ export default {
         hasIcon: true,
         onConfirm: () => this.userLeave()
       });
+    },
+    findToken() {
+      if (localStorage.getItem("token")) {
+        this.userLogin = true;
+      } else {
+        this.userLogin = false;
+      }
     }
   },
   watch: {
     search() {
       this.$emit("search", this.search);
     }
+    // findToken() {
+    //   if (localStorage.getItem("token")) {
+    //     this.userLogin = true;
+    //   } else {
+    //     this.userLogin = false;
+    //   }
+    // }
   },
   created() {
-    this.findToken();
+    // this.findToken();
+    this.getThisArticle();
+  },
+  mounted() {
+    // this.findToken();
+    this.getThisArticle();
   }
 };
 </script>
