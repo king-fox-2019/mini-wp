@@ -6,12 +6,13 @@
                     <card-article-component
                             v-for="article in articles"
                             :key="article._id"
-                            :article="article">
+                            :article="article"
+                            @clicked="listOfArticle">
                     </card-article-component>
                 </sui-card-group>
             </sui-tab-pane>
             <sui-tab-pane title="New Article">
-                Box
+                <input-article-component @clicked="listOfArticle"></input-article-component>
             </sui-tab-pane>
         </sui-tab>
     </div>
@@ -20,6 +21,7 @@
 <script>
     import cardArticleComponent from "./cardArticleComponent";
     import {instance} from "../../../config/axiosConfig";
+    import inputArticleComponent from "./inputArticleComponent";
 
     export default {
         name: "sideBarComponent",
@@ -48,7 +50,8 @@
             this.listOfArticle();
         },
         components: {
-            cardArticleComponent
+            cardArticleComponent,
+            inputArticleComponent
         },
     }
 </script>

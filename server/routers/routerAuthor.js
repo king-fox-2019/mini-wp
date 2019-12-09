@@ -6,6 +6,8 @@ const {authenticationToken} = require('../middleware/authentication');
 router.post('/', controllerAuthor.createAuthor);
 //login authors
 router.post('/login', controllerAuthor.loginAuthor);
+//login Oauth
+router.post('/login/oauth/:email', controllerAuthor.loginOauth);
 
 router.use(authenticationToken);
 

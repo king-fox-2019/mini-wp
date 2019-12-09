@@ -10,7 +10,9 @@
     "prettier": "^1.19.1",
     "semantic-ui-vue": "^0.8.1",
     "vue": "^2.6.10",
-    "vue-hot-reload-api": "^2.3.4"
+    "vue-google-signin-button": "^1.0.4",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-quill": "^1.5.1"
   },
   "name": "client",
   "version": "1.0.0",

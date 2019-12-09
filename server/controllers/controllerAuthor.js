@@ -13,6 +13,22 @@ class controllerAuthor {
         })
     };
 
+    static loginOauth(req, res, next) {
+        Author.findOne({
+            email: req.params.email
+        }).then(data => {
+            if (data) {
+                let token = jwt.sign({userId: data._id}, process.env.SECRET_KEY);
+                res.status(201).json({
+                    message: "User successfully login",
+                    token: token
+                })
+            }
+        }).catch(err => {
+            next(err);
+        })
+    };
+
     static createAuthor(req, res, next) {
         Author.create({
             name: req.body.name,
