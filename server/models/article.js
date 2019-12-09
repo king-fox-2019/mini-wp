@@ -13,11 +13,7 @@ const articleShema = new Schema({
   created_at: {
     type: Date
   },
-  status: {
-    type: String,
-    enum: ['pending', 'created'],
-    default: 'pending'
-  },
+  featured_image: String,
   userId: {
     type: Schema.Types.ObjectId, ref: 'User'
   }

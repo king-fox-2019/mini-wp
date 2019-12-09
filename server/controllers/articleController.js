@@ -4,14 +4,13 @@ const Article = require('../models/article')
 
 class articleController {
   static create(req, res, next) {
-    const { title, content, status } = req.body
-
+    const { title, content, image } = req.body
     Article
       .create({
         title,
         content,
+        featured_image: image,
         created_at: new Date(),
-        status,
         userId: req.decoded._id
       })
       .then(article => {
@@ -23,7 +22,7 @@ class articleController {
   static read(req, res, next) {
     let keys = ['title', 'content']
     let value = {
-      userId: req.decoded._id
+      // userId: req.decoded._id
     }
 
     keys.forEach(element => {
@@ -33,7 +32,7 @@ class articleController {
     })
 
     Article
-      .find(value).sort({ created_at: -1 })
+      .find(value).sort({ created_at: -1 }).populate('userId')
       .then(articles => {
         res.status(200).json(articles)
       })
@@ -42,12 +41,11 @@ class articleController {
 
   static update(req, res, next) {
     let id = req.params.id
-    let { title, content, status } = req.body
-    console.log(req.body)
+    let { title, content, image } = req.body
     let value = {
       title: title || undefined,
       content: content || undefined,
-      status: status || undefined
+      featured_image: image || undefined
     }
 
     Article
@@ -71,3 +69,4 @@ class articleController {
 }
 
 module.exports = articleController
+
