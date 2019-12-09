@@ -12,7 +12,13 @@
           </a>
 
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Logout</a>
+            <a
+              class="dropdown-item"
+              href="#"
+              v-on:click="logout"
+              >
+              Logout
+            </a>
           </div>
         </div>
       </div>
@@ -28,7 +34,13 @@ export default {
       username: 'Development'
     }
   },
-  props: ['isLogin']
+  props: ['isLogin'],
+  methods: {
+    logout() {
+      localStorage.removeItem('token')
+      this.$emit('logout')
+    }
+  }
 }
 </script>
 

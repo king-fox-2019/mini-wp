@@ -1,6 +1,10 @@
 <template>
   <div>
-    <HeaderMiniWP v-bind:isLogin="isLogin"></HeaderMiniWP>
+    <HeaderMiniWP
+      v-bind:isLogin="isLogin"
+      v-on:logout="checkAccessToken"
+      >
+    </HeaderMiniWP>
     <login_register_form
       v-if="!isLogin"
       v-on:updateLoginStatus="checkAccessToken"
@@ -46,7 +50,7 @@ export default {
         this.isLogin = false
       }
     },
-    passingToken(token) {
+    updateToken(token) {
       localStorage.setItem('token', token)
       this.checkAccessToken()
     }

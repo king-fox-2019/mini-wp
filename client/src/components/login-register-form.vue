@@ -9,6 +9,7 @@
     <LoginForm
       v-if="whatToDisplay === 'login'"
       v-on:change-display="changeDisplay"
+      v-on:passingToken="sentToken"
       >
     </LoginForm>
   </div>

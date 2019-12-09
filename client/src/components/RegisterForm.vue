@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import axios from '../utils/axios-instance'
+import axios from '../utils/axios-instance.js'
 
 export default {
   data: function () {
@@ -70,10 +70,12 @@ export default {
         password: this.password,
       })
         .then(({ data }) => {
-          this.password = ''
           this.$emit('passingToken', data.access_token)
         })
         .catch(console.log)
+        .finally(() => {
+          this.password = ''
+        })
     }
   }
 }
