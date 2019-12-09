@@ -184,19 +184,7 @@ export default {
             }
         },
         findAllArticles(){
-            Swal.fire({
-                title: 'Login!',
-                text: '',
-                imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
-                // imageWidth: 400,
-                // imageHeight: 200,
-                // timer: 2500,
-                imageAlt: 'Custom image',
-                showConfirmButton: false,
-                showCancelButton: false,
-                confirmButtonText: 'نعم',
-                cancelButtonText: 'لا',
-            })
+            Swal.showLoading()
             axios({
                 url : '/article/myarticles',
                 method : 'GET',
@@ -207,10 +195,38 @@ export default {
             .then(({ data })=>{
                 this.articles = data
                 Swal.close()
+                Swal.fire({
+                    title: 'Complete!',
+                    text: '',
+                    icon : 'success',
+                    // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                    // imageWidth: 400,
+                    // imageHeight: 200,
+                    timer: 1200,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'نعم',
+                    cancelButtonText: 'لا',
+                })
             })
             .catch(err=>{
                 console.log(err);
                 Swal.close()
+                Swal.fire({
+                    title: 'Errorr!',
+                    text: '',
+                    icon: 'error',
+                    // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                    // imageWidth: 400,
+                    // imageHeight: 200,
+                    timer: 2000,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'نعم',
+                    cancelButtonText: 'لا',
+                })
             })
         },
         editedTrigger(article){
