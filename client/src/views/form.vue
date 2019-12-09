@@ -91,6 +91,19 @@ export default {
                 localStorage.setItem('profil', data.user.image[0])
                 this.$emit('loginSuccess')
                 Swal.close()
+                Swal.fire({
+                    title: 'Login!',
+                    text: '',
+                    icon : 'success',
+                    // imageWidth: 400,
+                    // imageHeight: 200,
+                    timer: 2500,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'نعم',
+                    cancelButtonText: 'لا',
+                })
             })
             .catch(err=>{
                 Swal.close()
@@ -112,20 +125,7 @@ export default {
             })
         },
         register(){
-            Swal.fire({
-                title: 'Register!',
-                text: '',
-                // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
-                icon : 'success',
-                // imageWidth: 400,
-                // imageHeight: 200,
-                // timer: 2500,
-                imageAlt: 'Custom image',
-                showConfirmButton: false,
-                showCancelButton: false,
-                confirmButtonText: 'نعم',
-                cancelButtonText: 'لا',
-            })
+            Swal.showLoading()
             let form;
             if (this.google) {
                 form = {
@@ -159,7 +159,7 @@ export default {
                     Swal.fire({
                         title: 'Register Failed!',
                         text: ereror.join(` & `),
-                        icon : 'success',
+                        icon : 'error',
                         // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
                         // imageWidth: 400,
                         // imageHeight: 200,
@@ -178,7 +178,6 @@ export default {
                 form.set('email', this.email)
                 form.set('password', this.password)
                 form.append('image', this.image)
-
                 axios({
                 url : '/user/register',
                 method : 'POST',
@@ -190,6 +189,19 @@ export default {
                     this.image = ''
                     this.$emit('checkForm')
                     Swal.close()
+                    Swal.fire({
+                        title: 'Register Success!',
+                        text: '',
+                        icon : 'success',
+                        // imageWidth: 400,
+                        // imageHeight: 200,
+                        timer: 2500,
+                        imageAlt: 'Custom image',
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'نعم',
+                        cancelButtonText: 'لا',
+                    })
                 })
                 .catch(err=>{
                     Swal.close()
@@ -205,7 +217,7 @@ export default {
                         title: 'Register Failed!',
                         text: ereror.join(` & `),
                         // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
-                        icon : 'success',
+                        icon : 'error',
                         // imageWidth: 400,
                         // imageHeight: 200,
                         timer: 3500,
@@ -219,20 +231,21 @@ export default {
             }
         },
         onSignInSuccess (googleUser) {
-            Swal.fire({
-                title: 'Loading!',
-                text: '',
-                // imageUrl: '../public/img/loading.gif',
-                icon : 'success',
-                // imageWidth: 400,
-                // imageHeight: 200,
-                // timer: 2500,
-                imageAlt: 'Custom image',
-                showConfirmButton: false,
-                showCancelButton: false,
-                confirmButtonText: 'نعم',
-                cancelButtonText: 'لا',
-            })
+            // Swal.fire({
+            //     title: 'Loading!',
+            //     text: '',
+            //     imageUrl: '../public/img/loading.gif',
+            //     // icon : 'success',
+            //     // imageWidth: 400,
+            //     // imageHeight: 200,
+            //     // timer: 2500,
+            //     imageAlt: 'Custom image',
+            //     showConfirmButton: false,
+            //     showCancelButton: false,
+            //     confirmButtonText: 'نعم',
+            //     cancelButtonText: 'لا',
+            // })
+            Swal.showLoading()
             const { id_token } = googleUser.getAuthResponse();
             axios({
                 url : '/user/google',
@@ -247,6 +260,19 @@ export default {
                     localStorage.setItem('name', data.user.name)
                     localStorage.setItem('profil', data.user.image[0])
                     Swal.close()
+                    Swal.fire({
+                        title: 'Login!',
+                        text: '',
+                        icon : 'success',
+                        // imageWidth: 400,
+                        // imageHeight: 200,
+                        timer: 2500,
+                        imageAlt: 'Custom image',
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'نعم',
+                        cancelButtonText: 'لا',
+                    })
                     this.$emit('loginSuccess')
                 } else {
                     this.name = data.name
@@ -259,11 +285,35 @@ export default {
                 }
             })
             .catch(err=>{
-                console.log(err);
+                Swal.fire({
+                    title: 'Failed!',
+                    text: err,
+                    icon : 'error',
+                    // imageWidth: 400,
+                    // imageHeight: 200,
+                    timer: 2500,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'نعم',
+                    cancelButtonText: 'لا',
+                })
             })
         },
         onSignInError(error){
-            console.log(error);
+            Swal.fire({
+                    title: 'Failed!',
+                    text: error,
+                    icon : 'error',
+                    // imageWidth: 400,
+                    // imageHeight: 200,
+                    timer: 2500,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'نعم',
+                    cancelButtonText: 'لا',
+            })
 		},
     },
     mounted() {
