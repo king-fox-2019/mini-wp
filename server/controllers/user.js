@@ -56,17 +56,13 @@ class UserController {
     })
       .then(user => {
 
-        const { _id, email } = user
-
+        const id = user._id
+        const email = user.email
         let token = generateToken({
-          _id,
-          email
+          id: user._id,
+          email: user.email
         })
-
-
-        const result = { token, _id, email }
-
-        res.status(201).json(result)
+        res.status(200).json({ token, id, email })
 
 
       })

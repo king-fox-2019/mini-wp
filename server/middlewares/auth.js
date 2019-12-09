@@ -3,7 +3,10 @@ const Article = require('../models/article')
 const User = require('../models/user')
 
 const authentication = (req, res, next) => {
-
+  console.log(req.headers.access_token);
+  console.log(decodeToken(req.headers.access_token));
+  
+  
   User.findById(decodeToken(req.headers.access_token).id)
     .then(user => {
       if (!user) {
