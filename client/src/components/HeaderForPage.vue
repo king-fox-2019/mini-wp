@@ -1,7 +1,10 @@
 <template>
   <div id="Kepala">
     <div>
-      <Login @submit.prevent="loginUser"></Login>
+      <Login 
+        @submit.prevent="loginUser"
+        @data-submited-from-form="hideFormData"
+        ></Login>
     </div>
     <div></div>
   </div>
@@ -22,7 +25,9 @@ export default {
     }
   },
   methods: {
-  
+    hideFormData(){
+      this.$emit("data-submited-from-form")
+    }
   }
 };
 </script>

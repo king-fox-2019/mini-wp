@@ -1,5 +1,7 @@
 <template>
-  
+  <div>
+      <button id="logout"></button>
+  </div>
 </template>
 
 <script>
