@@ -1,4 +1,5 @@
 const Article = require('../models/Article');
+const imageUploader = require('../helpers/imageUploader');
 
 class ArticleController {
     static create(req, res, next) {
@@ -81,11 +82,23 @@ class ArticleController {
             })
     }
 
-    static uploadFile(req, res, next) {
-        let imageURL = req.body.image;
-        res.status(201).json({
-            image: imageURL
-        })
+    static async uploadFile(req, res, next) {
+        try {
+            imageUploader(req.file)
+                .then(url => {
+                    console.log(url)
+                    res.status(201).json({
+                        image: url
+                    })
+                })
+        } catch (error) {
+            next(error)
+        }
+
+        // let imageURL = req.body.image;
+        // res.status(201).json({
+        //     image: imageURL
+        // })
     }
 
     static trashStatus(req, res, next) {
