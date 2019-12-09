@@ -13,7 +13,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-mongoose.connect(`mongodb+srv://aws-miniwp-zoe:Ravepro203@hikari0-rmg8u.mongodb.net/test?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://aws-miniwp-zoe:${process.env.ATLAS_PASSWORD}@hikari0-rmg8u.mongodb.net/test?retryWrites=true&w=majority`, {
    useNewUrlParser: false
 })
 
