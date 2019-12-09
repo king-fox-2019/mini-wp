@@ -267,14 +267,18 @@ import Swal from 'sweetalert2'
 
             updateProject(){
                 let formData = new FormData()
-                
-                    this.dropFiles.forEach(image => {
-                        if(typeof image == 'string'){
+                    if(typeof this.dropFiles == 'string'){
                             formData.append('existing',image)
                         }else{
-                            formData.append ('files',image)
+                            this.dropFiles.forEach(image => {
+                                if(typeof image == 'string'){
+                                    formData.append('existing',image)
+                                }else{
+                                    formData.append ('files',image)
+                                }
+                            });
                         }
-                    });
+                    
                     this.tags.forEach(tags => {
                         formData.append ('tags',tags)
                     })
@@ -297,10 +301,17 @@ import Swal from 'sweetalert2'
                     )
                     this.keyword = ''
                     this.getPersonal()
-                    console.log(data)
-                    console.log('SUKSES')
+                    this.title = ''
+                    this.description = ''
+                    this.tags = ''
+                    this.dropFiles = ''
                 })
                 .catch(err => {
+                     Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something wrong when we try to upthe information', 
+                    })
                     console.log(err)
                 })
             },

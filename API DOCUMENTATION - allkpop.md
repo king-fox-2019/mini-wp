@@ -117,10 +117,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         "_id": "5ded4ff6f45a6b12a1570db0",
         "title": "Everglow ready for debut showcase",
         "description": "<p><span style=\"background-color: rgb(255, 255, 255); color: 
-        								rgb(34, 34, 34);\">Everglow is a South Korean girl group under 		
-        								Yuehua Entertainment.The group is composed of six members: E:U, 
-        								Sihyeon, Mia, Onda, Aisha and Yiren. Everglow debuted on March 18, 
-        								2019, with the album Arrival of Everglow.</span></p>",
+                    rgb(34, 34, 34);\">Everglow is a South Korean girl group under 		
+                    Yuehua Entertainment.The group is composed of six members: E:U, 
+                    Sihyeon, Mia, Onda, Aisha and Yiren. Everglow debuted on March 18, 
+                    2019, with the album Arrival of Everglow.</span></p>",
         "userId": {
             "_id": "5ded3e02322f050a3720f2ab",
             "fullname": "Dwitama Alfred",
@@ -154,10 +154,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         "_id": "5ded5054f45a6b12a1570db1",
         "title": "Yiren from everglow snapped top 20 in produce 48",
         "description": "<p><span style=\"color: rgb(34, 34, 34); background-color: rgb(255, 
-        								255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
-        								member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
-        								Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
-        								Produce 48 where she was voted as the #1 Visual Center.</span></p>",
+                        255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
+                        member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
+                        Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
+                        Produce 48 where she was voted as the #1 Visual Center.</span></p>",
         "userId": {
             "_id": "5ded3e02322f050a3720f2ab",
             "fullname": "Dwitama Alfred",
@@ -222,10 +222,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         "_id": "5ded4ff6f45a6b12a1570db0",
         "title": "Everglow ready for debut showcase",
         "description": "<p><span style=\"background-color: rgb(255, 255, 255); color: 
-        								rgb(34, 34, 34);\">Everglow is a South Korean girl group under 		
-        								Yuehua Entertainment.The group is composed of six members: E:U, 
-        								Sihyeon, Mia, Onda, Aisha and Yiren. Everglow debuted on March 18, 
-        								2019, with the album Arrival of Everglow.</span></p>",
+                        rgb(34, 34, 34);\">Everglow is a South Korean girl group under 		
+                        Yuehua Entertainment.The group is composed of six members: E:U, 
+                        Sihyeon, Mia, Onda, Aisha and Yiren. Everglow debuted on March 18, 
+                        2019, with the album Arrival of Everglow.</span></p>",
         "userId": {
             "_id": "5ded3e02322f050a3720f2ab",
             "fullname": "Dwitama Alfred",
@@ -259,10 +259,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         "_id": "5ded5054f45a6b12a1570db1",
         "title": "Yiren from everglow snapped top 20 in produce 48",
         "description": "<p><span style=\"color: rgb(34, 34, 34); background-color: rgb(255, 
-        								255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
-        								member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
-        								Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
-        								Produce 48 where she was voted as the #1 Visual Center.</span></p>",
+                        255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
+                        member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
+                        Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
+                        Produce 48 where she was voted as the #1 Visual Center.</span></p>",
         "userId": {
             "_id": "5ded3e02322f050a3720f2ab",
             "fullname": "Dwitama Alfred",
@@ -310,10 +310,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         ]
         "title": "Yiren from everglow snapped top 20 in produce 48",
         "description": "<p><span style=\"color: rgb(34, 34, 34); background-color: rgb(255, 
-        								255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
-        								member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
-        								Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
-        								Produce 48 where she was voted as the #1 Visual Center.</span></p>",
+                        255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
+                        member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
+                        Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
+                        Produce 48 where she was voted as the #1 Visual Center.</span></p>",
     }
 ```
 
@@ -336,10 +336,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         "_id": "5ded5054f45a6b12a1570db1",
         "title": "Yiren from everglow snapped top 20 in produce 48",
         "description": "<p><span style=\"color: rgb(34, 34, 34); background-color: rgb(255, 
-        								255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
-        								member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
-        								Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
-        								Produce 48 where she was voted as the #1 Visual Center.</span></p>",
+                        255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
+                        member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
+                        Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
+                        Produce 48 where she was voted as the #1 Visual Center.</span></p>",
         "userId": {
             "_id": "5ded3e02322f050a3720f2ab",
             "fullname": "Dwitama Alfred",
@@ -435,10 +435,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         ]
         "title": "Yiren from everglow snapped top 20 in produce 48 - EDIT",
         "description": "<p><span style=\"color: rgb(34, 34, 34); background-color: rgb(255, 
-        								255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
-        								member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
-        								Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
-        								Produce 48 where she was voted as the #1 Visual Center.</span></p>",
+                        255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
+                        member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
+                        Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
+                        Produce 48 where she was voted as the #1 Visual Center.</span></p>",
     }
 ```
 
@@ -457,10 +457,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         "_id": "5ded5054f45a6b12a1570db1",
         "title": "Yiren from everglow snapped top 20 in produce 48 - EDIT",
         "description": "<p><span style=\"color: rgb(34, 34, 34); background-color: rgb(255, 
-        								255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
-        								member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
-        								Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
-        								Produce 48 where she was voted as the #1 Visual Center.</span></p>",
+                        255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
+                        member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
+                        Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
+                        Produce 48 where she was voted as the #1 Visual Center.</span></p>",
         "userId": {
             "_id": "5ded3e02322f050a3720f2ab",
             "fullname": "Dwitama Alfred",
@@ -524,10 +524,10 @@ Recreate Allkpop which an English-language, US-based Korean pop blog launched on
         "_id": "5ded5054f45a6b12a1570db1",
         "title": "Yiren from everglow snapped top 20 in produce 48",
         "description": "<p><span style=\"color: rgb(34, 34, 34); background-color: rgb(255, 
-        								255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
-        								member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
-        								Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
-        								Produce 48 where she was voted as the #1 Visual Center.</span></p>",
+                        255, 255);\">Wang&nbsp;Yiren&nbsp;(왕이런) is the Center and youngest 
+                        member of the girl group&nbsp;Everglow&nbsp;under Yuehua 		
+                        Entertainment.&nbsp;Yiren&nbsp;is best known for appearing in 
+                        Produce 48 where she was voted as the #1 Visual Center.</span></p>",
         "userId": {
             "_id": "5ded3e02322f050a3720f2ab",
             "fullname": "Dwitama Alfred",

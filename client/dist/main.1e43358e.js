@@ -27697,6 +27697,8 @@ exports.default = void 0;
 //
 //
 //
+//
+//
 var _default = {
   name: 'navbar',
   data: function data() {
@@ -27752,7 +27754,21 @@ exports.default = _default;
                 }
               }
             })
-          ])
+          ]),
+          _vm._v(" "),
+          _c("div", {
+            staticClass: "bts-opening",
+            staticStyle: {
+              "background-image":
+                "url('/bts-nav.b2047b26.png')",
+              height: "130px",
+              width: "1000px",
+              position: "absolute",
+              left: "30%",
+              "margin-top": "-43px",
+              "background-size": "cover"
+            }
+          })
         ],
         1
       ),
@@ -27840,7 +27856,7 @@ render._withStripped = true
       
       }
     })();
-},{"./../../img/all-kpop-logo.png":[["all-kpop-logo.00a2da57.png","img/all-kpop-logo.png"],"img/all-kpop-logo.png"],"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
+},{"./../../img/all-kpop-logo.png":[["all-kpop-logo.00a2da57.png","img/all-kpop-logo.png"],"img/all-kpop-logo.png"],"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","./../../img/bts-nav.png":[["bts-nav.b2047b26.png","img/bts-nav.png"],"img/bts-nav.png"],"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /*!
@@ -31949,13 +31965,19 @@ var _default = {
       var _this3 = this;
 
       var formData = new FormData();
-      this.dropFiles.forEach(function (image) {
-        if (typeof image == 'string') {
-          formData.append('existing', image);
-        } else {
-          formData.append('files', image);
-        }
-      });
+
+      if (typeof this.dropFiles == 'string') {
+        formData.append('existing', image);
+      } else {
+        this.dropFiles.forEach(function (image) {
+          if (typeof image == 'string') {
+            formData.append('existing', image);
+          } else {
+            formData.append('files', image);
+          }
+        });
+      }
+
       this.tags.forEach(function (tags) {
         formData.append('tags', tags);
       });
@@ -31978,9 +32000,17 @@ var _default = {
 
         _this3.getPersonal();
 
-        console.log(data);
-        console.log('SUKSES');
+        _this3.title = '';
+        _this3.description = '';
+        _this3.tags = '';
+        _this3.dropFiles = '';
       }).catch(function (err) {
+        _sweetalert.default.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something wrong when we try to upthe information'
+        });
+
         console.log(err);
       });
     },
@@ -76288,7 +76318,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58996" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49245" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

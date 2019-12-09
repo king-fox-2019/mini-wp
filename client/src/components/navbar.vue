@@ -9,6 +9,8 @@
                         alt="Lightweight UI components for Vue.js based on Bulma"
                     >
                 </b-navbar-item>
+                <div class="bts-opening" style="background-image:url('../../img/bts-nav.png');height:130px;width:1000px;position:absolute;left:30%;margin-top:-43px;background-size:cover">
+                </div>
             </template>
             <template slot="start">
 
