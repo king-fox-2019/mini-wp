@@ -110,6 +110,19 @@ class ArticleController {
         .catch(next);
     }
   }
+
+  static deleteArticle(req, res, next) {
+    const articleId = req.params.articleId;
+    Article.deleteOne({
+      _id: articleId
+    })
+      .then(response => {
+        res.status(200).json({
+          message: "Success Delete Article"
+        });
+      })
+      .catch(next);
+  }
 }
 
 module.exports = ArticleController;

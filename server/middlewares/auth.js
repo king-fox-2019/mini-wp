@@ -13,7 +13,7 @@ function authentication(req, res, next) {
 }
 
 function authorization(req, res, next) {
-  Article.findById(req.params.id)
+  Article.findById(req.params.articleId)
     .then(response => {
       if (!response) {
         throw {
@@ -21,7 +21,7 @@ function authorization(req, res, next) {
           message: "Article Not Found!"
         };
       } else {
-        if (response.author === req.decoded.id) {
+        if (response.author === req.decoded.name) {
           next();
         } else {
           throw {

@@ -16,7 +16,7 @@
             >Genre: {{ article.tag }}</v-card-text>
             <v-card-text class="font-weight-thin display-1 red--text">{{ article.createdAt }}</v-card-text>
             <v-card-text class="font-weight-bold grey--text">By: {{ article.author }}</v-card-text>
-            <v-card-actions>
+            <v-card-actions class="d-flex justify-space-between">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn color="orange" text v-on="on">Share</v-btn>
@@ -24,7 +24,23 @@
                 <span>want share</span>
               </v-tooltip>
 
-              <v-btn color="orange" text>Explore</v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn color="blue" text v-on="on">
+                    <v-icon>edit</v-icon>
+                  </v-btn>
+                </template>
+                <span>want edit</span>
+              </v-tooltip>
+
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn color="red" @click="deleteArticle(article._id)" text v-on="on">
+                    <v-icon>delete</v-icon>
+                  </v-btn>
+                </template>
+                <span>want delete</span>
+              </v-tooltip>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -49,6 +65,9 @@ export default {
   methods: {
     fetchMyArticles() {
       this.$emit("fetch-myarticles");
+    },
+    deleteArticle(articleId) {
+      this.$emit("delete-article", articleId);
     }
   },
   created() {

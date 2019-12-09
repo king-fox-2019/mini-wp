@@ -35,11 +35,13 @@
       :articles="articles"
       @fetch-articles="fetchArticles"
       @searching-article="searchingArticle"
+      @delete-article="deleteArticle"
     ></allarticle-item>
     <router-view
       @error-create="errorCreate"
       :myarticles="myarticles"
       @fetch-myarticles="fetchMyArticles"
+      @delete-article="deleteArticle"
     ></router-view>
   </div>
 </template>
@@ -147,6 +149,34 @@ export default {
           this.inputSearch = "";
         }
       }
+    },
+    deleteArticle(articleId) {
+      const token = localStorage.getItem("token");
+      this.axios({
+        method: "DELETE",
+        url: `/articles/${articleId}`,
+        headers: {
+          token
+        }
+      })
+        .then(({ data }) => {
+          let payloadAlert = {
+            text: data.message,
+            value: true
+          };
+          this.$emit("success-create", payloadAlert);
+        })
+        .catch(err => {
+          let text = "";
+          err.response.data.errors.forEach(element => {
+            text += element + ", ";
+          });
+          let payloadAlert = {
+            text,
+            value: true
+          };
+          this.$emit("error-create", payloadAlert);
+        });
     }
   },
   computed: {}

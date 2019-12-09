@@ -27,5 +27,6 @@ router.get(
   Article.searchByTagMyArticle
 );
 router.get("/myarticles", authorizationMyArticle, Article.readMyArticle);
+router.delete("/:articleId", authorization, Article.deleteArticle);
 
 module.exports = router;

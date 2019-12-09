@@ -27,6 +27,7 @@
         :myarticles="myArticles"
         @fetch-articles="fetchAllArticle()"
         @fetch-myarticles="fetchMyArticles()"
+        @success-create="successCreate"
         @error-create="errorCreate"
         @searching-article="searchingArticle"
         @searching-myarticle="searchingMyArticle"
