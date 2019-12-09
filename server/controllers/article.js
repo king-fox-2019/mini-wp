@@ -86,7 +86,6 @@ class ArticleController {
         try {
             imageUploader(req.file)
                 .then(url => {
-                    console.log(url)
                     res.status(201).json({
                         image: url
                     })
@@ -94,11 +93,6 @@ class ArticleController {
         } catch (error) {
             next(error)
         }
-
-        // let imageURL = req.body.image;
-        // res.status(201).json({
-        //     image: imageURL
-        // })
     }
 
     static trashStatus(req, res, next) {
