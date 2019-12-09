@@ -105,13 +105,13 @@ export default {
                     cancelButtonText: 'لا',
                 })
             })
-            .catch(err=>{
+            .catch((error)=>{
                 Swal.close()
                 Swal.fire({
-                    title: 'Register Failed!',
-                    text: err,
-                    icon : 'error',
+                    title: 'Login Failed!',
+                    text: error.response.data.errors.join(' | '),
                     // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                    icon : 'error',
                     // imageWidth: 400,
                     // imageHeight: 200,
                     timer: 3500,
@@ -121,7 +121,6 @@ export default {
                     confirmButtonText: 'نعم',
                     cancelButtonText: 'لا',
                 })
-                console.log(err);
             })
         },
         register(){
@@ -146,31 +145,23 @@ export default {
                     this.$emit('checkForm')
                     Swal.close()
                 })
-                .catch(err=>{
+                .catch(error=>{
                     Swal.close()
                     let ereror = []
-                    this.tags.length == 0 ? ereror.push(`tag is required`) : ''
-                    !this.title ? ereror.push(`title is required`) : ''
-                    this.image.length == 0 ? ereror.push(`image is required`) : ''
-                    !this.content ? ereror.push(`content is required`) : ''
-                    if (err && this.image) {
-                        ereror.push(`image size too large`)
-                    }
                     Swal.fire({
                         title: 'Register Failed!',
-                        text: ereror.join(` & `),
-                        icon : 'error',
+                        text: error.response.data.errors.join(' | '),
                         // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                        icon : 'error',
                         // imageWidth: 400,
                         // imageHeight: 200,
-                        timer: 7500,
+                        timer: 3500,
                         imageAlt: 'Custom image',
                         showConfirmButton: false,
                         showCancelButton: false,
                         confirmButtonText: 'نعم',
                         cancelButtonText: 'لا',
                     })
-                    console.log(err);
                 })
             } else {
                 let form = new FormData();
@@ -203,19 +194,12 @@ export default {
                         cancelButtonText: 'لا',
                     })
                 })
-                .catch(err=>{
+                .catch(error=>{
                     Swal.close()
                     let ereror = []
-                    !this.name? ereror.push(`name is required`) : ''
-                    !this.email ? ereror.push(`email is required`) : ''
-                    !this.password ? ereror.push(`password is required`) : ''
-                    !this.image ? ereror.push(`image is required`) : ''
-                    if (err && this.image) {
-                        ereror.push(`image size too large`)
-                    }
                     Swal.fire({
                         title: 'Register Failed!',
-                        text: ereror.join(` & `),
+                        text: error.response.data.errors.join(' | '),
                         // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
                         icon : 'error',
                         // imageWidth: 400,
@@ -231,20 +215,6 @@ export default {
             }
         },
         onSignInSuccess (googleUser) {
-            // Swal.fire({
-            //     title: 'Loading!',
-            //     text: '',
-            //     imageUrl: '../public/img/loading.gif',
-            //     // icon : 'success',
-            //     // imageWidth: 400,
-            //     // imageHeight: 200,
-            //     // timer: 2500,
-            //     imageAlt: 'Custom image',
-            //     showConfirmButton: false,
-            //     showCancelButton: false,
-            //     confirmButtonText: 'نعم',
-            //     cancelButtonText: 'لا',
-            // })
             Swal.showLoading()
             const { id_token } = googleUser.getAuthResponse();
             axios({
@@ -253,7 +223,6 @@ export default {
                 data : { id_token }
             })
             .then(({data})=>{
-                console.log(data);
                 if (data.token) {
                     localStorage.setItem('token', data.token)
                     localStorage.setItem('email', data.user.email)
@@ -284,14 +253,15 @@ export default {
                     this.$emit('checkForm')
                 }
             })
-            .catch(err=>{
+            .catch(error=>{
                 Swal.fire({
-                    title: 'Failed!',
-                    text: err,
+                    title: 'Failed Access!',
+                    text: error.response.data.errors.join(' | '),
+                    // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
                     icon : 'error',
                     // imageWidth: 400,
                     // imageHeight: 200,
-                    timer: 2500,
+                    timer: 3500,
                     imageAlt: 'Custom image',
                     showConfirmButton: false,
                     showCancelButton: false,
@@ -302,17 +272,18 @@ export default {
         },
         onSignInError(error){
             Swal.fire({
-                    title: 'Failed!',
-                    text: error,
-                    icon : 'error',
-                    // imageWidth: 400,
-                    // imageHeight: 200,
-                    timer: 2500,
-                    imageAlt: 'Custom image',
-                    showConfirmButton: false,
-                    showCancelButton: false,
-                    confirmButtonText: 'نعم',
-                    cancelButtonText: 'لا',
+                title: 'Failed Access!',
+                text: error.response.data.errors.join(' | '),
+                // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                icon : 'error',
+                // imageWidth: 400,
+                // imageHeight: 200,
+                timer: 3500,
+                imageAlt: 'Custom image',
+                showConfirmButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'نعم',
+                cancelButtonText: 'لا',
             })
 		},
     },

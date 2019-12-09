@@ -195,20 +195,20 @@ export default {
             .then(({ data })=>{
                 this.articles = data
                 Swal.close()
-                Swal.fire({
-                    title: 'Complete!',
-                    text: '',
-                    icon : 'success',
-                    // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
-                    // imageWidth: 400,
-                    // imageHeight: 200,
-                    timer: 1200,
-                    imageAlt: 'Custom image',
-                    showConfirmButton: false,
-                    showCancelButton: false,
-                    confirmButtonText: 'نعم',
-                    cancelButtonText: 'لا',
-                })
+                // Swal.fire({
+                //     title: 'Complete!',
+                //     text: '',
+                //     icon : 'success',
+                //     // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                //     // imageWidth: 400,
+                //     // imageHeight: 200,
+                //     timer: 1200,
+                //     imageAlt: 'Custom image',
+                //     showConfirmButton: false,
+                //     showCancelButton: false,
+                //     confirmButtonText: 'نعم',
+                //     cancelButtonText: 'لا',
+                // })
             })
             .catch(err=>{
                 console.log(err);
@@ -242,10 +242,11 @@ export default {
         },
         saving(){
             if (!this.newPictures) {
+                // Swal.showLoading()
                 Swal.fire({
                     title: 'Saving your change!',
                     text: '',
-                    imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                    // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
                     // imageWidth: 400,
                     // imageHeight: 200,
                     // timer: 2500,
@@ -287,7 +288,7 @@ export default {
                     Swal.fire({
                         title: 'Failed Publish!',
                         text: ereror.join(` & `),
-                        imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                        // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
                         // imageWidth: 400,
                         // imageHeight: 200,
                         timer: 2500,
@@ -302,7 +303,7 @@ export default {
                 Swal.fire({
                     title: 'Saving your change!',
                     text: '',
-                    imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                    // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
                     // imageWidth: 400,
                     // imageHeight: 200,
                     // timer: 2500,
@@ -345,7 +346,8 @@ export default {
                     Swal.fire({
                         title: 'Failed Publish!',
                         text: ereror.join(` & `),
-                        imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                        icon: 'error',
+                        // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
                         // imageWidth: 400,
                         // imageHeight: 200,
                         timer: 2500,

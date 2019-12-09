@@ -17,7 +17,7 @@ export default {
             Swal.fire({
                 title: 'Searching Article!',
                 text: `by tag ${this.tag}`,
-                imageUrl: 'https://loading.io/mod/spinner/magnify/index.svg',
+                // imageUrl: 'https://loading.io/mod/spinner/magnify/index.svg',
                 // imageWidth: 400,
                 // imageHeight: 200,
                 // timer: 2500,

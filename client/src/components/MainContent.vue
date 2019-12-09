@@ -72,7 +72,7 @@ export default {
             Swal.fire({
                 title: 'Loading!',
                 text: '',
-                imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
                 // imageWidth: 400,
                 // imageHeight: 200,
                 // timer: 2500,

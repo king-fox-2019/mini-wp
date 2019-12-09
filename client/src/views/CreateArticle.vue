@@ -192,19 +192,7 @@ export default {
             this.$emit('createArticle')
         },
         publish(){
-            Swal.fire({
-                title: 'Publish Article!',
-                text: '',
-                imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
-                // imageWidth: 400,
-                // imageHeight: 200,
-                // timer: 2500,
-                imageAlt: 'Custom image',
-                showConfirmButton: false,
-                showCancelButton: false,
-                confirmButtonText: 'نعم',
-                cancelButtonText: 'لا',
-            })
+            Swal.showLoading()
             let form = new FormData();
             form.set('title', this.title)
             form.append('content', this.content)
@@ -229,6 +217,20 @@ export default {
                     this.styleImage = ''
                     this.$emit('createArticle')
                     Swal.close()
+                    Swal.fire({
+                        title: 'Publish Article!',
+                        text: '',
+                        icon : 'success',
+                        // imageUrl: 'https://loading.io/mod/spinner/square/index.svg',
+                        // imageWidth: 400,
+                        // imageHeight: 200,
+                        // timer: 2500,
+                        imageAlt: 'Custom image',
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'نعم',
+                        cancelButtonText: 'لا',
+                    })
                 })
                 .catch((err)=>{
                     Swal.close()
@@ -243,7 +245,8 @@ export default {
                     Swal.fire({
                         title: 'Failed Publish!',
                         text: ereror.join(` & `),
-                        imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                        // imageUrl: 'https://loading.io/mod/spinner/lava-lamp/index.svg',
+                        icon: 'success',
                         // imageWidth: 400,
                         // imageHeight: 200,
                         timer: 2500,
