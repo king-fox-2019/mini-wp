@@ -3,7 +3,7 @@
 DEPLOY GCS
 
 SERVER
-> [http://minipc-miniwpking.anggabanny.online](http://minipc-miniwpking.anggabanny.online)
+> [http://minipc-miniwp-king.anggabanny.online/](http://minipc-miniwp-king.anggabanny.online/)
 
 CLIENT
 > [http://wordpress.anggabanny.online/](http://wordpress.anggabanny.online/)
