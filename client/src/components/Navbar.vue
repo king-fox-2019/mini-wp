@@ -65,7 +65,6 @@ export default {
     return {};
   },
   props: ["isLogin"],
-
   methods: {
     logout() {
       localStorage.removeItem("token");
@@ -76,11 +75,11 @@ export default {
       this.$toastr.h("Logout").i("Success!");
     }
   },
-  // created() {
-  //   if (localStorage.getItem('token')) {
-  //     this.isLogin = false
-  //   }
-  // },
+  created() {
+    if (localStorage.getItem('token')) {
+      this.isLogin = false
+    }
+  },
    
   // computed: {
   //   showLis() {

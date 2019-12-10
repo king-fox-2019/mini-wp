@@ -24,9 +24,12 @@ export default {
   },
   methods: {
     cekLogin() {
-      if (!this.isLogin) {
+      if (this.isLogin) {
         this.isLogin = false;
         this.homepage = true;
+      } else {
+        this.isLogin = true;
+        this.homepage = false;
       }
     }
   },
