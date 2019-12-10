@@ -46,11 +46,35 @@
             <v-container>
               <p>Tag Selected : {{ form.tag }}</p>
               <v-layout d-flex flex-row>
-                <v-checkbox v-model="form.tag" label="Technologies" value="technologi"></v-checkbox>
-                <v-checkbox v-model="form.tag" class="ml-3" label="Sport" value="sport"></v-checkbox>
-                <v-checkbox v-model="form.tag" class="ml-3" label="Game" value="game"></v-checkbox>
-                <v-checkbox v-model="form.tag" class="ml-3" label="Education" value="education"></v-checkbox>
-                <v-checkbox v-model="form.tag" class="ml-3" label="Anime" value="anime"></v-checkbox>
+                <v-checkbox
+                  v-model="form.tag"
+                  label="Technologies"
+                  value="technologi"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="form.tag"
+                  class="ml-3"
+                  label="Sport"
+                  value="sport"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="form.tag"
+                  class="ml-3"
+                  label="Game"
+                  value="game"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="form.tag"
+                  class="ml-3"
+                  label="Education"
+                  value="education"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="form.tag"
+                  class="ml-3"
+                  label="Anime"
+                  value="anime"
+                ></v-checkbox>
               </v-layout>
             </v-container>
 
@@ -60,8 +84,11 @@
               class="white--text"
               depressed
               type="submit"
-            >Edit Article</v-btn>
-            <v-btn color="error" class="ml-5" depressed @click="resetArticle">Reset Form</v-btn>
+              >Edit Article</v-btn
+            >
+            <v-btn color="error" class="ml-5" depressed @click="resetArticle"
+              >Reset Form</v-btn
+            >
           </v-form>
         </v-card-text>
       </v-card>
@@ -128,8 +155,10 @@ export default {
           this.resetArticle();
           let payloadAlert = {
             text: data.message,
-            value: true
+            value: true,
+            updated: true
           };
+          this.$emit("fetch-articles", payloadAlert);
           this.$emit("success-create", payloadAlert);
         })
         .catch(err => {
@@ -197,5 +226,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

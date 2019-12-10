@@ -20,7 +20,7 @@
               }}</v-card-title>
             </v-img>
 
-            <v-card-subtitle class="pb-0">{{}}</v-card-subtitle>
+            <v-card-subtitle class="pb-0"></v-card-subtitle>
 
             <v-card-text
               v-html="article.content"
@@ -30,7 +30,7 @@
               >Genre: {{ article.tag }}</v-card-text
             >
             <v-card-text class="font-weight-thin display-1 red--text">{{
-              article.createdAt
+              article.updatedAt
             }}</v-card-text>
             <v-card-text class="font-weight-bold grey--text"
               >By: {{ article.author }}</v-card-text

@@ -1,6 +1,8 @@
 <template>
   <v-app class="grey lighten-4">
     <navbar-item
+      @not-login="isLogin = false"
+      @is-login="isLogin = true"
       @success-create="successCreate"
       @error-create="errorCreate"
       @fetch-articles="fetchAllArticle()"
@@ -24,12 +26,13 @@
         color="deep-orange"
         icon="mdi-fire"
         transition="scale-transition"
-      >{{alertError.text}}.</v-alert>
+      >{{ alertError.text }}.</v-alert>
       <!-- end alert -->
       <router-view
+        :islogin="isLogin"
         :articles="articles"
         :myarticles="myArticles"
-        @fetch-articles="fetchAllArticle()"
+        @fetch-articles="fetchAllArticle"
         @fetch-myarticles="fetchMyArticles()"
         @success-create="successCreate"
         @error-create="errorCreate"
@@ -64,7 +67,8 @@ export default {
         text: ""
       },
       articles: [],
-      myArticles: []
+      myArticles: [],
+      isLogin: false
     };
   },
   methods: {
@@ -84,7 +88,8 @@ export default {
         this.alertError.value = false;
       }, 5000);
     },
-    fetchAllArticle() {
+    fetchAllArticle(payload) {
+      console.log(payload);
       this.axios({
         method: "GET",
         url: "/articles/"
@@ -102,8 +107,8 @@ export default {
               });
               element.tag = newTag;
             }
-            let newTime = this.getTime(element.createdAt);
-            element.createdAt = `${newTime} ago`;
+            let newTime = this.getTime(element.updatedAt);
+            element.updatedAt = `${newTime} ago`;
           });
           this.articles = data;
         })
@@ -142,8 +147,8 @@ export default {
               });
               element.tag = newTag;
             }
-            let newTime = this.getTime(element.createdAt);
-            element.createdAt = `${newTime} ago`;
+            let newTime = this.getTime(element.updatedAt);
+            element.updatedAt = `${newTime} ago`;
           });
           this.myArticles = data;
         })

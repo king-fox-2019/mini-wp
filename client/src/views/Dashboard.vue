@@ -6,19 +6,13 @@
         <template v-slot:activator="{ on: menu }">
           <v-tooltip bottom>
             <template v-slot:activator="{ on: tooltip }">
-              <v-btn color="primary" dark v-on="{ ...tooltip, ...menu }"
-                >Tag</v-btn
-              >
+              <v-btn color="primary" dark v-on="{ ...tooltip, ...menu }">Tag</v-btn>
             </template>
             <span>Search By Tag</span>
           </v-tooltip>
         </template>
         <v-list>
-          <v-list-item
-            v-for="(item, index) in items"
-            :key="index"
-            @click="searchByTag(item.tag)"
-          >
+          <v-list-item v-for="(item, index) in items" :key="index" @click="searchByTag(item.tag)">
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -38,6 +32,7 @@
     </v-layout>
     <allarticle-item
       v-if="this.$route.path === '/'"
+      :islogin="islogin"
       :articles="articles"
       @fetch-articles="fetchArticles"
       @searching-article="searchingArticle"
@@ -71,6 +66,9 @@ export default {
     },
     myarticles: {
       type: Array
+    },
+    islogin: {
+      type: Boolean
     }
   },
   data() {
@@ -87,8 +85,8 @@ export default {
     };
   },
   methods: {
-    fetchArticles() {
-      this.$emit("fetch-articles");
+    fetchArticles(payload) {
+      this.$emit("fetch-articles", payload);
     },
     fetchMyArticles() {
       this.$emit("fetch-myarticles");

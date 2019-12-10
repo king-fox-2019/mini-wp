@@ -40,7 +40,7 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app temporary id="drawer-menu">
       <v-img
-        :aspect-ratio="16/9"
+        :aspect-ratio="16 / 9"
         src="https://i0.wp.com/wallur.com/wp-content/uploads/2016/12/yugioh-background-9.jpg?resize=1136%2C640"
       >
         <v-layout column align-center>
@@ -69,11 +69,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">
-              {{
-              link.text
-              }}
-            </v-list-item-title>
+            <v-list-item-title class="white--text">{{ link.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -148,6 +144,7 @@ export default {
         this.user = val.name;
         this.image = val.image;
       }
+      this.$emit("is-login");
     },
     onSuccess(googleUser) {
       const id_token = googleUser.getAuthResponse().id_token;
@@ -173,6 +170,7 @@ export default {
           };
           this.notify(notif);
           this.infoUser(userInfo);
+          this.$emit("is-login");
         })
         .catch(err => {
           console.log(err);
@@ -197,6 +195,7 @@ export default {
             this.$router.push("/");
             localStorage.removeItem("user");
             localStorage.removeItem("image");
+            this.$emit("not-login");
           })
           .catch(err => {
             console.log(err);
@@ -212,12 +211,18 @@ export default {
         this.$router.push("/");
         localStorage.removeItem("user");
         localStorage.removeItem("image");
+        this.$emit("not-login");
+
         //notif
       }
     },
     goDashboard() {
-      this.$router.push("/");
-      this.$emit("fetch-articles");
+      if (this.$route.path !== "/") {
+        this.$router.push("/");
+        this.$emit("fetch-articles");
+      } else {
+        this.$emit("fetch-articles");
+      }
     }
   },
   created() {
