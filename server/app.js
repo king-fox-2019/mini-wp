@@ -9,7 +9,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const errorHandler = require('./middlewares/errorHandler')
 
-const PORT = process.env.PORT || 3002
+const PORT = process.env.PORT || 3003
 
 
 

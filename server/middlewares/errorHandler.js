@@ -1,19 +1,38 @@
 module.exports = (err, req, res, next) => {
-  console.log(err.name, "=====================", err);
-  
+  console.log(err.name, "=================", err);
+  let message = []
+
   if (err.status) {
-    res.status(err.status).json({ message : err.message})
+    if (err.message || err.msg) {
+      message.push(err.message || err.msg)
+    }
+    res.status(err.status).json({ message })
   } else {
     if (err.name === `ValidationError`) {
-      let message = []
-      for(let field in err.errors) {
+      message.push(`Register failed`)
+      // console.log(err.errors)
+      for (let field in err.errors) {
+        if (field === `email` && err.errors[field].kind === 'unique') {          
+          err.errors[field].message = `email is already exist`
+        }
         message.push(err.errors[field].message)
       }
       res.status(400).json({ message })
-    } 
-    else {
-      res.status(500).json({ message : `internal server error`})
+    } else if (err.name === 'JsonWebTokenError') {
+      console.log(err.message);
+      let msg = `jwt id invalid`
+      message.push(msg)
+      res.status(401).json({ message })
+    } else if (err.name === 'MongoError') {
+      message.push('Email already registered')
+      res.status(404).json({ message })
     }
-  }
+    else {
+      let msg = `internal server error`
+      message.push(msg)
+      res.status(500).json({ message })
+    }
 
+  }
 }
+

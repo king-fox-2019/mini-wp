@@ -31,12 +31,14 @@ const routes = [
     component: () => import('../views/MyArticles.vue')
   },
   { 
-    path: '/', redirect: '/articles/all' 
+    path: '/', 
+    name: 'home',
+    redirect: '/articles/all' 
   },
   {
     path: '/articles',
     redirect: '/articles/all',
-    name: 'home',
+    name: 'articles',
     component: () => import('../views/Home.vue'),
     children: [
       {

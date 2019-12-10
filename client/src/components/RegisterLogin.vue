@@ -91,7 +91,10 @@ export default {
           localStorage.setItem("token", data.token);
           localStorage.setItem("userId", data.id);
           localStorage.setItem("userEmail", data.email);
+          console.log("masuk login kok");
+          
           this.$router.push("/");
+          // this.$emit("cekLogin"); hanya bisa kalo ke component yg route nya sama
         })
         .catch(err => {
           if (err.response) {
@@ -114,6 +117,7 @@ export default {
           localStorage.setItem("userId", data.id);
           localStorage.setItem("userEmail", data.email);
           this.$router.push("/");
+          // this.$emit("cekLogin");
         })
         .catch(err => {
           if (err.response) {
@@ -151,7 +155,7 @@ export default {
           this.switchToMainPage();
         })
         .catch(err => {
-            if (err.response) {
+          if (err.response) {
             this.$toastr.h("Error!").i(err.response.data.message);
           } else {
             this.$toastr.h("Error!").i(`Couldn't connect to server`);

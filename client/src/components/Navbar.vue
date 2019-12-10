@@ -22,17 +22,18 @@
         <sui-grid class="full-width">
           <sui-grid-row stretched>
             <sui-grid-column
-             v-if="isLogin"
+              v-if="isLogin"
               @click="$router.push('/add-article')"
               :width="5"
               style="color: white; padding-right: 10% !important; cursor: pointer;"
             >Add Article</sui-grid-column>
 
-            <sui-grid-column 
-             v-if="isLogin"
-            :width="5" 
-            @click="$router.push('/my-articles')"
-            style="color: white; padding-right: 10% !important; cursor: pointer;">
+            <sui-grid-column
+              v-if="isLogin"
+              :width="5"
+              @click="$router.push('/my-articles')"
+              style="color: white; padding-right: 10% !important; cursor: pointer;"
+            >
               My Articles
               <!-- <sui-icon style="color: white; margin-left: 80% !important;" name="search" /> -->
             </sui-grid-column>
@@ -61,23 +62,33 @@
 export default {
   name: "Navbar",
   data: function() {
-    return {
-    }
+    return {};
   },
+  props: ["isLogin"],
+
   methods: {
     logout() {
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
       localStorage.removeItem("userEmail");
       this.$router.push("/");
+      this.$emit("cekLogin");
       this.$toastr.h("Logout").i("Success!");
     }
   },
-  computed: {
-    isLogin() {
-      return localStorage.getItem("token");
-    }
-  }
+  // created() {
+  //   if (localStorage.getItem('token')) {
+  //     this.isLogin = false
+  //   }
+  // },
+   
+  // computed: {
+  //   showLis() {
+  //      if (localStorage.getItem('token')) {
+  //     return this.isLogin = false
+  //   }
+  //   }
+  // }
 };
 </script>
 

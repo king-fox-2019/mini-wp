@@ -6,7 +6,7 @@
       <wysiwyg v-model="content"></wysiwyg>
 
       <div class="container">
-        <label class="label" for="input">Please upload a picture !</label>
+        <label class="label" for="input">Please upload a picture</label>
 
         <div class="input">
           <input @change="previewFiles" ref="myFiles" name="input" id="file" type="file" />
@@ -123,6 +123,9 @@ export default {
 </script>
 
 <style scoped>
+btn {
+  background-color: #1a4756;
+}
 .container {
   width: 200px;
   margin: 50px auto;

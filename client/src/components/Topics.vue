@@ -5,13 +5,13 @@
         @click="$router.push('/articles/' + topic.split(' ').join('-').toLowerCase())"
         is="sui-label"
         basic
-        color="pink"
       >{{topic}}</a>
     </span>
   </div>
 </template>
 
 <script>
+// red orange yellow olive green teal blue violet purple pink brown grey ssblack
 export default {
   data: function() {
     return {
@@ -38,18 +38,26 @@ a {
   /* color: rgb(197, 67, 67) !important; */
   font-size: 15px;
   cursor: pointer;
-  box-shadow: none !important;
+  /* box-shadow: none !important; */
   text-align: center;
   /* padding-top: 5px !important; */
   font-family: "Antic", sans-serif !important;
   margin: 10px !important;
+
+  color: white !important;
+  background-color: #ab7a6ca6 !important;
 }
 a:hover {
-  border-width: 2px !important;
+  /* border-width: 1px !important; */
+  /* color: white !important;
+  background-color: #AB7A6C !important; */
+  box-shadow: none !important;
+  color: #ab7a6ca6 !important;
+   background-color: #ffffff !important;
 }
 .topic-container {
   /* background-color: #FAE9E3; */
-  height: 11vh;
+  height: 12vh;
   text-align: center;
   padding: 23px;
 }

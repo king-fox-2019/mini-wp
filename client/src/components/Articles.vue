@@ -1,8 +1,8 @@
 <template>
   <div class="contained">
-    <div style="  text-align: center; margin: 50px;">
-      <h2>READ</h2>
-      <h5>Classroom favorites and new stories are both included in our hand-picked books for tweens to enjoy.</h5>
+    <div style="  text-align: center; margin: 5px;">
+      <!-- <h2>READ</h2>
+      <h5>Classroom favorites and new stories are both included in our hand-picked books for tweens to enjoy.</h5>-->
     </div>
     <div class="contained">
       <sui-item-group divided>
@@ -15,7 +15,12 @@
             </sui-item-header>
             <sui-item-meta>
               <span v-for="(tag, i) in article.tags" :key="i" class="tag">
-                <a is="sui-label" tag>{{tag.value}}</a>
+                <a class="topictag" is="sui-label" size="mini" tag color="black">{{tag.value}}</a>
+
+                <!-- <a is="sui-label">
+                  {{tag.value}}
+                  <sui-icon name="delete"></sui-icon>
+                </a> -->
               </span>
             </sui-item-meta>
             <sui-item-description>
@@ -69,9 +74,8 @@ export default {
         });
     },
     truncate(content) {
-      console.log(content, "nulis apaaa");
-      
-      return content.substring(243, 450)
+
+      return content.substring(243, 450);
     },
     paginate() {
       this.fetchArticle(this.page);
@@ -100,12 +104,17 @@ img {
   margin-right: 30px;
 }
 .title:hover {
-  color: darkred !important;
+  color: #ab7a6c !important;
 }
 .pagination {
   display: flex;
   list-style-type: none;
   align-items: center;
   justify-content: center;
+  letter-spacing: 4px;
 }
+
+/* .topictag {
+  size: tiny;
+} */
 </style>

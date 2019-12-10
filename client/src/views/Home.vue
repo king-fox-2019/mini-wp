@@ -1,16 +1,14 @@
 <template>
   <div>
     <div class="gradient" style="padding: 30px; color: white;">
-      <h2 style="margin-bottom: 30px; text-align: center;">DISCOVER</h2>
-      <h5
-        style=" text-align: center;"
-      >Find book picks, reading tips, and activities for your little ones</h5>
+      <h2 class="discover">DISCOVER</h2>
+      <h5 style=" text-align: center; color: #795147a6; margin-top: 0px !important;">
+        <i>Find book picks, reading tips, and activities for your little ones</i>
+      </h5>
       <Topics></Topics>
     </div>
     <router-view></router-view>
   </div>
-
-
 </template>
 
 <script>
@@ -29,6 +27,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
 .gradient {
   background: rgb(237, 162, 139);
   background: linear-gradient(
@@ -36,5 +35,11 @@ export default {
     rgba(237, 162, 139, 1) 0%,
     rgba(244, 244, 244, 1) 83%
   );
+}
+.discover {
+  margin-bottom: 8px;
+  font-family: "Pacifico", cursive !important;
+  text-align: center;
+  color: #795147a6;
 }
 </style>
