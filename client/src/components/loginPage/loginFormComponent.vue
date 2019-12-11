@@ -1,7 +1,7 @@
 <template>
     <form class="ui form login" @submit.prevent="login">
         <p>
-            <message-component :header="header" :content="content">
+            <message-component :header="header" :content="content" :visible="visible">
             </message-component>
         </p>
         <h1>Mini WP</h1>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div>
-            <button type="submit" class="ui blue labeled icon button" >
+            <button type="submit" class="ui blue labeled icon button">
                 Sign In
                 <i class="lock icon"></i>
             </button>
@@ -34,7 +34,7 @@
                 <i class="google icon"></i>
             </g-signin-button>
             <p></p>
-           <!-- end google signin -->
+            <!-- end google signin -->
         </div>
 
     </form>
@@ -54,11 +54,13 @@
             return {
                 email: null,
                 password: null,
+                googleSignInParams: {
+                    // client_id: '1077663190419-heca6gdre9f5031fdtd57m2uts9u64jj.apps.googleusercontent.com' //prodServer
+                    client_id: '1077663190419-fkbutpat7sloejjac79gs8tnfa1bmi3k.apps.googleusercontent.com' //localhost:1234'
+                },
                 header: null,
                 content: null,
-                googleSignInParams: {
-                    client_id: '1077663190419-heca6gdre9f5031fdtd57m2uts9u64jj.apps.googleusercontent.com'
-                }
+                visible: false
             }
         },
         methods: {
@@ -79,6 +81,7 @@
                     this.header = "Sign In Error";
                     this.content = err.response.data.message;
                 })
+                this.visible = true
             },
             onSignInSuccess: function (googleUser) {
                 let profile = googleUser.getBasicProfile();
@@ -99,6 +102,7 @@
                     this.header = "Sign In Error";
                     this.content = err.response.data.message;
                 })
+                this.visible = true
 
                 // let userName = email.split("@")[0];
                 // let id_token = googleUser.getAuthResponse().id_token;
@@ -110,6 +114,9 @@
                 // `error` contains any error occurred.
                 this.header = "Google Sign In Error";
                 this.content = error.error;
+            },
+            dismissHandler(){
+                this.visible = false
             }
         }
     }

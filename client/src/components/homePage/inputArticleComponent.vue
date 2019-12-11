@@ -1,53 +1,55 @@
 <template>
-    <form class="w-100" @submit.prevent="submitArticle" action="" enctype="multipart/form-data">
-        <label for="article-title">Title</label>
-        <div class="field">
-            <div class="ui input">
-                <input type="text"
-                       id="article-title"
-                       placeholder="Title"
-                       v-model="title"
-                       size="100"
-                       required>
+    <div>
+        <message-component :header="header" :content="contentMsg" :visible="visible"></message-component>
+        <form class="w-100" @submit.prevent="submitArticle" action="" enctype="multipart/form-data">
+            <label for="article-title">Title</label>
+            <div class="field">
+                <div class="ui input">
+                    <input type="text"
+                           id="article-title"
+                           placeholder="Title"
+                           v-model="title"
+                           size="100"
+                           required>
+                </div>
             </div>
-        </div>
 
-        <label for="article-category">Category</label>
-        <div class="field">
-            <div class="ui input">
-                <input type="text"
-                       id="article-category"
-                       placeholder="Category"
-                       v-model="category"
-                       size="50"
-                       required>
+            <label for="article-category">Category</label>
+            <div class="field">
+                <div class="ui input">
+                    <input type="text"
+                           id="article-category"
+                           placeholder="Category"
+                           v-model="category"
+                           size="50"
+                           required>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <div class="ui input">
-                <input type="file" ref="featured_image" name="featured_image" @change="handleFileUpload"/>
+            <div class="field">
+                <div class="ui input">
+                    <input type="file" ref="featured_image" name="featured_image" @change="handleFileUpload"/>
+                </div>
             </div>
-        </div>
 
-        <label>Content</label>
-        <div class="field">
-            <local-quill-editor v-model="content"
-                                ref="quillEditor"
-                                :options="editorOption">
-            </local-quill-editor>
-        </div>
+            <label>Content</label>
+            <div class="field">
+                <local-quill-editor v-model="content"
+                                    ref="quillEditor"
+                                    :options="editorOption">
+                </local-quill-editor>
+            </div>
 
-        <div class="field">
-            <button class="ui button" type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        </div>
-
-    </form>
+            <div class="field">
+                <button class="ui button blue" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
     import {instance} from "../../../config/axiosConfig";
+    import messageComponent from "../messageComponent";
 
     export default {
         name: "inputArticleComponent",
@@ -59,7 +61,10 @@
                 content: "",
                 editorOption: {
                     theme: 'snow'
-                }
+                },
+                header: null,
+                contentMsg: null,
+                visible: false
             }
         },
         methods: {
@@ -81,23 +86,32 @@
                     }
                 }).then(({data}) => {
                     this.$emit('clicked');
-                    console.log(data)
+                    this.header = "Success Saving Data";
+                    this.contentMsg = "Data successfully saved";
+                    console.log(data);
                 }).catch(err => {
+                    this.header = "Error Saving Data";
+                    this.contentMsg = "Data failed to save";
                     console.log(err)
                 });
+                this.visible = true;
+                setTimeout(() => {
+                    this.visible = false;
+                }, 2000);
             },
             handleFileUpload: function () {
                 this.featured_image = this.$refs.featured_image.files[0];
             }
         },
         components: {
-            LocalQuillEditor: VueQuillEditor.quillEditor
+            LocalQuillEditor: VueQuillEditor.quillEditor,
+            messageComponent
         }
     }
 </script>
 
 <style scoped>
-.field{
-    margin: 10px;
-}
+    .field {
+        margin: 10px;
+    }
 </style>

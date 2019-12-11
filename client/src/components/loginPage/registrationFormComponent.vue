@@ -1,7 +1,7 @@
 <template>
     <form class="ui form" @submit.prevent="registration">
         <p>
-            <message-component :header="header" :content="content"></message-component>
+            <message-component :header="header" :content="content" :visible="visible"></message-component>
         </p>
         <h1>Registration</h1>
         <p></p>
@@ -53,7 +53,8 @@
                 name: null,
                 title: null,
                 email: null,
-                password: null
+                password: null,
+                visible: false
             }
         },
         components: {
@@ -80,7 +81,8 @@
                     console.log(err);
                     this.header = "Sign Up Error";
                     this.content = err.response.data.message;
-                })
+                });
+                this.visible = true
             }
         }
 

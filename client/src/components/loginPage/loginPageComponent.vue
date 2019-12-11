@@ -1,7 +1,7 @@
 <template lang="html">
-    <div class="ui placeholder segment">
+    <div class="sui placeholder segment">
+        <div class="ui vertical divider">Or</div>
         <div class="ui two column stackable center aligned grid">
-            <div class="ui vertical divider">Or</div>
             <div class="middle aligned row">
                 <div class="column">
                     <registration-form-component></registration-form-component>

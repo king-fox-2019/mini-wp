@@ -6,7 +6,7 @@
         <a>
             <sui-image :src="article.featured_image"/>
         </a>
-        <sui-card-content>
+        <sui-card-content @click="showContent">
             <small id="created_at">{{createdDate}}</small>
             <p></p>
             <sui-card-header><a>{{article.title}}</a></sui-card-header>
@@ -46,6 +46,10 @@
                 }).catch(err => {
                     console.log(err);
                 })
+            },
+            showContent: function () {
+                this.$emit('showContent');
+                this.$emit('data', this.article);
             }
         }
     }
