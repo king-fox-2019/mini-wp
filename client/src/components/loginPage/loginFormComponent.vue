@@ -55,8 +55,8 @@
                 email: null,
                 password: null,
                 googleSignInParams: {
-                    // client_id: '1077663190419-heca6gdre9f5031fdtd57m2uts9u64jj.apps.googleusercontent.com' //prodServer
-                    client_id: '1077663190419-fkbutpat7sloejjac79gs8tnfa1bmi3k.apps.googleusercontent.com' //localhost:1234'
+                    client_id: '1077663190419-heca6gdre9f5031fdtd57m2uts9u64jj.apps.googleusercontent.com' //prodServer
+                    // client_id: '1077663190419-fkbutpat7sloejjac79gs8tnfa1bmi3k.apps.googleusercontent.com' //localhost:1234'
                 },
                 header: null,
                 content: null,
