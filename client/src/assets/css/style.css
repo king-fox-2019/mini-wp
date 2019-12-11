@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.card-container {
+    padding: 20px;
+}
+
+.card {
+    margin: 5px;
+}
+
+.card-header {
+    font-size: 12px;
+}
+
+.left-nav {
+
+}
+
+.profile {
+    text-align: center;
+}
+
+.card-footer {
+    text-align: right;
+}
+
+.card-text {
+    font-size: 12px;
+}
+
+.card-delete {
+    float: right;
+}
+
+#logo {
+    font-family: Xanthousy;
+    font-size: 50px;
+}
+
+.search-form {
+    float: right;
+}
+
+#article-new, #article-list {
+    font-size: 14px;
+    padding: 10px;
+}
+
+#article-list{
+    color: #fff;
+}
+
+#img-profile {
+    padding: 25px;
+}
