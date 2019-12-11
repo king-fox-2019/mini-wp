@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hacktiv8-immersive",
+  "private_key_id": "6193e9b7eff9702e5333754910ec2f0fa0c4b56c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDn8Cj8E8DL9LpV\neJd908W2HQ7oBG90D+eXwBB1xosUfN48gftHgFK13OWrM+GQVD3HRq27mgt7KVy+\n7VNU3g2v5iEIBS7uagxsVfaXAFszp7veZqi6hPfg5q/UoQ4ZFPKEzb3kT8piYVtJ\n+cVwwEMeU8Zoe2JfB9QWtQEDOzhwl9Kjf20OxaKiONuhb8Oxfnq7UE0FZraovEPx\nR+Hvpfp86e4xUnE/0qDlxATjsAbfqZbWUOrPJM/m3cLMpapKNdESq6aKvP3/I5FU\n/MxX6WeNY7Yv0km3C9/mn1iXlej16CXklIq3hSxhEzIIfh8/1xkphfz4uBhUZfMg\nfV8i6dRlAgMBAAECggEAEsVlC8GtgNQ1oGU6HXzeK3b+ldiGDKac37MzodSHvQi+\nE7eRVqAUEZPnIov4XW3z8gTOWriE5VrbnrgmXl/6S5ocYkHJIpKCnuH2KxJkTzHs\nCnvUfAP268S/xj2innULi6P7EldC0eN/N+V3DUECLZoqHJqfw4EmsQ/FHTXVw4be\nmbk9Fr6BXFgcr8iJ8/sC8LC524XUPXpmCVuNPsm2iDRRloXtWAYKsKDmxY4CyuhX\nZntpbRUv/hA+3r/689+v4NSCG4tF9+feQ/Qfn/HzU6fsgo4E+SVPYuJ9+ZKHMkGp\nA0Dy8/c6r0jlEfcsLeP4G1fszGl2uJjTbVaWuUyqoQKBgQD5DXt8yS8P3n/8tOxe\n9AoDQCgfROelzPbU3SEBQtJ7GTKqa0XRjFHjBOlx/nISPxl7YB0YUKFsirAhFFxs\n1YsIzT4SCm+JWCy4K6lJYGWezbN17QhhlRfk+2EuqpYludAk47TR1PHMwiEFrx9b\nFWd6rcGu2p+zdcAViZlozdyYvwKBgQDuaHXnAXT5uNbwTfNJG230aA9YBT3SiG8o\nn3dCQGAtDXkDJ2A53Qp09xNc6aUIqUrhNr4PF3wxZKlW3EBG7DzxLOP6b3CFGiIu\nskjp3ZGG1lAZJIyJL75IhTcsC91cS39TyGe5a4tUfrmWx/ufPVlSEGxDGMX/mxkf\nUa1SnwYX2wKBgQDL5SPSF4s1/LzfkOdrHXQNETtHzkuvy8vQnXDl7WUQbqKyLrys\nP6rSpzTPpLaTBaHBBgEL5QcjK6/ihR7d4z2+aPmGH5EM6mlCJkyjzA2mI1XnF7Wi\n3kL/rmXzpKjkHemwKdPhbeq/7bbHRoXvNejP4O0OT+IrNB2cBFjaGp+dVQKBgQCT\nWAxGUSgyjoKI0iRiMomqXAXfqJ2k2J2axbO3RoIqVgFMabGXEX28/FcDPYO57qdQ\nubyNJz6iaEwgWs9/BdJEXDIqPWWVXalyos1dfIrMgvfOEkCpKNC5kVuf5VVSDXcM\nGPfCKS1bc1bQUZi5ufjSN0Qx08XLS9gi+x/byFzDsQKBgQDpq7c3u/CPS3697Meu\nM65kNwJYu90D9MYpVteOvUhGl8smnsjmkZev+k3IzPekGNUtHGm6tfhpdg1mpSlm\nwodZobwF4BVTdHHDe+ztVrC5dpFF6pq433UkXJ30mUzKQzsxSV2+iIjwWyNsyfGB\n8k/ssufSaRmhY607r5tFek70XA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "gcsupload@hacktiv8-immersive.iam.gserviceaccount.com",
+  "client_id": "113386871588119500237",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gcsupload%40hacktiv8-immersive.iam.gserviceaccount.com"
+}
