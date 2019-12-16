@@ -1,0 +1,4 @@
+PORT=3000
+JWT_SECRET=rahasia
+CLIENT_ID=695100302239-30f33dp0caovbesh8na0ggbslblufu9i.apps.googleusercontent.com
+Client_Secret=9M4itnVweGI1Ey7iV9W8v9Ph
