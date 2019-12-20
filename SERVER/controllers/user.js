@@ -64,7 +64,7 @@ class ControllerUser {
           password = process.env.DEFAULT_USER_PASSWORD,
           picture = payload.picture
 
-      let user = User.findOne({ email })
+      let user = await User.findOne({ email })
 
       if (!user) {
         user = User.create({

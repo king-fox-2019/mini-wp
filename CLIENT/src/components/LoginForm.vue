@@ -21,7 +21,8 @@
             id="login-button"
             >Log in</button>
           <div class="ui horizontal divider text-white my-4 px-6">Or</div>
-          <GoogleSignIn/>
+          <GoogleSignIn
+            @check-token="emitCheckToken"/>
         </form>
       </div>
 
@@ -65,6 +66,9 @@ export default {
         })
         // console.log(response.data.messages)
       })
+    },
+    emitCheckToken: function () {
+      this.$emit('check-token')
     }
   },
   components: {

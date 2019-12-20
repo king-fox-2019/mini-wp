@@ -10889,10 +10889,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
 var _default = {
-  name: 'google-sign-in-button',
+  name: "google-sign-in-button",
   directives: {
     GoogleSignInButton: _vueGoogleSigninButtonDirective.default
   },
@@ -10906,22 +10904,32 @@ var _default = {
       var _this = this;
 
       // console.log("ini env host server", process.env.HOST_SERVER);
-      // console.log('google auth success')
+      console.log("google auth success");
       (0, _axios.default)({
-        method: 'post',
-        url: "http://localhost:3000" + '/users/googleSignIn',
+        method: "post",
+        url: "http://localhost:3000" + "/users/google-sign-in",
         headers: {
           googleidtoken: idToken
         }
       }).then(function (_ref) {
         var data = _ref.data;
         console.log("ini data di google auth", data);
-        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem("access_token", data.access_token);
 
-        _this.$emit('check-token'); // M.toast({html: data.message})
+        _this.$emit("check-token");
+
+        _this.$buefy.toast.open(data.message); // M.toast({html: data.message})
 
       }).catch(function (err) {
-        console.log(err); // M.toast({html: JSON.stringify(err.response.data.messages[0])})
+        console.log(err.response);
+
+        _this.$buefy.toast.open({
+          duration: 5000,
+          message: err.response.data.messages[0],
+          position: "is-bottom",
+          type: "is-danger"
+        }); // M.toast({html: JSON.stringify(err.response.data.messages[0])})
+
       });
     },
     OnGoogleAuthFail: function OnGoogleAuthFail(error) {// M.toast({html: JSON.stringify(error)})
@@ -11068,6 +11076,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   name: "regis-form",
   data: function data() {
@@ -11105,6 +11115,9 @@ var _default = {
           _this.danger(message);
         }); // console.log(response.data.messages)
       });
+    },
+    emitCheckToken: function emitCheckToken() {
+      this.$emit('check-token');
     }
   },
   components: {
@@ -11127,7 +11140,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c("section", { attrs: { id: "regis-form" } }, [
     _c("div", { staticClass: "wrapper" }, [
-      _c("div", { staticClass: ".form-container" }, [
+      _c("div", { staticClass: "form-container" }, [
         _c("h2", { staticClass: "text-white" }, [_vm._v("Create an account")]),
         _vm._v(" "),
         _c(
@@ -11217,7 +11230,7 @@ exports.default = _default;
               [_vm._v("Or")]
             ),
             _vm._v(" "),
-            _c("GoogleSignIn")
+            _c("GoogleSignIn", { on: { "check-token": _vm.emitCheckToken } })
           ],
           1
         )
@@ -11305,6 +11318,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 var _default = {
   name: "login-form",
   data: function data() {
@@ -11341,6 +11355,9 @@ var _default = {
           _this.danger(message);
         }); // console.log(response.data.messages)
       });
+    },
+    emitCheckToken: function emitCheckToken() {
+      this.$emit('check-token');
     }
   },
   components: {
@@ -11432,7 +11449,7 @@ exports.default = _default;
               [_vm._v("Or")]
             ),
             _vm._v(" "),
-            _c("GoogleSignIn")
+            _c("GoogleSignIn", { on: { "check-token": _vm.emitCheckToken } })
           ],
           1
         )
@@ -11483,14 +11500,10 @@ exports.default = void 0;
 
 var _toastMixin = _interopRequireDefault(require("../mixins/toastMixin"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -11544,13 +11557,14 @@ var _default = {
     submitArticle: function submitArticle() {
       var _this = this;
 
+      console.log('---masuk submit article');
       var access_token = localStorage.getItem("access_token");
 
       if (this.imageToUpload) {
         var featured_image = '';
         var data = new FormData();
         data.append("image", this.imageToUpload);
-        axios({
+        (0, _axios.default)({
           method: "post",
           url: "http://localhost:3000" + '/upload-image',
           data: data,
@@ -11561,12 +11575,12 @@ var _default = {
           var data = _ref.data;
           featured_image = data; // console.log("ini response", data);
 
-          return axios({
+          return (0, _axios.default)({
             method: 'post',
             url: "http://localhost:3000" + '/articles',
             data: {
-              title: title,
-              content: content,
+              title: _this.postTitle,
+              content: _this.myHTML,
               featured_image: featured_image
             },
             headers: {
@@ -11575,6 +11589,7 @@ var _default = {
           });
         }).then(function (_ref2) {
           var data = _ref2.data;
+          console.log('---ini hasil submit article', data);
 
           _this.toast({
             html: data.message
@@ -11592,18 +11607,19 @@ var _default = {
           });
         });
       } else {
-        axios({
+        (0, _axios.default)({
           method: 'post',
           url: "http://localhost:3000" + '/articles',
           data: {
-            title: title,
-            content: content
+            title: this.postTitle,
+            content: this.myHTML
           },
           headers: {
             access_token: access_token
           }
         }).then(function (_ref3) {
           var data = _ref3.data;
+          console.log('---ini hasil submit article pas ga ada image', data);
 
           _this.toast({
             html: data.message
@@ -11705,7 +11721,12 @@ $('.ui.dropdown').dropdown({
               "button",
               {
                 staticClass: "fluid ui yellow button mt-3",
-                on: { click: _vm.submitArticle }
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.submitArticle($event)
+                  }
+                }
               },
               [_vm._v("Submit")]
             )
@@ -11771,7 +11792,7 @@ render._withStripped = true
       
       }
     })();
-},{"../mixins/toastMixin":"src/mixins/toastMixin.js","_css_loader":"../../../../../../.nvm/versions/node/v10.16.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/ArticleItem.vue":[function(require,module,exports) {
+},{"../mixins/toastMixin":"src/mixins/toastMixin.js","axios":"node_modules/axios/index.js","_css_loader":"../../../../../../.nvm/versions/node/v10.16.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/ArticleItem.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11807,16 +11828,9 @@ exports.default = void 0;
 //
 //
 //
-//
-//
-//
-//
-//
 var _default = {
-  name: 'article-item' // data () {
-  //   return {}
-  // }
-
+  name: 'article-item',
+  props: ['title', 'content', 'tags', 'featuredImage', 'author']
 };
 exports.default = _default;
         var $1650e6 = exports.default || module.exports;
@@ -11831,64 +11845,41 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ui fluid card" }, [
-      _c("div", { staticClass: "image" }, [
-        _c("img", {
-          attrs: {
-            src: "https://miro.medium.com/max/4750/1*hjnZmMS2URkaXm52z8J5EQ.png"
-          }
-        })
-      ]),
+  return _c("div", { staticClass: "ui fluid card" }, [
+    _c("div", { staticClass: "image" }, [
+      _c("img", { attrs: { src: _vm.featuredImage } })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "content px-5 py-5" }, [
+      _c("a", { staticClass: "header" }, [_vm._v(_vm._s(_vm.title))]),
       _vm._v(" "),
-      _c("div", { staticClass: "content px-5 py-5" }, [
-        _c("a", { staticClass: "header" }, [
-          _vm._v("Delete Your Slack Messages Right Now. Here’s How.")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "meta" }, [
-          _vm._v("Slack is not your friend")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "description" }, [
-          _c("p", [
-            _vm._v(
-              "\n        We’ve all typed things into Slack that we might not want our bosses to see. For me, it might have been “baby Yoda” a few dozen too many times. For employees of the suitcase company Away, it might have been valid complaints in a private Slack channel about how the company was not as progressive or inclusive as it claimed to be, according to a recent story on The Verge.\n      "
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n        According to the story, Away employees faced a draconian Slack policy, where private communication was highly discouraged in favor of all communications being conducted in surveillable public channels. Six employees were allegedly fired from Away after CEO Steph Korey was invited into a channel where employees criticized the company. Screenshots in the story expose Korey bullying employees over Slack.\n      "
-            )
-          ])
+      _c("div", {
+        staticClass: "description",
+        domProps: { innerHTML: _vm._s(_vm.content) }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "extra content" },
+      _vm._l(_vm.tags, function(tag, i) {
+        return _c("span", { key: i, staticClass: "right floated" }, [
+          _c("a", { staticClass: "ui yellow tag label" }, [_vm._v(_vm._s(tag))])
         ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "extra content" }, [
+      _c("span", { staticClass: "right floated" }, [
+        _vm._v("\n      Dec 6, 2019\n    ")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "extra content" }, [
-        _c("span", { staticClass: "right floated" }, [
-          _c("a", { staticClass: "ui yellow tag label" }, [_vm._v("Slack")]),
-          _vm._v(" "),
-          _c("a", { staticClass: "ui yellow tag label" }, [_vm._v("Work")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "extra content" }, [
-        _c("span", { staticClass: "right floated" }, [
-          _vm._v("\n      Dec 6, 2019\n    ")
-        ]),
-        _vm._v(" "),
-        _c("span", [_vm._v("\n      Dave Gershgorn\n    ")])
-      ])
+      _c("span", [_vm._v("\n      " + _vm._s(_vm.author) + "\n    ")])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -11951,8 +11942,16 @@ var _ArticleAddForm = _interopRequireDefault(require("./components/ArticleAddFor
 
 var _ArticleItem = _interopRequireDefault(require("./components/ArticleItem"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12012,14 +12011,18 @@ var _default = {
       isLoggedIn: false,
       regisFormActive: false,
       loginFormActive: false,
+      articleAddFormActive: false,
       successMessageActive: false,
-      successMessageHeader: ''
+      successMessageHeader: "",
+      articles: []
     };
   },
   methods: {
     checkToken: function checkToken() {
       if (localStorage.getItem("access_token")) {
         this.isLoggedIn = true;
+        this.loginFormActive = false;
+        this.regisFormActive = false;
       } else {
         this.isLoggedIn = false;
       }
@@ -12027,6 +12030,17 @@ var _default = {
     redirectHome: function redirectHome() {
       this.loginFormActive = false;
       this.regisFormActive = false;
+    },
+    fetchArticles: function fetchArticles() {
+      var _this = this;
+
+      (0, _axios.default)({
+        method: "get",
+        url: "http://localhost:3000" + "/articles"
+      }).then(function (_ref) {
+        var data = _ref.data;
+        _this.articles = data;
+      }).catch();
     },
     toggleLoginForm: function toggleLoginForm() {
       this.loginFormActive = !this.loginFormActive;
@@ -12036,14 +12050,18 @@ var _default = {
       this.regisFormActive = !this.regisFormActive;
       this.loginFormActive = false;
     },
+    toggleArticleAddForm: function toggleArticleAddForm() {
+      this.articleAddFormActive = !this.articleAddFormActive;
+    },
     logOut: function logOut() {
-      this.toast('You are now logged out!');
+      this.toast("You are now logged out!");
       localStorage.removeItem("access_token");
       this.checkToken();
     }
   },
   created: function created() {
     this.checkToken();
+    this.fetchArticles();
   },
   components: {
     Navbar: _Navbar.default,
@@ -12100,24 +12118,50 @@ exports.default = _default;
           })
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-5", attrs: { id: "main-content" } }, [
-        _c(
-          "div",
-          { staticClass: "article-container" },
-          [_c("ArticleAddForm")],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "article-container my-3",
-            attrs: { id: "article-reader" }
-          },
-          [_c("ArticleItem")],
-          1
-        )
-      ]),
+      _vm.isLoggedIn
+        ? _c(
+            "div",
+            { staticClass: "mb-5", attrs: { id: "main-content" } },
+            [
+              _c(
+                "div",
+                { staticClass: "article-container" },
+                [
+                  _c("button", { on: { click: _vm.toggleArticleAddForm } }, [
+                    _vm._v("Add Article")
+                  ]),
+                  _vm._v(" "),
+                  _vm.articleAddFormActive ? _c("ArticleAddForm") : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.articles, function(article) {
+                return _c(
+                  "div",
+                  {
+                    key: article._id,
+                    staticClass: "article-container my-3",
+                    attrs: { id: "article-reader" }
+                  },
+                  [
+                    _c("ArticleItem", {
+                      attrs: {
+                        title: article.title,
+                        content: article.content,
+                        tags: article.tags,
+                        "featured-image": article.featured_image,
+                        author: article.author.name
+                      }
+                    })
+                  ],
+                  1
+                )
+              })
+            ],
+            2
+          )
+        : _vm._e(),
       _vm._v(" "),
       _vm._m(0)
     ],
@@ -12184,7 +12228,7 @@ render._withStripped = true
       
       }
     })();
-},{"./mixins/toastMixin":"src/mixins/toastMixin.js","./components/Navbar":"src/components/Navbar.vue","./components/RegisForm":"src/components/RegisForm.vue","./components/LoginForm":"src/components/LoginForm.vue","./components/ArticleAddForm.vue":"src/components/ArticleAddForm.vue","./components/ArticleItem":"src/components/ArticleItem.vue","../css/home.css":"css/home.css","../css/article.css":"css/article.css","_css_loader":"../../../../../../.nvm/versions/node/v10.16.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/buefy/dist/esm/chunk-f2006744.js":[function(require,module,exports) {
+},{"./mixins/toastMixin":"src/mixins/toastMixin.js","./components/Navbar":"src/components/Navbar.vue","./components/RegisForm":"src/components/RegisForm.vue","./components/LoginForm":"src/components/LoginForm.vue","./components/ArticleAddForm.vue":"src/components/ArticleAddForm.vue","./components/ArticleItem":"src/components/ArticleItem.vue","axios":"node_modules/axios/index.js","../css/home.css":"css/home.css","../css/article.css":"css/article.css","_css_loader":"../../../../../../.nvm/versions/node/v10.16.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/buefy/dist/esm/chunk-f2006744.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31958,7 +32002,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38129" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32991" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

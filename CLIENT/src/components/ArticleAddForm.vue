@@ -26,15 +26,9 @@
         <select name="skills" multiple="" class="ui search fluid dropdown">
           <option value="">Tags</option>
         </select>
-        <!-- <div class="field">
-          <input 
-            type="text" 
-            v-model="tags"
-            placeholder="Add tags" 
-            />
-        </div> -->
+
         <button class="fluid ui yellow button mt-3"
-          @click="submitArticle"
+          @click.prevent="submitArticle"
           >Submit</button>
       </form>
     </div>
@@ -43,6 +37,7 @@
 
 <script>
 import toastMixin from "../mixins/toastMixin"
+import axios from "axios"
 
 export default {
   data() {
@@ -58,6 +53,8 @@ export default {
       this.imageToUpload = this.$refs.myFiles.files[0]
     },
     submitArticle: function() {
+      console.log('---masuk submit article');
+      
       const access_token = localStorage.getItem("access_token")
 
       if (this.imageToUpload) {
@@ -78,12 +75,16 @@ export default {
               method: 'post',
               url: process.env.HOST_SERVER + '/articles',
               data: {
-                title, content, featured_image
+                title: this.postTitle, 
+                content: this.myHTML, 
+                featured_image
               },
               headers: { access_token }
             })
           })
           .then(({ data }) => {
+            console.log('---ini hasil submit article', data)
+            
             this.toast({ html: data.message });
             this.postTitle = "";
             this.myHTML = "";
@@ -99,14 +100,17 @@ export default {
           method: 'post',
           url: process.env.HOST_SERVER + '/articles',
           data: {
-            title, content
+            title: this.postTitle, 
+            content: this.myHTML
           },
           headers: { access_token }
         })
         .then(({ data }) => {
+          console.log('---ini hasil submit article pas ga ada image', data);
+          
           this.toast({ html: data.message })
           this.postTitle = ""
-            this.myHTML = ""
+          this.myHTML = ""
           this.$emit('get-articles');
           this.$emit('article-submitted')
         })

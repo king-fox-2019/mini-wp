@@ -11,7 +11,7 @@
 
     <LoginForm
       @check-token="checkToken"
-      @toggle-login-form="toggleLoginForm" 
+      @toggle-login-form="toggleLoginForm"
       v-if="loginFormActive"
     ></LoginForm>
 
@@ -21,19 +21,25 @@
       v-if="regisFormActive"
     ></RegisForm>
 
-    <div id="main-content" class="mb-5">
-      <div class="article-container"
-        >
-        <ArticleAddForm></ArticleAddForm>
+    <div id="main-content" class="mb-5" v-if="isLoggedIn">
+      <div class="article-container">
+        <button @click="toggleArticleAddForm">Add Article</button>
+        <ArticleAddForm v-if="articleAddFormActive"></ArticleAddForm>
       </div>
 
       <div id="article-reader"
-        class="article-container my-3"
-        >
-        <ArticleItem></ArticleItem>
+        v-for="article in articles" :key="article._id" 
+        class="article-container my-3">
+        <ArticleItem
+          :title="article.title"
+          :content="article.content"
+          :tags="article.tags"
+          :featured-image="article.featured_image"
+          :author="article.author.name"
+          >
+        </ArticleItem>
       </div>
     </div>
-
 
     <ul class="bg-bubbles">
       <li></li>
@@ -57,6 +63,7 @@ import RegisForm from "./components/RegisForm";
 import LoginForm from "./components/LoginForm";
 import ArticleAddForm from "./components/ArticleAddForm.vue";
 import ArticleItem from "./components/ArticleItem";
+import axios from "axios";
 
 export default {
   name: "app",
@@ -66,22 +73,38 @@ export default {
 
       regisFormActive: false,
       loginFormActive: false,
-      successMessageActive: false,
 
-      successMessageHeader: ''
+      articleAddFormActive: false,
+
+      successMessageActive: false,
+      successMessageHeader: "",
+
+      articles: []
     };
   },
   methods: {
     checkToken: function() {
       if (localStorage.getItem("access_token")) {
-        this.isLoggedIn = true
+        this.isLoggedIn = true;
+        this.loginFormActive = false;
+        this.regisFormActive = false;
       } else {
-        this.isLoggedIn = false
+        this.isLoggedIn = false;
       }
     },
     redirectHome: function() {
       this.loginFormActive = false;
       this.regisFormActive = false;
+    },
+    fetchArticles: function() {
+      axios({
+        method: "get",
+        url: process.env.HOST_SERVER + "/articles"
+      })
+        .then(({ data }) => {
+          this.articles = data
+        })
+        .catch()
     },
     toggleLoginForm: function() {
       this.loginFormActive = !this.loginFormActive;
@@ -91,14 +114,18 @@ export default {
       this.regisFormActive = !this.regisFormActive;
       this.loginFormActive = false;
     },
+    toggleArticleAddForm: function() {
+      this.articleAddFormActive = !this.articleAddFormActive;
+    },
     logOut: function() {
-      this.toast('You are now logged out!')
-      localStorage.removeItem("access_token")
-      this.checkToken()
+      this.toast("You are now logged out!");
+      localStorage.removeItem("access_token");
+      this.checkToken();
     }
   },
   created() {
     this.checkToken()
+    this.fetchArticles()
   },
   components: {
     Navbar,

@@ -1,7 +1,7 @@
 <template>
   <section id="regis-form">
     <div class="wrapper">
-      <div class=".form-container">
+      <div class="form-container">
         <h2 class="text-white">Create an account</h2>
 
         <form class="form">
@@ -22,7 +22,9 @@
             />
           <button @click.prevent="register" type="submit" id="login-button">Register</button>
           <div class="ui horizontal divider text-white my-4 px-6">Or</div>
-          <GoogleSignIn/>
+          
+          <GoogleSignIn
+            @check-token="emitCheckToken"/>
         </form>
       </div>
 
@@ -68,6 +70,9 @@ export default {
         })
         // console.log(response.data.messages)
       })
+    },
+    emitCheckToken: function () {
+      this.$emit('check-token')
     }
   },
   components: {
