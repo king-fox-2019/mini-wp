@@ -1,0 +1,46 @@
+{
+  "article": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "content": "typicode",
+      "created_at": "2019-11-2"
+    },
+    {
+      "id": 2,
+      "title": "todo-list",
+      "content": "make todo list",
+      "created_at": "2019-12-1"
+    },
+    {
+      "id": 3,
+      "title": "learn vue",
+      "content": "yeayyyyyyyyyy",
+      "created_at": "2019-12-2"
+    },
+    {
+      "id": 4,
+      "title": "dede",
+      "content": "",
+      "created_at": "2019-12-03T09:02:04.190Z"
+    },
+    {
+      "id": 5,
+      "title": "yoi",
+      "content": "blabalablbalbalbal",
+      "created_at": "2019-12-03T09:36:45.205Z"
+    },
+    {
+      "id": 6,
+      "title": "aaa",
+      "content": "bbbbbbb",
+      "created_at": "2019-12-03T09:37:57.772Z"
+    },
+    {
+      "id": 7,
+      "title": "aaaa",
+      "content": "zaki gk pulang pulang",
+      "created_at": "2019-12-03T09:42:58.376Z"
+    }
+  ]
+}
