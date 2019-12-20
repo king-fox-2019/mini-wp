@@ -28,5 +28,6 @@ export default {
 .bookmark-wrapper{
   height: 300px;
   max-height: 300px;
+  overflow: auto;
 }
 </style>

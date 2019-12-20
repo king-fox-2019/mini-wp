@@ -30,7 +30,7 @@
                       <span><i class="far fa-comment"><small class="ml-2">Comment</small></i></span>
                     </div>
                     <div>
-                      <span><i class="far fa-bookmark" style="cursor: pointer; font-size: 18px"></i></span>
+                      <span @click.prevent="addBookmark(article._id)"><i class="far fa-bookmark" style="cursor: pointer; font-size: 18px"></i></span>
                     </div>
                   </div>
                 </div>
@@ -47,6 +47,8 @@
 
 import moment from 'moment'
 import articleServer from '../../api/article'
+import userServer from '../../api/user'
+import Alert from '../public/Alert'
 
 export default {
     data (){
@@ -85,6 +87,30 @@ export default {
       },
       showDate(date){
         return moment(date).format('LL')
+      },
+      addBookmark(id){
+        userServer({
+          url: `/bookmark/${id}`,
+          method: 'PUT',
+          headers:{
+            access_token: localStorage.getItem('token')
+          }
+        })
+        .then(({data})=>{
+          Alert.Toast.fire({
+            icon: 'success',
+            title: 'Add Bookmark',
+            text: 'Add Bookmark Success'
+          })
+          this.$emit('fetch-bookmark')
+        })
+        .catch(err => {
+          Alert.Toast.fire({
+            icon: 'error',
+            title: 'Bookmark Error',
+            text: `${err.response.data.message}`
+          })
+        })
       }
     }
 }

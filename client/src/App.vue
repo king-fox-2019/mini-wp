@@ -22,7 +22,8 @@
         @go-draft="getDraft"
         :bookmark="bookmarkUser"
         :tags="tags"
-        @search="searchArticle">
+        @search="searchArticle"
+        @fetch-bookmark="getFavorites">
         </landingPage>
         <usercontrol v-if="!isLogin && !mainPage" 
         :show-register="registerPage" 
@@ -112,6 +113,7 @@ export default {
             this.userLogin = val
         },
         thereUserLogin(){
+            this.fethcingArticlePublished()
             this.mainPage = true
             this.registerPage = false
             this.loginPage = false
@@ -246,7 +248,6 @@ export default {
             })
             .then(({data})=>{
                 this.bookmarkUser = data.favorites
-                console.log(this.bookmarkUser)
             })
             .catch(err => {
                 Alert.Swal.fire({
@@ -295,6 +296,7 @@ export default {
     created(){
         this.checkLogin()
         this.fethcingArticlePublished()
+        this.getFavorites()
     },
     computed:{
     }

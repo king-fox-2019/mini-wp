@@ -14,4 +14,7 @@ router.get('/', Authenticate, UserController.getAllUser)
 // get one user
 router.get('/profile', Authenticate, UserController.getOneUser)
 
+// add bookmark
+router.put('/bookmark/:id', Authenticate, UserController.addBookmark)
+
 module.exports = router

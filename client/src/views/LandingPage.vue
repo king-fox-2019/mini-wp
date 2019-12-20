@@ -5,7 +5,8 @@
                 <featuredArticle v-if="!showDetail && !showDraft"
                 :publishArticle="publisharticle"
                 :isLogin="isLogin"
-                @current-article="setCurrentArticle">
+                @current-article="setCurrentArticle"
+                @fetch-bookmark="fetchBookmark">
                 </featuredArticle>
                 <draftArticle 
                 :draftArticle="draftarticle" 
@@ -26,7 +27,6 @@
                 :tags="tags"
                 @search-article="searchArticle">
                 </tag>
-                <job class="mt-4"></job>
             </div>
         </div>
     </div>
@@ -77,6 +77,9 @@ export default {
         },
         searchArticle(tag){
             this.$emit('search', tag)
+        },
+        fetchBookmark(){
+            this.$emit('fetch-bookmark')
         }
     },
     created(){

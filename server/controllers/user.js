@@ -98,6 +98,24 @@ class UserController{
             next(err)
         })
     }
+
+    static addBookmark(req,res,next){
+        User.findOneAndUpdate({
+            _id: req.decoded.id
+        },
+        {
+          $push : { favorites: req.params.id }  
+        },
+        {
+            new: true
+        })
+        .then(user => {
+            res.status(200).json({
+                message: `Add bookmark success`
+            })
+        })
+        .catch(next)
+    }
 }
 
 module.exports = UserController

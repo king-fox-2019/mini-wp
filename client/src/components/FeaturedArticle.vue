@@ -1,6 +1,6 @@
 <template>
 <div>
-  <featuredCard :articles="publishArticle" :isLogin="isLogin" @current-article="currentArticle"></featuredCard>
+  <featuredCard :articles="publishArticle" :isLogin="isLogin" @current-article="currentArticle" @fetch-bookmark="fetchBookmark"></featuredCard>
 </div>
 </template>
 
@@ -16,6 +16,9 @@ export default {
   methods:{
     currentArticle(val){
       this.$emit('current-article', val)
+    },
+    fetchBookmark(){
+      this.$emit('fetch-bookmark')
     }
   }
 }
