@@ -77,47 +77,47 @@ import axios from "../helpers/axios";
 // import VueTagsInput from "@johmun/vue-tags-input";
 import Tags from "../components/Tags";
 
-$(function() {
-  var container = $(".container"),
-    inputFile = $("#file"),
-    img,
-    btn,
-    txt = "change image",
-    txtAfter = "Browse another pic";
+// $(function() {
+//   var container = $(".container"),
+//     inputFile = $("#file"),
+//     img,
+//     btn,
+//     txt = "change image",
+//     txtAfter = "Browse another pic";
 
-  if (!container.find("#upload").length) {
-    container
-      .find(".input")
-      .append('<input type="button" value="' + txt + '" id="upload">');
-    btn = $("#upload");
+//   if (!container.find("#upload").length) {
+//     container
+//       .find(".input")
+//       .append('<input type="button" value="' + txt + '" id="upload">');
+//     btn = $("#upload");
 
-    container.prepend('<img class="hidden"  id="uploadImg" width="100">');
-    img = $("#uploadImg");
-  }
+//     container.prepend('<img class="hidden"  id="uploadImg" width="100">');
+//     img = $("#uploadImg");
+//   }
 
-  btn.on("click", function() {
-    img.animate({ opacity: 0 }, 300);
-    inputFile.click();
-  });
+//   btn.on("click", function() {
+//     img.animate({ opacity: 0 }, 300);
+//     inputFile.click();
+//   });
 
-  inputFile.on("change", function(e) {
-    container.find("label").html(inputFile.val());
+//   inputFile.on("change", function(e) {
+//     container.find("label").html(inputFile.val());
 
-    var i = 0;
-    for (i; i < e.originalEvent.srcElement.files.length; i++) {
-      var file = e.originalEvent.srcElement.files[i],
-        reader = new FileReader();
+//     var i = 0;
+//     for (i; i < e.originalEvent.srcElement.files.length; i++) {
+//       var file = e.originalEvent.srcElement.files[i],
+//         reader = new FileReader();
 
-      reader.onloadend = function() {
-        img.attr("src", reader.result).animate({ opacity: 1 }, 700);
-      };
-      reader.readAsDataURL(file);
-      img.removeClass("hidden");
-    }
+//       reader.onloadend = function() {
+//         img.attr("src", reader.result).animate({ opacity: 1 }, 700);
+//       };
+//       reader.readAsDataURL(file);
+//       img.removeClass("hidden");
+//     }
 
-    btn.val(txtAfter);
-  });
-});
+//     btn.val(txtAfter);
+//   });
+// });
 
 export default {
   name: "UpdateArticle",
@@ -226,6 +226,50 @@ export default {
   },
   created() {
     this.fetchDetailArticle();
+  },
+  mounted() {
+
+$(function() {
+  var container = $(".container"),
+    inputFile = $("#file"),
+    img,
+    btn,
+    txt = "change image",
+    txtAfter = "Browse another pic";
+
+  if (!container.find("#upload").length) {
+    container
+      .find(".input")
+      .append('<input type="button" value="' + txt + '" id="upload">');
+    btn = $("#upload");
+
+    container.prepend('<img class="hidden"  id="uploadImg" width="100">');
+    img = $("#uploadImg");
+  }
+
+  btn.on("click", function() {
+    img.animate({ opacity: 0 }, 300);
+    inputFile.click();
+  });
+
+  inputFile.on("change", function(e) {
+    container.find("label").html(inputFile.val());
+
+    var i = 0;
+    for (i; i < e.originalEvent.srcElement.files.length; i++) {
+      var file = e.originalEvent.srcElement.files[i],
+        reader = new FileReader();
+
+      reader.onloadend = function() {
+        img.attr("src", reader.result).animate({ opacity: 1 }, 700);
+      };
+      reader.readAsDataURL(file);
+      img.removeClass("hidden");
+    }
+
+    btn.val(txtAfter);
+  });
+});
   }
 };
 </script>

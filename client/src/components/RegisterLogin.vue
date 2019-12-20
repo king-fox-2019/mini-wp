@@ -135,7 +135,7 @@ export default {
       // See https://developers.google.com/identity/sign-in/web/reference#users
       // const profile = googleUser.getBasicProfile(); // etc etc
       // console.log(profile);
-      // let idToken = googleUser.getAuthResponse().id_token;
+      let idToken = googleUser.getAuthResponse().id_token;
       // console.log(idToken);
 
       axios({

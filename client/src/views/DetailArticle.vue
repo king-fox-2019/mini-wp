@@ -79,6 +79,8 @@ export default {
   text-align: center;
   align-items: center;
   margin-left: 14%;
+  margin-bottom: 10%;
+  padding-bottom: 8px; 
 }
 .detail-title {
 font-family: 'PT Serif', serif;

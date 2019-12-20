@@ -13,8 +13,8 @@ const PORT = process.env.PORT || 3003
 
 
 
-mongoose.connect(process.env.MONGO_ATLAS, { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify : false })
-// mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify : false })
+// mongoose.connect(process.env.MONGO_ATLAS, { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify : false })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify : false })
 
 .then(() => {
   console.log(`Server connected`);  
